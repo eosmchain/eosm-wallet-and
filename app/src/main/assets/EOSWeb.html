@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*"/>
+    <link rel="stylesheet" href="web.css">
+    <script src="./dist-web/eosjs-api.js"></script>
+    <script src="./dist-web/eosjs-jsonrpc.js"></script>
+    <script src="./dist-web/eosjs-jssig.js"></script>
+    <!-- <script src="lib.js"></script> -->
+    <script>
+
+        var privateKey; // replace with 'bob' account private key
+        var rpc;
+        var signatureProvider;
+        var api;
+
+        function setUpConfig(pk, endPoint) {
+           // alert('私钥是' + pk);
+           // alert('结点是' + endPoint);
+            privateKey = pk; // replace with 'bob' account private key
+            rpc = new eosjs_jsonrpc.JsonRpc(endPoint);
+            signatureProvider = new eosjs_jssig.JsSignatureProvider([privateKey]);
+            api = new eosjs_api.Api({ rpc, signatureProvider });
+        }
+
+        //交易配置
+        const transactData = async (from, to, quantity, memo) => await api.transact({
+            actions: [{
+                account: 'eosio.token',
+                name: 'transfer',
+                authorization: [{
+                    actor: from,
+                    permission: 'active',
+                }],
+                data: {
+                    from: from,
+                    to: to,
+                    quantity: quantity,
+                    memo: memo,
+                },
+            }]
+        }, {
+                blocksBehind: 3,
+                expireSeconds: 30,
+            });
+
+        //测试交易
+        const testTransact = async (from, to, quantity, memo) => {
+            try {
+                transactionResponse = await transactData(from, to, quantity, memo);
+            } catch (error) {
+
+                alert('Transact With Config Test Failure: ' + error.message);
+                return transactionResponse;
+            }
+
+            if (transactionResponse.transaction_id) {
+
+                alert('交易成功' + transactionResponse.transaction_id);
+                return transactionResponse;;
+            }
+
+            alert('Transact With Config Test fail');
+            return transactionResponse;
+        }
+
+        const createAccount = async (creator,
+            private_key,
+            account,
+            buy_ram_bytes,
+            stake_net_quantity,
+            stake_cpu_quantity,
+            active_pubkey,
+            owner_pubkey) => await api.transact({
+                actions: [{
+                    account: 'eosio',
+                    name: 'newaccount',
+                    authorization: [{
+                        actor: creator,
+                        permission: 'active',
+                    }],
+                    data: {
+                        creator: creator,
+                        name: account,
+                        owner: {
+                            threshold: 1,
+                            keys: [{
+                                key: owner_pubkey,
+                                weight: 1
+                            }],
+                            accounts: [],
+                            waits: []
+                        },
+                        active: {
+                            threshold: 1,
+                            keys: [{
+                                key: active_pubkey,
+                                weight: 1
+                            }],
+                            accounts: [],
+                            waits: []
+                        },
+                    },
+                },
+                {
+                    account: 'eosio',
+                    name: 'buyrambytes',
+                    authorization: [{
+                        actor: creator,
+                        permission: 'active',
+                    }],
+                    data: {
+                        payer: creator,
+                        receiver: account,
+                        bytes: buy_ram_bytes,
+                    },
+                },
+                {
+                    account: 'eosio',
+                    name: 'delegatebw',
+                    authorization: [{
+                        actor: creator,
+                        permission: 'active',
+                    }],
+                    data: {
+                        from: creator,
+                        receiver: account,
+                        stake_net_quantity: stake_net_quantity,
+                        stake_cpu_quantity: stake_cpu_quantity,
+                        transfer: false,
+                    }
+                }]
+            }, {
+                    blocksBehind: 3,
+                    expireSeconds: 30,
+                });
+
+        const testCreateAccountWithConfig = async (creator,private_key,account,buy_ram_bytes,stake_net_quantity,stake_cpu_quantity,active_pubkey,owner_pubkey) => {
+           // alert('调用创建账户方法');
+            try {
+                transactionResponse = await createAccount(creator,
+                    private_key,
+                    account,
+                    buy_ram_bytes,
+                    stake_net_quantity,
+                    stake_cpu_quantity,
+                    active_pubkey,
+                    owner_pubkey);
+            } catch (error) {
+                //alert('创建账户失败: ' + error.message);
+                return "fail:"+error.message;
+            }
+
+            if (transactionResponse.transaction_id) {
+               // alert('创建账户成功');
+                return "succeed";
+            }
+
+           // alert('创建账户失败');
+            return  "fail";
+        }
+
+
+        /*这段代码是固定的，必须要放到js中*/
+        function setupWebViewJavascriptBridge(callback) {
+            if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+            if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+            window.WVJBCallbacks = [callback];
+            var WVJBIframe = document.createElement('iframe');
+            WVJBIframe.style.display = 'none';
+            WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
+            document.documentElement.appendChild(WVJBIframe);
+            setTimeout(function () { document.documentElement.removeChild(WVJBIframe) }, 0)
+        }
+
+        /*与OC交互的所有JS方法都要放在此处注册，才能调用通过JS调用OC或者让OC调用这里的JS*/
+        setupWebViewJavascriptBridge(function (bridge) {
+            var uniqueId = 1
+            function log(message, data) {
+                alert(message + JSON.stringify(data))
+            }
+            /* Initialize your app here */
+
+            /*JS给ObjC提供公开的API，在ObjC端可以手动调用JS的这个API。接收ObjC传过来的参数，且可以回调ObjC*/
+            // 交易
+            bridge.registerHandler('transact', function (data, responseCallback) {
+                log("交易的参数是: ", data)
+                var from = data.from
+                var to = data.to
+                var quantity = data.quantity
+                var memo = data.memo
+                var pk = data.pk;
+                var ep = data.ep;
+                setUpConfig(pk, ep);
+                testTransact(from, to, quantity, memo).then(result => {
+                    responseCallback(result)
+                });
+            })
+
+            // 创建账户
+            bridge.registerHandler('createAccount', function (str, responseCallback) {
+                var data  = JSON.parse(str);
+                //log("创建账户的参数是: ", data)
+                var creator = data.creator
+                var private_key = data.private_key
+                var account = data.account
+                var buy_ram_bytes = data.buy_ram_bytes
+                var stake_net_quantity = data.stake_net_quantity;
+                var stake_cpu_quantity = data.stake_cpu_quantity;
+                var active_pubkey = data.active_pubkey;
+                var owner_pubkey = data.owner_pubkey;
+                var ep = data.ep;
+                setUpConfig(private_key, ep);
+                testCreateAccountWithConfig(creator,
+                    private_key,
+                    account,
+                    buy_ram_bytes,
+                    stake_net_quantity,
+                    stake_cpu_quantity,
+                    active_pubkey,
+                    owner_pubkey).then(result => {
+                        responseCallback(result)
+                    });
+            })
+        })
+
+
+
+
+    </script>
+    <title>Document</title>
+</head>
+
+<body>
+<!-- <div class='header-container'>
+    <div class='header'>
+        <h1>Web Build Integration Tests</h1>
+        <button onClick='runAllTests();'>Run All Tests</button>
+    </div>
+</div>
+<div class='tests'>
+    <div>
+        <h2>Transact with Configuration Parameter</h2><button onClick='testTransactWithConfig(event);'>Test</button>
+    </div>
+    <div>
+        <h2>Transact without Broadcasting</h2><button onClick="alertMeWithMyCustomFunction('I am');">Test</button>
+    </div>
+</div> -->
+</body>
+
+</html>

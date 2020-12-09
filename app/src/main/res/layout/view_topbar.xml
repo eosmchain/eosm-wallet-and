@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/qmui_topbar_height">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/qrCodeIv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/album_dp_10"
+        android:drawableTop="@mipmap/icon_scan2"
+        android:text="@string/str_RichScan"
+        android:textSize="@dimen/micro" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="6dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg_searchview"
+        android:imeOptions="actionSearch"
+        app:queryBackground="@drawable/bg_searchview"
+        app:queryHint="@string/str_search"
+        app:submitBackground="@android:color/transparent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/shoppingcartIv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/album_dp_10"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:drawableTop="@mipmap/ic_shopping_cart"
+        android:text="@string/str_shoppingcart"
+        android:textSize="@dimen/micro" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/classifyIv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:drawableTop="@mipmap/ic_classify"
+        android:text="@string/str_classify"
+        android:textSize="@dimen/micro" />
+</merge>

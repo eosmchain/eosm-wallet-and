@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/main_home_select"
+        android:title="@string/str_wallet" />
+
+    <item
+        android:id="@+id/navigation_apps"
+        android:icon="@drawable/main_app_select"
+        android:title="@string/str_apps" />
+
+<!--    <item-->
+    <!--        android:id="@+id/navigation_store"-->
+    <!--        android:icon="@drawable/main_store_select"-->
+    <!--        android:title="@string/str_store" />-->
+
+    <item
+        android:id="@+id/navigation_my"
+        android:icon="@drawable/main_my_select"
+        android:title="@string/str_my" />
+
+</menu>

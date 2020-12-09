@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/qmui_config_color_white"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.activity.login.LoginFragment">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/helloTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginTop="50dp"
+        android:text="@string/str_hello"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_medium"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topBar" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/welcomeTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginTop="8dp"
+        android:text="@string/str_welcome"
+        android:textColor="@color/app_color_description"
+        android:textSize="@dimen/small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/helloTv" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/usernameEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="24dp"
+        android:hint="@string/str_prompt_account"
+        android:inputType="textEmailAddress"
+        android:selectAllOnFocus="true"
+        app:layout_constraintTop_toBottomOf="@id/welcomeTv" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/passwordEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginRight="24dp"
+        android:hint="@string/str_register_prompt_password"
+        android:imeActionLabel="@string/action_sign_in"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:selectAllOnFocus="true"
+        app:layout_constraintTop_toBottomOf="@+id/usernameEt" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/affirmPasswordEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginRight="24dp"
+        android:hint="@string/str_register_prompt_password_affirm"
+        android:imeActionLabel="@string/action_sign_in"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:selectAllOnFocus="true"
+        app:layout_constraintTop_toBottomOf="@+id/passwordEt" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/completeBtn"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="start"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:background="@drawable/gradient_left_to_right"
+        android:text="@string/str_complete"
+        android:textColor="@color/qmui_config_color_white"
+        android:textSize="@dimen/small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/affirmPasswordEt" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

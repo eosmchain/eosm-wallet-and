@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/album_dp_0"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topBar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+                android:id="@+id/unpaidIv"
+                android:layout_width="@dimen/dp_120"
+                android:layout_height="@dimen/dp_120"
+                android:layout_marginTop="@dimen/album_dp_20"
+                android:src="@mipmap/ic_blue_circle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:qmui_border_width="@dimen/album_dp_0"
+                app:qmui_is_circle="true" />
+
+            <LinearLayout
+                android:id="@+id/unpaidLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@id/firstStepTitleTv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/unpaidValueTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.00"
+                    android:textStyle="bold"
+                    android:textColor="@color/app_color_orange"
+                    android:textSize="@dimen/big_large" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/unpaidUnitTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MGP"
+                    android:textStyle="bold"
+                    android:textColor="@color/app_color_orange"
+                    android:textSize="@dimen/medium" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/toTransferTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_to_transfer"
+                android:textColor="@color/durban_White"
+                android:textSize="@dimen/micro"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/unpaidLayout" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/firstStepTitleTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/album_dp_20"
+                android:background="@color/qmui_config_color_gray_9"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:paddingTop="@dimen/album_dp_4"
+                android:paddingBottom="@dimen/album_dp_4"
+                android:text="@string/str_first_step"
+                android:textSize="@dimen/big_small"
+                app:layout_constraintTop_toBottomOf="@id/unpaidIv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/firstExplainTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:paddingTop="@dimen/album_dp_4"
+                android:text="@string/str_first_explain_t"
+                android:textSize="@dimen/small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/firstStepTitleTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/firstExplain1Tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:paddingBottom="@dimen/album_dp_4"
+                android:text="@string/str_first_explain1"
+                android:textColor="@color/app_color_common_hint"
+                android:textSize="@dimen/micro"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/firstExplainTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/secondStepTitleTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/qmui_config_color_gray_9"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:paddingTop="@dimen/album_dp_4"
+                android:paddingBottom="@dimen/album_dp_4"
+                android:text="@string/str_second_step"
+                android:textSize="@dimen/big_small"
+                app:layout_constraintTop_toBottomOf="@id/firstExplain1Tv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/secondExplainTv1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:paddingTop="@dimen/album_dp_4"
+                android:text="@string/str_second_explain_t1"
+                android:textSize="@dimen/small"
+                app:layout_constraintEnd_toStartOf="@id/arrowsIv1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/secondStepTitleTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tokenAddressTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:paddingBottom="@dimen/album_dp_4"
+                android:text="0x77BC9462EF31177693edaAaA9aa68f10F9DA685D"
+                android:textColor="@color/app_color_common_hint"
+                android:textSize="@dimen/micro"
+                app:layout_constraintEnd_toStartOf="@id/arrowsIv1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/secondExplainTv1" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/arrowsIv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_arrows"
+                app:layout_constraintBottom_toTopOf="@id/line1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/secondStepTitleTv" />
+
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constraintTop_toBottomOf="@id/tokenAddressTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/secondExplainTv2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:paddingTop="@dimen/album_dp_4"
+                android:text="@string/str_second_explain_t2"
+                android:textSize="@dimen/small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line1" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/secondExplain2Tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:paddingBottom="@dimen/album_dp_4"
+                android:text="@string/str_second_explain2"
+                android:textColor="@color/app_color_common_hint"
+                android:textSize="@dimen/micro"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/secondExplainTv2" />
+
+            <View
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constraintTop_toBottomOf="@id/secondExplain2Tv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/secondExplainTv3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:paddingTop="@dimen/album_dp_4"
+                android:text="@string/str_second_explain_t3"
+                android:textSize="@dimen/small"
+                app:layout_constraintEnd_toStartOf="@id/arrowsIv2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line2" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/collectionAddressTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:paddingBottom="@dimen/album_dp_4"
+                android:text="0x77BC9462EF31177693edaAaA9aa68f10F9DA685D"
+                android:textColor="@color/app_color_common_hint"
+                android:textSize="@dimen/micro"
+                app:layout_constraintEnd_toStartOf="@id/arrowsIv2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/secondExplainTv3" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/arrowsIv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_arrows"
+                app:layout_constraintBottom_toTopOf="@id/line3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line2" />
+
+            <View
+                android:id="@+id/line3"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constraintTop_toBottomOf="@id/collectionAddressTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/secondExplainTv4"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/album_dp_45"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:paddingTop="@dimen/album_dp_4"
+                android:text="@string/str_second_explain_t4"
+                android:textSize="@dimen/small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line3" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/thirdStepTitleTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/qmui_config_color_gray_9"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:paddingTop="@dimen/album_dp_4"
+                android:paddingBottom="@dimen/album_dp_4"
+                android:text="@string/str_third_step"
+                android:textSize="@dimen/big_small"
+                app:layout_constraintTop_toBottomOf="@id/secondExplainTv4" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/thirdExplainTv1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/album_dp_45"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:paddingTop="@dimen/album_dp_4"
+                android:text="@string/str_third_explain_t1"
+                android:textSize="@dimen/small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/thirdStepTitleTv" />
+
+            <View
+                android:id="@+id/line4"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constraintTop_toBottomOf="@id/thirdExplainTv1" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/thirdExplainTv2"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/album_dp_45"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:paddingTop="@dimen/album_dp_4"
+                android:text="@string/str_third_explain_t2"
+                android:textColor="@color/app_color_orange"
+                android:textSize="@dimen/small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line4" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/hashEt"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/album_dp_45"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:hint="@string/str_please_import"
+                android:paddingLeft="5dp"
+                android:textSize="@dimen/micro"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/thirdExplainTv2" />
+
+            <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                android:id="@+id/submitBtn"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/album_dp_45"
+                android:layout_marginLeft="@dimen/durban_dp_16"
+                android:layout_marginTop="@dimen/album_dp_45"
+                android:layout_marginRight="@dimen/durban_dp_16"
+                android:layout_marginBottom="@dimen/album_dp_45"
+                android:text="@string/str_submit"
+                android:textColor="@color/durban_White"
+                android:textSize="@dimen/big_small"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hashEt"
+                app:qmui_backgroundColor="@color/app_color_blue"
+                app:qmui_borderWidth="@dimen/album_dp_0"
+                app:qmui_radius="8dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

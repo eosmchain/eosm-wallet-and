@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qmuiteam.qmui.layout.QMUIConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/addressCardLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:background="@color/durban_White"
+    android:layout_marginTop="5dp"
+    android:layout_marginRight="5dp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/userNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:text="xxx"
+        android:textSize="@dimen/small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/telTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:text="000***000"
+        android:textSize="@dimen/small"
+        app:layout_constraintStart_toEndOf="@id/userNameTv"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/addressTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_10"
+        android:text="xx省xx市xx区 xxxx"
+        android:textColor="@color/qmui_config_color_gray_3"
+        android:textSize="@dimen/small"
+        android:layout_marginRight="@dimen/album_dp_15"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userNameTv" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/qmui_list_divider_height"
+        android:layout_marginTop="@dimen/album_dp_10"
+        android:background="@drawable/qmui_divider"
+        app:layout_constraintTop_toBottomOf="@id/addressTv" />
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/defaultAddressBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:button="@drawable/checkbox_selector"
+        android:padding="8dp"
+        android:text="@string/str_default_address"
+        android:textColor="@color/qmui_config_color_gray_2"
+        android:textSize="@dimen/micro"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/editAddressTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/album_dp_10"
+        android:drawableLeft="@mipmap/ic_edit_r"
+        android:drawablePadding="@dimen/album_dp_4"
+        android:text="@string/str_edit"
+        android:textColor="@color/qmui_config_color_gray_2"
+        android:textSize="@dimen/micro"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/line2"
+        app:layout_constraintTop_toBottomOf="@id/line" />
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="@dimen/qmui_list_divider_height"
+        android:layout_height="@dimen/album_dp_20"
+        android:layout_marginRight="@dimen/album_dp_10"
+        android:background="@drawable/qmui_divider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/delAddressTv"
+        app:layout_constraintTop_toBottomOf="@id/line" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/delAddressTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:drawableLeft="@mipmap/ic_delete_r"
+        android:drawablePadding="@dimen/album_dp_4"
+        android:text="@string/str_delete"
+        android:textColor="@color/qmui_config_color_gray_2"
+        android:textSize="@dimen/micro"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line" />
+</com.qmuiteam.qmui.layout.QMUIConstraintLayout>

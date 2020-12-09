@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qmuiteam.qmui.layout.QMUIConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/itemGoods"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/album_dp_10"
+    android:layout_marginTop="@dimen/album_dp_10"
+    android:layout_marginRight="@dimen/album_dp_10"
+    android:background="@color/durban_White"
+    android:paddingBottom="@dimen/album_dp_10">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/smallStoreIv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_10"
+        android:layout_marginTop="8dp"
+        android:src="@mipmap/ic_store"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/smallStoreTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_10"
+        android:text="@string/str_shop"
+        android:textColor="@color/app_color_common_hint"
+        android:textSize="6.5sp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/smallStoreIv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/usernameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_10"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="11sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/smallStoreTv"
+        app:layout_constraintStart_toEndOf="@id/smallStoreTv"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/statusTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_10"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="@dimen/album_dp_10"
+        android:textColor="@color/qmui_config_color_red"
+        android:textSize="11sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/smallStoreTv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/goodsPicIv"
+        android:layout_width="@dimen/album_dp_80"
+        android:layout_height="@dimen/album_dp_80"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="@dimen/album_dp_10"
+        android:scaleType="matrix"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/smallStoreTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/goodsNameTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="12dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text=""
+        android:textColor="@color/app_color_common_black"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toStartOf="@id/goodsBtn"
+        app:layout_constraintStart_toEndOf="@id/goodsPicIv"
+        app:layout_constraintTop_toBottomOf="@id/smallStoreTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/goodsSpecificationTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/app_color_common_deputy"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toStartOf="@id/goodsBtn"
+        app:layout_constraintStart_toEndOf="@id/goodsPicIv"
+        app:layout_constraintTop_toBottomOf="@id/goodsNameTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/goodsNumberTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/app_color_common_deputy"
+        android:textSize="11sp"
+        app:layout_constraintStart_toEndOf="@id/goodsPicIv"
+        app:layout_constraintTop_toBottomOf="@id/goodsSpecificationTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/goodsPriceTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/app_color_common_deputy"
+        android:textSize="11sp"
+        app:layout_constraintStart_toEndOf="@id/goodsPicIv"
+        app:layout_constraintTop_toBottomOf="@id/goodsNumberTv" />
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/goodsBtn"
+        android:layout_width="@dimen/durban_dp_70"
+        android:layout_height="@dimen/album_dp_30"
+        android:layout_marginTop="@dimen/album_dp_10"
+        android:layout_marginRight="@dimen/album_dp_10"
+        android:text="@string/str_undercarriage"
+        android:textColor="@color/qmui_config_color_red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/smallStoreTv"
+        app:qmui_borderColor="@color/qmui_config_color_red" />
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/delBtn"
+        android:layout_width="@dimen/durban_dp_70"
+        android:layout_height="@dimen/album_dp_30"
+        android:layout_marginTop="@dimen/album_dp_10"
+        android:layout_marginRight="@dimen/album_dp_10"
+        android:text="@string/str_delete"
+        android:textColor="@color/qmui_config_color_red"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/goodsBtn"
+        app:qmui_borderColor="@color/qmui_config_color_red" />
+</com.qmuiteam.qmui.layout.QMUIConstraintLayout>

@@ -1,0 +1,45 @@
+<com.qmuiteam.qmui.layout.QMUIFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:layout_margin="5dp"
+    android:background="@color/app_color_theme_10">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/coinView"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="right" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/moreIv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|top"
+        android:layout_margin="@dimen/dp_15"
+        android:src="@mipmap/more_icon" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/walletMainNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        android:text="MGP-Wallet"
+        android:textColor="@color/qmui_config_color_white"
+        android:textSize="@dimen/big_small" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/walletAddressTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:layout_margin="@dimen/dp_10"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="x00000000000000000000000000000000000000000000000000000000000000000"
+        android:textColor="@color/qmui_config_color_white"
+        android:textSize="@dimen/small" />
+
+</com.qmuiteam.qmui.layout.QMUIFrameLayout>

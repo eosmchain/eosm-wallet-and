@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/qmui_config_color_background">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        android:fitsSystemWindows="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.qmuiteam.qmui.layout.QMUIRelativeLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/durban_dp_70"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:background="@color/durban_White"
+        android:padding="@dimen/album_dp_15"
+        app:layout_constraintTop_toBottomOf="@id/topbar">
+
+        <LinearLayout
+            android:id="@+id/layout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/transactionStateTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/durban_dp_30"
+                android:text=""
+                android:textColor="@color/app_color_dark_blue"
+                android:textSize="@dimen/big_small" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/amountTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text=""
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/sendTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/str_send"
+                android:textColor="@color/qmui_config_color_gray_6"
+                android:textSize="@dimen/small"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/amountTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fromTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@mipmap/copy_icon"
+                android:drawablePadding="5dp"
+                android:text=""
+                android:textSize="@dimen/small"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sendTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/receiveTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/str_receive"
+                android:textColor="@color/qmui_config_color_gray_6"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fromTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/toTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@mipmap/copy_icon"
+                android:drawablePadding="5dp"
+                android:text=""
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/receiveTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/remarkTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/str_memo"
+                android:textColor="@color/qmui_config_color_gray_6"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/memoTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/remarkTv" />
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/qmui_config_color_gray_6"
+                app:layout_constraintTop_toBottomOf="@id/memoTv" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout2"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/transactionTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/str_transaction_id"
+                android:textColor="@color/qmui_config_color_gray_6"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/transactionIdTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@mipmap/copy_icon"
+                android:drawablePadding="5dp"
+                android:ellipsize="end"
+                android:lines="1"
+                android:maxEms="10"
+                android:text=""
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/transactionTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/blockHeightTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/str_block_height"
+                android:textColor="@color/qmui_config_color_gray_6"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/transactionIdTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/blocknumTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/blockHeightTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tradingTimeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/str_transaction_time"
+                android:textColor="@color/qmui_config_color_gray_6"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/blocknumTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/timeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tradingTimeTv" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/QRcodeIv"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignBottom="@id/layout3"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right" />
+    </com.qmuiteam.qmui.layout.QMUIRelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/transactionStateIv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="45dp"
+        android:src="@mipmap/transaction_success_icon"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topbar" />
+
+    <LinearLayout
+        android:id="@+id/webTransactionDetailsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="@dimen/album_dp_15"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/eosx_icon"
+            android:visibility="gone" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/album_dp_15"
+            android:layout_marginRight="@dimen/album_dp_15"
+            android:text="@string/str_to_transaction_detailed"
+            android:textColor="@color/app_color_blue"
+            android:textSize="@dimen/sp_14" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

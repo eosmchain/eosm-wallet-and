@@ -1,0 +1,3 @@
+Keystore_password：925379434
+alias：eoswallet
+key_password:925379434

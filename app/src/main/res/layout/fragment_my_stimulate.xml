@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/qmui_config_color_background">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/qmui_topbar_height"
+        android:layout_marginBottom="@dimen/durban_dp_70"
+        app:layout_constraintTop_toBottomOf="@id/topBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.qmuiteam.qmui.layout.QMUIRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/album_dp_100"
+                android:layout_margin="@dimen/album_dp_15"
+                android:background="@color/app_color_dark_blue">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/myBalanceTitleTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/album_dp_10"
+                    android:layout_marginTop="@dimen/album_dp_10"
+                    android:text="@string/str_my_balance"
+                    android:textColor="@color/durban_White"
+                    android:textSize="@dimen/small" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/myBalanceTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/myBalanceTitleTv"
+                    android:layout_marginLeft="@dimen/album_dp_10"
+                    android:layout_marginTop="@dimen/album_dp_15"
+                    android:text=""
+                    android:textColor="@color/durban_White"
+                    android:textSize="@dimen/medium" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/freezeTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="@dimen/album_dp_10"
+                    android:layout_marginTop="@dimen/album_dp_10"
+                    android:layout_marginRight="@dimen/album_dp_15"
+                    android:text="@string/str_freeze"
+                    android:textColor="@color/durban_White"
+                    android:textSize="@dimen/small" />
+            </com.qmuiteam.qmui.layout.QMUIRelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/nextstepBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/album_dp_50"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_50"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:layout_marginBottom="@dimen/album_dp_20"
+        android:text="@string/str_extraction_yield"
+        android:textColor="@color/durban_White"
+        android:textSize="@dimen/medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:qmui_backgroundColor="@color/app_color_dark_blue"
+        app:qmui_borderWidth="@dimen/album_dp_0"
+        app:qmui_radius="@dimen/album_dp_4" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qmuiteam.qmui.layout.QMUILinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/commodityItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="@dimen/album_dp_10"
+    android:layout_marginRight="5dp"
+    android:background="@color/durban_White"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/commodityPicIv"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/blue_top_bg" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/commodityNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_margin="@dimen/album_dp_10"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="sss"
+        android:textSize="@dimen/small" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/commodityPriceTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginLeft="@dimen/album_dp_10"
+        android:layout_marginRight="@dimen/album_dp_10"
+        android:layout_marginBottom="@dimen/album_dp_10"
+        android:gravity="center_vertical"
+        android:text="45"
+        android:textColor="@color/qmui_config_color_red"
+        android:textSize="@dimen/small"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/commodityNameTv" />
+</com.qmuiteam.qmui.layout.QMUILinearLayout>

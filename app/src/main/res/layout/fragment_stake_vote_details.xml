@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/qmui_topbar_height">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageIv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_120"
+                android:scaleType="fitXY"
+                android:src="@mipmap/blue_top_bg"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+                android:id="@+id/headerIv"
+                android:layout_width="@dimen/album_dp_100"
+                android:layout_height="@dimen/album_dp_100"
+                android:layout_marginTop="@dimen/durban_dp_70"
+                android:src="@mipmap/ic_mgp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:qmui_border_width="@dimen/album_dp_0"
+                app:qmui_is_circle="true" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/nodeNameTv"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/app_color_common_dark_black"
+                android:textSize="@dimen/big_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/headerIv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/nodeURLNameTv"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_4"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nodeNameTv" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/nodeDescribeTv"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:text=""
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nodeURLNameTv" />
+
+            <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                android:id="@+id/popularVoteBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/album_dp_35"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:paddingTop="@dimen/album_dp_10"
+                android:paddingRight="@dimen/album_dp_15"
+                android:paddingBottom="@dimen/album_dp_10"
+                android:text="@string/str_popular_vote"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nodeDescribeTv"
+                app:qmui_backgroundColor="@color/app_color_theme_11"
+                app:qmui_borderColor="@color/app_color_theme_11"
+                app:qmui_borderWidth="@dimen/album_dp_0" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/compileVoteBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginRight="@dimen/album_dp_10"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:paddingTop="@dimen/album_dp_10"
+                android:paddingRight="@dimen/album_dp_15"
+                android:paddingBottom="@dimen/album_dp_10"
+                android:text="@string/str_edit"
+                android:visibility="gone"
+                android:textColor="@color/white"
+                android:textSize="@dimen/album_sp_18"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/album_dp_10"
+                android:layout_marginTop="@dimen/album_dp_20"
+                android:background="@color/activity_bg"
+                app:layout_constraintTop_toBottomOf="@id/popularVoteBtn" />
+
+            <LinearLayout
+                android:id="@+id/votesLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line1">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/votesTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/album_dp_15"
+                    android:layout_marginTop="@dimen/album_dp_10"
+                    android:text="@string/str_vote_num"
+                    android:textColor="@color/app_color_common_dark_black"
+                    android:textSize="@dimen/big_small"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line1" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/votesNumTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/album_dp_15"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text=""
+                    android:textColor="@color/app_color_common_dark_black"
+                    android:textSize="@dimen/small" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/votesLayout" />
+
+            <LinearLayout
+                android:id="@+id/nodeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line2">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/nodeTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/album_dp_15"
+                    android:layout_marginTop="@dimen/album_dp_10"
+                    android:text="@string/str_node"
+                    android:textColor="@color/app_color_common_dark_black"
+                    android:textSize="@dimen/big_small"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line1" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/nodeURLTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/album_dp_15"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text=""
+                    android:textColor="@color/app_color_common_dark_black"
+                    android:textSize="@dimen/small" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line3"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nodeLayout" />
+
+            <LinearLayout
+                android:id="@+id/rateLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line3">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/rateTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/album_dp_15"
+                    android:layout_marginTop="@dimen/album_dp_10"
+                    android:text="@string/str_rate"
+                    android:textColor="@color/app_color_common_dark_black"
+                    android:textSize="@dimen/big_small"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line1" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/rateValTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/album_dp_15"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text=""
+                    android:textColor="@color/app_color_common_dark_black"
+                    android:textSize="@dimen/small" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line4"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rateLayout" />
+
+            <LinearLayout
+                android:id="@+id/associationIntroduceLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line4">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/associationIntroduceTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/album_dp_15"
+                    android:layout_marginTop="@dimen/album_dp_10"
+                    android:text="@string/str_association_introduce"
+                    android:textColor="@color/app_color_common_dark_black"
+                    android:textSize="@dimen/big_small"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line1" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/associationIntroduceValTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/album_dp_15"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text=""
+                    android:textColor="@color/app_color_common_dark_black"
+                    android:textSize="@dimen/small" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line5"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:layout_marginBottom="@dimen/album_dp_30"
+                android:background="@drawable/qmui_divider"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/associationIntroduceLayout" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

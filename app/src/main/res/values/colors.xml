@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="transparentColor">#00000000</color>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="blueColor">#4095ff</color>
+    <color name="durban_White">#FFFFFFFF</color>
+    <!-- common -->
+    <color name="transparent_black">#59000000</color>
+    <color name="app_color_orange">#EF6716</color>
+    <color name="app_color_blue">#00A8E1</color>
+    <color name="app_color_blue_disabled">#8000A8E1</color>
+    <color name="app_color_blue_pressed">#c000A8E1</color>
+    <color name="app_color_common_dark_black">#000000</color>
+    <color name="app_color_common_black">#333333</color> <!-- 主文字体颜色 -->
+    <color name="app_color_common_deputy">#666666</color><!-- 副文字体颜色 -->
+    <color name="app_color_common_hint">#999999</color><!-- 提示文案文字体颜色 -->
+    <color name="app_color_dark_blue">#3167FF</color>
+    <color name="app_color_description">@color/qmui_config_color_gray_5</color>
+    <color name="item_divider_bg_color">#CAC9C9</color>
+
+    <color name="app_color_blue_2">#31BDF3</color>
+    <color name="app_color_blue_2_disabled">#7F31BDF3</color>
+    <color name="app_color_blue_2_pressed">#7F31BDF3</color>
+
+    <color name="app_color_blue_3">#EBF9FF</color>
+    <color name="app_color_blue_3_disabled">#7FEBF9FF</color>
+    <color name="app_color_blue_3_pressed">#7FEBF9FF</color>
+    <color name="app_color_baby_blue">#3db1ea</color>
+    <color name="app_color_viridis">#1FB15B</color>
+    <color name="app_color_red_1">#F76968</color>
+    <color name="app_color_green">#83d62f</color>
+    <color name="app_color_saffron_yellow">#f08f26</color>
+    <color name="app_color_red">#fe4e4e</color>
+
+    <color name="app_color_theme_1">#EF5362</color> <!-- Grapefruit -->
+    <color name="app_color_theme_2">#FE6D4B</color> <!-- Bittersweet -->
+    <color name="app_color_theme_3">#FFCF47</color> <!-- Sunflower -->
+    <color name="app_color_theme_4">#9FD661</color> <!-- Grass -->
+    <color name="app_color_theme_5">#3FD0AD</color> <!-- Mint -->
+    <color name="app_color_theme_6">#2BBDF3</color> <!-- Aqua -->
+    <color name="app_color_theme_7">#5A9AEF</color> <!-- Blue Jeans -->
+    <color name="app_color_theme_8">#AC8FEF</color> <!-- Lavender -->
+    <color name="app_color_theme_9">#EE85C1</color> <!-- Pink Rose -->
+    <color name="app_color_theme_10">#3F92BE</color> <!-- MGP -->
+    <color name="app_color_theme_11">#F0A23B</color> <!-- BTC -->
+    <color name="app_color_theme_12">#383554</color> <!-- EOS -->
+    <color name="app_color_theme_13">#5590F0</color> <!-- ETH -->
+    <color name="app_color_background">#eeeeee</color>
+
+    <color name="bar_divider">#D4D6D8</color>
+    <color name="tab_panel_bg">#ffffff</color>
+    <color name="tab_panel_divider">@color/bar_divider</color>
+
+    <!-- Components 组件 -->
+    <color name="radiusImageView_border_color">@color/app_color_theme_2</color>
+    <color name="radiusImageView_selected_border_color">@color/app_color_theme_1</color>
+    <color name="radiusImageView_selected_mask_color">#7FEF5362</color>
+
+    <!-- Helper 系列界面 -->
+
+    <!-- ColorHelper 颜色工具 -->
+    <color name="colorHelper_square_alpha_background">@color/app_color_theme_4</color>
+    <color name="colorHelper_square_from_ratio_background">@color/app_color_blue</color>
+    <color name="colorHelper_square_to_ratio_background">@color/app_color_theme_3</color>
+    <color name="color_gold">#ffd700</color><!--金色 -->
+    <color name="color_coppery">#B87333</color><!--铜色 -->
+
+</resources>

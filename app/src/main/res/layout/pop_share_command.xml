@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/durban_White">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/passwordCopyTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_10"
+        android:text="@string/str_password_copy"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.qmuiteam.qmui.nestedScroll.QMUIContinuousNestedScrollLayout
+        android:id="@+id/scrolllayout"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:layout_constraintBottom_toTopOf="@id/shareBtn"
+        app:layout_constraintTop_toBottomOf="@id/passwordCopyTv">
+
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/album_dp_10"
+            android:background="#eeeeee"
+            app:qmui_radius="5dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/copyTv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/album_dp_4"
+                android:bufferType="spannable"
+                android:text="@string/str_command"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small" />
+        </com.qmuiteam.qmui.widget.roundwidget.QMUIRoundFrameLayout>
+    </com.qmuiteam.qmui.nestedScroll.QMUIContinuousNestedScrollLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/shareBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/album_dp_35"
+        android:layout_marginLeft="@dimen/album_dp_30"
+        android:layout_marginRight="@dimen/album_dp_30"
+        android:layout_marginBottom="@dimen/album_dp_20"
+        android:background="@drawable/green_radius_bg"
+        android:text="@string/str_share_paste"
+        android:textColor="@color/durban_White"
+        android:textSize="@dimen/small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrolllayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/durban_White">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/rankingTv"
+        android:layout_width="@dimen/album_dp_45"
+        android:layout_height="@dimen/album_dp_45"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_4"
+        android:layout_marginBottom="@dimen/album_dp_4"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="@color/app_color_common_deputy"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_10"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/voteBtn"
+        app:layout_constraintStart_toEndOf="@id/rankingTv"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/voteTitleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/album_dp_10"
+            android:text="@string/str_mix_mortgage_progress" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/voteSchemeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/album_dp_10"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@string/str_mix_mortgage_progress"
+            android:textColor="@color/app_color_common_deputy"
+            android:textSize="@dimen/micro" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/voteBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:drawableTop="@mipmap/ic_vote"
+        android:text="@string/str_vote_t"
+        android:textColor="@color/app_color_saffron_yellow"
+        android:textSize="@dimen/small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/layout"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/rectProgressBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="0dp"
+        android:layout_height="8dp"
+        android:layout_marginLeft="@dimen/album_dp_10"
+        android:layout_marginTop="@dimen/album_dp_10"
+        android:layout_marginRight="@dimen/album_dp_10"
+        android:layout_marginBottom="@dimen/album_dp_10"
+
+        android:progressDrawable="@drawable/layer_list_progress_drawable"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/rateTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rankingTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/rateTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:text="0%"
+        android:textColor="@color/app_color_saffron_yellow"
+        android:textSize="@dimen/small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/rectProgressBar"
+        app:layout_constraintTop_toBottomOf="@id/rankingTv" />
+</androidx.constraintlayout.widget.ConstraintLayout>

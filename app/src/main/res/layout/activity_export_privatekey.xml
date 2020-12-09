@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <com.qmuiteam.qmui.widget.QMUITopBarLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.qmuiteam.qmui.layout.QMUIConstraintLayout
+        android:id="@+id/tipLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:background="#FDFEEF"
+        android:paddingLeft="@dimen/album_dp_15"
+        android:paddingTop="@dimen/album_dp_20"
+        android:paddingRight="@dimen/album_dp_20"
+        android:paddingBottom="@dimen/album_dp_20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topbar">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/tipIconIv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/statement_icon"
+            app:layout_constraintEnd_toStartOf="@id/tipTv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tipTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/album_dp_15"
+            android:text="@string/str_privatekey_tip"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tipIconIv"
+            app:layout_constraintTop_toTopOf="parent" />
+    </com.qmuiteam.qmui.layout.QMUIConstraintLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/album_dp_15"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tipLayout"
+        app:layout_constraintVertical_weight="6">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/album_dp_15"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/album_dp_45"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/str_role"
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/small" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/ownerTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/album_dp_20"
+                    android:text="@string/str_owner"
+                    android:textColor="@color/qmui_config_color_gray_3"
+                    android:textSize="@dimen/small" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@drawable/qmui_divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/str_publickey"
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/small" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/publickeyTv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/album_dp_20"
+                    android:text=""
+                    android:textColor="@color/qmui_config_color_gray_3"
+                    android:textSize="@dimen/small" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/str_privatekey"
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/small" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/privatekeyTv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/album_dp_20"
+                    android:text=""
+                    android:textColor="@color/qmui_config_color_gray_3"
+                    android:textSize="@dimen/small" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/copyTv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/album_dp_50"
+                android:layout_marginTop="5dp"
+                android:text="@string/str_copy"
+                android:textColor="@color/app_color_blue"
+                android:textSize="@dimen/small" />
+
+            <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                android:id="@+id/qrCodeBtn1"
+                android:layout_width="65dp"
+                android:layout_height="@dimen/album_dp_30"
+                android:layout_gravity="right"
+                android:gravity="center"
+                android:text="@string/str_qrcode"
+                android:textColor="@color/qmui_config_color_white"
+                android:textSize="@dimen/small"
+                app:qmui_backgroundColor="@color/app_color_blue"
+                app:qmui_borderColor="@null"
+                app:qmui_borderWidth="0dp"
+                app:qmui_radius="5dp" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/album_dp_15"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintTop_toBottomOf="@id/cardView1"
+        app:layout_constraintVertical_weight="6">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/album_dp_15"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/album_dp_45"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/str_role"
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/small" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/activeTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/album_dp_20"
+                    android:text="@string/str_active"
+                    android:textColor="@color/qmui_config_color_gray_3"
+                    android:textSize="@dimen/small" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@drawable/qmui_divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/str_publickey"
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/small" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/publickeyTv2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/album_dp_20"
+                    android:text=""
+                    android:textColor="@color/qmui_config_color_gray_3"
+                    android:textSize="@dimen/small" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/str_privatekey"
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/small" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/privatekeyTv2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/album_dp_20"
+                    android:text=""
+                    android:textColor="@color/qmui_config_color_gray_3"
+                    android:textSize="@dimen/small" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/copyTv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/album_dp_50"
+                android:layout_marginTop="5dp"
+                android:text="@string/str_copy"
+                android:textColor="@color/app_color_blue"
+                android:textSize="@dimen/small" />
+
+            <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                android:id="@+id/qrCodeBtn2"
+                android:layout_width="65dp"
+                android:layout_height="@dimen/album_dp_30"
+                android:layout_gravity="right"
+                android:gravity="center"
+                android:text="@string/str_qrcode"
+                android:textColor="@color/qmui_config_color_white"
+                android:textSize="@dimen/small"
+                app:qmui_backgroundColor="@color/app_color_blue"
+                app:qmui_borderColor="@null"
+                app:qmui_borderWidth="0dp"
+                app:qmui_radius="5dp" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/album_dp_15"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tipLayout"
+        app:layout_constraintVertical_weight="6">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/album_dp_15"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/album_dp_45"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/str_account_name"
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/small" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/accountNameTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/album_dp_20"
+                    android:text="@string/str_active"
+                    android:textColor="@color/qmui_config_color_gray_3"
+                    android:textSize="@dimen/small" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@drawable/qmui_divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/str_publickey"
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/small" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/publickeyTv3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/album_dp_20"
+                    android:text=""
+                    android:textColor="@color/qmui_config_color_gray_3"
+                    android:textSize="@dimen/small" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/str_mnemonic_word"
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/small" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/mnemonicsTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/album_dp_20"
+                    android:text=""
+                    android:textColor="@color/qmui_config_color_gray_3"
+                    android:textSize="@dimen/small" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/copyTv3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/album_dp_50"
+                android:layout_marginTop="5dp"
+                android:text="@string/str_copy"
+                android:textColor="@color/app_color_blue"
+                android:textSize="@dimen/small" />
+
+            <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                android:id="@+id/qrCodeBtn3"
+                android:layout_width="65dp"
+                android:layout_height="@dimen/album_dp_30"
+                android:layout_gravity="right"
+                android:gravity="center"
+                android:text="@string/str_qrcode"
+                android:textColor="@color/qmui_config_color_white"
+                android:textSize="@dimen/small"
+                app:qmui_backgroundColor="@color/app_color_blue"
+                app:qmui_borderColor="@null"
+                app:qmui_borderWidth="0dp"
+                app:qmui_radius="5dp" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/album_dp_15"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tipLayout"
+        app:layout_constraintVertical_weight="6">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/album_dp_15"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/titleTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/str_mnemonic_word"
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/small" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/contentTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/album_dp_20"
+                    android:text=""
+                    android:textColor="@color/qmui_config_color_gray_3"
+                    android:textSize="@dimen/small" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/copyTv4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/album_dp_50"
+                android:layout_marginTop="5dp"
+                android:text="@string/str_copy"
+                android:textColor="@color/app_color_blue"
+                android:textSize="@dimen/small" />
+
+            <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                android:id="@+id/qrCodeBtn4"
+                android:layout_width="65dp"
+                android:layout_height="@dimen/album_dp_30"
+                android:layout_gravity="right"
+                android:gravity="center"
+                android:text="@string/str_qrcode"
+                android:textColor="@color/qmui_config_color_white"
+                android:textSize="@dimen/small"
+                app:qmui_backgroundColor="@color/app_color_blue"
+                app:qmui_borderColor="@null"
+                app:qmui_borderWidth="0dp"
+                app:qmui_radius="5dp" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

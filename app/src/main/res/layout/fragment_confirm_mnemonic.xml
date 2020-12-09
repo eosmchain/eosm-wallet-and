@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="@string/str_backup_mnemonics_confirm"
+        android:textColor="@color/app_color_description"
+        android:textSize="@dimen/small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topbar" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:minHeight="@dimen/dp_120"
+        app:cardBackgroundColor="@color/qmui_config_color_white"
+        app:cardCornerRadius="5dp"
+        app:layout_constraintTop_toBottomOf="@id/text1">
+
+        <com.qmuiteam.qmui.widget.QMUIFloatLayout
+            android:id="@+id/mnemonicTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="left"
+            android:padding="@dimen/activity_horizontal_margin"
+            app:qmui_childHorizontalSpacing="20dp"
+            app:qmui_childVerticalSpacing="20dp" />
+    </androidx.cardview.widget.CardView>
+
+    <com.qmuiteam.qmui.widget.QMUIFloatLayout
+        android:id="@+id/mnemonicTagLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:gravity="left"
+        app:layout_constraintTop_toBottomOf="@id/cardView"
+        app:qmui_childHorizontalSpacing="20dp"
+        app:qmui_childVerticalSpacing="20dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/completeBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/album_dp_45"
+        android:background="@color/item_divider_bg_color"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="@string/str_complete"
+        android:textColor="@color/qmui_config_color_white"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

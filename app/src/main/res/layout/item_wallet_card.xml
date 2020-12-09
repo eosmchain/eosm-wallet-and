@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qmuiteam.qmui.layout.QMUIConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/walletCardView"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_120"
+    android:layout_marginLeft="@dimen/album_dp_15"
+    android:layout_marginTop="@dimen/album_dp_10"
+    android:layout_marginRight="@dimen/album_dp_15"
+    android:background="@color/app_color_theme_11">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/coinView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/ic_mgp_card_bg"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/walletNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_20"
+        android:layout_marginTop="@dimen/album_dp_20"
+        android:text="MGP_Wallet"
+        android:textColor="@color/durban_White"
+        android:textSize="@dimen/medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/walletAddressTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_20"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="@dimen/album_dp_20"
+        android:drawableRight="@mipmap/ic_copy_white"
+        android:drawablePadding="5dp"
+        android:ellipsize="middle"
+        android:minWidth="@dimen/album_dp_100"
+        android:singleLine="true"
+        android:text=""
+        android:textColor="@color/durban_White"
+        android:textSize="@dimen/small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/walletNameTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/exportTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_20"
+        android:layout_marginBottom="@dimen/album_dp_20"
+        android:text="@string/str_export"
+        android:textColor="@color/durban_White"
+        android:textSize="@dimen/small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/delWalletTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_20"
+        android:layout_marginRight="@dimen/album_dp_20"
+        android:src="@mipmap/ic_delete_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</com.qmuiteam.qmui.layout.QMUIConstraintLayout>

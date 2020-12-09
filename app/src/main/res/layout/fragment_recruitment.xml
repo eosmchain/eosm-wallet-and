@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/qmui_topbar_height"
+        android:background="@color/durban_White"
+        app:layout_constraintTop_toBottomOf="@id/topBar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.token.mangowallet.view.RequiredTextView
+                android:id="@+id/realNameTv"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:text="@string/str_real_name"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.35"
+                app:prefix="*"
+                app:prefix_color="@color/app_color_red_1" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/realNameEt"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="right|center_vertical"
+                android:hint="@string/str_please_import"
+                android:paddingRight="@dimen/album_dp_15"
+                android:singleLine="true"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toEndOf="@id/realNameTv"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.65" />
+
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/realNameTv" />
+
+            <com.token.mangowallet.view.RequiredTextView
+                android:id="@+id/phoneNumberTv"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:text="@string/str_phone_number"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line1"
+                app:layout_constraintWidth_percent="0.35"
+                app:prefix="*"
+                app:prefix_color="@color/app_color_red_1" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/phoneNumberEt"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="right|center_vertical"
+                android:hint="@string/str_please_import"
+                android:inputType="phone"
+                android:paddingRight="@dimen/album_dp_15"
+                android:singleLine="true"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toEndOf="@id/phoneNumberTv"
+                app:layout_constraintTop_toBottomOf="@id/line1"
+                app:layout_constraintWidth_percent="0.65" />
+
+            <View
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/phoneNumberTv" />
+
+            <com.token.mangowallet.view.RequiredTextView
+                android:id="@+id/IDNumberTv"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:text="@string/str_ID_number"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line2"
+                app:layout_constraintWidth_percent="0.35"
+                app:prefix="*"
+                app:prefix_color="@color/app_color_red_1" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/IDNumberEt"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="right|center_vertical"
+                android:hint="@string/str_please_import"
+                android:paddingRight="@dimen/album_dp_15"
+                android:singleLine="true"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toEndOf="@id/phoneNumberTv"
+                app:layout_constraintTop_toBottomOf="@id/line2"
+                app:layout_constraintWidth_percent="0.65" />
+
+            <View
+                android:id="@+id/line3"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/IDNumberTv" />
+
+            <com.token.mangowallet.view.RequiredTextView
+                android:id="@+id/frontIDCardTv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:text="@string/str_identity_card_picture"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line3"
+                app:prefix="*"
+                app:prefix_color="@color/app_color_red_1" />
+
+            <View
+                android:id="@+id/line4"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/frontIDCardTv" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/frontIDCardIv"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="@dimen/album_dp_10"
+                android:layout_marginTop="@dimen/album_dp_10"
+                android:layout_marginRight="@dimen/album_dp_10"
+                android:scaleType="matrix"
+                android:src="@mipmap/ic_add_pic"
+                app:layout_constrainedHeight="true"
+                app:layout_constraintBottom_toTopOf="@id/line5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line4" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/delBtn1"
+                android:layout_width="@dimen/album_dp_20"
+                android:layout_height="@dimen/album_dp_20"
+                android:layout_gravity="top|right"
+                android:background="@color/transparent_black"
+                android:src="@mipmap/ic_del"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/frontIDCardIv"
+                app:layout_constraintTop_toTopOf="@id/frontIDCardIv" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/reverseIDCardIv"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_margin="@dimen/album_dp_10"
+                android:scaleType="matrix"
+                android:src="@mipmap/ic_add_pic"
+                android:visibility="gone"
+                app:layout_constrainedHeight="true"
+                app:layout_constraintBottom_toTopOf="@id/line5"
+                app:layout_constraintStart_toEndOf="@id/frontIDCardIv"
+                app:layout_constraintTop_toBottomOf="@id/line4" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/delBtn2"
+                android:layout_width="@dimen/album_dp_20"
+                android:layout_height="@dimen/album_dp_20"
+                android:layout_gravity="top|right"
+                android:background="@color/transparent_black"
+                android:src="@mipmap/ic_del"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/reverseIDCardIv"
+                app:layout_constraintTop_toTopOf="@id/reverseIDCardIv" />
+
+            <View
+                android:id="@+id/line5"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginTop="@dimen/album_dp_10"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/frontIDCardIv" />
+
+            <com.token.mangowallet.view.RequiredTextView
+                android:id="@+id/handIDCardTv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:text="@string/str_hand_identity_card"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line5"
+                app:prefix="*"
+                app:prefix_color="@color/app_color_red_1" />
+
+            <View
+                android:id="@+id/line6"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/handIDCardTv" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/handIDCardIv"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_margin="@dimen/album_dp_10"
+                android:scaleType="matrix"
+                android:src="@mipmap/ic_add_pic"
+                app:layout_constrainedHeight="true"
+                app:layout_constraintBottom_toTopOf="@id/line7"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line6" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/delBtn3"
+                android:layout_width="@dimen/album_dp_20"
+                android:layout_height="@dimen/album_dp_20"
+                android:layout_gravity="top|right"
+                android:background="@color/transparent_black"
+                android:src="@mipmap/ic_del"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/handIDCardIv"
+                app:layout_constraintTop_toTopOf="@id/handIDCardIv" />
+
+            <View
+                android:id="@+id/line7"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginTop="@dimen/album_dp_10"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/handIDCardIv" />
+
+            <com.token.mangowallet.view.RequiredTextView
+                android:id="@+id/socialCreditCodeTv"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:text="@string/str_social_credit_code"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line7"
+                app:layout_constraintWidth_percent="0.35"
+                app:prefix="*"
+                app:prefix_color="@color/app_color_red_1" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/socialCreditCodeEt"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="right|center_vertical"
+                android:hint="@string/str_please_import"
+                android:paddingRight="@dimen/album_dp_15"
+                android:singleLine="true"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toEndOf="@id/socialCreditCodeTv"
+                app:layout_constraintTop_toBottomOf="@id/line7"
+                app:layout_constraintWidth_percent="0.65" />
+
+            <View
+                android:id="@+id/line8"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/socialCreditCodeEt" />
+
+            <com.token.mangowallet.view.RequiredTextView
+                android:id="@+id/photoBusinessLicenseTv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:text="@string/str_photo_business_license"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line8"
+                app:prefix="*"
+                app:prefix_color="@color/app_color_red_1" />
+
+            <View
+                android:id="@+id/line9"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/photoBusinessLicenseTv" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/photoBusinessLicenseIv"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_margin="@dimen/album_dp_10"
+                android:scaleType="matrix"
+                android:src="@mipmap/ic_add_pic"
+                app:layout_constrainedHeight="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line9" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/delBtn4"
+                android:layout_width="@dimen/album_dp_20"
+                android:layout_height="@dimen/album_dp_20"
+                android:layout_gravity="top|right"
+                android:background="@color/transparent_black"
+                android:src="@mipmap/ic_del"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/photoBusinessLicenseIv"
+                app:layout_constraintTop_toTopOf="@id/photoBusinessLicenseIv" />
+
+            <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                android:id="@+id/nextStepBtn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/album_dp_45"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginTop="@dimen/album_dp_45"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:layout_marginBottom="@dimen/album_dp_100"
+                android:text="@string/str_nextStep"
+                android:textColor="@color/durban_White"
+                android:textSize="@dimen/small"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/photoBusinessLicenseIv"
+                app:qmui_backgroundColor="@color/app_color_blue"
+                app:qmui_borderWidth="@dimen/album_dp_0"
+                app:qmui_radius="5dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

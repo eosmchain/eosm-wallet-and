@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/durban_White"
+    android:fitsSystemWindows="true">
+
+    <wendu.webviewjavascriptbridge.WVJBWebView
+        android:id="@+id/webview"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+    <!--    <com.tencent.smtt.sdk.WebView-->
+    <!--        android:id="@+id/webview"-->
+    <!--        android:layout_width="1px"-->
+    <!--        android:layout_height="1px"-->
+    <!--         />-->
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/topbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/logoIv"
+                android:layout_width="@dimen/album_dp_80"
+                android:layout_height="@dimen/album_dp_80"
+                android:adjustViewBounds="true"
+                android:foreground="@mipmap/ic_mgp"
+                android:scaleType="center"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/appCompatTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_10"
+                android:text="MGP"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/big_large"
+                app:layout_constraintBottom_toBottomOf="@+id/logoIv"
+                app:layout_constraintStart_toEndOf="@+id/logoIv"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text="@string/str_active_amount"
+                android:textColor="@color/app_color_blue"
+                android:textSize="@dimen/medium"
+                app:layout_constraintBottom_toBottomOf="@+id/logoIv"
+                app:layout_constraintStart_toEndOf="@id/appCompatTextView"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.571"
+                app:layout_constraintWidth_percent="0.5" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:text="@string/str_creator"
+                android:textColor="@color/app_color_description"
+                android:textSize="@dimen/big_small"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/logoIv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/creatorTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:text=""
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/big_small"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text1" />
+
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constraintTop_toBottomOf="@id/creatorTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:text="@string/str_account_name"
+                android:textColor="@color/app_color_description"
+                android:textSize="@dimen/big_small"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line1" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/accountNameTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:text=""
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/big_small"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text2" />
+
+            <View
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constraintTop_toBottomOf="@id/accountNameTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:text="@string/str_active_publickey"
+                android:textColor="@color/app_color_description"
+                android:textSize="@dimen/big_small"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line2" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/activePublickeyTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:paddingRight="@dimen/album_dp_15"
+                android:text=""
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/big_small"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text3" />
+
+            <View
+                android:id="@+id/line3"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constraintTop_toBottomOf="@id/activePublickeyTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:text="@string/str_owner_publickey"
+                android:textColor="@color/app_color_description"
+                android:textSize="@dimen/big_small"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line3" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/ownerPublickeyTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:paddingRight="@dimen/album_dp_15"
+                android:text=""
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/big_small"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text4" />
+
+            <View
+                android:id="@+id/line4"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constraintTop_toBottomOf="@id/ownerPublickeyTv" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/album_dp_15"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line4">
+
+                <LinearLayout
+                    android:layout_width="@dimen/album_dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/album_dp_15"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:text="@string/str_storage_allocation"
+                        android:textColor="@color/app_color_description"
+                        android:textSize="@dimen/small" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/RAMTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/album_dp_15"
+                        android:text=""
+                        android:textColor="@color/app_color_common_black"
+                        android:textSize="@dimen/small" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="@dimen/album_dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/album_dp_15"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:text="@string/str_cpu_pledge"
+                        android:textColor="@color/app_color_description"
+                        android:textSize="@dimen/small" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/CPUTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/album_dp_15"
+                        android:text="" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="@dimen/album_dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/text7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:text="@string/str_net_pledge"
+                        android:textColor="@color/app_color_description"
+                        android:textSize="@dimen/small" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/NETTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/album_dp_15"
+                        android:text="" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/immediatelyCreateBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/album_dp_45"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginLeft="@dimen/album_dp_20"
+        android:layout_marginTop="@dimen/album_dp_30"
+        android:layout_marginRight="@dimen/album_dp_20"
+        android:layout_marginBottom="@dimen/album_dp_50"
+        android:gravity="center"
+        android:text="@string/str_immediately_create"
+        android:textColor="@color/qmui_config_color_white"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollview"
+        app:qmui_backgroundColor="@color/app_color_blue"
+        app:qmui_borderColor="@null"
+        app:qmui_borderWidth="0dp"
+        app:qmui_radius="5dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

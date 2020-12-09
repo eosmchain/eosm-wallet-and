@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topBar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.youth.banner.Banner
+                android:id="@+id/storeBanner"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="5dp"
+                android:elevation="@dimen/album_dp_10"
+                app:banner_radius="@dimen/album_dp_15"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.qmuiteam.qmui.layout.QMUIConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_10"
+                android:layout_marginTop="@dimen/album_dp_20"
+                android:layout_marginRight="@dimen/album_dp_10"
+                android:background="@drawable/fillet_border_bg"
+                android:elevation="5dp"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:paddingTop="8dp"
+                android:paddingRight="@dimen/album_dp_15"
+                android:paddingBottom="@dimen/album_dp_50"
+                app:layout_constraintTop_toBottomOf="@id/storeBanner">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/currencyTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$"
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/small"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/fundsReceivedValueTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="@string/str_please_enter_amount"
+                    android:inputType="numberDecimal"
+                    android:text=""
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/small"
+                    app:layout_constraintEnd_toStartOf="@id/toCurrencyValueTv"
+                    app:layout_constraintStart_toEndOf="@id/currencyTv"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/toCurrencyValueTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="≈$0.00"
+                    android:textColor="@color/app_color_common_hint"
+                    android:textSize="@dimen/small"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/line1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/album_dp_1"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/qmui_divider"
+                    app:layout_constraintTop_toBottomOf="@id/fundsReceivedValueTv" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/str_on_discount"
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/small"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line1" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/onDiscountValueTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="0.00%"
+                    android:textColor="@color/app_color_red"
+                    android:textSize="@dimen/small"
+                    app:layout_constraintBottom_toTopOf="@id/line2"
+                    app:layout_constraintEnd_toStartOf="@id/arrowsIv"
+                    app:layout_constraintTop_toBottomOf="@id/line1" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/arrowsIv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_arrows"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@id/line2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line1" />
+
+                <View
+                    android:id="@+id/line2"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/album_dp_1"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/qmui_divider"
+                    app:layout_constraintTop_toBottomOf="@id/onDiscountValueTv" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/str_present_value"
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/small"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line2" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/presentValueTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="$0.00"
+                    android:textColor="@color/app_color_red"
+                    android:textSize="@dimen/small"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line2" />
+
+                <View
+                    android:id="@+id/line3"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/album_dp_1"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/qmui_divider"
+                    app:layout_constraintTop_toBottomOf="@id/presentValueTv" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/str_service_charge"
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/small"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line3" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/serviceChargeTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="0.00%"
+                    android:textColor="@color/app_color_red"
+                    android:textSize="@dimen/small"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line3" />
+
+                <View
+                    android:id="@+id/line4"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/album_dp_1"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/qmui_divider"
+                    app:layout_constraintTop_toBottomOf="@id/serviceChargeTv" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/receivingAccountTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/str_receiving_account"
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/small"
+                    app:layout_constraintEnd_toStartOf="@id/receivingAccountValueTv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line4" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/receivingAccountValueTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/album_dp_15"
+                    android:layout_marginTop="8dp"
+                    android:background="@null"
+                    android:gravity="right"
+                    android:hint="@string/str_enter_receiving_account"
+                    android:text=""
+                    android:textColor="@color/app_color_red"
+                    android:textSize="@dimen/small"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/receivingAccountTv"
+                    app:layout_constraintTop_toBottomOf="@id/line4" />
+
+                <View
+                    android:id="@+id/line5"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/album_dp_1"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/qmui_divider"
+                    app:layout_constraintTop_toBottomOf="@id/receivingAccountTv" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/msgTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/str_memo"
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/small"
+                    app:layout_constraintEnd_toStartOf="@id/msgValueTv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line5" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/msgValueTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/album_dp_15"
+                    android:layout_marginTop="8dp"
+                    android:background="@null"
+                    android:gravity="right"
+                    android:hint="@string/str_enter_remarks"
+                    android:text=""
+                    android:textColor="@color/app_color_red"
+                    android:textSize="@dimen/small"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/msgTv"
+                    app:layout_constraintTop_toBottomOf="@id/line5" />
+
+                <View
+                    android:id="@+id/line6"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/album_dp_1"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/qmui_divider"
+                    app:layout_constraintTop_toBottomOf="@id/msgValueTv" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/thisPaymentTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/album_dp_15"
+                    android:text="@string/str_this_payment"
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/small"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/line6" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/paymentValueTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/album_dp_10"
+                    android:text="0.00 MGP"
+                    android:textColor="@color/app_color_red"
+                    android:textSize="@dimen/big_medium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/thisPaymentTv" />
+
+            </com.qmuiteam.qmui.layout.QMUIConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/paymentBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/album_dp_45"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:layout_marginBottom="@dimen/album_dp_45"
+        android:text="@string/str_payment"
+        android:textColor="@color/durban_White"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:qmui_backgroundColor="@color/qmui_config_color_red"
+        app:qmui_borderWidth="@dimen/album_dp_0" />
+</androidx.constraintlayout.widget.ConstraintLayout>

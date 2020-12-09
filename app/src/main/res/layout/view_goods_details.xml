@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.youth.banner.Banner
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="250dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/durban_White"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/goodsNameTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/album_dp_15"
+                    android:layout_marginTop="@dimen/album_dp_10"
+                    android:text="商品名称"
+                    android:textSize="@dimen/big_small" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/goodsInfoTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/album_dp_15"
+                    android:layout_marginTop="@dimen/album_dp_10"
+                    android:text="商品详情"
+                    android:textSize="@dimen/small" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/goodsPriceTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/album_dp_15"
+                    android:layout_marginTop="@dimen/album_dp_10"
+                    android:layout_marginBottom="@dimen/album_dp_15"
+                    android:text="0.00 MGP"
+                    android:textColor="@color/qmui_config_color_red"
+                    android:textSize="@dimen/big_small" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/album_dp_10"
+                android:background="@color/durban_White"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/sfTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/album_dp_15"
+                    android:text="@string/str_specification"
+                    android:textColor="@color/app_color_description"
+                    android:textSize="@dimen/small" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/specificationTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/album_dp_15"
+                    android:layout_toRightOf="@id/sfTv"
+                    android:text="白色：台"
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/small" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/specificationTv"
+                    android:layout_marginTop="@dimen/album_dp_10"
+                    android:layout_marginBottom="5dp"
+                    android:layout_toRightOf="@id/sfTv"
+                    android:gravity="center_vertical"
+                    android:text="@string/str_trade_regulation"
+                    android:textColor="@color/app_color_description"
+                    android:textSize="@dimen/small" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/arrowsIv"
+                    android:layout_width="@dimen/album_dp_20"
+                    android:layout_height="@dimen/album_dp_20"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/album_dp_15"
+                    android:src="@mipmap/icon_arrows" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/album_dp_10"
+                android:background="@color/durban_White">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/freightTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/album_dp_15"
+                    android:text="@string/str_freight"
+                    android:textColor="@color/app_color_description"
+                    android:textSize="@dimen/small" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/freightPriceTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/album_dp_15"
+                    android:layout_toRightOf="@id/freightTv"
+                    android:text="运费（0）"
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/small" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/freightPriceTv"
+                    android:layout_marginLeft="@dimen/album_dp_15"
+                    android:layout_marginTop="@dimen/album_dp_10"
+                    android:layout_marginBottom="5dp"
+                    android:drawableLeft="@mipmap/ic_confirm_red"
+                    android:drawablePadding="5dp"
+                    android:text="@string/str_7sales_return"
+                    android:textColor="@color/app_color_description"
+                    android:textSize="@dimen/micro" />
+            </RelativeLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</merge>

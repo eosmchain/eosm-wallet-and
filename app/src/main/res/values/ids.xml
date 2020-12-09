@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="mnemon_select_tag" type="id"></item>
+    <item name="mnemon_index_tag" type="id"></item>
+    <item name="OrderID" type="id"></item>
+    <item name="quantity" type="id"></item>
+    <item name="topbar_right_change_button" type="id" />
+    <item name="topbar_left_change_button" type="id" />
+    <item name="eostoken" type="id" />
+    <item name="categoryID" type="id" />
+    <item name="currencyID" type="id" />
+
+    <item name="layout_for_shadow" type="id"/>
+</resources>

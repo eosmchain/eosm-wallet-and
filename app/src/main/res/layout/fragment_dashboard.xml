@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.MyController">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <com.qmuiteam.qmui.widget.QMUITopBar
+            android:id="@+id/topbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/qmui_topbar_height"
+            android:background="@color/qmui_config_color_white"
+            android:fitsSystemWindows="true" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView
+                    android:id="@+id/groupListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/appVersionTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/album_dp_15"
+                    android:layout_marginBottom="56dp"
+                    android:text="v0.0.0"
+                    android:textColor="@color/app_color_description"
+                    android:textSize="@dimen/small"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+        <!--    <LinearLayout-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="match_parent"-->
+        <!--        android:fitsSystemWindows="true"-->
+        <!--        android:orientation="vertical">-->
+
+        <!--        <com.qmuiteam.qmui.widget.QMUITopBar-->
+        <!--            android:id="@+id/topbar"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="?attr/qmui_topbar_height"-->
+        <!--            android:background="@color/qmui_config_color_white"-->
+        <!--            android:fitsSystemWindows="true" />-->
+
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/walletLayout"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="@dimen/album_dp_80"-->
+        <!--            android:background="@color/durban_White"-->
+        <!--            android:orientation="horizontal">-->
+
+        <!--            <androidx.appcompat.widget.AppCompatImageView-->
+        <!--                android:id="@+id/walletIconIv"-->
+        <!--                android:layout_width="@dimen/album_dp_45"-->
+        <!--                android:layout_height="@dimen/album_dp_45"-->
+        <!--                android:layout_gravity="left|center_vertical"-->
+        <!--                android:layout_marginLeft="@dimen/album_dp_15"-->
+        <!--                android:src="@mipmap/ic_mgp_rounded" />-->
+
+        <!--            <androidx.appcompat.widget.AppCompatTextView-->
+        <!--                android:id="@+id/walletNameTv"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center_vertical"-->
+        <!--                android:layout_marginLeft="@dimen/album_dp_20"-->
+        <!--                android:ellipsize="middle"-->
+        <!--                android:singleLine="true"-->
+        <!--                android:text="MGP_Temp"-->
+        <!--                android:textSize="@dimen/big_small" />-->
+        <!--        </LinearLayout>-->
+
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/walletAdminLayout"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="56dp"-->
+        <!--            android:layout_marginTop="5dp"-->
+        <!--            android:layout_marginBottom="5dp"-->
+        <!--            android:background="@color/durban_White"-->
+        <!--            android:orientation="horizontal">-->
+
+        <!--            <androidx.appcompat.widget.AppCompatImageView-->
+        <!--                android:id="@+id/iconIv1"-->
+        <!--                android:layout_width="25dp"-->
+        <!--                android:layout_height="25dp"-->
+        <!--                android:layout_gravity="left|center_vertical"-->
+        <!--                android:layout_marginLeft="@dimen/album_dp_15"-->
+        <!--                android:src="@mipmap/ic_wallet_address" />-->
+
+        <!--            <androidx.appcompat.widget.AppCompatTextView-->
+        <!--                android:id="@+id/nameTv1"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center_vertical"-->
+        <!--                android:layout_marginLeft="@dimen/album_dp_15"-->
+        <!--                android:text="@string/str_wallet_manage"-->
+        <!--                android:textSize="@dimen/big_small" />-->
+
+        <!--            <androidx.appcompat.widget.AppCompatTextView-->
+        <!--                android:id="@+id/subTv1"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center_vertical|right"-->
+        <!--                android:layout_marginLeft="@dimen/album_dp_15"-->
+        <!--                android:layout_marginRight="@dimen/album_dp_15"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:drawableRight="@mipmap/icon_arrows"-->
+        <!--                android:gravity="right|center_vertical"-->
+        <!--                android:textColor="@color/qmui_config_color_red"-->
+        <!--                android:textSize="@dimen/micro" />-->
+        <!--        </LinearLayout>-->
+
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/chainstoreLayout"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="56dp"-->
+        <!--            android:layout_marginBottom="5dp"-->
+        <!--            android:background="@color/durban_White"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            android:visibility="gone">-->
+
+        <!--            <androidx.appcompat.widget.AppCompatImageView-->
+        <!--                android:id="@+id/iconIv2"-->
+        <!--                android:layout_width="25dp"-->
+        <!--                android:layout_height="25dp"-->
+        <!--                android:layout_gravity="left|center_vertical"-->
+        <!--                android:layout_marginLeft="@dimen/album_dp_15"-->
+        <!--                android:src="@mipmap/ic_chainstore" />-->
+
+        <!--            <androidx.appcompat.widget.AppCompatTextView-->
+        <!--                android:id="@+id/nameTv2"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center_vertical"-->
+        <!--                android:layout_marginLeft="@dimen/album_dp_15"-->
+        <!--                android:text="@string/str_chain_business_center"-->
+        <!--                android:textSize="@dimen/big_small" />-->
+
+        <!--            <androidx.appcompat.widget.AppCompatTextView-->
+        <!--                android:id="@+id/subTv2"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center_vertical|right"-->
+        <!--                android:layout_marginLeft="@dimen/album_dp_15"-->
+        <!--                android:layout_marginRight="@dimen/album_dp_15"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:drawableRight="@mipmap/icon_arrows"-->
+        <!--                android:gravity="right|center_vertical"-->
+        <!--                android:textColor="@color/qmui_config_color_red"-->
+        <!--                android:textSize="@dimen/micro" />-->
+        <!--        </LinearLayout>-->
+
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/myInvitationCodeLayout"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="56dp"-->
+        <!--            android:background="@color/durban_White"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            android:visibility="gone">-->
+
+        <!--            <androidx.appcompat.widget.AppCompatImageView-->
+        <!--                android:id="@+id/iconIv3"-->
+        <!--                android:layout_width="25dp"-->
+        <!--                android:layout_height="25dp"-->
+        <!--                android:layout_gravity="left|center_vertical"-->
+        <!--                android:layout_marginLeft="@dimen/album_dp_15"-->
+        <!--                android:src="@mipmap/ic_invitation_code" />-->
+
+        <!--            <androidx.appcompat.widget.AppCompatTextView-->
+        <!--                android:id="@+id/nameTv3"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center_vertical"-->
+        <!--                android:layout_marginLeft="@dimen/album_dp_15"-->
+        <!--                android:text="@string/str_invitation_code"-->
+        <!--                android:textSize="@dimen/big_small" />-->
+
+        <!--            <androidx.appcompat.widget.AppCompatTextView-->
+        <!--                android:id="@+id/subTv3"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center_vertical|right"-->
+        <!--                android:layout_marginLeft="@dimen/album_dp_15"-->
+        <!--                android:layout_marginRight="@dimen/album_dp_15"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:drawableRight="@mipmap/icon_arrows"-->
+        <!--                android:gravity="right|center_vertical"-->
+        <!--                android:textColor="@color/qmui_config_color_red"-->
+        <!--                android:textSize="@dimen/micro" />-->
+        <!--        </LinearLayout>-->
+
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/mgpStimulateLayout"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="56dp"-->
+        <!--            android:layout_marginTop="@dimen/album_dp_1"-->
+        <!--            android:background="@color/durban_White"-->
+        <!--            android:orientation="horizontal">-->
+
+        <!--            <androidx.appcompat.widget.AppCompatImageView-->
+        <!--                android:id="@+id/iconIv4"-->
+        <!--                android:layout_width="25dp"-->
+        <!--                android:layout_height="25dp"-->
+        <!--                android:layout_gravity="left|center_vertical"-->
+        <!--                android:layout_marginLeft="@dimen/album_dp_15"-->
+        <!--                android:src="@mipmap/ic_mgp_stimulate" />-->
+
+        <!--            <androidx.appcompat.widget.AppCompatTextView-->
+        <!--                android:id="@+id/nameTv4"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center_vertical"-->
+        <!--                android:layout_marginLeft="@dimen/album_dp_15"-->
+        <!--                android:text="@string/str_mgp_stimulate"-->
+        <!--                android:textSize="@dimen/big_small" />-->
+
+        <!--            <androidx.appcompat.widget.AppCompatTextView-->
+        <!--                android:id="@+id/subTv4"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center_vertical|right"-->
+        <!--                android:layout_marginLeft="@dimen/album_dp_15"-->
+        <!--                android:layout_marginRight="@dimen/album_dp_15"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:drawableRight="@mipmap/icon_arrows"-->
+        <!--                android:gravity="right|center_vertical"-->
+        <!--                android:textColor="@color/qmui_config_color_red"-->
+        <!--                android:textSize="@dimen/micro" />-->
+        <!--        </LinearLayout>-->
+
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/helpCenterLayout"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="56dp"-->
+        <!--            android:layout_marginTop="5dp"-->
+        <!--            android:background="@color/durban_White"-->
+        <!--            android:orientation="horizontal">-->
+
+        <!--            <androidx.appcompat.widget.AppCompatImageView-->
+        <!--                android:id="@+id/iconIv5"-->
+        <!--                android:layout_width="25dp"-->
+        <!--                android:layout_height="25dp"-->
+        <!--                android:layout_gravity="left|center_vertical"-->
+        <!--                android:layout_marginLeft="@dimen/album_dp_15"-->
+        <!--                android:src="@mipmap/ic_help_center" />-->
+
+        <!--            <androidx.appcompat.widget.AppCompatTextView-->
+        <!--                android:id="@+id/nameTv5"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center_vertical"-->
+        <!--                android:layout_marginLeft="@dimen/album_dp_15"-->
+        <!--                android:text="@string/str_help_center"-->
+        <!--                android:textSize="@dimen/big_small" />-->
+
+        <!--            <androidx.appcompat.widget.AppCompatTextView-->
+        <!--                android:id="@+id/subTv5"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center_vertical|right"-->
+        <!--                android:layout_marginLeft="@dimen/album_dp_15"-->
+        <!--                android:layout_marginRight="@dimen/album_dp_15"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:drawableRight="@mipmap/icon_arrows"-->
+        <!--                android:gravity="right|center_vertical"-->
+        <!--                android:textColor="@color/qmui_config_color_red"-->
+        <!--                android:textSize="@dimen/micro" />-->
+        <!--        </LinearLayout>-->
+
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/aboutUsLayout"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="56dp"-->
+        <!--            android:layout_marginTop="@dimen/album_dp_1"-->
+        <!--            android:background="@color/durban_White"-->
+        <!--            android:orientation="horizontal">-->
+
+        <!--            <androidx.appcompat.widget.AppCompatImageView-->
+        <!--                android:id="@+id/iconIv6"-->
+        <!--                android:layout_width="25dp"-->
+        <!--                android:layout_height="25dp"-->
+        <!--                android:layout_gravity="left|center_vertical"-->
+        <!--                android:layout_marginLeft="@dimen/album_dp_15"-->
+        <!--                android:src="@mipmap/ic_aboutus" />-->
+
+        <!--            <androidx.appcompat.widget.AppCompatTextView-->
+        <!--                android:id="@+id/nameTv6"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center_vertical"-->
+        <!--                android:layout_marginLeft="@dimen/album_dp_15"-->
+        <!--                android:text="@string/str_about_us"-->
+        <!--                android:textSize="@dimen/big_small" />-->
+
+        <!--            <androidx.appcompat.widget.AppCompatTextView-->
+        <!--                android:id="@+id/subTv6"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center_vertical|right"-->
+        <!--                android:layout_marginLeft="@dimen/album_dp_15"-->
+        <!--                android:layout_marginRight="@dimen/album_dp_15"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:drawableRight="@mipmap/icon_arrows"-->
+        <!--                android:gravity="right|center_vertical"-->
+        <!--                android:textColor="@color/qmui_config_color_red"-->
+        <!--                android:textSize="@dimen/micro" />-->
+        <!--        </LinearLayout>-->
+
+        <!--        <androidx.appcompat.widget.AppCompatTextView-->
+        <!--            android:id="@+id/appVersionTv"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="center_horizontal"-->
+        <!--            android:layout_marginTop="@dimen/album_dp_20"-->
+        <!--            android:text="V0.0.0"-->
+        <!--            android:textColor="@color/app_color_common_deputy"-->
+        <!--            android:textSize="@dimen/small" />-->
+    </LinearLayout>
+</merge>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "284719200038",
+    "firebase_url": "https://mangowallet-c8943.firebaseio.com",
+    "project_id": "mangowallet-c8943",
+    "storage_bucket": "mangowallet-c8943.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:284719200038:android:bf3b85ebabd9917a9cf3e7",
+        "android_client_info": {
+          "package_name": "com.token.mangowallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "284719200038-rhe43jso30hesrna12tqd6c57icidr8g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqnTW-TxNEbl6ROYV7habzRDXoc4eRXQ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "284719200038-rhe43jso30hesrna12tqd6c57icidr8g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

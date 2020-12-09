@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/walletNameTil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/topBar">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/walletNameEt"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="@string/str_wallet_name"
+            android:textColor="@color/app_color_common_black"
+            android:textSize="@dimen/small" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/walletPasswordTil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        app:layout_constraintTop_toBottomOf="@id/walletNameTil">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/walletPasswordEt"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="@string/str_wallet_password"
+            android:inputType="textPassword"
+            android:textColor="@color/app_color_common_black"
+            android:textSize="@dimen/small" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/againWalletPasswordTil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        app:layout_constraintTop_toBottomOf="@id/walletPasswordTil">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/againWalletPasswordEt"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="@string/str_again_input_password"
+            android:inputType="textPassword"
+            android:textColor="@color/app_color_common_black"
+            android:textSize="@dimen/small" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/hintTil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        app:layout_constraintTop_toBottomOf="@id/againWalletPasswordTil">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/hintEt"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="@string/str_password_prompt_msg"
+            android:textColor="@color/app_color_common_black"
+            android:textSize="@dimen/small" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/createBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/album_dp_45"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/album_dp_45"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:background="@drawable/gradient_left_to_right"
+        android:gravity="center"
+        android:text="@string/str_create_wallet"
+        android:textColor="@color/qmui_config_color_white"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintTop_toBottomOf="@id/hintTil" />
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/importBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/album_dp_45"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="@string/str_import_title"
+        android:textColor="@color/app_color_dark_blue"
+        android:textSize="@dimen/small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createBtn"
+        app:qmui_borderColor="@color/qmui_config_color_gray_8"
+        app:qmui_radius="5dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

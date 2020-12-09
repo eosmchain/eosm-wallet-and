@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/app_color_common_dark_black">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/progressTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_50"
+        android:gravity="center"
+        android:text="@string/str_vote_progress"
+        android:textColor="@color/durban_White"
+        android:textSize="@dimen/small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="0dp"
+        android:layout_height="8dp"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:layout_marginBottom="@dimen/album_dp_10"
+        android:progressDrawable="@drawable/layer_list_progress_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progressTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/biNumTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:gravity="left"
+        android:text="0.00 USDT"
+        android:textColor="@color/durban_White"
+        android:textSize="@dimen/small"
+        app:layout_constraintEnd_toStartOf="@id/blockHeightValTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progressBar" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/priceTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_10"
+        android:layout_marginBottom="@dimen/album_dp_20"
+        android:gravity="left"
+        android:text="MGP Price"
+        android:textColor="@color/durban_White"
+        android:textSize="@dimen/small"
+        app:layout_constraintBottom_toTopOf="@id/sortLayout"
+        app:layout_constraintEnd_toStartOf="@id/blockHeightTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/biNumTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/blockHeightValTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:gravity="left"
+        android:text="0"
+        android:textColor="@color/durban_White"
+        android:textSize="@dimen/small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/biNumTv"
+        app:layout_constraintTop_toBottomOf="@id/progressBar" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/blockHeightTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_10"
+        android:layout_marginBottom="@dimen/album_dp_20"
+        android:gravity="left"
+        android:text="Block Height"
+        android:textColor="@color/durban_White"
+        android:textSize="@dimen/small"
+        app:layout_constraintBottom_toTopOf="@id/sortLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/priceTv"
+        app:layout_constraintTop_toBottomOf="@id/biNumTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/viewRuleTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:layout_marginBottom="@dimen/album_dp_20"
+        android:text="@string/str_view_rule"
+        android:textColor="@color/durban_White"
+        android:textSize="@dimen/small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/sortLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/album_dp_45"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/priceTv">
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:id="@+id/defaultBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:background="@drawable/vote_sort_selector"
+                android:button="@null"
+                android:checked="true"
+                android:padding="6dp"
+                android:text="@string/str_default"
+                android:textColor="@color/white"
+                android:textSize="@dimen/small" />
+
+            <RadioButton
+                android:id="@+id/voteNumBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:background="@drawable/vote_sort_selector"
+                android:button="@null"
+                android:checked="false"
+                android:padding="6dp"
+                android:text="@string/str_vote_num"
+                android:textColor="@color/app_color_common_dark_black"
+                android:textSize="@dimen/small" />
+
+            <RadioButton
+                android:id="@+id/rateBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:background="@drawable/vote_sort_selector"
+                android:button="@null"
+                android:checked="false"
+                android:padding="6dp"
+                android:text="@string/str_rate"
+                android:textColor="@color/app_color_common_dark_black"
+                android:textSize="@dimen/small" />
+        </RadioGroup>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

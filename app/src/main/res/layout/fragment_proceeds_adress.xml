@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/qmui_config_color_gray_1">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="148dp"
+        android:layout_marginBottom="@dimen/album_dp_100"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topBar">
+
+        <com.qmuiteam.qmui.layout.QMUIFrameLayout
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="23dp"
+            android:layout_marginRight="@dimen/activity_horizontal_margin">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/album_dp_0"
+                    android:layout_weight="1"
+                    android:background="@color/app_color_blue"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/walletNameTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center"
+                        android:text="MGP_wallet"
+                        android:textColor="@color/durban_White"
+                        android:textSize="@dimen/big_small" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/walletAddressTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center_horizontal"
+                        android:layout_marginBottom="@dimen/album_dp_10"
+                        android:drawableRight="@mipmap/icon_copy"
+                        android:drawablePadding="5dp"
+                        android:ellipsize="middle"
+                        android:singleLine="true"
+                        android:text="888uuuu8u8u"
+                        android:textColor="@color/durban_White"
+                        android:textSize="@dimen/big_small" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/album_dp_0"
+                    android:layout_weight="2"
+                    android:background="@color/durban_White"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/qrCodeAdressIv"
+                        android:layout_width="@dimen/durban_dp_200"
+                        android:layout_height="@dimen/durban_dp_200"
+                        android:layout_gravity="center" />
+                </FrameLayout>
+            </LinearLayout>
+        </com.qmuiteam.qmui.layout.QMUIFrameLayout>
+
+        <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+            android:id="@+id/logoIv"
+            android:layout_width="@dimen/album_dp_45"
+            android:layout_height="@dimen/album_dp_45"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/ic_mgp"
+            app:qmui_border_width="@dimen/album_dp_0"
+            app:qmui_is_circle="true" />
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

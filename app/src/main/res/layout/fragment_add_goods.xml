@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/durban_White">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/qmui_topbar_height"
+        app:layout_constraintTop_toBottomOf="@id/topBar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.token.mangowallet.view.RequiredTextView
+                android:id="@+id/goodsNameTv"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:text="@string/str_goods_name"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.35"
+                app:prefix="*"
+                app:prefix_color="@color/app_color_red_1" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/goodsNameEt"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:hint="@string/str_please_import_goods_name"
+                android:singleLine="true"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toEndOf="@id/goodsNameTv"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.65" />
+
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/goodsNameTv" />
+
+            <com.token.mangowallet.view.RequiredTextView
+                android:id="@+id/typeTv"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:text="@string/str_type"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line1"
+                app:layout_constraintWidth_percent="0.35"
+                app:prefix="*"
+                app:prefix_color="@color/app_color_red_1" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/typeEt"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:drawableRight="@mipmap/icon_arrows"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical|right"
+                android:paddingRight="@dimen/album_dp_15"
+                android:singleLine="true"
+                android:text="@string/str_please_select_type"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toEndOf="@id/typeTv"
+                app:layout_constraintTop_toBottomOf="@id/line1"
+                app:layout_constraintWidth_percent="0.65" />
+
+            <View
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/typeTv" />
+
+            <com.token.mangowallet.view.RequiredTextView
+                android:id="@+id/specificationTv"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:text="@string/str_specification"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line2"
+                app:layout_constraintWidth_percent="0.35"
+                app:prefix="*"
+                app:prefix_color="@color/app_color_red_1" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/specificationEt"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:hint="@string/str_please_import"
+                android:singleLine="true"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toEndOf="@id/specificationTv"
+                app:layout_constraintTop_toBottomOf="@id/line2"
+                app:layout_constraintWidth_percent="0.65" />
+
+            <View
+                android:id="@+id/line3"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/specificationTv" />
+
+            <com.token.mangowallet.view.RequiredTextView
+                android:id="@+id/unitTv"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:text="@string/str_unit"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line3"
+                app:layout_constraintWidth_percent="0.35"
+                app:prefix="*"
+                app:prefix_color="@color/app_color_red_1" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/unitEt"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:hint="@string/str_please_import"
+                android:singleLine="true"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toEndOf="@id/unitTv"
+                app:layout_constraintTop_toBottomOf="@id/line3"
+                app:layout_constraintWidth_percent="0.65" />
+
+            <View
+                android:id="@+id/line4"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/unitTv" />
+
+            <com.token.mangowallet.view.RequiredTextView
+                android:id="@+id/inventoryTv"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:text="@string/str_inventory"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line4"
+                app:layout_constraintWidth_percent="0.35"
+                app:prefix="*"
+                app:prefix_color="@color/app_color_red_1" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/inventoryEt"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:hint="@string/str_please_import"
+                android:inputType="number"
+                android:singleLine="true"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toEndOf="@id/inventoryTv"
+                app:layout_constraintTop_toBottomOf="@id/line4"
+                app:layout_constraintWidth_percent="0.65" />
+
+            <View
+                android:id="@+id/line5"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/inventoryTv" />
+
+            <com.token.mangowallet.view.RequiredTextView
+                android:id="@+id/priceTv"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:text="@string/str_price"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line5"
+                app:layout_constraintWidth_percent="0.35"
+                app:prefix="*"
+                app:prefix_color="@color/app_color_red_1" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/priceEt"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:hint="@string/str_please_import"
+                android:inputType="numberDecimal"
+                android:singleLine="true"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toEndOf="@id/priceTv"
+                app:layout_constraintTop_toBottomOf="@id/line5"
+                app:layout_constraintWidth_percent="0.65" />
+
+            <View
+                android:id="@+id/line6"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/priceTv" />
+
+            <com.token.mangowallet.view.RequiredTextView
+                android:id="@+id/postageTv"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:text="@string/str_postage"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line6"
+                app:layout_constraintWidth_percent="0.35"
+                app:prefix="*"
+                app:prefix_color="@color/app_color_red_1" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/postageEt"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:hint="@string/str_please_import"
+                android:inputType="numberDecimal"
+                android:singleLine="true"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toEndOf="@id/postageTv"
+                app:layout_constraintTop_toBottomOf="@id/line6"
+                app:layout_constraintWidth_percent="0.65" />
+
+            <View
+                android:id="@+id/line7"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/postageTv" />
+
+            <com.token.mangowallet.view.RequiredTextView
+                android:id="@+id/actualChargeSellerTv"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:text="@string/str_actual_charge_seller"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line7"
+                app:layout_constraintWidth_percent="0.35"
+                app:prefix="*"
+                app:prefix_color="@color/app_color_red_1" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/actualChargeSellerEt"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:hint="@string/str_please_import_interval"
+                android:inputType="numberDecimal"
+                android:singleLine="true"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toEndOf="@id/actualChargeSellerTv"
+                app:layout_constraintTop_toBottomOf="@id/line7"
+                app:layout_constraintWidth_percent="0.65" />
+
+            <View
+                android:id="@+id/line8"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/actualChargeSellerTv" />
+
+            <com.token.mangowallet.view.RequiredTextView
+                android:id="@+id/bonusIncentivesTv"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:text="@string/str_bonus_incentives"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line8"
+                app:layout_constraintWidth_percent="0.35"
+                app:prefix="*"
+                app:prefix_color="@color/app_color_red_1" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/bonusIncentivesEt"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:hint="@string/str_please_import_interval"
+                android:inputType="numberDecimal"
+                android:singleLine="true"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toEndOf="@id/bonusIncentivesTv"
+                app:layout_constraintTop_toBottomOf="@id/line8"
+                app:layout_constraintWidth_percent="0.65" />
+
+            <View
+                android:id="@+id/line9"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bonusIncentivesTv" />
+
+            <com.token.mangowallet.view.RequiredTextView
+                android:id="@+id/mortgageAwayTv"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:text="@string/str_mortgage_away"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line9"
+                app:layout_constraintWidth_percent="0.35"
+                app:prefix="*"
+                app:prefix_color="@color/app_color_red_1" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/mortgageAwayEt"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:hint="@string/str_please_import"
+                android:inputType="numberDecimal"
+                android:paddingRight="@dimen/album_dp_30"
+                android:singleLine="true"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toEndOf="@id/mortgageAwayTv"
+                app:layout_constraintTop_toBottomOf="@id/line9"
+                app:layout_constraintWidth_percent="0.65" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/arrowsIv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:src="@mipmap/icon_arrows"
+                app:layout_constraintBottom_toTopOf="@id/line10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line9" />
+
+            <View
+                android:id="@+id/line10"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mortgageAwayTv" />
+
+            <com.token.mangowallet.view.RequiredTextView
+                android:id="@+id/salesAreaTv"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:text="@string/str_sales_area"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line10"
+                app:layout_constraintWidth_percent="0.35"
+                app:prefix="*"
+                app:prefix_color="@color/app_color_red_1" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/areaTv"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="center_vertical|right"
+                android:paddingRight="@dimen/album_dp_45"
+                android:singleLine="true"
+                android:text="@string/str_please_choose"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toEndOf="@id/salesAreaTv"
+                app:layout_constraintTop_toBottomOf="@id/line10"
+                app:layout_constraintWidth_percent="0.65" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/arrowsIv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:src="@mipmap/icon_arrows"
+                app:layout_constraintBottom_toTopOf="@id/line11"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line10" />
+
+            <View
+                android:id="@+id/line11"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/salesAreaTv" />
+
+            <com.token.mangowallet.view.RequiredTextView
+                android:id="@+id/payConfigTv"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:text="@string/str_pay_mode"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line11"
+                app:layout_constraintWidth_percent="0.35"
+                app:prefix="*"
+                app:prefix_color="@color/app_color_red_1" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/payConfigValTv"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="center_vertical|right"
+                android:paddingRight="@dimen/album_dp_45"
+                android:singleLine="true"
+                android:text="@string/str_please_multi_select"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toEndOf="@id/payConfigTv"
+                app:layout_constraintTop_toBottomOf="@id/line11"
+                app:layout_constraintWidth_percent="0.65" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/arrowsIv3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:src="@mipmap/icon_arrows"
+                app:layout_constraintBottom_toTopOf="@id/line12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line11" />
+
+            <View
+                android:id="@+id/line12"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/payConfigTv" />
+
+            <com.token.mangowallet.view.RequiredTextView
+                android:id="@+id/introductionTv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/album_dp_40"
+                android:background="@color/durban_White"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/album_dp_15"
+                android:text="@string/str_introduction"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line12"
+                app:prefix="*"
+                app:prefix_color="@color/app_color_red_1" />
+
+            <View
+                android:id="@+id/line13"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/qmui_list_divider_height"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:background="@drawable/qmui_divider"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/introductionTv" />
+
+            <FrameLayout
+                android:id="@+id/introductionLayout"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@color/durban_White"
+                app:layout_constraintTop_toBottomOf="@id/line13">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/introductionEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:gravity="top"
+                    android:hint="@string/str_please_import_introduction"
+                    android:inputType=""
+                    android:maxLength="150"
+                    android:paddingLeft="@dimen/album_dp_15"
+                    android:paddingTop="@dimen/album_dp_10"
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/small" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/importNumTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|right"
+                    android:layout_marginRight="@dimen/album_dp_15"
+                    android:layout_marginBottom="@dimen/album_dp_15"
+                    android:text="0/150"
+                    android:textColor="@color/app_color_common_hint"
+                    android:textSize="@dimen/small" />
+            </FrameLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/addPicRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:src="@mipmap/ic_add_pic"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/introductionLayout" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/picPromptTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:text="@string/str_uploading_pic"
+                android:textColor="@color/app_color_common_hint"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/addPicRecyclerView" />
+
+            <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                android:id="@+id/submitBtn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/album_dp_45"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginTop="@dimen/album_dp_45"
+                android:layout_marginRight="@dimen/album_dp_15"
+                android:layout_marginBottom="@dimen/album_dp_100"
+                android:text="@string/str_submit"
+                android:textColor="@color/durban_White"
+                android:textSize="@dimen/small"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/picPromptTv"
+                app:qmui_backgroundColor="@color/app_color_blue"
+                app:qmui_borderWidth="@dimen/album_dp_0"
+                app:qmui_radius="5dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

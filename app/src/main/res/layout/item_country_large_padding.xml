@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_flag"
+        android:layout_width="@dimen/drawableHelper_item_marginHorizontal"
+        android:layout_height="@dimen/drawableHelper_item_marginHorizontal" />
+
+    <Space
+        android:layout_width="12dp"
+        android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:textSize="@dimen/small" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:textSize="@dimen/small" />
+
+    <Space
+        android:layout_width="@dimen/activity_horizontal_margin"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:elevation="@dimen/album_dp_4">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        android:background="@color/durban_White"
+        app:theme="@style/Widget.AppCompat.Toolbar">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:id="@+id/goodsLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/goodsTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/str_goods"
+                    android:textColor="@color/qmui_config_color_red"
+                    android:textSize="@dimen/small" />
+
+                <View
+                    android:id="@+id/goodsLine"
+                    android:layout_width="@dimen/album_dp_30"
+                    android:layout_height="@dimen/album_dp_1"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:background="@color/qmui_config_color_red" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/detailsLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/album_dp_15">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/detailsTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/str_details"
+                    android:textSize="@dimen/small" />
+
+                <View
+                    android:id="@+id/detailsLine"
+                    android:layout_width="@dimen/album_dp_30"
+                    android:layout_height="@dimen/album_dp_1"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:background="@color/qmui_config_color_red"
+                    android:visibility="gone" />
+            </FrameLayout>
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+</com.google.android.material.appbar.AppBarLayout>

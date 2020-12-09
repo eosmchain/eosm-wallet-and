@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80000000"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/pullDownIv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:src="@mipmap/ic_pull_down" />
+
+    <com.qmuiteam.qmui.layout.QMUIFrameLayout
+        android:id="@+id/contentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/qmui_config_color_white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tabLayout"
+            android:orientation="horizontal">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/typeRecycler"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/tab_panel_bg" />
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/qmui_config_color_gray_9" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/titleLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/album_dp_35">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/titleTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="left|center_vertical"
+                        android:layout_marginLeft="@dimen/album_dp_10"
+                        android:gravity="center_vertical"
+                        android:text="@string/str_identity_wallet"
+                        android:textColor="@color/app_color_common_black"
+                        android:textSize="@dimen/small" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/addWalletIv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center_vertical"
+                        android:layout_margin="5dp"
+                        android:src="@mipmap/ic_add"
+                        android:visibility="gone" />
+
+                </FrameLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/walletItemRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/qmui_config_color_white" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </com.qmuiteam.qmui.layout.QMUIFrameLayout>
+
+</LinearLayout>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qmuiteam.qmui.widget.QMUIWindowInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlEnablePreviewInEditMode="false">
+
+        <com.scwang.smart.refresh.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.youth.banner.Banner
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/home_grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none"
+                    android:visibility="visible" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/hotadIv"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    android:scaleType="center"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:visibility="visible" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/wtoutiaoIv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical" />
+
+                    <ViewFlipper
+                        android:id="@+id/home_page_vf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/album_dp_10"
+                        android:autoStart="true"
+                        android:flipInterval="4000"
+                        android:inAnimation="@anim/anim_text_banner_marquee_in"
+                        android:outAnimation="@anim/anim_text_banner_marquee_out"
+                        android:paddingLeft="10dp" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/commodityRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <com.scwang.smart.refresh.footer.ClassicsFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        android:layout_marginBottom="0dp"
+        android:background="@android:color/transparent"
+        app:layout_collapseMode="pin"
+        app:navigationIcon="?attr/homeAsUpIndicator">
+
+        <!--        <com.qmuiteam.qmui.widget.QMUIAppBarLayout-->
+        <!--            android:id="@+id/buttonBarLayout"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="center">-->
+
+        <!--            &lt;!&ndash;            <com.qmuiteam.qmui.widget.QMUITopBar&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:id="@+id/topbar"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:layout_height="?attr/qmui_topbar_height"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:background="@color/qmui_config_color_transparent"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                android:fitsSystemWindows="true"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                app:qmui_bottomDividerHeight="0px"&ndash;&gt;-->
+        <!--            &lt;!&ndash;                app:qmui_layout_collapseMode="pin" />&ndash;&gt;-->
+        <!--        </com.qmuiteam.qmui.widget.QMUIAppBarLayout>-->
+    </androidx.appcompat.widget.Toolbar>
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/topBarLayout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="horizontal">-->
+
+    <!--        <include-->
+    <!--            android:id="@+id/topbar"-->
+    <!--            layout="@layout/view_topbar" />-->
+    <!--    </LinearLayout>-->
+</com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>

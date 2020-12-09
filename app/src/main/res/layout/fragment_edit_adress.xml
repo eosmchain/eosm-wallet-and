@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/layout0"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/album_dp_35"
+        android:layout_marginTop="@dimen/list_divider_height"
+        android:background="@color/durban_White"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/topBar">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/album_dp_15"
+            android:gravity="center_vertical"
+            android:text="@string/str_united_states"
+            android:textSize="@dimen/sp_15" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/unitedStatesTv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/album_dp_15"
+            android:background="@null"
+            android:drawableRight="@mipmap/icon_arrows"
+            android:ellipsize="end"
+            android:gravity="right|center_vertical"
+            android:lines="1"
+            android:text="@string/str_please_choose"
+            android:textSize="@dimen/small" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/qmui_list_item_height"
+        android:layout_marginTop="@dimen/list_divider_height"
+        android:background="@color/durban_White"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/layout0">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/album_dp_15"
+            android:gravity="center_vertical"
+            android:text="@string/address_consignee"
+            android:textSize="@dimen/sp_15" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edit_consignee"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:ellipsize="end"
+            android:hint="@string/address_hint_consignee"
+            android:inputType="text"
+            android:lines="1"
+            android:textSize="@dimen/small" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/qmui_list_item_height"
+        android:layout_marginTop="@dimen/list_divider_height"
+        android:background="@color/durban_White"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/layout1">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/album_dp_15"
+            android:gravity="center_vertical"
+            android:text="@string/address_tel"
+            android:textSize="@dimen/sp_15" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edit_tel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:ellipsize="end"
+            android:hint="@string/address_hint_tel"
+            android:inputType="phone"
+            android:lines="1"
+            android:textSize="@dimen/small" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/qmui_list_item_height"
+        android:layout_marginTop="@dimen/list_divider_height"
+        android:background="@color/durban_White"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/layout2">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/album_dp_15"
+            android:gravity="center_vertical"
+            android:text="@string/address_region"
+            android:textSize="@dimen/sp_15" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_region"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/album_dp_15"
+            android:background="@null"
+            android:drawableRight="@mipmap/icon_arrows"
+            android:ellipsize="end"
+            android:gravity="right|center_vertical"
+            android:hint="@string/address_hint_region"
+            android:lines="1"
+            android:textSize="@dimen/small" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout4"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/qmui_list_item_height"
+        android:layout_marginTop="@dimen/list_divider_height"
+        android:background="@color/durban_White"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/layout3">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/album_dp_15"
+            android:gravity="center_vertical"
+            android:text="@string/address_detail"
+            android:textSize="@dimen/sp_15" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edit_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:ellipsize="end"
+            android:hint="@string/address_hint_detail"
+            android:inputType="text"
+            android:lines="1"
+            android:textSize="@dimen/small" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/defaultAddressLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/album_dp_50"
+        android:layout_marginTop="45dp"
+        android:background="@color/durban_White"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/album_dp_15"
+        android:paddingRight="@dimen/album_dp_15"
+        app:layout_constraintTop_toBottomOf="@id/layout4">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|left"
+            android:text="@string/default_address_set"
+            android:textSize="@dimen/sp_15" />
+
+        <Switch
+            android:id="@+id/tv_toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center_vertical|right"
+            android:gravity="center" />
+
+
+    </FrameLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_save"
+        style="@style/UserInfoButton"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:layout_marginBottom="@dimen/album_dp_45"
+        android:enabled="false"
+        android:text="@string/address_action_save_and_use"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

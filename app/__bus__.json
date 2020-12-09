@@ -1,0 +1,10 @@
+{
+  "BusUtilsClass": "com.blankj.utilcode.util.BusUtils",
+  "rightBus": {
+    "bus_to_wallet": [
+      "{ desc: com.token.mangowallet.ui.fragment.WalletFragment#busToWallet(com.token.mangowallet.bus.ToWallet toWallet) }",
+      "{ desc: com.token.mangowallet.ui.home.HomeFragment#busToWallet(com.token.mangowallet.bus.ToWallet toWallet) }"
+    ]
+  },
+  "wrongBus": {}
+}

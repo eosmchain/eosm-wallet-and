@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qmuiteam.qmui.layout.QMUIConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/album_dp_10"
+    android:background="@color/durban_White">
+
+    <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+        android:id="@+id/picIv"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="matrix"
+        app:layout_constraintTop_toTopOf="parent"
+        app:qmui_border_width="@dimen/album_dp_0"
+        app:qmui_corner_radius="@dimen/album_dp_10" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/storeAddressTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_20"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:gravity="left"
+        android:text="深圳市西乡区xxxx路154号"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/small"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toStartOf="@id/paymentBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/picIv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/doBusinessTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_10"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:layout_marginBottom="@dimen/album_dp_15"
+        android:gravity="left"
+        android:text="营业：8:30-21:30"
+        android:textColor="@color/app_color_common_deputy"
+        android:textSize="@dimen/small"
+        app:layout_constrainedHeight="true"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/paymentBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/storeAddressTv" />
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/paymentBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/album_dp_15"
+        android:paddingLeft="@dimen/album_dp_20"
+        android:paddingTop="@dimen/album_dp_10"
+        android:paddingRight="@dimen/album_dp_20"
+        android:paddingBottom="@dimen/album_dp_10"
+        android:text="@string/str_pay_bill"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/sp_15"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/picIv"
+        app:qmui_backgroundColor="@color/app_color_theme_3"
+        app:qmui_borderWidth="@dimen/album_dp_0"
+        app:qmui_radius="5dp" />
+</com.qmuiteam.qmui.layout.QMUIConstraintLayout>

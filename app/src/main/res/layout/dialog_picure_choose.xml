@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80000000">
+
+    <com.qmuiteam.qmui.layout.QMUILinearLayout
+        android:id="@+id/functionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:background="@color/durban_White"
+        android:orientation="vertical"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toTopOf="@id/cancelBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/photographTv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/album_dp_45"
+            android:gravity="center"
+            android:text="@string/str_photograph"
+            android:textColor="@color/blueColor"
+            android:textSize="@dimen/small" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qmui_list_divider_height"
+            android:background="@drawable/qmui_divider" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/albumSelectTv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/album_dp_45"
+            android:gravity="center"
+            android:text="@string/str_album_select"
+            android:textColor="@color/blueColor"
+            android:textSize="@dimen/small" />
+    </com.qmuiteam.qmui.layout.QMUILinearLayout>
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/cancelBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/album_dp_45"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:text="@string/str_cancel"
+        android:textColor="@color/blueColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:qmui_backgroundColor="@color/durban_White"
+        app:qmui_borderWidth="@dimen/album_dp_0"
+        app:qmui_radius="8dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/topBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/activity_web_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:scaleType="center"
+            android:src="@mipmap/ic_back" />
+
+        <TextView
+            android:id="@+id/activity_web_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textSize="@dimen/big_medium" />
+
+        <ImageView
+            android:id="@+id/iv_activity_web_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:padding="8dp"
+            android:src="@mipmap/ic_web_close"
+            android:textSize="@dimen/big_medium" />
+
+        <View
+            android:layout_width="@dimen/qmui_list_divider_height"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/qmui_config_color_gray_5" />
+
+        <ImageView
+            android:id="@+id/iv_activity_web_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="8dp"
+            android:src="@mipmap/ic_web_more" />
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/activity_web_pb"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:progressDrawable="@drawable/bg_webview_progressbar"
+        app:layout_constraintTop_toBottomOf="@id/topBarLayout" />
+
+    <com.token.mangowallet.view.X5WebView
+        android:id="@+id/activity_web_webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_web_pb" />
+</LinearLayout>

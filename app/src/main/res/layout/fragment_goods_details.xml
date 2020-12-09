@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qmuiteam.qmui.widget.QMUIWindowInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        android:layout_gravity="top" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/qmui_topbar_height"
+        android:layout_marginBottom="@dimen/home_tab_height"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.youth.banner.Banner
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="250dp" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/durban_White">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:gravity="left"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/goodsNameTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/album_dp_15"
+                        android:layout_marginTop="@dimen/album_dp_10"
+                        android:layout_marginRight="@dimen/album_dp_45"
+                        android:text="商品名称"
+                        android:textSize="@dimen/big_small" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/goodsInfoTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/album_dp_15"
+                        android:layout_marginTop="@dimen/album_dp_10"
+                        android:text="商品详情"
+                        android:textSize="@dimen/small" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/goodsPriceTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/album_dp_15"
+                        android:layout_marginTop="@dimen/album_dp_10"
+                        android:layout_marginBottom="@dimen/album_dp_15"
+                        android:text="$0.00"
+                        android:textColor="@color/qmui_config_color_red"
+                        android:textSize="@dimen/big_small" />
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/shareTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="@dimen/album_dp_15"
+                    android:src="@mipmap/ic_share2" />
+            </FrameLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/album_dp_10"
+                android:background="@color/durban_White"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/sfTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/album_dp_15"
+                    android:text="@string/str_specification"
+                    android:textColor="@color/app_color_description"
+                    android:textSize="@dimen/small" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/specificationTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/album_dp_15"
+                    android:layout_toRightOf="@id/sfTv"
+                    android:text="白色：台"
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/small" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/specificationTv"
+                    android:layout_marginTop="@dimen/album_dp_10"
+                    android:layout_marginBottom="5dp"
+                    android:layout_toRightOf="@id/sfTv"
+                    android:gravity="center_vertical"
+                    android:text="@string/str_trade_regulation"
+                    android:textColor="@color/app_color_description"
+                    android:textSize="@dimen/small" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/arrowsIv"
+                    android:layout_width="@dimen/album_dp_20"
+                    android:layout_height="@dimen/album_dp_20"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/album_dp_15"
+                    android:src="@mipmap/icon_arrows" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/album_dp_10"
+                android:background="@color/durban_White">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/awardTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/album_dp_15"
+                    android:text="@string/str_award"
+                    android:textColor="@color/app_color_description"
+                    android:textSize="@dimen/small" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/awardValueTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/album_dp_15"
+                    android:layout_toRightOf="@id/awardTv"
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/small" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/awardNumTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/awardValueTv"
+                    android:layout_marginTop="@dimen/album_dp_10"
+                    android:layout_marginBottom="5dp"
+                    android:layout_toRightOf="@id/awardTv"
+                    android:textColor="@color/app_color_description"
+                    android:textSize="@dimen/micro" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/album_dp_10"
+                android:background="@color/durban_White">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/locationTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/album_dp_15"
+                    android:text="@string/str_scope"
+                    android:textColor="@color/app_color_description"
+                    android:textSize="@dimen/small" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/locationValueTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/album_dp_15"
+                    android:layout_toRightOf="@id/locationTv"
+                    android:drawableLeft="@mipmap/ic_location"
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/small" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/locationStateTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/locationValueTv"
+                    android:layout_marginTop="@dimen/album_dp_10"
+                    android:layout_marginBottom="5dp"
+                    android:text=""
+                    android:layout_toRightOf="@id/locationTv"
+                    android:textColor="@color/app_color_description"
+                    android:textSize="@dimen/micro" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/album_dp_10"
+                android:background="@color/durban_White">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/freightTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/album_dp_15"
+                    android:text="@string/str_freight"
+                    android:textColor="@color/app_color_description"
+                    android:textSize="@dimen/small" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/freightPriceTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/album_dp_15"
+                    android:layout_toRightOf="@id/freightTv"
+                    android:text="运费（0）"
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/small" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/freightPriceTv"
+                    android:layout_marginLeft="@dimen/album_dp_15"
+                    android:layout_marginTop="@dimen/album_dp_10"
+                    android:layout_marginBottom="5dp"
+                    android:drawableLeft="@mipmap/ic_confirm_red"
+                    android:drawablePadding="5dp"
+                    android:text="@string/str_7sales_return"
+                    android:textColor="@color/app_color_description"
+                    android:textSize="@dimen/micro" />
+            </RelativeLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/home_tab_height"
+        android:layout_gravity="bottom"
+        android:background="@color/durban_White">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/immediatelyBuyBtn"
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:background="@color/app_color_orange"
+            android:gravity="center"
+            android:text="@string/str_immediately_buy"
+            android:textColor="@color/durban_White"
+            android:textSize="@dimen/big_small" />
+    </FrameLayout>
+
+    <!--    <include-->
+    <!--        android:id="@+id/topBar"-->
+    <!--        layout="@layout/view_topbar_store"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--    <include layout="@layout/view_goods_details" />-->
+    <!--    <com.qmuiteam.qmui.widget.QMUIViewPager-->
+    <!--        android:id="@+id/pager"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:layout_marginTop="?attr/qmui_topbar_height"-->
+    <!--        android:layout_marginBottom="@dimen/home_tab_height" />-->
+</com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>

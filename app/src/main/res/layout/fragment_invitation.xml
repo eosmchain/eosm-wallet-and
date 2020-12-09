@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.qmuiteam.qmui.layout.QMUIConstraintLayout
+        android:id="@+id/invitationCodeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/album_dp_20"
+        android:background="@color/durban_White"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintTop_toBottomOf="@id/topBar">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/invitationCodeTv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/album_dp_20"
+            android:text="@string/str_invitation_code"
+            android:textColor="@color/app_color_common_black"
+            android:textSize="@dimen/small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/invitationCodeTv2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/invitationCodeTv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/album_dp_20"
+            android:textColor="@color/app_color_orange"
+            android:textSize="@dimen/medium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/invitationCodeTv1"
+            app:layout_constraintTop_toTopOf="parent" />
+    </com.qmuiteam.qmui.layout.QMUIConstraintLayout>
+
+    <com.qmuiteam.qmui.layout.QMUIConstraintLayout
+        android:id="@+id/qrCodeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/album_dp_20"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_20"
+        android:background="@color/durban_White"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toBottomOf="@id/invitationCodeLayout">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/qrCodeIv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/album_dp_80"
+            android:layout_marginTop="@dimen/album_dp_15"
+            android:layout_marginRight="@dimen/album_dp_80"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/invitationNumTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/album_dp_15"
+            android:text="@string/str_invited_num"
+            android:textColor="@color/app_color_orange"
+            android:textSize="@dimen/small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/qrCodeIv" />
+
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/copyinvitationCodeBtn"
+            android:layout_width="@dimen/album_dp_0"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/album_dp_15"
+            android:layout_marginRight="@dimen/album_dp_10"
+            android:padding="@dimen/album_dp_15"
+            android:text="@string/str_copy_invitation_code"
+            android:textColor="@color/app_color_orange"
+            android:textSize="@dimen/big_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/copyinvitationUrlBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/invitationNumTv"
+            app:qmui_borderColor="@color/app_color_orange" />
+
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/copyinvitationUrlBtn"
+            android:layout_width="@dimen/album_dp_0"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/album_dp_10"
+            android:layout_marginRight="@dimen/album_dp_15"
+            android:padding="@dimen/album_dp_15"
+            android:text="@string/str_app_install_url"
+            android:textSize="@dimen/big_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/copyinvitationCodeBtn"
+            app:layout_constraintTop_toBottomOf="@id/invitationNumTv" />
+    </com.qmuiteam.qmui.layout.QMUIConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/shareRulesTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_20"
+        android:layout_marginTop="@dimen/album_dp_10"
+        android:text="@string/str_share_rules"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/qrCodeLayout" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/shareRulesMsgTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_20"
+        android:layout_marginTop="@dimen/album_dp_10"
+        android:text="@string/str_share_rules"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/shareRulesTv" />
+</androidx.constraintlayout.widget.ConstraintLayout>

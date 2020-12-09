@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/qmui_config_color_background">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/album_dp_45"
+        android:background="@color/qmui_config_color_white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topbar">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/album_dp_15"
+            android:text="@string/str_purchase_quantity" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/balanceTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="@dimen/album_dp_15"
+            android:text="@string/str_balance_value"
+            android:textColor="@color/app_color_dark_blue" />
+    </FrameLayout>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/EOSAmountEt"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/qmui_config_color_white"
+        android:hint="@string/str_input_quantity"
+        android:inputType="numberDecimal"
+        android:padding="15dp"
+        android:theme="@style/MyEditText"
+        app:layout_constraintTop_toBottomOf="@id/layout" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/CollectionAddressTv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="15dp"
+        android:background="@color/qmui_config_color_white"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:text="@string/str_collection_address"
+        app:layout_constraintTop_toBottomOf="@id/EOSAmountEt" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/CollectionAddressEt"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/qmui_config_color_white"
+        android:hint="@string/str_input_accountname"
+        android:padding="15dp"
+        android:theme="@style/MyEditText"
+        app:layout_constraintTop_toBottomOf="@id/CollectionAddressTv" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/album_dp_50"
+        android:layout_marginTop="1px"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/CollectionAddressEt">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/memoTv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/qmui_config_color_white"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:text="@string/str_memo" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/memoEt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/qmui_config_color_white"
+            android:hint="@string/str_enter_remarks"
+            android:padding="15dp"
+            android:theme="@style/MyEditText" />
+    </LinearLayout>
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/transactionBtn"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="@dimen/dp_40"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="@string/str_nextStep"
+        android:textColor="@color/qmui_config_color_white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:qmui_backgroundColor="@color/app_color_blue"
+        app:qmui_borderColor="@null"
+        app:qmui_borderWidth="0dp"
+        app:qmui_radius="5dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
