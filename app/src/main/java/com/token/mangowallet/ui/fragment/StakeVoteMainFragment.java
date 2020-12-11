@@ -314,7 +314,7 @@ public class StakeVoteMainFragment extends BaseFragment {
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 NodeSection nodeSection = nodeSectionList.get(position);
                 if (!nodeSection.isHeader) {
-                    NodeBean nodeBean = (NodeBean) nodeSection.getObject();
+                    mCurNodeBean = (NodeBean) nodeSection.getObject();
                     boolean isMy;
                     if (isManage) {
                         isMy = mIndex == 0 ? false : true;
@@ -323,7 +323,7 @@ public class StakeVoteMainFragment extends BaseFragment {
                     }
                     Bundle bundle = new Bundle();
                     bundle.putParcelable(EXTRA_WALLET, mangoWallet);
-                    bundle.putParcelable("RowsBean", nodeBean);
+                    bundle.putParcelable("RowsBean", mCurNodeBean);
                     bundle.putBoolean("isMy", isMy);
                     bundle.putInt("type", type);
                     startFragment("StakeVoteDetailsFragment", bundle);
@@ -746,7 +746,7 @@ public class StakeVoteMainFragment extends BaseFragment {
 
     private void onTableRowsVoters(Object o) {
         dismissTipDialog();
-        unpaidUnitTv.setText("0.0000");
+        unpaidValueTv.setText("0.0000");
         if (ObjectUtils.isNotEmpty(o)) {
             VotersBean votersBean = GsonUtils.fromJson(o.toString(), VotersBean.class);
             if (ObjectUtils.isNotEmpty(votersBean.getRows())) {
@@ -817,7 +817,7 @@ public class StakeVoteMainFragment extends BaseFragment {
                     unpaidUnitTv.setText(arrRewards[1]);
                     unpaidValueTv.setText(arrRewards[0]);
                 } else {
-                    unpaidUnitTv.setText("0.0000");
+                    unpaidValueTv.setText("0.0000");
                 }
             }
 

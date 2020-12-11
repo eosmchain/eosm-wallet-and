@@ -2,6 +2,7 @@ package com.token.mangowallet.ui.fragment;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -53,6 +54,7 @@ import com.token.mangowallet.utils.AppFilePath;
 import com.token.mangowallet.utils.PhotoUtils;
 import com.token.mangowallet.utils.RSAUtils;
 import com.token.mangowallet.view.BottomSheetPopupWindow;
+import com.token.mangowallet.view.CashierInputFilter;
 import com.token.mangowallet.view.ViewUtils;
 import com.yanzhenjie.album.AlbumFile;
 
@@ -259,6 +261,9 @@ public class AddGoodsFragment extends BaseFragment {
                 }
             }
         });
+        actualChargeSellerEt.setFilters(new InputFilter[]{new CashierInputFilter(100, 2)});
+        bonusIncentivesEt.setFilters(new InputFilter[]{new CashierInputFilter(100, 2)});
+        mortgageAwayEt.setFilters(new InputFilter[]{new CashierInputFilter(100, 2)});
         MultiEditTextListening(actualChargeSellerEt);
         MultiEditTextListening(bonusIncentivesEt);
         MultiEditTextListening(mortgageAwayEt);
