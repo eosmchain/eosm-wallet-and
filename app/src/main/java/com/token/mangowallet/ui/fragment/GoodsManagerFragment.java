@@ -41,7 +41,7 @@ import com.token.mangowallet.bus.ShippingAddressEffect;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.ui.adapter.GoodsManagAdapter;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -236,7 +236,7 @@ public class GoodsManagerFragment extends BaseFragment {
         params.put("type", String.valueOf(mCurType));//0全部默认 1销售中 2已售完 3 仓库中
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().merPro(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -253,7 +253,7 @@ public class GoodsManagerFragment extends BaseFragment {
         params.put("proID", proID);
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().delPro(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -272,7 +272,7 @@ public class GoodsManagerFragment extends BaseFragment {
 
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().upDown(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

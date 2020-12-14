@@ -164,15 +164,15 @@ public class AssistCreateFragment extends BaseFragment {
         }
 
         Map<String, Object> map = new HashMap<>();
-        map.put("account", account);
-        map.put("creator", creator);
-        map.put("private_key", private_key);
-        map.put("buy_ram_bytes", buy_ram_bytes);
-        map.put("stake_net_quantity", stake_net_quantity);
-        map.put("stake_cpu_quantity", stake_cpu_quantity);
-        map.put("active_pubkey", active_pubkey);
-        map.put("owner_pubkey", owner_pubkey);
-        map.put("ep", ep);
+        map.put("account", account);//要激活的账号
+        map.put("creator", creator);//给账号激活的账号
+        map.put("private_key", private_key);//给账号激活的私钥
+        map.put("buy_ram_bytes", buy_ram_bytes);//给激活的账号购买的内存
+        map.put("stake_net_quantity", stake_net_quantity);//给要激活的账号购买的宽带
+        map.put("stake_cpu_quantity", stake_cpu_quantity);//给要激活的账号购买的cpu
+        map.put("active_pubkey", active_pubkey);//要激活的账号的active公钥
+        map.put("owner_pubkey", owner_pubkey);//要激活的账号的owner公钥
+        map.put("ep", ep);//币的节点
         json = JSON.toJSONString(map);
     }
 

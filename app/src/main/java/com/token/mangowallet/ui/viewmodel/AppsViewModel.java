@@ -15,7 +15,7 @@ import com.token.mangowallet.interact.FetchWalletInteract;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.utils.Constants;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 
 import java.util.Map;
 
@@ -60,7 +60,7 @@ public class AppsViewModel extends BaseViewModel {
         map.put("type", type);
         String jsonData2 = GsonUtils.toJson(map);
         try {
-            String content = RSAUtils.encrypt(jsonData2);
+            String content = NRSAUtils.encrypt(jsonData2);
             NetWorkManager.getRequest().getHome(content)
                     .subscribeOn(Schedulers.newThread())
                     .subscribeOn(Schedulers.io())
@@ -76,7 +76,7 @@ public class AppsViewModel extends BaseViewModel {
         map.put("mgpName", defaultWallet.getValue().getWalletAddress());
         String jsonData2 = GsonUtils.toJson(map);
         try {
-            String content = RSAUtils.encrypt(jsonData2);
+            String content = NRSAUtils.encrypt(jsonData2);
             NetWorkManager.getRequest().getFindMgp(content)
                     .subscribeOn(Schedulers.newThread())
                     .subscribeOn(Schedulers.io())

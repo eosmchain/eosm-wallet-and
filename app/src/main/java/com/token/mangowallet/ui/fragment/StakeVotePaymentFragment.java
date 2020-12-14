@@ -134,7 +134,8 @@ public class StakeVotePaymentFragment extends BaseFragment {
 
         if (mDataBean != null) {
             mNodeName = ObjectUtils.isEmpty(mDataBean.getNodeName()) ? "" : mDataBean.getNodeName();
-            mProfitRatio = ObjectUtils.isEmpty(mDataBean.getNodeShareRatio()) ? "" : percent.subtract(mDataBean.getNodeShareRatio().divide(percent, 2, RoundingMode.HALF_UP)).toPlainString();
+            mProfitRatio = ObjectUtils.isEmpty(mDataBean.getNodeShareRatio()) ? ""
+                    : percent.subtract(mDataBean.getNodeShareRatio().divide(percent, 2, RoundingMode.HALF_UP)).toPlainString() + "%";
             mNodeUrl = ObjectUtils.isEmpty(mDataBean.getNodeUrl()) ? "" : mDataBean.getNodeUrl();
             mNodeAddress = ObjectUtils.isEmpty(mDataBean.getMgpAddress()) ? "" : mDataBean.getMgpAddress();
         } else {

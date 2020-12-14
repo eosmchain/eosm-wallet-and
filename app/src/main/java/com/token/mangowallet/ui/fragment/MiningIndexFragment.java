@@ -38,7 +38,7 @@ import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.ui.adapter.MarkIndexAdapter;
 import com.token.mangowallet.utils.BalanceUtils;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -160,7 +160,7 @@ public class MiningIndexFragment extends BaseFragment {
             params.put("limit", limit + "");
             params.put("page", pageInfo.page + "");
             String jsonData = GsonUtils.toJson(params);
-            String content = RSAUtils.encrypt(jsonData);
+            String content = NRSAUtils.encrypt(jsonData);
             NetWorkManager.getRequest().getIndexMarkIndex(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

@@ -45,7 +45,7 @@ import com.token.mangowallet.ui.adapter.LifeRecordAdapter;
 import com.token.mangowallet.ui.adapter.MixMortgageAdapter;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.Md5Utils;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.DialogHelper;
 
 import java.math.BigDecimal;
@@ -157,7 +157,7 @@ public class LifePaymentRecordFragment extends BaseFragment {
         params.put("limit", "20");
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().orderList(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

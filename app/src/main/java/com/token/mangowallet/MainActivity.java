@@ -45,7 +45,7 @@ import com.token.mangowallet.ui.home.MyController;
 import com.token.mangowallet.utils.AppDataUtils;
 import com.token.mangowallet.utils.BalanceUtils;
 import com.token.mangowallet.utils.ClipboardUtils;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.utils.WalletDaoUtils;
 import com.token.mangowallet.view.DialogHelper;
 import com.youth.banner.Banner;
@@ -274,7 +274,7 @@ public class MainActivity extends BaseFragmentActivity {
         params.put("proId", proId);
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().proFind(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

@@ -37,7 +37,7 @@ import com.token.mangowallet.listener.DialogConfirmListener;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.Md5Utils;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.DialogHelper;
 import com.token.mangowallet.view.ViewUtils;
 
@@ -204,7 +204,7 @@ public class ExtractionYieldFragment extends BaseFragment {
             params.put("address", walletAddress);
             params.put("moneyType", moneyType);
             String jsonData = GsonUtils.toJson(params);
-            String content = RSAUtils.encrypt(jsonData);
+            String content = NRSAUtils.encrypt(jsonData);
             NetWorkManager.getRequest().getWithdrawIndex(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -220,7 +220,7 @@ public class ExtractionYieldFragment extends BaseFragment {
             params.put("address", walletAddress);
             params.put("moneyType", moneyType);
             String jsonData = GsonUtils.toJson(params);
-            String content = RSAUtils.encrypt(jsonData);
+            String content = NRSAUtils.encrypt(jsonData);
             NetWorkManager.getRequest().getWithdrawAddOrder(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

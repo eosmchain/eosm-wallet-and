@@ -50,7 +50,7 @@ import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.utils.BalanceUtils;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.Md5Utils;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.DialogHelper;
 import com.token.mangowallet.view.ViewUtils;
 import com.youth.banner.Banner;
@@ -344,7 +344,7 @@ public class LifePaymentFragment extends BaseFragment {
         params.put("id", "2");//1 商城 2 本地化店铺
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().defaultModel(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -363,7 +363,7 @@ public class LifePaymentFragment extends BaseFragment {
             Map map = MapUtils.newHashMap();
             map.put("pair", walletType + "_USDT");
             String json = GsonUtils.toJson(map);
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().getCoinPrice(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -386,7 +386,7 @@ public class LifePaymentFragment extends BaseFragment {
         params.put("address", walletAddress);
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().getPayInit(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -416,7 +416,7 @@ public class LifePaymentFragment extends BaseFragment {
         params.put("storeId", String.valueOf(dataBean.getId()));
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().lifeAddOrder(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -470,7 +470,7 @@ public class LifePaymentFragment extends BaseFragment {
         params.put("address", walletAddress);
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().lifePayOrder(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

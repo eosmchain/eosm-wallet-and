@@ -33,7 +33,7 @@ import com.token.mangowallet.net.exception.CompanyException;
 import com.token.mangowallet.ui.adapter.AssociationAdapter;
 import com.token.mangowallet.utils.BalanceUtils;
 import com.token.mangowallet.utils.Constants;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -127,7 +127,7 @@ public class MangoAssociationFragment extends BaseFragment {
             Map mapOrderIndex = MapUtils.newHashMap();
             mapOrderIndex.put("address", walletAddress);
             String jsonData2 = GsonUtils.toJson(mapOrderIndex);
-            String content = RSAUtils.encrypt(jsonData2);
+            String content = NRSAUtils.encrypt(jsonData2);
             NetWorkManager.getRequest().getMortgageAssociation(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

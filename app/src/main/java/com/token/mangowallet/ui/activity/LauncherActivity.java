@@ -39,7 +39,7 @@ import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.ui.activity.login.BaseLoginActivity;
 import com.token.mangowallet.ui.activity.login.LoginFragment;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.utils.WalletDaoUtils;
 
 import java.util.List;

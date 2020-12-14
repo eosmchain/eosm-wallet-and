@@ -27,7 +27,7 @@ import com.token.mangowallet.bean.NodeIndexBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.utils.BalanceUtils;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 
 import java.math.RoundingMode;
 import java.util.Map;
@@ -157,7 +157,7 @@ public class MangoNodeFragment extends BaseFragment {
             Map params = MapUtils.newHashMap();
             params.put("address", walletAddress);
             String jsonData2 = GsonUtils.toJson(params);
-            String content = RSAUtils.encrypt(jsonData2);
+            String content = NRSAUtils.encrypt(jsonData2);
 
             NetWorkManager.getRequest().getNodeIndex(content)
                     .subscribeOn(Schedulers.io())

@@ -49,7 +49,7 @@ import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.ui.adapter.VoteMainAdapter;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.Md5Utils;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.DialogHelper;
 import com.token.mangowallet.view.DragFloatActionButton;
 
@@ -317,7 +317,7 @@ public class MyVoteMainFragment extends BaseFragment {
         params.put("limit", String.valueOf(limit));
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().myTheme(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -338,7 +338,7 @@ public class MyVoteMainFragment extends BaseFragment {
         params.put("limit", String.valueOf(limit));
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().participateUpdate(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -359,7 +359,7 @@ public class MyVoteMainFragment extends BaseFragment {
         params.put("money", VoteMainFragment.mNumer);
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().upHash(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

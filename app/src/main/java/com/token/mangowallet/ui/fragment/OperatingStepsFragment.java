@@ -26,7 +26,7 @@ import com.token.mangowallet.bean.MsgCodeBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.utils.ClipboardUtils;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 
 import java.util.Map;
 
@@ -181,7 +181,7 @@ public class OperatingStepsFragment extends BaseFragment {
         }
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             Observable<JsonObject> observable = null;
             if (type == FIRST_MIX_MORTGAGE_TYPE) {
                 observable = NetWorkManager.getRequest().uploadHash(content);

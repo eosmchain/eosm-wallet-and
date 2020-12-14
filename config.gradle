@@ -6,8 +6,8 @@ ext {
             applicationId    : "com.token.mangowallet",
             minSdkVersion    : 21,
             targetSdkVersion : 29,
-            versionCode      : 50,
-            versionName      : "2.0.4.9",//正式版三位比如：1.0.1，测试版四位比如1.0.1.128；第四位无限大，第三位十进一
+            versionCode      : 51,
+            versionName      : "2.0.4.10",//正式版三位比如：1.0.1，测试版四位比如1.0.1.128；第四位无限大，第三位十进一
     ]
     //version配置
     versions = [

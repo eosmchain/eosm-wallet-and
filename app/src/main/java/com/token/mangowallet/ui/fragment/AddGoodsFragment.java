@@ -52,7 +52,7 @@ import com.token.mangowallet.ui.adapter.SelImgAdapter;
 import com.token.mangowallet.ui.adapter.decoration.GridSectionAverageGapItemDecoration;
 import com.token.mangowallet.utils.AppFilePath;
 import com.token.mangowallet.utils.PhotoUtils;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.BottomSheetPopupWindow;
 import com.token.mangowallet.view.CashierInputFilter;
 import com.token.mangowallet.view.ViewUtils;
@@ -397,7 +397,7 @@ public class AddGoodsFragment extends BaseFragment {
         params.put("id", "2");//1 首页显示用 2 店铺上传用
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().defaultModel(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -509,11 +509,11 @@ public class AddGoodsFragment extends BaseFragment {
                 params.put("isShow", goodsData.isIsShow());
                 params.put("id", String.valueOf(goodsData.getProID()));
                 json = GsonUtils.toJson(params);
-                content = RSAUtils.encrypt(json);
+                content = NRSAUtils.encrypt(json);
                 request = NetWorkManager.getRequest().upPro(content);
             } else {
                 json = GsonUtils.toJson(params);
-                content = RSAUtils.encrypt(json);
+                content = NRSAUtils.encrypt(json);
                 request = NetWorkManager.getRequest().addPro(content);
             }
             request.subscribeOn(Schedulers.io())

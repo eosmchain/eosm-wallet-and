@@ -244,9 +244,9 @@ public class ExportPrivateKeyOrMnemonicsFragment extends BaseFragment {
                     String ownerKey = ownerKeyBean.getKey();
 
                     ownerTv.setText(ownerName);
-                    publickeyTv1.setText(ownerKey);
+                    publickeyTv1.setText(ownerKey.replace("EOS", "MGP"));
                     activeTv.setText(activeName);
-                    publickeyTv2.setText(activeKey);
+                    publickeyTv2.setText(activeKey.replace("EOS", "MGP"));
                 }
                 privatekeyTv1.setText(privateKey);
                 privatekeyTv2.setText(privateKey);
@@ -257,7 +257,7 @@ public class ExportPrivateKeyOrMnemonicsFragment extends BaseFragment {
         } else {
             if (walletType == Constants.WalletType.MGP || walletType == Constants.WalletType.EOS) {
                 accountNameTv.setText(wallet.getWalletAddress());
-                publickeyTv3.setText(wallet.getPublicKey());
+                publickeyTv3.setText(wallet.getPublicKey().replace("EOS","MGP"));
                 mnemonicsTv.setText(mnemonicSB.toString());
             } else {
                 if (type == 2) {

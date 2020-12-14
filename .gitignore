@@ -12,3 +12,10 @@
 /captures
 .externalNativeBuild
 .cxx
+release
+*.apk
+androidTest
+test
+.idea
+/app/src/main/java/com/token/mangowallet/utils/NRSAUtils.java
+/app/src/main/java/com/token/mangowallet/utils/RSAUtils.java

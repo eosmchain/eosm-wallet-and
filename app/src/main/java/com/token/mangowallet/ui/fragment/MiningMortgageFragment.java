@@ -49,7 +49,7 @@ import com.token.mangowallet.ui.viewmodel.MortgageViewModel;
 import com.token.mangowallet.utils.BalanceUtils;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.Md5Utils;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.DialogHelper;
 import com.token.mangowallet.view.ViewUtils;
 

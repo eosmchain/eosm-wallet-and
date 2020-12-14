@@ -51,7 +51,7 @@ import com.token.mangowallet.utils.APPUtils;
 import com.token.mangowallet.utils.AppFilePath;
 import com.token.mangowallet.utils.BalanceUtils;
 import com.token.mangowallet.utils.ClipboardUtils;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.BigImgDialog;
 import com.youth.banner.Banner;
 import com.youth.banner.adapter.BannerImageAdapter;
@@ -241,7 +241,7 @@ public class GoodsDetailsFragment extends BaseFragment implements OnBannerListen
         params.put("productId", String.valueOf(proListBean.getProID()));
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().browse(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

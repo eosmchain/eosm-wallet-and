@@ -56,7 +56,7 @@ import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.service.LocationService;
 import com.token.mangowallet.ui.adapter.LifeAdapter;
 import com.token.mangowallet.utils.LocationUtils;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -313,7 +313,7 @@ public class LifeFragment extends BaseFragment {
         params.put("type", "1");//1 首页显示用 2 店铺上传用
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().getCategory(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -338,7 +338,7 @@ public class LifeFragment extends BaseFragment {
         params.put("countryId", countryId == -1 ? "" : String.valueOf(countryId));
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().getAppStoreLife(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

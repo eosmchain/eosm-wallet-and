@@ -47,7 +47,7 @@ import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.ui.activity.QRCodeScanActivity;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.Md5Utils;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.DialogHelper;
 import com.token.mangowallet.view.ViewUtils;
 
@@ -306,7 +306,7 @@ public class MarginFragment extends BaseFragment {
         params.put("type", String.valueOf(isBindUsdt));
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().bindUsdt(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -325,7 +325,7 @@ public class MarginFragment extends BaseFragment {
         params.put("address", walletAddress);
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().lower(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

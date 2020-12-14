@@ -35,7 +35,7 @@ import com.token.mangowallet.net.eosmgp.EOSParams;
 import com.token.mangowallet.utils.APPUtils;
 import com.token.mangowallet.utils.BalanceUtils;
 import com.token.mangowallet.utils.Constants;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -227,7 +227,7 @@ public class NewRealTimeDateFragment extends BaseFragment {
             Map map = MapUtils.newHashMap();
             map.put("pair", walletType + "_USDT");
             String json = GsonUtils.toJson(map);
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().getCoinPrice(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

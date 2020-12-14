@@ -51,7 +51,7 @@ import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.ui.adapter.OrderAdapter;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.Md5Utils;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.DialogHelper;
 
 import java.math.BigDecimal;
@@ -372,7 +372,7 @@ public class OrderCenterFragment extends BaseFragment {
         params.put("type", type);
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             Observable<JsonObject> observable;
             if (isBuyer) {
                 //买家：0 全部  1 待付款  2 待发货  3 发货中  4 已收货 5 退款中/已退款 /退款失败
@@ -406,7 +406,7 @@ public class OrderCenterFragment extends BaseFragment {
                 params.put("num", trackingNum);//快递单号
                 params.put("company", company);
                 json = GsonUtils.toJson(params);
-                content = RSAUtils.encrypt(json);
+                content = NRSAUtils.encrypt(json);
                 observable = NetWorkManager.getRequest().merConfirm(content);
             } else if (type == 1) {//1：退款
                 ToastUtils.showLong(R.string.str_development_of);
@@ -414,19 +414,19 @@ public class OrderCenterFragment extends BaseFragment {
             } else if (type == 2) {//2：确定收货
                 params.put("orderId", orderId);
                 json = GsonUtils.toJson(params);
-                content = RSAUtils.encrypt(json);
+                content = NRSAUtils.encrypt(json);
                 observable = NetWorkManager.getRequest().buyerConfirm(content);
             } else if (type == 3) {//3：去付款
                 transferTransaction();
             } else if (type == 4) {//4：取消订单
                 params.put("orderId", orderId);
                 json = GsonUtils.toJson(params);
-                content = RSAUtils.encrypt(json);
+                content = NRSAUtils.encrypt(json);
                 observable = NetWorkManager.getRequest().delOrder(content);
             } else if (type == 5) {//5：商家入账中 确认收款
                 params.put("orderId", orderId);
                 json = GsonUtils.toJson(params);
-                content = RSAUtils.encrypt(json);
+                content = NRSAUtils.encrypt(json);
                 observable = NetWorkManager.getRequest().confirm(content);
             }
             if (observable != null) {
@@ -486,7 +486,7 @@ public class OrderCenterFragment extends BaseFragment {
         params.put("orderId", orderBean.getOrderId());
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().buyOrder(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

@@ -52,7 +52,7 @@ import com.token.mangowallet.ui.activity.WebActivity;
 import com.token.mangowallet.ui.activity.pinyin.CountryCodeActivity;
 import com.token.mangowallet.utils.ClipboardUtils;
 import com.token.mangowallet.utils.Constants;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.DialogHelper;
 import com.token.mangowallet.view.ViewUtils;
 
@@ -339,7 +339,7 @@ public class MyController extends QMUIWindowInsetLayout {
         map.put("mgpName", baseFragment.mangoWallet.getWalletAddress());
         String jsonData2 = GsonUtils.toJson(map);
         try {
-            String content = RSAUtils.encrypt(jsonData2);
+            String content = NRSAUtils.encrypt(jsonData2);
             NetWorkManager.getRequest().getFindMgp(content)
                     .subscribeOn(Schedulers.newThread())
                     .subscribeOn(Schedulers.io())
@@ -357,7 +357,7 @@ public class MyController extends QMUIWindowInsetLayout {
             params.put("currentAddr", baseFragment.mangoWallet.getWalletAddress());
             params.put("type", "2");
             String jsonData2 = GsonUtils.toJson(params);
-            String content = RSAUtils.encrypt(jsonData2);
+            String content = NRSAUtils.encrypt(jsonData2);
             NetWorkManager.getRequest().newCheckstatus(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

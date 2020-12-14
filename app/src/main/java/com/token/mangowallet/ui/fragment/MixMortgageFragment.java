@@ -45,7 +45,7 @@ import com.token.mangowallet.ui.adapter.MixMortgageAdapter;
 import com.token.mangowallet.ui.viewmodel.MortgageViewModel;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.Md5Utils;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.DialogHelper;
 
 import java.math.BigDecimal;
@@ -212,7 +212,7 @@ public class MixMortgageFragment extends BaseFragment {
         params.put("size", "20");
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().getMixMortgageList(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -230,7 +230,7 @@ public class MixMortgageFragment extends BaseFragment {
         params.put("id", String.valueOf(dataBean.getId()));
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().editHash(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

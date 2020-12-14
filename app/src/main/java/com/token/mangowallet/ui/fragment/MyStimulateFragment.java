@@ -36,7 +36,7 @@ import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.ui.adapter.MiningOrderIncomeAdapter;
 import com.token.mangowallet.utils.BalanceUtils;
 import com.token.mangowallet.utils.Constants;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -178,7 +178,7 @@ public class MyStimulateFragment extends BaseFragment {
             params.put("limit", limit + "");
             params.put("page", pageInfo.page + "");
             String jsonData = GsonUtils.toJson(params);
-            String content = RSAUtils.encrypt(jsonData);
+            String content = NRSAUtils.encrypt(jsonData);
             NetWorkManager.getRequest().getMiningOrderIncome(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -194,7 +194,7 @@ public class MyStimulateFragment extends BaseFragment {
             params.put("address", walletAddress);
             params.put("moneyType", moneyType);
             String jsonData = GsonUtils.toJson(params);
-            String content = RSAUtils.encrypt(jsonData);
+            String content = NRSAUtils.encrypt(jsonData);
             NetWorkManager.getRequest().getWithdrawIndex(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -210,7 +210,7 @@ public class MyStimulateFragment extends BaseFragment {
             Map map = MapUtils.newHashMap();
             map.put("pair", walletType + "_USDT");
             String json = GsonUtils.toJson(map);
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().getCoinPrice(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

@@ -16,7 +16,7 @@ import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.net.exception.CompanyException;
 import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.utils.Constants;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -90,7 +90,7 @@ public class MortgageViewModel extends BaseViewModel {
             Map map = MapUtils.newHashMap();
             map.put("pair", Constants.WalletType.getPagerFromPositon(defaultWallet.getValue().getWalletType()) + "_USDT");
             String json = GsonUtils.toJson(map);
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().getCoinPrice(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

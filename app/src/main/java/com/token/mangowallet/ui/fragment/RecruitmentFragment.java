@@ -37,7 +37,7 @@ import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.utils.AppFilePath;
 import com.token.mangowallet.utils.PhotoUtils;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.utils.UriToPathUtils;
 import com.token.mangowallet.view.DialogHelper;
 import com.token.mangowallet.view.PictureChoicePop;
@@ -378,7 +378,7 @@ public class RecruitmentFragment extends BaseFragment {
         params.put("phone", phoneNumberEt.getText().toString());
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().addUserInfo(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

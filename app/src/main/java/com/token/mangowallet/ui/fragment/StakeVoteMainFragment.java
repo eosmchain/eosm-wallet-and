@@ -63,7 +63,7 @@ import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.ui.adapter.StakeVotesMainAdapter;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.Md5Utils;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.DialogHelper;
 import com.token.mangowallet.view.DragFloatActionButton;
 
@@ -151,12 +151,11 @@ public class StakeVoteMainFragment extends BaseFragment {
     protected void initData() {
         Bundle bundle = getArguments();
         mangoWallet = bundle.getParcelable(EXTRA_WALLET);
-        walletAddress = mangoWallet.getWalletAddress();
+        walletAddress = mangoWallet.getWalletAddress();//"huobioooo.kr";//
         walletType = Constants.WalletType.getPagerFromPositon(mangoWallet.getWalletType());
         pageInfo = new PageInfo();
         mVoteContract = BaseUrlUtils.getInstance().getVoteContract();
         emWalletRepository = new EMWalletRepository();
-
     }
 
     @Override
@@ -220,8 +219,8 @@ public class StakeVoteMainFragment extends BaseFragment {
         String mRightStr = "";
         String mTitle = "";
         if (isManage) {
-            getTableRowsVoters();
             type = 1;
+            getTableRowsVoters();
             mIndex = 0;
             tabs.selectTab(mIndex);
             mTitle = getString(R.string.str_management_center);
@@ -240,6 +239,7 @@ public class StakeVoteMainFragment extends BaseFragment {
         getTableRows();
         mRightBtn.setText(mRightStr);
         votesMainAdapter.setManage(isManage);
+        votesMainAdapter.removeAllHeaderView();
         votesMainAdapter.setHeaderView(isManage ? mSubHeaderView : mMainHeaderView);
         votesMainAdapter.notifyDataSetChanged();
         becomeNodeTv.setVisibility(isManage ? View.GONE : View.VISIBLE);
@@ -418,8 +418,10 @@ public class StakeVoteMainFragment extends BaseFragment {
                 pageInfo.reset();
                 mIndex = index;
                 if (isManage) {
-                    getTableRowsVoters();
                     type = index + 1;
+                    if (type == 1) {
+                        getTableRowsVoters();
+                    }
                     LogUtils.dTag("LogInterceptor==", "onTabSelected type = " + type);
                     getTableRows();
                 }
@@ -471,7 +473,7 @@ public class StakeVoteMainFragment extends BaseFragment {
             Map map = MapUtils.newHashMap();
             map.put("pair", walletType + "_USDT");
             String json = GsonUtils.toJson(map);
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().getCoinPrice(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -492,7 +494,7 @@ public class StakeVoteMainFragment extends BaseFragment {
             params.put("limit", limit);
             params.put("sort", String.valueOf(sort));
             String json = GsonUtils.toJson(params);
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().scNodeList(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -511,7 +513,7 @@ public class StakeVoteMainFragment extends BaseFragment {
             Map params = MapUtils.newHashMap();
             params.put("account", walletAddress);
             String json = GsonUtils.toJson(params);
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().votes(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -605,6 +607,7 @@ public class StakeVoteMainFragment extends BaseFragment {
             getNodeList();
             return;
         }
+
         if (type == 1) {
             votes();
             return;
@@ -668,19 +671,21 @@ public class StakeVoteMainFragment extends BaseFragment {
      * 获取未领取数额（unclaimed_rewards）
      */
     private void getTableRowsVoters() {
-        try {
-            showTipDialog(getString(R.string.str_loading));
-            Map mapTableRows = MapUtils.newHashMap();
-            mapTableRows.put("scope", mVoteContract);
-            mapTableRows.put("code", mVoteContract);
-            mapTableRows.put("lower_bound", walletAddress);
-            mapTableRows.put("upper_bound", walletAddress);
-            mapTableRows.put("json", true);
-            mapTableRows.put("table", "voters");
-            emWalletRepository.fetchTableRowsStr(mapTableRows, walletType)
-                    .subscribe(this::onTableRowsVoters, this::onError);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (type == 1) {
+            try {
+                showTipDialog(getString(R.string.str_loading));
+                Map mapTableRows = MapUtils.newHashMap();
+                mapTableRows.put("scope", mVoteContract);
+                mapTableRows.put("code", mVoteContract);
+                mapTableRows.put("lower_bound", walletAddress);
+                mapTableRows.put("upper_bound", walletAddress);
+                mapTableRows.put("json", true);
+                mapTableRows.put("table", "voters");
+                emWalletRepository.fetchTableRowsStr(mapTableRows, walletType)
+                        .subscribe(this::onTableRowsVoters, this::onError);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -746,16 +751,18 @@ public class StakeVoteMainFragment extends BaseFragment {
 
     private void onTableRowsVoters(Object o) {
         dismissTipDialog();
-        unpaidValueTv.setText("0.0000");
-        if (ObjectUtils.isNotEmpty(o)) {
-            VotersBean votersBean = GsonUtils.fromJson(o.toString(), VotersBean.class);
-            if (ObjectUtils.isNotEmpty(votersBean.getRows())) {
-                VotersBean.RowsBean rowsBean = votersBean.getRows().get(0);
-                if (rowsBean != null) {
-                    String mUnclaimed_rewards = ObjectUtils.isEmpty(rowsBean.getUnclaimed_rewards()) ? "0.0000 MGP" : rowsBean.getUnclaimed_rewards();
-                    String[] arrRewards = mUnclaimed_rewards.split(" ");
-                    unpaidUnitTv.setText(arrRewards[1]);
-                    unpaidValueTv.setText(arrRewards[0]);
+        if (type == 1) {
+            unpaidValueTv.setText("0.0000");
+            if (ObjectUtils.isNotEmpty(o)) {
+                VotersBean votersBean = GsonUtils.fromJson(o.toString(), VotersBean.class);
+                if (ObjectUtils.isNotEmpty(votersBean.getRows())) {
+                    VotersBean.RowsBean rowsBean = votersBean.getRows().get(0);
+                    if (rowsBean != null) {
+                        String mUnclaimed_rewards = ObjectUtils.isEmpty(rowsBean.getUnclaimed_rewards()) ? "0.0000 MGP" : rowsBean.getUnclaimed_rewards();
+                        String[] arrRewards = mUnclaimed_rewards.split(" ");
+                        unpaidUnitTv.setText(arrRewards[1]);
+                        unpaidValueTv.setText(arrRewards[0]);
+                    }
                 }
             }
         }
@@ -809,6 +816,7 @@ public class StakeVoteMainFragment extends BaseFragment {
         }
         votesMainAdapter.notifyDataSetChanged();
         if (type == 2) {
+            unpaidValueTv.setText("0.0000");
             if (CollectionUtils.isNotEmpty(rowsBeanList)) {
                 NodeBean rowsBean = rowsBeanList.get(0);
                 if (rowsBean != null) {
@@ -820,7 +828,6 @@ public class StakeVoteMainFragment extends BaseFragment {
                     unpaidValueTv.setText("0.0000");
                 }
             }
-
         }
     }
 

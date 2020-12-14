@@ -226,6 +226,7 @@ public class DialogHelper {
         detailsLayout.setLayoutParams(params);
         detailsLayout.requestLayout();
 
+        cancelBtn.setVisibility(View.GONE);
         dialog_update_download_bt.setOnClickListener(listener);
         cancelBtn.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
             @Override
