@@ -202,4 +202,6 @@ dependencies {
     implementation platform(rootProject.ext.dependencies.firebaseBom)
     implementation rootProject.ext.dependencies.firebaseAnalytics
     implementation 'com.google.firebase:firebase-core:18.0.0'
+
+    implementation 'io.github.yuweiguocn:GreenDaoUpgradeHelper:v2.2.1'
 }

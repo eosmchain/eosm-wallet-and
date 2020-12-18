@@ -2,6 +2,8 @@ package com.token.mangowallet.db.greendao;
 
 import android.content.Context;
 
+import com.token.mangowallet.db.MySQLiteOpenHelper;
+
 
 /**
  * [数据库管理类，数据采用GreenDao来实现，所有实现通过模板自动生成；通过获取daoSession来获取所有的dao，从而实现操作对象]
@@ -41,7 +43,7 @@ public class DBManager {
     private DBManager(Context context) {
         if (daoSession == null) {
             if (daoMaster == null) {
-                DaoMaster.OpenHelper helper = new DaoMaster.DevOpenHelper(context, context.getPackageName(), null);
+                MySQLiteOpenHelper helper = new MySQLiteOpenHelper(context, context.getPackageName(), null);
                 daoMaster = new DaoMaster(helper.getWritableDatabase());
             }
             daoSession = daoMaster.newSession();

@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import androidx.annotation.DrawableRes;
 
+import com.blankj.utilcode.util.CollectionUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.token.mangowallet.utils.StringConverter;
 
@@ -56,15 +57,15 @@ public class MangoWallet implements Parcelable {
         keystore = in.readString();
         mnemonicCode = in.createStringArrayList();
         tokens = in.createStringArrayList();
-        isBackup = ObjectUtils.isEmpty(mnemonicCode) ? true : in.readByte() != 0;
+        isBackup = CollectionUtils.isEmpty(mnemonicCode) ? true : in.readByte() != 0;
 
     }
 
     @Generated(hash = 479349119)
     public MangoWallet(Long id, int image, int walletType, @NotNull String walletPassword,
-            String hint, String WalletAddress, @NotNull String privateKey, String publicKey,
-            String keystore, List<String> mnemonicCode, List<String> tokens,
-            boolean isBackup) {
+                       String hint, String WalletAddress, @NotNull String privateKey, String publicKey,
+                       String keystore, List<String> mnemonicCode, List<String> tokens,
+                       boolean isBackup) {
         this.id = id;
         this.image = image;
         this.walletType = walletType;
@@ -101,7 +102,7 @@ public class MangoWallet implements Parcelable {
         dest.writeString(keystore);
         dest.writeStringList(mnemonicCode);
         dest.writeStringList(tokens);
-        dest.writeByte(ObjectUtils.isEmpty(mnemonicCode) ? 1 : (byte) (isBackup ? 1 : 0));
+        dest.writeByte(CollectionUtils.isEmpty(mnemonicCode) ? 1 : (byte) (isBackup ? 1 : 0));
     }
 
     @Override
@@ -210,7 +211,7 @@ public class MangoWallet implements Parcelable {
     }
 
     public boolean getIsBackup() {
-        return isBackup;
+        return CollectionUtils.isEmpty(mnemonicCode) ? true : isBackup;
     }
 
     public void setIsBackup(boolean backup) {
