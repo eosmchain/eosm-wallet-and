@@ -14,7 +14,7 @@ import com.blankj.utilcode.util.Utils;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.BaseUrlUtils;
 import com.token.mangowallet.utils.Constants;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.utils.WalletDaoUtils;
 
 import java.io.IOException;
@@ -141,7 +141,7 @@ public class CommonParamInterceptor implements Interceptor {
         String content = request.header("content");
         String jsonData = GsonUtils.toJson(paramsMap);
         try {
-            content = RSAUtils.encrypt(jsonData);
+            content = NRSAUtils.encrypt(jsonData);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -187,7 +187,7 @@ public class CommonParamInterceptor implements Interceptor {
         }
         String content = request.header("content");
         if (ObjectUtils.isNotEmpty(content)) {
-            String decryptJson = RSAUtils.decrypt(content);
+            String decryptJson = NRSAUtils.decrypt(content);
             try {
                 Map map = GsonUtils.fromJson(decryptJson, Map.class);
                 Iterator<String> iter = map.keySet().iterator();

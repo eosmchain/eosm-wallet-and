@@ -11,21 +11,37 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/backupsTipTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+        android:text="@string/str_backup_tip"
+        android:textColor="@color/app_color_description"
+        android:textSize="@dimen/small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topBar" />
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/backupsMWTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="25dp"
         android:text="@string/str_backups_mnemonic_tip"
         android:textColor="@color/app_color_description"
         android:textSize="@dimen/small"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topBar" />
+        app:layout_constraintTop_toBottomOf="@id/backupsTipTv" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/mnemonicWordCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="@dimen/album_dp_10"
+        android:layout_marginRight="25dp"
         android:minHeight="@dimen/dp_120"
         app:cardCornerRadius="5dp"
         app:layout_constraintTop_toBottomOf="@id/backupsMWTv">
@@ -35,9 +51,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:padding="@dimen/dp_10"
             android:layout_margin="@dimen/activity_horizontal_margin"
             android:gravity="center_vertical"
+            android:padding="@dimen/dp_10"
             android:text=""
             android:textColor="@color/app_color_common_dark_black"
             android:textSize="@dimen/small" />
@@ -47,9 +63,22 @@
         android:id="@+id/nextStepBtn"
         android:layout_width="match_parent"
         android:layout_height="@dimen/album_dp_45"
+        android:layout_marginBottom="@dimen/album_dp_100"
         android:background="@color/app_color_dark_blue"
         android:text="@string/str_nextStep"
         android:textColor="@color/qmui_config_color_white"
         android:textSize="@dimen/big_small"
         app:layout_constraintBottom_toBottomOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/skipTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/album_dp_45"
+        android:text="@string/str_skip"
+        android:textColor="#868686"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nextStepBtn" />
 </androidx.constraintlayout.widget.ConstraintLayout>

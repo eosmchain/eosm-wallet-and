@@ -373,6 +373,7 @@ public class ImportWalletFragment extends BaseFragment {
 
     private void toMainActivity(MangoWallet mangoWallet) {
         if (mangoWallet != null) {
+            mangoWallet.setIsBackup(true);
             WalletDaoUtils.insertNewWallet(mangoWallet);
             WalletDaoUtils.updateCurrent(mangoWallet);
         }

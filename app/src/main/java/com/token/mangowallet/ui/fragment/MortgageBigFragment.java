@@ -39,7 +39,7 @@ import com.token.mangowallet.ui.viewmodel.MortgageModelFactory;
 import com.token.mangowallet.ui.viewmodel.MortgageViewModel;
 import com.token.mangowallet.utils.BalanceUtils;
 import com.token.mangowallet.utils.Constants;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -258,7 +258,7 @@ public class MortgageBigFragment extends BaseFragment {
             Map mapOrderIndex = MapUtils.newHashMap();
             mapOrderIndex.put("address", walletAddress);
             String jsonData2 = GsonUtils.toJson(mapOrderIndex);
-            String content = RSAUtils.encrypt(jsonData2);
+            String content = NRSAUtils.encrypt(jsonData2);
             mortgageViewModel.fetchOrderIndex(content);
         } catch (Exception e) {
             e.printStackTrace();

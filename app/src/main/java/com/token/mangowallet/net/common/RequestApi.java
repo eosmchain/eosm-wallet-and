@@ -1416,4 +1416,16 @@ public interface RequestApi {
     @Headers("urlname:" + Constants.VOTEURL)
     @POST("/api/voteNode/votes")
     Observable<JsonObject> votes(@Header("content") String content);
+
+
+    /**
+     * 账号自动激活
+     * publicKey 公钥
+     * account 账号
+     *
+     * @Header("content:") String content
+     */
+    @Headers("urlname:" + Constants.CORPORATION_URL)
+    @POST("/user/userRegister")
+    Observable<JsonObject> userRegister(@Header("content") String content);
 }

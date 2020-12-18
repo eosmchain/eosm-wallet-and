@@ -125,9 +125,7 @@ public class StakeVotesMainAdapter extends BaseSectionQuickAdapter<NodeSection, 
                         Constants.percent.subtract(nodeBean.getSelf_reward_share().divide(Constants.percent)) + "%";
                 String mReceivedVotes = ObjectUtils.isEmpty(nodeBean.getReceived_votes()) ? "0.00 MGP" : nodeBean.getReceived_votes();
                 String mStakedVotes = ObjectUtils.isEmpty(nodeBean.getStaked_votes()) ? "0.00 MGP" : nodeBean.getStaked_votes();
-                mVoteNum = new BigDecimal(mReceivedVotes.split(" ")[0])
-                        .add(new BigDecimal(mStakedVotes.split(" ")[0])).toPlainString()
-                        + mStakedVotes.split(" ")[1];
+                mVoteNum = new BigDecimal(mReceivedVotes.split(" ")[0]).add(new BigDecimal(mStakedVotes.split(" ")[0])).toPlainString() + mStakedVotes.split(" ")[1];
                 mNodeUrl = ObjectUtils.isEmpty(nodeBean.getNode_url()) ? "" : nodeBean.getNode_url();
                 voteBtn.setVisibility(View.VISIBLE);
             } else if (baseFragment.type == 1) {//1：获取我的投票数据；

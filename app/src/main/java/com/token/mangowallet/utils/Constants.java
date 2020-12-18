@@ -6,6 +6,7 @@ import java.io.File;
 import java.math.BigDecimal;
 
 public interface Constants {
+    boolean isTest = false;
     /**
      * 正式域名
      */
@@ -133,6 +134,7 @@ public interface Constants {
     ///////////////////////////////////////////
     String BaseFilePath = Environment.getExternalStorageDirectory() + File.separator + "MangoWallet";
     String CrashFilePath = BaseFilePath + File.separator + "Crash";
+    String HttpRequestLog = BaseFilePath + File.separator + "HttpRequestLog";
     String WalletFilePath = BaseFilePath + File.separator + "Wallet";
     String CropimageFilePath = BaseFilePath + File.separator + "cropimage";
     String REGEX_ACCOUNT_NAME = "^[a-z1-5]{12}$";

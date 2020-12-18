@@ -116,7 +116,7 @@ public class MangoWalletUtils {
         MangoWallet MGPWallet = generateWalletData(MGP, pwd, hint, MGPPrieth);
         if (MGPWallet != null) {
             MGPWallet.setMnemonicCode(mnemonicCode);
-            WalletDaoUtils.insertNewWallet(MGPWallet);
+//            WalletDaoUtils.insertNewWallet(MGPWallet);
         }
 //        try {
 //            Thread.sleep(3000);

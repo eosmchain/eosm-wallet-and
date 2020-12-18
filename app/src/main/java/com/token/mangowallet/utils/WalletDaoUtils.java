@@ -11,9 +11,6 @@ import com.token.mangowallet.db.greendao.MangoWalletDao;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import static com.token.mangowallet.utils.Constants.WalletType.EOS;
-import static com.token.mangowallet.utils.Constants.WalletType.MGP;
-
 public class WalletDaoUtils {
     public static MangoWalletDao mangoWalletDao = MyApplication.getInstance().getDaoSession().getMangoWalletDao();
 

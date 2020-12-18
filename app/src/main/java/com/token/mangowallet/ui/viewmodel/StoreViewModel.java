@@ -9,7 +9,7 @@ import com.token.mangowallet.bean.StoreHomeBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.interact.FetchWalletInteract;
 import com.token.mangowallet.net.common.NetWorkManager;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 
 import java.util.Map;
 
@@ -39,7 +39,7 @@ public class StoreViewModel extends BaseViewModel {
         params.put("limit", String.valueOf(20));
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             disposable = NetWorkManager.getRequest().getCategoryProduct(content)
                     .subscribeOn(Schedulers.newThread())
                     .subscribeOn(Schedulers.io())

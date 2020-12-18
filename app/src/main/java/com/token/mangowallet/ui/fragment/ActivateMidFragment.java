@@ -43,7 +43,7 @@ import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.ui.activity.QRCodeScanActivity;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.Md5Utils;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.DialogHelper;
 
 import java.util.List;
@@ -164,7 +164,7 @@ public class ActivateMidFragment extends BaseFragment {
                 params.put("mgpName", walletAddress);
                 params.put("parentMid", parentMid);
                 String jsonData2 = GsonUtils.toJson(params);
-                String content = RSAUtils.encrypt(jsonData2);
+                String content = NRSAUtils.encrypt(jsonData2);
                 NetWorkManager.getRequest().getBindMidMgp(content)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -181,7 +181,7 @@ public class ActivateMidFragment extends BaseFragment {
             params.put("address", walletAddress);
             params.put("type", "1");
             String jsonData = GsonUtils.toJson(params);
-            String content = RSAUtils.encrypt(jsonData);
+            String content = NRSAUtils.encrypt(jsonData);
             NetWorkManager.getRequest().isFindMIDBinding(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

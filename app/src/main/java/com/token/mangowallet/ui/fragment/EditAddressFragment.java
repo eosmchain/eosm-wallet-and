@@ -43,7 +43,7 @@ import com.token.mangowallet.bean.ShippingAddressBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.net.exception.CompanyException;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -275,7 +275,7 @@ public class EditAddressFragment extends BaseFragment {
         params.put("country", String.valueOf(country));
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().addUserAddr(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -301,7 +301,7 @@ public class EditAddressFragment extends BaseFragment {
         params.put("country", String.valueOf(country));
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().updateAddr(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

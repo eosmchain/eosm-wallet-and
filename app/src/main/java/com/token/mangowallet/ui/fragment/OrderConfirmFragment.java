@@ -45,7 +45,7 @@ import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.utils.BalanceUtils;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.Md5Utils;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.CustomizeGoodsAddView;
 import com.token.mangowallet.view.DialogHelper;
 
@@ -324,7 +324,7 @@ public class OrderConfirmFragment extends BaseFragment {
         params.put("address", walletAddress);
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().findAddr(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -343,7 +343,7 @@ public class OrderConfirmFragment extends BaseFragment {
             Map map = MapUtils.newHashMap();
             map.put("pair", SYMBOL + "_USDT");
             String json = GsonUtils.toJson(map);
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().getCoinPrice(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -375,7 +375,7 @@ public class OrderConfirmFragment extends BaseFragment {
         params.put("pay", String.valueOf(payConfigsBean.getPayId()));
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().addOrder(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -432,7 +432,7 @@ public class OrderConfirmFragment extends BaseFragment {
         params.put("orderId", orderIDData.getData());
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().buyOrder(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

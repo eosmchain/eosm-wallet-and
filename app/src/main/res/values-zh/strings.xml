@@ -701,7 +701,7 @@
     <string name="str_vote_list">投票列表</string>
     <string name="str_add_vote_succeed">添加成功</string>
     <string name="str_add_vote_fail">添加失败</string>
-    <string name="str_vote_progress">已投：%1$s</string>
+    <string name="str_vote_progress">全局已投：%1$s</string>
     <string name="str_yesterday_whole_network_total_hashrate">昨日全网总算力</string>
     <string name="str_vote_rule">投票规则</string>
     <string name="str_Unclaimed">待领取</string>

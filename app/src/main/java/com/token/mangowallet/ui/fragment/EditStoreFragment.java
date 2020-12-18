@@ -59,7 +59,7 @@ import com.token.mangowallet.ui.adapter.decoration.GridSectionAverageGapItemDeco
 import com.token.mangowallet.utils.AppFilePath;
 import com.token.mangowallet.utils.LocationUtils;
 import com.token.mangowallet.utils.PhotoUtils;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.RequiredTextView;
 import com.token.mangowallet.view.ViewUtils;
 import com.yanzhenjie.album.AlbumFile;
@@ -440,7 +440,7 @@ public class EditStoreFragment extends BaseFragment {
         params.put("id", "1");//1 商城 2 本地化店铺
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().defaultModel(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -459,7 +459,7 @@ public class EditStoreFragment extends BaseFragment {
         params.put("type", "2");//1 首页显示用 2 店铺上传用
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().getCategory(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -561,16 +561,16 @@ public class EditStoreFragment extends BaseFragment {
                 if (ObjectUtils.isNotEmpty(storeData.getUserId())) {
                     params.put("id", String.valueOf(storeData.getLifeID()));
                     json = GsonUtils.toJson(params);
-                    content = RSAUtils.encrypt(json);
+                    content = NRSAUtils.encrypt(json);
                     request = NetWorkManager.getRequest().editStore(content);
                 } else {
                     json = GsonUtils.toJson(params);
-                    content = RSAUtils.encrypt(json);
+                    content = NRSAUtils.encrypt(json);
                     request = NetWorkManager.getRequest().addStore(content);
                 }
             } else {
                 json = GsonUtils.toJson(params);
-                content = RSAUtils.encrypt(json);
+                content = NRSAUtils.encrypt(json);
                 request = NetWorkManager.getRequest().addStore(content);
             }
             request.subscribeOn(Schedulers.io())

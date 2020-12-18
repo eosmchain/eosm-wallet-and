@@ -38,6 +38,7 @@ public class MangoWalletDao extends AbstractDao<MangoWallet, Long> {
         public final static Property Keystore = new Property(8, String.class, "keystore", false, "KEYSTORE");
         public final static Property MnemonicCode = new Property(9, String.class, "mnemonicCode", false, "MNEMONIC_CODE");
         public final static Property Tokens = new Property(10, String.class, "tokens", false, "TOKENS");
+        public final static Property IsBackup = new Property(11, boolean.class, "isBackup", false, "IS_BACKUP");
     }
 
     private final StringConverter mnemonicCodeConverter = new StringConverter();
@@ -65,7 +66,8 @@ public class MangoWalletDao extends AbstractDao<MangoWallet, Long> {
                 "\"PUBLIC_KEY\" TEXT," + // 7: publicKey
                 "\"KEYSTORE\" TEXT," + // 8: keystore
                 "\"MNEMONIC_CODE\" TEXT," + // 9: mnemonicCode
-                "\"TOKENS\" TEXT);"); // 10: tokens
+                "\"TOKENS\" TEXT," + // 10: tokens
+                "\"IS_BACKUP\" INTEGER NOT NULL );"); // 11: isBackup
     }
 
     /** Drops the underlying database table. */
@@ -116,6 +118,7 @@ public class MangoWalletDao extends AbstractDao<MangoWallet, Long> {
         if (tokens != null) {
             stmt.bindString(11, tokensConverter.convertToDatabaseValue(tokens));
         }
+        stmt.bindLong(12, entity.getIsBackup() ? 1L: 0L);
     }
 
     @Override
@@ -160,6 +163,7 @@ public class MangoWalletDao extends AbstractDao<MangoWallet, Long> {
         if (tokens != null) {
             stmt.bindString(11, tokensConverter.convertToDatabaseValue(tokens));
         }
+        stmt.bindLong(12, entity.getIsBackup() ? 1L: 0L);
     }
 
     @Override
@@ -180,7 +184,8 @@ public class MangoWalletDao extends AbstractDao<MangoWallet, Long> {
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // publicKey
             cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // keystore
             cursor.isNull(offset + 9) ? null : mnemonicCodeConverter.convertToEntityProperty(cursor.getString(offset + 9)), // mnemonicCode
-            cursor.isNull(offset + 10) ? null : tokensConverter.convertToEntityProperty(cursor.getString(offset + 10)) // tokens
+            cursor.isNull(offset + 10) ? null : tokensConverter.convertToEntityProperty(cursor.getString(offset + 10)), // tokens
+            cursor.getShort(offset + 11) != 0 // isBackup
         );
         return entity;
     }
@@ -198,6 +203,7 @@ public class MangoWalletDao extends AbstractDao<MangoWallet, Long> {
         entity.setKeystore(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
         entity.setMnemonicCode(cursor.isNull(offset + 9) ? null : mnemonicCodeConverter.convertToEntityProperty(cursor.getString(offset + 9)));
         entity.setTokens(cursor.isNull(offset + 10) ? null : tokensConverter.convertToEntityProperty(cursor.getString(offset + 10)));
+        entity.setIsBackup(cursor.getShort(offset + 11) != 0);
      }
     
     @Override

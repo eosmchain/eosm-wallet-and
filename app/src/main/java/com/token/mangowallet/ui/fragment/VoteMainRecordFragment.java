@@ -35,7 +35,7 @@ import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.ui.adapter.VoteMainAdapter;
 import com.token.mangowallet.ui.adapter.VoteMainRecordAdapter;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.DragFloatActionButton;
 
 import java.util.ArrayList;
@@ -148,7 +148,7 @@ public class VoteMainRecordFragment extends BaseFragment {
         params.put("limit", String.valueOf(limit));
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().getAward(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

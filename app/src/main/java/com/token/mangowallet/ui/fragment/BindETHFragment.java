@@ -35,7 +35,7 @@ import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.Md5Utils;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.DialogHelper;
 import com.token.mangowallet.view.ViewUtils;
 
@@ -151,7 +151,7 @@ public class BindETHFragment extends BaseFragment {
             params.put("currentAddr", walletAddress);
             params.put("type", "2");
             String jsonData2 = GsonUtils.toJson(params);
-            String content = RSAUtils.encrypt(jsonData2);
+            String content = NRSAUtils.encrypt(jsonData2);
             NetWorkManager.getRequest().newCheckstatus(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -197,7 +197,7 @@ public class BindETHFragment extends BaseFragment {
             params.put("type", "2");
             params.put("money", "0");
             String jsonData2 = GsonUtils.toJson(params);
-            String content = RSAUtils.encrypt(jsonData2);
+            String content = NRSAUtils.encrypt(jsonData2);
             NetWorkManager.getRequest().bindWalletAddress(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -215,7 +215,7 @@ public class BindETHFragment extends BaseFragment {
             params.put("bindAdress", bindAddress);
             params.put("type", "2");
             String jsonData2 = GsonUtils.toJson(params);
-            String content = RSAUtils.encrypt(jsonData2);
+            String content = NRSAUtils.encrypt(jsonData2);
             NetWorkManager.getRequest().newCheckAddr(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

@@ -46,7 +46,7 @@ import com.token.mangowallet.bean.MerchantBean;
 import com.token.mangowallet.bean.StoreIncomeBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -401,7 +401,7 @@ public class ChainStoreFragment extends BaseFragment {
         params.put("address", walletAddress);
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().getIncome(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -417,7 +417,7 @@ public class ChainStoreFragment extends BaseFragment {
         params.put("address", walletAddress);
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().isMer(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

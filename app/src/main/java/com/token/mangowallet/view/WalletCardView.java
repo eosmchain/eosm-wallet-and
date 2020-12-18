@@ -46,6 +46,8 @@ public class WalletCardView extends FrameLayout {
     AppCompatTextView tvTolalAssetValue;
     @BindView(R.id.cardView)
     QMUIFrameLayout cardView;
+    @BindView(R.id.noBackupTv)
+    AppCompatTextView noBackupTv;
 
     private Context context;
     private Unbinder unbinder;
@@ -122,14 +124,19 @@ public class WalletCardView extends FrameLayout {
         coinView.setBackgroundResource(raw);
     }
 
+    public void setIsBackup(boolean isBackup) {
+        moreIv.setVisibility(isBackup ? VISIBLE : GONE);
+        noBackupTv.setVisibility(isBackup ? GONE : VISIBLE);
+    }
 
     public void setTolalAssetValue(String balance) {
         tvTolalAssetValue.setText(balance);
     }
 
-    @OnClick({R.id.moreIv, R.id.walletNameTv, R.id.toActivateTv, R.id.walletMainNameTv})
+    @OnClick({R.id.moreIv, R.id.walletNameTv, R.id.toActivateTv, R.id.walletMainNameTv, R.id.noBackupTv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.noBackupTv:
             case R.id.moreIv:
                 if (listener != null) {
                     listener.onWalletInfo();

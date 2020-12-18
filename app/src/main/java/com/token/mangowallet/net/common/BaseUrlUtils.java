@@ -51,7 +51,7 @@ public class BaseUrlUtils {
     public String getDIGICCYBaseUrl() {
         String nodeServerName = SPUtils.getInstance(Constants.SP_MangoWallet_info)
                 .getString(KEY_DIGICCY_SERVER, String.valueOf(Constants.WalletType.MGP));
-        String serverName = SPUtils.getInstance(Constants.SP_MangoWallet_info).getString(Constants.KEY_SERVER, CORPORATION_URL);
+        String serverName = SPUtils.getInstance(Constants.SP_MangoWallet_info).getString(Constants.KEY_SERVER, Constants.isTest ? TESTURL : CORPORATION_URL);
         ServerInfo serverInfo = serverInfoMap.get(serverName);
         if (ObjectUtils.equals(String.valueOf(Constants.WalletType.EOS), nodeServerName)) {
             return serverInfo.getNodeEOS();
@@ -63,9 +63,7 @@ public class BaseUrlUtils {
     }
 
     public String getVoteUrl() {
-        String nodeServerName = SPUtils.getInstance(Constants.SP_MangoWallet_info)
-                .getString(KEY_DIGICCY_SERVER, String.valueOf(Constants.WalletType.MGP));
-        String serverName = SPUtils.getInstance(Constants.SP_MangoWallet_info).getString(Constants.KEY_SERVER, CORPORATION_URL);
+        String serverName = SPUtils.getInstance(Constants.SP_MangoWallet_info).getString(Constants.KEY_SERVER, Constants.isTest ? TESTURL : CORPORATION_URL);
         ServerInfo serverInfo = serverInfoMap.get(serverName);
         if (serverInfo.isTest()) {
             return VOTE_TEST_API_URL;
@@ -75,9 +73,7 @@ public class BaseUrlUtils {
     }
 
     public String getVoteContract() {
-        String nodeServerName = SPUtils.getInstance(Constants.SP_MangoWallet_info)
-                .getString(KEY_DIGICCY_SERVER, String.valueOf(Constants.WalletType.MGP));
-        String serverName = SPUtils.getInstance(Constants.SP_MangoWallet_info).getString(Constants.KEY_SERVER, CORPORATION_URL);
+        String serverName = SPUtils.getInstance(Constants.SP_MangoWallet_info).getString(Constants.KEY_SERVER, Constants.isTest ? TESTURL : CORPORATION_URL);
         ServerInfo serverInfo = serverInfoMap.get(serverName);
         if (serverInfo.isTest()) {
             return TEST_VOTE_CONTRACT;
@@ -87,13 +83,13 @@ public class BaseUrlUtils {
     }
 
     public String getCompanyBaseUrl() {
-        String serverName = SPUtils.getInstance(Constants.SP_MangoWallet_info).getString(Constants.KEY_SERVER, CORPORATION_URL);
+        String serverName = SPUtils.getInstance(Constants.SP_MangoWallet_info).getString(Constants.KEY_SERVER, Constants.isTest ? TESTURL : CORPORATION_URL);
         ServerInfo serverInfo = serverInfoMap.get(serverName);
         return serverInfo.getKserverApi();
     }
 
     public boolean isTest() {
-        String serverName = SPUtils.getInstance(Constants.SP_MangoWallet_info).getString(Constants.KEY_SERVER, CORPORATION_URL);
+        String serverName = SPUtils.getInstance(Constants.SP_MangoWallet_info).getString(Constants.KEY_SERVER, Constants.isTest ? TESTURL : CORPORATION_URL);
         ServerInfo serverInfo = serverInfoMap.get(serverName);
         return serverInfo.isTest();
     }

@@ -1,13 +1,19 @@
 package com.token.mangowallet.net.interceptor;
 
+import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.blankj.utilcode.util.CrashUtils;
 import com.blankj.utilcode.util.EncodeUtils;
+import com.blankj.utilcode.util.FileIOUtils;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.TimeUtils;
+import com.token.mangowallet.utils.Constants;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
@@ -25,6 +31,7 @@ import okio.Buffer;
 import okio.BufferedSource;
 
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
+import static com.token.mangowallet.utils.Constants.isTest;
 
 public class LogInterceptor implements Interceptor {
     private static final String TAG = "HTTP_TRACE";
@@ -107,8 +114,35 @@ public class LogInterceptor implements Interceptor {
         logBuilder.append("\n");
         logBuilder.append("<-----------------------------END REQUEST--------------------------------->");
         logBuilder.append("\n\n\n");
+        if (isTest) {
+            FileIOUtils.writeFileFromString(getSDPath(), EncodeUtils.urlDecode(logBuilder.toString(), "UTF-8"));
+        }
         LogUtils.d(TAG, EncodeUtils.urlDecode(logBuilder.toString(), "UTF-8"));
         return response;
+    }
+
+    /**
+     * 获取sd卡路径
+     *
+     * @return
+     */
+    private static File getSDPath() {
+        File sdDir = null;
+        try {
+            boolean sdCardExist = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED); // 判断sd卡是否存在
+            if (sdCardExist) {
+                // 这里可以修改为你的路径
+                sdDir = new File(Constants.HttpRequestLog, "http_" + TimeUtils.getNowString() + ".txt");
+                if (!sdDir.exists()) {
+                    File dir = new File(sdDir.getParent());
+                    dir.mkdirs();
+                    sdDir.createNewFile();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return sdDir;
     }
 
     private String requestDecodedPath(HttpUrl url) {

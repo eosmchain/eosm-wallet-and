@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 
 import com.blankj.utilcode.util.AppUtils;
@@ -19,6 +20,7 @@ import com.blankj.utilcode.util.ClickUtils;
 import com.blankj.utilcode.util.CollectionUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
+import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.google.android.material.textfield.TextInputLayout;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
@@ -29,6 +31,7 @@ import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
+import com.token.mangowallet.bean.AccountInfo;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.interact.CreateWalletInteract;
 import com.token.mangowallet.utils.Constants;
@@ -42,6 +45,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+import static com.token.mangowallet.utils.Constants.EXTRA_AMOUNT;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
 import static com.token.mangowallet.utils.Constants.INTENT_EXTRA_KEY_WALLET_TYPE;
 import static com.token.mangowallet.utils.Constants.WalletType.ALL;
@@ -73,6 +77,12 @@ public class CreationWalletFragment extends BaseFragment {
     @BindView(R.id.importBtn)
     QMUIRoundButton importBtn;
 
+    @BindView(R.id.accountNameEt)
+    AppCompatEditText accountNameEt;
+    @BindView(R.id.errorTv)
+    AppCompatTextView errorTv;
+
+
     private Unbinder unbinder;
     private Constants.WalletType mWalletType;
     private boolean isNamePass = false;
@@ -95,7 +105,7 @@ public class CreationWalletFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        topBar.setTitle(String.format(getString(R.string.str_create_title), mWalletType == ALL ? "" : mWalletType));
+        topBar.setTitle(mWalletType == ALL ? getString(R.string.str_create_import_account) : String.format(getString(R.string.str_create_title), mWalletType));
         importBtn.setText(String.format(getString(R.string.str_import_title), ""));
         if (mWalletType == ALL) {
             importBtn.setVisibility(View.VISIBLE);
@@ -107,6 +117,14 @@ public class CreationWalletFragment extends BaseFragment {
                 }
             });
             importBtn.setVisibility(View.GONE);
+        }
+
+        if (mWalletType == ALL || mWalletType == MGP) {
+            accountNameEt.setVisibility(View.VISIBLE);
+            isNamePass = false;
+        } else {
+            isNamePass = true;
+            accountNameEt.setVisibility(View.GONE);
         }
     }
 
@@ -132,7 +150,7 @@ public class CreationWalletFragment extends BaseFragment {
 
     @Override
     protected void initAction() {
-//        afterTextChanged(walletNameEt);
+        afterTextChanged(accountNameEt);
         afterTextChanged(walletPasswordEt);
         afterTextChanged(againWalletPasswordEt);
     }
@@ -148,15 +166,15 @@ public class CreationWalletFragment extends BaseFragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String errorMsg = "";
                 switch (editText.getId()) {
-//                    case R.id.walletNameEt:
-//                        if (mWalletType == MGP || mWalletType == EOS) {
-//                            isNamePass = RegexUtils.isMatch(Constants.REGEX_ACCOUNT_NAME, s);
-//                            errorMsg = getString(R.string.str_account_name_rule);
-//                            upTextInputLayout(walletNameTil, isNamePass, errorMsg);
-//                        } else {
-//                            isNamePass = true;
-//                        }
-//                        break;
+                    case R.id.accountNameEt:
+                        if (mWalletType == ALL || mWalletType == MGP || mWalletType == EOS) {
+                            boolean isPass = RegexUtils.isMatch(Constants.REGEX_ACCOUNT_NAME, s);
+                            errorMsg = getString(R.string.str_account_hint);
+                            upErrorLayout(errorMsg, s.toString(), isPass);
+                        } else {
+                            isNamePass = true;
+                        }
+                        break;
                     case R.id.walletPasswordEt:
                         isPswPass = false;
                         if (s.length() >= 8 && s.length() <= 18) {
@@ -178,14 +196,7 @@ public class CreationWalletFragment extends BaseFragment {
                         upTextInputLayout(againWalletPasswordTil, isAgainPswPass, errorMsg);
                         break;
                 }
-
-                if (isPswPass && isAgainPswPass) {
-                    createBtn.setEnabled(true);
-                    createBtn.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.gradient_left_to_right));
-                } else {
-                    createBtn.setEnabled(false);
-                    createBtn.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.item_divider_bg_color));
-                }
+                createEnabled();
             }
 
             @Override
@@ -193,6 +204,28 @@ public class CreationWalletFragment extends BaseFragment {
                 String string = s.toString();
             }
         });
+    }
+
+    private void createEnabled() {
+        if (isPswPass && isAgainPswPass && isNamePass) {
+            createBtn.setEnabled(true);
+            createBtn.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.gradient_left_to_right));
+        } else {
+            createBtn.setEnabled(false);
+            createBtn.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.item_divider_bg_color));
+        }
+    }
+
+    private void upErrorLayout(String errorMsg, String walletAddress, boolean isPass) {
+        if (isPass) {
+            errorTv.setVisibility(View.GONE);
+            errorTv.setText("");
+            createWalletInteract.getVerifyWallet(walletAddress, mWalletType).subscribe(this::jumpToVerifyWallet, this::verifyWalletError);
+        } else {
+            errorTv.setVisibility(View.VISIBLE);
+            errorTv.setText(errorMsg);
+            errorTv.setTextColor(ContextCompat.getColor(getActivity(), R.color.app_color_red));
+        }
     }
 
     private void upTextInputLayout(TextInputLayout textInputLayout, boolean isVerify, String errorMsg) {
@@ -211,6 +244,10 @@ public class CreationWalletFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.createBtn:
+                if (ObjectUtils.isEmpty(accountNameEt.getText())) {
+                    ToastUtils.showLong(R.string.str_please_enter_account);
+                    return;
+                }
                 if (ObjectUtils.isEmpty(walletPasswordEt.getText())) {
                     ToastUtils.showLong(R.string.str_enter_password);
                     return;
@@ -227,17 +264,16 @@ public class CreationWalletFragment extends BaseFragment {
                     ToastUtils.showLong(R.string.str_wallet_password);
                     return;
                 }
-                if (ObjectUtils.isEmpty(againWalletPasswordEt.getText().toString())) {
-                    ToastUtils.showLong(R.string.str_again_input_password);
-                    return;
-                }
+//                if (ObjectUtils.isEmpty(againWalletPasswordEt.getText().toString())) {
+//                    ToastUtils.showLong(R.string.str_again_input_password);
+//                    return;
+//                }
 
                 String walletPwd = walletPasswordEt.getText().toString().trim();
                 String againWalletPwd = againWalletPasswordEt.getText().toString().trim();
                 String pwdReminder = hintEt.getText().toString().trim();
                 if (ObjectUtils.equals(walletPwd, againWalletPwd)) {
-                    showTipDialog(getString(R.string.str_creating_wallet_tip));
-                    createWalletInteract.create(getActivity(), mWalletType, walletPwd, pwdReminder).subscribe(this::jumpToWalletBackUp, this::showError);
+                    createWalletInteract.create(getActivity(), mWalletType, walletPwd, "").subscribe(this::jumpToWalletBackUp, this::showError);
                 } else {
                     ToastUtils.showLong(R.string.str_pwd_confirm_input_tips);
                 }
@@ -262,29 +298,55 @@ public class CreationWalletFragment extends BaseFragment {
         }
     }
 
-    public void showError(Throwable errorInfo) {
+
+    private void jumpToVerifyWallet(AccountInfo accountInfo) {
         dismissTipDialog();
-        LogUtils.e("CreateWalletActivity", errorInfo);
-        ToastUtils.showShort(errorInfo.toString());
+        isNamePass = false;
+        errorTv.setVisibility(View.VISIBLE);
+        errorTv.setText(getString(R.string.str_account_invalid));
+        errorTv.setTextColor(ContextCompat.getColor(getActivity(), R.color.app_color_red));
+        createEnabled();
+    }
+
+    public void verifyWalletError(Throwable errorInfo) {
+        dismissTipDialog();
+        isNamePass = true;
+        errorTv.setVisibility(View.VISIBLE);
+        errorTv.setText(getString(R.string.str_account_available));
+        errorTv.setTextColor(ContextCompat.getColor(getActivity(), R.color.app_color_viridis));
+        createEnabled();
     }
 
     public void jumpToWalletBackUp(MangoWallet wallet) {
         dismissTipDialog();
         if (wallet != null) {
-            ToastUtils.showShort(R.string.str_create_wallet_succeed);
-            qmuiDialog = DialogHelper.showMessageDialog(getActivity(), getString(R.string.str_backup_wallet), getString(R.string.str_backup_wallet_msg),
-                    "", getString(R.string.str_backup_mnemonic), null, new QMUIDialogAction.ActionListener() {
-                        @Override
-                        public void onClick(QMUIDialog dialog, int index) {
-                            dialog.dismiss();
-                            Bundle bundle = new Bundle();
-                            bundle.putParcelable(EXTRA_WALLET, wallet);
-                            startFragment("BackupsMnemonicFragment", bundle);
-                            qmuiDialog = null;
-                        }
-                    });
-            qmuiDialog.show();
+            wallet.setWalletAddress(accountNameEt.getText().toString().trim());
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("isCreate", true);
+            bundle.putParcelable(EXTRA_WALLET, wallet);
+            startFragment("BackupsMnemonicFragment", bundle);
+//            ToastUtils.showShort(R.string.str_create_wallet_succeed);
+//            qmuiDialog = DialogHelper.showMessageDialog(getActivity(), getString(R.string.str_backup_wallet), getString(R.string.str_backup_wallet_msg),
+//                    "", getString(R.string.str_backup_mnemonic), null, new QMUIDialogAction.ActionListener() {
+//                        @Override
+//                        public void onClick(QMUIDialog dialog, int index) {
+//                            dialog.dismiss();
+//                            Bundle bundle = new Bundle();
+//                            bundle.putParcelable(EXTRA_WALLET, wallet);
+//                            startFragment("BackupsMnemonicFragment", bundle);
+//                            qmuiDialog = null;
+//                        }
+//                    });
+//            qmuiDialog.show();
+        } else {
+            ToastUtils.showShort(R.string.str_create_wallet_fail);
         }
+    }
+
+    public void showError(Throwable errorInfo) {
+        dismissTipDialog();
+        LogUtils.e("CreateWalletActivity", errorInfo);
+        ToastUtils.showShort(errorInfo.toString());
     }
 
     @Override

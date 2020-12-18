@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import androidx.annotation.DrawableRes;
 
+import com.blankj.utilcode.util.ObjectUtils;
 import com.token.mangowallet.utils.StringConverter;
 
 import org.greenrobot.greendao.annotation.Convert;
@@ -37,6 +38,7 @@ public class MangoWallet implements Parcelable {
     List<String> mnemonicCode;
     @Convert(columnType = String.class, converter = StringConverter.class)
     List<String> tokens;
+    private boolean isBackup = false;
 
     protected MangoWallet(Parcel in) {
         if (in.readByte() == 0) {
@@ -54,13 +56,15 @@ public class MangoWallet implements Parcelable {
         keystore = in.readString();
         mnemonicCode = in.createStringArrayList();
         tokens = in.createStringArrayList();
+        isBackup = ObjectUtils.isEmpty(mnemonicCode) ? true : in.readByte() != 0;
+
     }
 
-    @Generated(hash = 1843577074)
-    public MangoWallet(Long id, int image, int walletType,
-            @NotNull String walletPassword, String hint, String WalletAddress,
-            @NotNull String privateKey, String publicKey, String keystore,
-            List<String> mnemonicCode, List<String> tokens) {
+    @Generated(hash = 479349119)
+    public MangoWallet(Long id, int image, int walletType, @NotNull String walletPassword,
+            String hint, String WalletAddress, @NotNull String privateKey, String publicKey,
+            String keystore, List<String> mnemonicCode, List<String> tokens,
+            boolean isBackup) {
         this.id = id;
         this.image = image;
         this.walletType = walletType;
@@ -72,6 +76,7 @@ public class MangoWallet implements Parcelable {
         this.keystore = keystore;
         this.mnemonicCode = mnemonicCode;
         this.tokens = tokens;
+        this.isBackup = isBackup;
     }
 
     @Generated(hash = 2114901284)
@@ -96,6 +101,7 @@ public class MangoWallet implements Parcelable {
         dest.writeString(keystore);
         dest.writeStringList(mnemonicCode);
         dest.writeStringList(tokens);
+        dest.writeByte(ObjectUtils.isEmpty(mnemonicCode) ? 1 : (byte) (isBackup ? 1 : 0));
     }
 
     @Override
@@ -203,6 +209,14 @@ public class MangoWallet implements Parcelable {
         this.tokens = tokens;
     }
 
+    public boolean getIsBackup() {
+        return isBackup;
+    }
+
+    public void setIsBackup(boolean backup) {
+        isBackup = backup;
+    }
+
     @Override
     public String toString() {
         return "MangoWallet{" +
@@ -217,6 +231,7 @@ public class MangoWallet implements Parcelable {
                 ", keystore='" + keystore + '\'' +
                 ", mnemonicCode=" + mnemonicCode +
                 ", tokens=" + tokens +
+                ", isBackup=" + isBackup +
                 '}';
     }
 }

@@ -249,10 +249,13 @@ public class MyController extends QMUIWindowInsetLayout {
                         bundle.putParcelable(EXTRA_WALLET, baseFragment.mangoWallet);
                         baseFragment.startFragment("ChainStoreFragment", bundle);
                     } else if (ObjectUtils.equals(getString(R.string.str_invitation_code), text)) {
+                        bundle = new Bundle();
                         if (ObjectUtils.isNotEmpty(MyApplication.getInstance().mMid)) {
-                            bundle = new Bundle();
                             bundle.putParcelable("DataBean", dataBean);
                             homeFragment.startFragment("InvitationFragment", bundle);
+                        } else {
+                            bundle.putParcelable(EXTRA_WALLET, baseFragment.mangoWallet);
+                            homeFragment.startFragment("ActivateMidFragment", bundle);
                         }
                     } else if (ObjectUtils.equals(getString(R.string.str_mgp_stimulate), text)) {
                         bundle = new Bundle();
@@ -379,7 +382,7 @@ public class MyController extends QMUIWindowInsetLayout {
         }
         myInvitationCodeItem.setDetailText(MyApplication.getInstance().mMid);
         myInvitationCodeItem.getDetailTextView().setTextColor(ContextCompat.getColor(getContext(), R.color.app_color_red));
-        myInvitationCodeItem.setVisibility(ObjectUtils.isEmpty(MyApplication.getInstance().mMid) ? GONE : VISIBLE);
+        myInvitationCodeItem.setVisibility(ObjectUtils.isEmpty(homeFragment.mangoWallet.getWalletAddress()) ? GONE : VISIBLE);
         chainstoreItem.setVisibility(ObjectUtils.isEmpty(MyApplication.getInstance().mMid) ? GONE : VISIBLE);
     }
 

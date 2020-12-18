@@ -18,9 +18,13 @@ import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.BusUtils;
 import com.blankj.utilcode.util.ClickUtils;
 import com.blankj.utilcode.util.ColorUtils;
+import com.blankj.utilcode.util.GsonUtils;
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.MapUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.google.gson.JsonObject;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUIFloatLayout;
@@ -28,22 +32,32 @@ import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.token.mangowallet.MainActivity;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
+import com.token.mangowallet.bean.MsgCodeBean;
 import com.token.mangowallet.bus.ToWallet;
 import com.token.mangowallet.db.MangoWallet;
+import com.token.mangowallet.interact.CreateWalletInteract;
+import com.token.mangowallet.net.common.NetWorkManager;
+import com.token.mangowallet.utils.Constants;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.utils.WalletDaoUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 import static com.token.mangowallet.utils.Constants.BUS_CUT_WALLET;
 import static com.token.mangowallet.utils.Constants.BUS_TO_WALLET;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
+import static com.token.mangowallet.utils.Constants.LOG_TAG;
+import static com.token.mangowallet.utils.Constants.WalletType.ALL;
 
 public class ConfirmMnemonicFragment extends BaseFragment {
 
@@ -65,6 +79,9 @@ public class ConfirmMnemonicFragment extends BaseFragment {
     private List<String> shuffleList = new ArrayList<>();
     private List<String> confirmList = new ArrayList<>();
     private List<String> originList;
+    private boolean isCreate = true;
+    private Constants.WalletType mWalletType;
+
 
     @Override
     protected View onCreateView() {
@@ -73,19 +90,6 @@ public class ConfirmMnemonicFragment extends BaseFragment {
         View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_confirm_mnemonic, null);
         unbinder = ButterKnife.bind(this, root);
         return root;
-    }
-
-    @OnClick(R.id.completeBtn)
-    public void onViewClicked() {
-        if (ObjectUtils.equals(originList, confirmList)) {
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            startActivity(intent);
-            WalletDaoUtils.updateCurrent(wallet);
-            BusUtils.post(BUS_TO_WALLET, new ToWallet(wallet, BUS_CUT_WALLET));
-            getActivity().finish();
-        } else {
-            ToastUtils.showShort(R.string.str_backup_mnemonics_error);
-        }
     }
 
     @Override
@@ -108,7 +112,9 @@ public class ConfirmMnemonicFragment extends BaseFragment {
     @Override
     protected void initData() {
         Bundle bundle = getArguments();
+        isCreate = bundle.getBoolean("isCreate", true);
         wallet = bundle.getParcelable(EXTRA_WALLET);
+        mWalletType = Constants.WalletType.getPagerFromPositon(wallet.getWalletType());
         originList = wallet.getMnemonicCode();
         shuffleList.clear();
         shuffleList.addAll(originList);
@@ -118,6 +124,24 @@ public class ConfirmMnemonicFragment extends BaseFragment {
     @Override
     protected void initAction() {
 
+    }
+
+    @OnClick(R.id.completeBtn)
+    public void onViewClicked() {
+        if (ObjectUtils.equals(originList, confirmList)) {
+            if (isCreate) {
+                if (mWalletType == ALL || mWalletType == Constants.WalletType.MGP) {
+                    showTipDialog(getString(R.string.str_creating_wallet_tip));
+                    userRegister();
+                } else {
+                    toMainActivity();
+                }
+            } else {
+                toMainActivity();
+            }
+        } else {
+            ToastUtils.showShort(R.string.str_backup_mnemonics_error);
+        }
     }
 
     private void addItemToFloatLayout(QMUIFloatLayout floatLayout, String text, boolean isClick) {
@@ -180,6 +204,59 @@ public class ConfirmMnemonicFragment extends BaseFragment {
             return;
         }
         floatLayout.removeView(floatLayout.getChildAt(index));
+    }
+
+    private void toMainActivity() {
+        if (wallet == null) {
+            return;
+        }
+        wallet.setIsBackup(true);
+        if (isCreate) {
+            WalletDaoUtils.insertNewWallet(wallet);
+        } else {
+            WalletDaoUtils.mangoWalletDao.update(wallet);
+        }
+
+        if (isCreate) {
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
+            getActivity().finish();
+        } else {
+            popBackStack();
+        }
+        WalletDaoUtils.updateCurrent(wallet);
+        BusUtils.post(BUS_TO_WALLET, new ToWallet(wallet, BUS_CUT_WALLET));
+    }
+
+    /**
+     * 账号自动激活
+     */
+    private void userRegister() {
+        try {
+            Map params = MapUtils.newHashMap();
+            params.put("publicKey", wallet.getPublicKey());
+            params.put("account", wallet.getWalletAddress());
+            String json = GsonUtils.toJson(params);
+            String content = NRSAUtils.encrypt(json);
+            NetWorkManager.getRequest().userRegister(content)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::userRegisterSuccess, this::onError);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void onError(Throwable throwable) {
+        dismissTipDialog();
+        LogUtils.eTag(LOG_TAG, "e = " + throwable.toString() + " ===== " + throwable.getMessage());
+        ToastUtils.showShort(R.string.str_create_wallet_fail);
+    }
+
+    private void userRegisterSuccess(JsonObject jsonObject) {
+        dismissTipDialog();
+        LogUtils.eTag(LOG_TAG, "userRegisterSuccess = " + GsonUtils.toJson(jsonObject));
+        toMainActivity();
     }
 
     @Override

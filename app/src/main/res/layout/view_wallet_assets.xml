@@ -14,6 +14,19 @@
         android:background="@mipmap/ic_mgp_card_bg" />
 
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/noBackupTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|top"
+        android:layout_margin="@dimen/dp_15"
+        android:drawableLeft="@drawable/ic_warn"
+        android:drawablePadding="@dimen/album_dp_4"
+        android:gravity="center_vertical"
+        android:text="@string/str_no_backup"
+        android:textColor="@color/app_color_red"
+        android:visibility="gone" />
+
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/moreIv"
         android:layout_width="wrap_content"

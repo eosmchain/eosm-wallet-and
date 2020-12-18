@@ -41,7 +41,7 @@ import com.token.mangowallet.bean.StoreHomeBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.ui.adapter.ClassifyListAdapter;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.SpinerPopWindow;
 import com.token.mangowallet.view.basepopup.ItemClickListener;
 
@@ -357,7 +357,7 @@ public class ProClassifyfragment extends BaseFragment {
         params.put("partition", partition);//1A 2B 3C 4D 5E
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().proList(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

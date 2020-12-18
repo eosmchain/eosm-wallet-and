@@ -195,7 +195,6 @@ public class StakeVoteMainFragment extends BaseFragment {
         progressBar.setMax(100);
         progressTv.setText(String.format(getString(R.string.str_vote_progress), "0"));
 
-
         mSubHeaderView = LayoutInflater.from(getActivity()).inflate(R.layout.view_manage_header, null, false);
         unpaidValueTv = mSubHeaderView.findViewById(R.id.unpaidValueTv);
         toTransferTv = mSubHeaderView.findViewById(R.id.toTransferTv);
@@ -836,6 +835,7 @@ public class StakeVoteMainFragment extends BaseFragment {
         if (transactionBean != null) {
             if (transactionBean.isSuccess) {
                 getTableRowsVoters();
+                getTableRows();
                 ToastUtils.showLong(R.string.str_award_get_success);
             } else {
                 ToastUtils.showLong(transactionBean.msg);

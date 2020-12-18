@@ -27,12 +27,37 @@
             android:textSize="@dimen/small" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/accountNameEt"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/album_dp_80"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:background="@drawable/edit_input_shape"
+        android:gravity="center_vertical"
+        android:hint="@string/str_set_wallet_address"
+        android:padding="@dimen/dp_10"
+        android:text=""
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintTop_toBottomOf="@id/topBar" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/errorTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/album_dp_4"
+        android:text="@string/str_account_hint"
+        android:textColor="@color/app_color_common_hint"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/accountNameEt" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/walletPasswordTil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/activity_horizontal_margin"
-        app:layout_constraintTop_toBottomOf="@id/walletNameTil">
+        app:layout_constraintTop_toBottomOf="@id/errorTv">
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/walletPasswordEt"
@@ -66,6 +91,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/activity_horizontal_margin"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/againWalletPasswordTil">
 
         <androidx.appcompat.widget.AppCompatEditText
@@ -100,11 +126,12 @@
         android:clickable="true"
         android:gravity="center"
         android:text="@string/str_import_title"
-        android:textColor="@color/app_color_dark_blue"
+        android:textColor="@color/white"
         android:textSize="@dimen/small"
+        app:qmui_backgroundColor="#FEDE89"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/createBtn"
-        app:qmui_borderColor="@color/qmui_config_color_gray_8"
+        app:qmui_borderWidth="0dp"
         app:qmui_radius="5dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

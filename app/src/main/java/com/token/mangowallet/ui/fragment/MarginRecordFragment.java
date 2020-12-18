@@ -35,7 +35,7 @@ import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.ui.adapter.MarginRecordAdapter;
 import com.token.mangowallet.ui.home.HomeFragment;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.DialogHelper;
 
 import java.util.Map;
@@ -145,7 +145,7 @@ public class MarginRecordFragment extends BaseFragment {
         params.put("address", walletAddress);
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().getLog(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -164,7 +164,7 @@ public class MarginRecordFragment extends BaseFragment {
         params.put("address", walletAddress);
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().marginRefund(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

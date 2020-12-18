@@ -48,7 +48,7 @@ import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.InputFilterMinMax;
 import com.token.mangowallet.utils.Md5Utils;
 import com.token.mangowallet.utils.PhotoUtils;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.CashierInputFilter;
 import com.token.mangowallet.view.DialogHelper;
 import com.token.mangowallet.view.PictureChoicePop;
@@ -360,7 +360,7 @@ public class StakeAddVoteFragment extends BaseFragment {
         params.put("nodeUrl", nodeNameEt.getText().toString());
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().uploadNodeMsg(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

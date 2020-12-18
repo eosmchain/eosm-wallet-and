@@ -149,7 +149,13 @@ public class WalletController extends QMUIWindowInsetLayout implements PopCreati
             public void onWalletInfo() {
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(EXTRA_WALLET, baseFragment.mangoWallet);
-                homeFragment.startFragment("WalletManagementFragment", bundle);
+                if (baseFragment.mangoWallet.getIsBackup()) {
+                    homeFragment.startFragment("WalletManagementFragment", bundle);
+                } else {
+                    bundle.putBoolean("isCreate", false);
+                    homeFragment.startFragment("BackupsMnemonicFragment", bundle);
+                }
+
             }
 
             @Override
@@ -275,6 +281,7 @@ public class WalletController extends QMUIWindowInsetLayout implements PopCreati
             String walletName = mCurrentWalletType + "-Wallet";
             walletCardView.setWalletAddress(ObjectUtils.isNotEmpty(walletAddress), walletAddress, "");
             walletCardView.setWalletType(mCurrentWalletType);
+            walletCardView.setIsBackup(homeFragment.mangoWallet.getIsBackup());
             walletCardView.setWalletName(walletName.contains("-") ? walletName : mCurrentWalletType + "-" + walletName);
             if (mCurrentWalletType == EOS || mCurrentWalletType == MGP) {
                 walletInfoLayout.setVisibility(View.VISIBLE);

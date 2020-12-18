@@ -30,7 +30,7 @@ import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.PhotoUtils;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.PictureChoicePop;
 
 import java.math.BigDecimal;
@@ -180,7 +180,7 @@ public class StakeVoteDetailsFragment extends BaseFragment {
         params.put("address", mNodeName);
         String json = GsonUtils.toJson(params);
         try {
-            String content = RSAUtils.encrypt(json);
+            String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().nodeDetail(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

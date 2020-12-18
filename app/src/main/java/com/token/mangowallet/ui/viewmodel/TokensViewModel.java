@@ -1,39 +1,27 @@
 package com.token.mangowallet.ui.viewmodel;
 
-import android.app.Activity;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.MapUtils;
-import com.blankj.utilcode.util.ObjectUtils;
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.token.mangowallet.MyApplication;
 import com.token.mangowallet.bean.AppHomeBean;
 import com.token.mangowallet.bean.CurrencyPrice;
 import com.token.mangowallet.bean.TableRowsBean;
 import com.token.mangowallet.bean.TransactionBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.entity.NetworkInfo;
-import com.token.mangowallet.entity.Ticker;
 import com.token.mangowallet.entity.Token;
 import com.token.mangowallet.entity.TokenInfo;
-import com.token.mangowallet.interact.FetchTokensInteract;
 import com.token.mangowallet.interact.FetchWalletInteract;
 import com.token.mangowallet.net.common.NetWorkManager;
-import com.token.mangowallet.net.common.RxSubscriber;
-import com.token.mangowallet.net.eosmgp.EOSParams;
-import com.token.mangowallet.net.eth.service.TickerService;
-import com.token.mangowallet.net.eth.service.UpWalletTickerService;
 import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.repository.EthereumNetworkRepository;
 import com.token.mangowallet.repository.TokenRepository;
 import com.token.mangowallet.utils.Constants;
-import com.token.mangowallet.utils.RSAUtils;
-import com.token.mangowallet.utils.WalletDaoUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -44,10 +32,7 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.RequestBody;
-import one.block.eosiojavarpcprovider.implementations.EosioJavaRpcProviderImpl;
 
-import static com.token.mangowallet.utils.Constants.EOSIO_TOKEN_CONTRACT_CODE;
 import static com.token.mangowallet.utils.Constants.WalletType.BTC;
 import static com.token.mangowallet.utils.Constants.WalletType.EOS;
 import static com.token.mangowallet.utils.Constants.WalletType.ETH;
@@ -118,7 +103,7 @@ public class TokensViewModel extends BaseViewModel {
         map.put("type", type);
         String jsonData2 = GsonUtils.toJson(map);
         try {
-            String content = RSAUtils.encrypt(jsonData2);
+            String content = NRSAUtils.encrypt(jsonData2);
             NetWorkManager.getRequest().getHome(content)
                     .subscribeOn(Schedulers.newThread())
                     .subscribeOn(Schedulers.io())
@@ -192,7 +177,7 @@ public class TokensViewModel extends BaseViewModel {
                 Map map = MapUtils.newHashMap();
                 map.put("pair", token.tokenInfo.symbol + "_USDT");
                 String json = GsonUtils.toJson(map);
-                String content = RSAUtils.encrypt(json);
+                String content = NRSAUtils.encrypt(json);
                 getTicker(content).subscribe(this::onPrice, this::onError);
             }
         } catch (Exception e) {

@@ -32,7 +32,7 @@ import com.token.mangowallet.bean.WithdrawIndexBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.ui.adapter.MinerIncomeAdapter;
-import com.token.mangowallet.utils.RSAUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -173,7 +173,7 @@ public class StimulateListFragment extends BaseFragment {
             params.put("limit", limit + "");
             params.put("page", pageInfo.page + "");
             String jsonData = GsonUtils.toJson(params);
-            String content = RSAUtils.encrypt(jsonData);
+            String content = NRSAUtils.encrypt(jsonData);
 
             NetWorkManager.getRequest().getMyOrderWallet(content)
                     .subscribeOn(Schedulers.io())
@@ -190,7 +190,7 @@ public class StimulateListFragment extends BaseFragment {
             params.put("address", walletAddress);
             params.put("moneyType", moneyType);
             String jsonData = GsonUtils.toJson(params);
-            String content = RSAUtils.encrypt(jsonData);
+            String content = NRSAUtils.encrypt(jsonData);
 
             NetWorkManager.getRequest().getWithdrawIndex(content)
                     .subscribeOn(Schedulers.io())
