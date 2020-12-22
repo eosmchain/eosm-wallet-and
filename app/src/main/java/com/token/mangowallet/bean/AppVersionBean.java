@@ -49,7 +49,7 @@ public class AppVersionBean {
         private String msg;
         private String download;
         private String versionNum;
-        private String force;
+        private int force;
         private String versionCode;
 
         public String getMsg() {
@@ -76,11 +76,11 @@ public class AppVersionBean {
             this.versionNum = versionNum;
         }
 
-        public String getForce() {
+        public int getForce() {
             return force;
         }
 
-        public void setForce(String force) {
+        public void setForce(int force) {
             this.force = force;
         }
 

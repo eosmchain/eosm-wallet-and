@@ -458,7 +458,7 @@
     <string name="str_mining_index">マイニング指数</string>
     <string name="str_mining_index_tip">説明：指数が0になる場合、注文が自動に中止されます</string>
     <string name="str_free_freight">送料が必要ありません</string>
-    <string name="str_new_version_upgrade">ニューバージョンのアップグレード</string>
+    <string name="str_new_version_upgrade">新しいバージョンの更新</string>
     <string name="str_update_content">コンテンツ更新</string>
     <string name="main_activity_automatic_download_toast">ダウンロードなので、少々お待ちください...</string>
     <string name="main_activity_downloading_dg">ダウンロードには少々お待ちください</string>

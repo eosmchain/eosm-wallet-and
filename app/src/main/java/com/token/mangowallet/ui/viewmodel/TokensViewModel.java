@@ -7,6 +7,7 @@ import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.MapUtils;
 import com.google.gson.reflect.TypeToken;
+import com.token.mangowallet.bean.AccountInfo;
 import com.token.mangowallet.bean.AppHomeBean;
 import com.token.mangowallet.bean.CurrencyPrice;
 import com.token.mangowallet.bean.TableRowsBean;
@@ -47,6 +48,8 @@ public class TokensViewModel extends BaseViewModel {
     private final MutableLiveData<TransactionBean> transactionBean = new MutableLiveData<>();
     private final MutableLiveData<TableRowsBean> tableRowsBean = new MutableLiveData<>();
     private final MutableLiveData<AppHomeBean> appHomeData = new MutableLiveData<>();
+    private final MutableLiveData<AccountInfo> accountInfoMutableLiveData = new MutableLiveData<>();
+
     private final EthereumNetworkRepository ethereumNetworkRepository;
     private final FetchWalletInteract findDefaultWalletInteract;
 
@@ -167,6 +170,31 @@ public class TokensViewModel extends BaseViewModel {
                         .subscribeOn(Schedulers.io()));
     }
 
+    public void getVerifyWallet() {
+        if (Constants.WalletType.getPagerFromPositon(defaultWallet.getValue().getWalletType()) == EOS
+                || Constants.WalletType.getPagerFromPositon(defaultWallet.getValue().getWalletType()) == MGP) {
+            Single.fromCallable(() -> {
+                return emWalletRepository.getAccountInfo(defaultWallet.getValue().getWalletAddress()
+                        , Constants.WalletType.getPagerFromPositon(defaultWallet.getValue().getWalletType()));
+            }).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread()).subscribe(this::onAccountInfo, this::onError);
+        }
+    }
+
+    public Single<AccountInfo> getVerifyWallet(MangoWallet wallet) {
+        if (wallet == null)
+            return null;
+        if (Constants.WalletType.getPagerFromPositon(wallet.getWalletType()) == EOS
+                || Constants.WalletType.getPagerFromPositon(wallet.getWalletType()) == MGP) {
+            return Single.fromCallable(() -> {
+                return emWalletRepository.getAccountInfo(wallet.getWalletAddress(), Constants.WalletType.getPagerFromPositon(wallet.getWalletType()));
+            }).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread());
+        } else {
+            return null;
+        }
+    }
+
     private void onTokens(List<Token> tokens) {
         try {
             LogUtils.d("Tokens", "onTokens");
@@ -202,6 +230,11 @@ public class TokensViewModel extends BaseViewModel {
         this.appHomeData.postValue(appHomeData);
     }
 
+    private void onAccountInfo(AccountInfo accountInfo) {
+        progress.postValue(false);
+        this.accountInfoMutableLiveData.postValue(accountInfo);
+    }
+
     public LiveData<NetworkInfo> defaultNetwork() {
         return defaultNetwork;
     }
@@ -221,6 +254,11 @@ public class TokensViewModel extends BaseViewModel {
     public MutableLiveData<CurrencyPrice> prices() {
         return prices;
     }
+
+    public LiveData<AccountInfo> accountInfo() {
+        return accountInfoMutableLiveData;
+    }
+
 }
 
 

@@ -38,10 +38,17 @@ android {
 
     signingConfigs {
         debug {
-            storeFile file('../jks/MangoWalletKeystore.jks')        //证书存放目录
-            storePassword "925379434"                               //密码
-            keyAlias "eoswallet"                                                //别名
-            keyPassword "925379434"
+            storeFile file(KEY_PATH)        //证书存放目录
+            storePassword KEY_PASS                              //密码
+            keyAlias ALIAS_NAME                                          //别名
+            keyPassword ALIAS_PASS
+
+        }
+        release {
+            storeFile file(KEY_PATH)
+            storePassword KEY_PASS
+            keyAlias ALIAS_NAME
+            keyPassword ALIAS_PASS
         }
     }
 

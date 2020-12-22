@@ -32,6 +32,7 @@ import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.token.mangowallet.MainActivity;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
+import com.token.mangowallet.bean.BaseBean;
 import com.token.mangowallet.bean.MsgCodeBean;
 import com.token.mangowallet.bus.ToWallet;
 import com.token.mangowallet.db.MangoWallet;
@@ -256,7 +257,22 @@ public class ConfirmMnemonicFragment extends BaseFragment {
     private void userRegisterSuccess(JsonObject jsonObject) {
         dismissTipDialog();
         LogUtils.eTag(LOG_TAG, "userRegisterSuccess = " + GsonUtils.toJson(jsonObject));
-        toMainActivity();
+        if (jsonObject != null) {
+            BaseBean baseBean = GsonUtils.fromJson(GsonUtils.toJson(jsonObject), BaseBean.class);
+            if (baseBean != null) {
+                if (baseBean.getCode() == 0) {
+                    ToastUtils.showShort(R.string.str_create_wallet_succeed);
+                    toMainActivity();
+                } else {
+                    MsgCodeBean msgCodeBean = GsonUtils.fromJson(GsonUtils.toJson(jsonObject), MsgCodeBean.class);
+                    ToastUtils.showShort(msgCodeBean.getMsg());
+                }
+            } else {
+                ToastUtils.showShort(R.string.str_create_wallet_fail);
+            }
+        } else {
+            ToastUtils.showShort(R.string.str_create_wallet_fail);
+        }
     }
 
     @Override

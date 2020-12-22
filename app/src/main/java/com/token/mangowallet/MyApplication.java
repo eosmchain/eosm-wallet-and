@@ -28,6 +28,7 @@ import androidx.multidex.MultiDex;
 
 import com.blankj.utilcode.util.CrashUtils;
 import com.blankj.utilcode.util.GsonUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.Utils;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -115,6 +116,8 @@ public class MyApplication extends Application {
          * 初始化定位sdk，建议在Application中创建
          */
         locationService = new LocationService(getApplicationContext());
+
+        LogUtils.getConfig().setLogSwitch(BuildConfig.DEBUG);
     }
 
     /**

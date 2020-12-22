@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.content.ContextCompat;
 
 import com.blankj.utilcode.util.ColorUtils;
 import com.blankj.utilcode.util.ScreenUtils;
@@ -127,6 +128,19 @@ public class WalletCardView extends FrameLayout {
     public void setIsBackup(boolean isBackup) {
         moreIv.setVisibility(isBackup ? VISIBLE : GONE);
         noBackupTv.setVisibility(isBackup ? GONE : VISIBLE);
+        if (!isBackup) {
+            noBackupTv.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(context, R.drawable.ic_warn), null, null, null);
+            noBackupTv.setText(context.getString(R.string.str_no_backup));
+        }
+    }
+
+    public void setIsActivate(boolean isActivate) {
+        moreIv.setVisibility(isActivate ? VISIBLE : GONE);
+        noBackupTv.setVisibility(isActivate ? GONE : VISIBLE);
+        if (!isActivate) {
+            noBackupTv.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+            noBackupTv.setText(context.getString(R.string.str_go_activate));
+        }
     }
 
     public void setTolalAssetValue(String balance) {

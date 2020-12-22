@@ -460,7 +460,7 @@
     <string name="str_mining_index">挖矿指数</string>
     <string name="str_mining_index_tip">说明:当指数变为0时,订单将自动关闭</string>
     <string name="str_free_freight">免运费</string>
-    <string name="str_new_version_upgrade">新版本升级</string>
+    <string name="str_new_version_upgrade">版本更新</string>
     <string name="str_update_content">更新内容</string>
     <string name="main_activity_automatic_download_toast">自动下载中，请稍后...</string>
     <string name="main_activity_downloading_dg">下载中请等待</string>

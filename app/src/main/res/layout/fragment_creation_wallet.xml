@@ -34,6 +34,7 @@
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:background="@drawable/edit_input_shape"
         android:gravity="center_vertical"
+        android:maxLength="12"
         android:hint="@string/str_set_wallet_address"
         android:padding="@dimen/dp_10"
         android:text=""

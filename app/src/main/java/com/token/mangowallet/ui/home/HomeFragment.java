@@ -38,6 +38,7 @@ import com.qmuiteam.qmui.widget.tab.QMUITabSegment;
 import com.token.mangowallet.MyApplication;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
+import com.token.mangowallet.bean.AccountInfo;
 import com.token.mangowallet.bean.AppHomeBean;
 import com.token.mangowallet.bean.CurrencyPrice;
 import com.token.mangowallet.bus.ToWallet;
@@ -85,6 +86,7 @@ public class HomeFragment extends BaseFragment {
     private MyController myController;
     private int mCurIndex = 0;
     private QMUIDialog msgQmuiDialog;
+    public boolean isActivate = true;
 
     @Override
     protected View onCreateView() {
@@ -413,6 +415,14 @@ public class HomeFragment extends BaseFragment {
 
     }
 
+    private void jumpToVerifyWallet(AccountInfo accountInfo) {
+        isActivate = true;
+    }
+
+    public void verifyWalletError(Throwable errorInfo) {
+        isActivate = false;
+    }
+
     private void onError(Throwable e) {
 
     }
@@ -428,6 +438,9 @@ public class HomeFragment extends BaseFragment {
         super.onResume();
         BarUtils.setStatusBarColor(getBaseFragmentActivity(), ContextCompat.getColor(getBaseFragmentActivity(), R.color.qmui_config_color_white));
         tokensViewModel.prepare();
+        if (tokensViewModel.getVerifyWallet(mangoWallet) != null) {
+            tokensViewModel.getVerifyWallet(mangoWallet).subscribe(this::jumpToVerifyWallet, this::verifyWalletError);
+        }
     }
 
     @Override

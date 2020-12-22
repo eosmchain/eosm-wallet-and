@@ -38,6 +38,7 @@ import com.qmuiteam.qmui.widget.popup.QMUIFullScreenPopup;
 import com.qmuiteam.qmui.widget.popup.QMUIPopup;
 import com.qmuiteam.qmui.widget.popup.QMUIPopups;
 import com.token.mangowallet.R;
+import com.token.mangowallet.bean.AppVersionBean;
 import com.token.mangowallet.listener.DialogConfirmListener;
 import com.token.mangowallet.utils.Constants;
 
@@ -202,10 +203,10 @@ public class DialogHelper {
 
     /**
      * 显示更新对话框
-     *
-     * @param remark 要更新的内容说明
+     * <p>
+     * 要更新的内容说明
      */
-    public static Dialog showUpdateDialog(Context context, String remark, View.OnClickListener listener) {
+    public static Dialog showUpdateDialog(Context context, AppVersionBean.DataBean dataBean, View.OnClickListener listener) {
         View view = View.inflate(context, R.layout.dialog_updata, null);
         final Dialog updateDialog = new Dialog(context, R.style.loading_dialog);
         updateDialog.setContentView(view);
@@ -218,15 +219,21 @@ public class DialogHelper {
         Button dialog_update_download_bt = (Button) view.findViewById(R.id.completeBtn);
         ImageView updateIv = (ImageView) view.findViewById(R.id.updateIv);
         ImageView cancelBtn = (ImageView) view.findViewById(R.id.cancelBtn);
-        udpata_view_text.setText(remark);
-        int height = SizeUtils.getMeasuredHeight(updateIv);
+        TextView newVersionTv = (TextView) view.findViewById(R.id.newVersionTv);
 
+        if (dataBean != null) {
+            newVersionTv.setText((ObjectUtils.isEmpty(dataBean.getVersionCode()) ? "" : dataBean.getVersionCode()) + context.getString(R.string.str_new_version_upgrade));
+            udpata_view_text.setText(ObjectUtils.isEmpty(dataBean.getMsg()) ? "" : dataBean.getMsg());
+            cancelBtn.setVisibility(dataBean.getForce() == 0 ? View.VISIBLE : View.GONE);
+        }
+
+        int height = SizeUtils.getMeasuredHeight(updateIv);
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) detailsLayout.getLayoutParams();
         params.topMargin = height / 2;
         detailsLayout.setLayoutParams(params);
         detailsLayout.requestLayout();
+        //force 是否强制更新 0 否 1 是
 
-        cancelBtn.setVisibility(View.GONE);
         dialog_update_download_bt.setOnClickListener(listener);
         cancelBtn.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
             @Override

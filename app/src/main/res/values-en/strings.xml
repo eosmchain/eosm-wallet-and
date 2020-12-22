@@ -460,7 +460,7 @@
     <string name="str_produced">Produced</string>
     <string name="str_surplus_produced">Remaining production</string>
     <string name="str_free_freight">free shipping</string>
-    <string name="str_new_version_upgrade">New version upgrade</string>
+    <string name="str_new_version_upgrade">version update</string>
     <string name="str_update_content">update content</string>
     <string name="main_activity_automatic_download_toast">Automatic downloading, please wait...</string>
     <string name="main_activity_downloading_dg">Please wait while downloading</string>

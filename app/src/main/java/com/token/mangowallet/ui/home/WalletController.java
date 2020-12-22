@@ -18,26 +18,34 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.ClickUtils;
+import com.blankj.utilcode.util.FileIOUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.MapUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.PermissionUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.blankj.utilcode.util.UtilsTransActivity;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.QMUIWindowInsetLayout;
 import com.qmuiteam.qmui.widget.pullRefreshLayout.QMUIPullRefreshLayout;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
+import com.token.mangowallet.bean.BaseBean;
+import com.token.mangowallet.bean.MsgCodeBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.entity.Token;
+import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.ui.activity.AddWalletActivity;
 import com.token.mangowallet.ui.activity.QRCodeScanActivity;
 import com.token.mangowallet.ui.adapter.WalletAdapter;
 import com.token.mangowallet.utils.BalanceUtils;
 import com.token.mangowallet.utils.Constants;
+import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.DialogHelper;
 import com.token.mangowallet.view.PopCreationWallet;
 import com.token.mangowallet.view.WalletCardView;
@@ -47,11 +55,14 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import party.loveit.eosforandroidlibrary.Ecc;
 
 import static com.token.mangowallet.ui.home.HomeFragment.homeFragment;
@@ -62,10 +73,12 @@ import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
 import static com.token.mangowallet.utils.Constants.IMPORT_WALLET;
 import static com.token.mangowallet.utils.Constants.INTENT_EXTRA_KEY_QR_SCAN;
 import static com.token.mangowallet.utils.Constants.INTENT_EXTRA_KEY_WALLET_TYPE;
+import static com.token.mangowallet.utils.Constants.LOG_TAG;
 import static com.token.mangowallet.utils.Constants.TO_CREATE_WALLET;
 import static com.token.mangowallet.utils.Constants.WalletType.ALL;
 import static com.token.mangowallet.utils.Constants.WalletType.EOS;
 import static com.token.mangowallet.utils.Constants.WalletType.MGP;
+import static com.token.mangowallet.utils.Constants.isTest;
 
 public class WalletController extends QMUIWindowInsetLayout implements PopCreationWallet.OnCreationWalletClickListener, QMUIPullRefreshLayout.OnPullListener {
 
@@ -147,15 +160,18 @@ public class WalletController extends QMUIWindowInsetLayout implements PopCreati
 
             @Override
             public void onWalletInfo() {
-                Bundle bundle = new Bundle();
-                bundle.putParcelable(EXTRA_WALLET, baseFragment.mangoWallet);
-                if (baseFragment.mangoWallet.getIsBackup()) {
-                    homeFragment.startFragment("WalletManagementFragment", bundle);
+                if (homeFragment.isActivate) {
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable(EXTRA_WALLET, baseFragment.mangoWallet);
+                    if (baseFragment.mangoWallet.getIsBackup()) {
+                        homeFragment.startFragment("WalletManagementFragment", bundle);
+                    } else {
+                        bundle.putBoolean("isCreate", false);
+                        homeFragment.startFragment("BackupsMnemonicFragment", bundle);
+                    }
                 } else {
-                    bundle.putBoolean("isCreate", false);
-                    homeFragment.startFragment("BackupsMnemonicFragment", bundle);
+                    userRegister();
                 }
-
             }
 
             @Override
@@ -281,7 +297,11 @@ public class WalletController extends QMUIWindowInsetLayout implements PopCreati
             String walletName = mCurrentWalletType + "-Wallet";
             walletCardView.setWalletAddress(ObjectUtils.isNotEmpty(walletAddress), walletAddress, "");
             walletCardView.setWalletType(mCurrentWalletType);
-            walletCardView.setIsBackup(homeFragment.mangoWallet.getIsBackup());
+            if (homeFragment.isActivate) {
+                walletCardView.setIsBackup(homeFragment.mangoWallet.getIsBackup());
+            } else {
+                walletCardView.setIsActivate(false);
+            }
             walletCardView.setWalletName(walletName.contains("-") ? walletName : mCurrentWalletType + "-" + walletName);
             if (mCurrentWalletType == EOS || mCurrentWalletType == MGP) {
                 walletInfoLayout.setVisibility(View.VISIBLE);
@@ -304,6 +324,58 @@ public class WalletController extends QMUIWindowInsetLayout implements PopCreati
             walletAdapter.setTokens(tokenItems);
             walletAdapter.notifyDataSetChanged();
         }
+    }
+
+    /**
+     * 账号自动激活
+     */
+    private void userRegister() {
+        try {
+            homeFragment.showTipDialog(homeFragment.getString(R.string.str_loading));
+            Map params = MapUtils.newHashMap();
+            params.put("publicKey", homeFragment.mangoWallet.getPublicKey());
+            params.put("account", homeFragment.mangoWallet.getWalletAddress());
+            String json = GsonUtils.toJson(params);
+            String content = NRSAUtils.encrypt(json);
+            NetWorkManager.getRequest().userRegister(content)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::userRegisterSuccess, this::onError);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void userRegisterSuccess(JsonObject jsonObject) {
+        homeFragment.dismissTipDialog();
+        LogUtils.eTag(LOG_TAG, "userRegisterSuccess = " + GsonUtils.toJson(jsonObject));
+        if (jsonObject != null) {
+            BaseBean baseBean = GsonUtils.fromJson(GsonUtils.toJson(jsonObject), BaseBean.class);
+            if (baseBean != null) {
+                if (baseBean.getCode() == 0) {
+                    homeFragment.isActivate = true;
+                    if (homeFragment.isActivate) {
+                        walletCardView.setIsBackup(homeFragment.mangoWallet.getIsBackup());
+                    } else {
+                        walletCardView.setIsActivate(false);
+                    }
+                    ToastUtils.showShort(R.string.str_activate_succeed);
+                } else {
+                    MsgCodeBean msgCodeBean = GsonUtils.fromJson(GsonUtils.toJson(jsonObject), MsgCodeBean.class);
+                    ToastUtils.showShort(msgCodeBean.getMsg());
+                }
+            } else {
+                ToastUtils.showShort(R.string.str_activate_succeed);
+            }
+        } else {
+            ToastUtils.showShort(R.string.str_activate_succeed);
+        }
+    }
+
+    private void onError(Throwable throwable) {
+        homeFragment.dismissTipDialog();
+        LogUtils.eTag(LOG_TAG, "e = " + throwable.toString() + " ===== " + throwable.getMessage());
+        ToastUtils.showShort(R.string.str_activate_fail);
     }
 
     private void dismissWalletPopupWindow() {

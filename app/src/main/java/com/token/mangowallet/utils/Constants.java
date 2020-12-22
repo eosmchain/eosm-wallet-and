@@ -6,7 +6,7 @@ import java.io.File;
 import java.math.BigDecimal;
 
 public interface Constants {
-    boolean isTest = false;
+    boolean isTest = true;
     /**
      * 正式域名
      */

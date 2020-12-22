@@ -459,7 +459,7 @@
     <string name="str_mining_index">마이닝 지수</string>
     <string name="str_mining_index_tip">설명: 지수가 0이 되면 주문이 자동으로 종료됩니다. </string>
     <string name="str_free_freight">운비 면제</string>
-    <string name="str_new_version_upgrade">새로운 버전 업그레이드</string>
+    <string name="str_new_version_upgrade">새 버전 업데이트</string>
     <string name="str_update_content">내용 업데이트</string>
     <string name="main_activity_automatic_download_toast">자동 다운로드 중입니다. 잠시 기다려주십시오...</string>
     <string name="main_activity_downloading_dg">다운로드 중입니다. 잠시 기다려주십시오.</string>

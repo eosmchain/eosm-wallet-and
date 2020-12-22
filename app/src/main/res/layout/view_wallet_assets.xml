@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
             android:text="@string/str_invite_friends_create"
-            android:textColor="@color/app_color_blue"
+            android:textColor="@color/app_color_red"
             android:textSize="@dimen/small"
             android:visibility="gone" />
     </LinearLayout>

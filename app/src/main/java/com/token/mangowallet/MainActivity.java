@@ -133,7 +133,7 @@ public class MainActivity extends BaseFragmentActivity {
                                             if (Integer.parseInt(versioncode) > AppUtils.getAppVersionCode()) {
                                                 String url = dataBean.getDownload();
                                                 String versiondes = dataBean.getVersionNum();
-                                                updateDialog = DialogHelper.showUpdateDialog(MainActivity.this, versiondes, new ClickUtils.OnDebouncingClickListener() {
+                                                updateDialog = DialogHelper.showUpdateDialog(MainActivity.this, dataBean, new ClickUtils.OnDebouncingClickListener() {
                                                     @Override
                                                     public void onDebouncingClick(View v) {
                                                         if (updateDialog != null) {
