@@ -154,9 +154,9 @@ public class GoodsDetailsFragment extends BaseFragment implements OnBannerListen
     protected void initView() {
         BarUtils.addMarginTopEqualStatusBarHeight(topBar);
         topBar.setTitle(R.string.str_goods);
-        topBar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        topBar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 popBackStack();
             }
         });
@@ -295,9 +295,9 @@ public class GoodsDetailsFragment extends BaseFragment implements OnBannerListen
 //        shareBtn.setTextColor(ContextCompat.getColor(getContext(), R.color.durban_White));
 //        shareBtn.setStrokeData(0, ContextCompat.getColorStateList(getContext(), R.color.app_color_green));
         copyTv.setText(copyText);
-        shareBtn.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        shareBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 ClipboardUtils.copyText(copyText);
                 Intent imageIntent = new Intent(Intent.ACTION_SEND);
                 imageIntent.setType("text/*");  //设置分享内容的类型

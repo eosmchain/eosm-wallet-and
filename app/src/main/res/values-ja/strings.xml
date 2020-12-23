@@ -721,6 +721,20 @@
     <string name="str_candidate_node">候補ノード</string>
     <string name="str_hypothecation">誓約</string>
     <string name="str_award_get_success">成功した報酬</string>
+    <string name="str_account_hint">a-zと12文字の1-5の組み合わせ</string>
+    <string name="str_create_import_account">アカウントの作成/インポート</string>
+    <string name="str_please_enter_account">ユーザー名を入力してください</string>
+    <string name="str_account_available">利用可能なアカウント</string>
+    <string name="str_skip">飛び越える</string>
+    <string name="str_create_wallet_fail">ウォレットの作成に失敗しました</string>
+    <string name="str_no_backup">ニーモニックをバックアップしていません</string>
+    <string name="str_set_wallet_address">ウォレットアカウント名を設定する</string>
+    <string name="str_backup_tip">資金の安全を確保するために、ウォレットのニーモニックを適切にバックアップします。
+プログラムまたはウォレットを削除した後、ニーモニックをインポートしてウォレットを復元する必要があります。</string>
+    <string name="str_go_activate">アクティベーション</string>
+    <string name="str_activate_succeed">正常にアクティブ化されました</string>
+    <string name="str_activate_fail">アクティベーションが失敗する</string>
+
 
     <string name="str_aleft">👈</string>
     <string name="str_right">👉</string>

@@ -231,9 +231,10 @@ public class MyController extends QMUIWindowInsetLayout {
         testItem.setOrientation(QMUICommonListItemView.VERTICAL);
         testItem.setVisibility(GONE);
 
-        ClickUtils.OnDebouncingClickListener onClickListener = new ClickUtils.OnDebouncingClickListener() {
+
+        OnClickListener onClickListener = new OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 Bundle bundle;
                 Intent intent;
                 if (v instanceof QMUICommonListItemView) {

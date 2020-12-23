@@ -144,9 +144,9 @@ public class LifeFragment extends BaseFragment {
 
     @Override
     protected void initAction() {
-        backupIV.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        backupIV.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 if (isSearch) {
                     key = "";
                     isSearch = false;
@@ -159,9 +159,9 @@ public class LifeFragment extends BaseFragment {
                 }
             }
         });
-        countryTv.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        countryTv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 if (ObjectUtils.isNotEmpty(countryList)) {
                     showSimpleBottomSheetList();
                 } else {

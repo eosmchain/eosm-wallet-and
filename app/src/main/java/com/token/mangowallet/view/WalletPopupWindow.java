@@ -192,9 +192,9 @@ public class WalletPopupWindow extends BasePopup {
             }
         });
         setItemChecked(0);
-        pullDownIv.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        pullDownIv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 dismiss();
             }
         });

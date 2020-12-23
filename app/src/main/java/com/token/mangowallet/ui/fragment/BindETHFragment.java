@@ -100,9 +100,9 @@ public class BindETHFragment extends BaseFragment {
     @Override
     public void initView() {
         topBar.setTitle(getString(R.string.str_bind_eth_address));
-        topBar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        topBar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 popBackStack();
             }
         });

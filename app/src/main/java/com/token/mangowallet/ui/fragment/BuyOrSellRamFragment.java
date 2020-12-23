@@ -123,9 +123,9 @@ public class BuyOrSellRamFragment extends BaseFragment {
     @Override
     protected void initView() {
         topbar.setTitle(StringUtils.getString(R.string.str_ram));
-        topbar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        topbar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 popBackStack();
             }
         });

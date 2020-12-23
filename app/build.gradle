@@ -133,7 +133,7 @@ dependencies {
         exclude group: 'com.android.support'
     }
     /*工具库*/
-    implementation 'com.blankj:utilcodex:1.29.0'
+    implementation 'com.blankj:utilcodex:1.30.5'
     /*腾讯QMUI UI https://qmuiteam.com/android*/
     implementation 'com.qmuiteam:qmui:2.0.0-alpha10'
     implementation "com.qmuiteam:arch:2.0.0-alpha10"

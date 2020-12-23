@@ -97,7 +97,7 @@ public class EOSParams {
      * @return 抵押
      */
     public static Map<String, Object> getDelegatebw(String from, String receiver, String stake_net_quantity,
-                                                    String stake_cpu_quantity, int transfer) {
+                                                    String stake_cpu_quantity, boolean transfer) {
         Map map = MapUtils.newHashMap();
         map.put("from", from);
         map.put("receiver", receiver);

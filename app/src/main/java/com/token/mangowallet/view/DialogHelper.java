@@ -235,9 +235,9 @@ public class DialogHelper {
         //force 是否强制更新 0 否 1 是
 
         dialog_update_download_bt.setOnClickListener(listener);
-        cancelBtn.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 updateDialog.dismiss();
             }
         });

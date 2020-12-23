@@ -108,7 +108,7 @@ public class LanguageActivity extends BaseActivity {
         englishItem.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CUSTOM);
         englishItem.setOrientation(QMUICommonListItemView.VERTICAL);
         englishItem.addAccessoryCustomView(imageView1);
-       
+
         QMUICommonListItemView japaneseItem = groupListView.createItemView(StringUtils.getString(R.string.str_lang_japanese));
         japaneseItem.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CUSTOM);
         japaneseItem.setOrientation(QMUICommonListItemView.VERTICAL);
@@ -137,22 +137,22 @@ public class LanguageActivity extends BaseActivity {
                     CharSequence text = ((QMUICommonListItemView) v).getText();
                     if (ObjectUtils.equals(StringUtils.getString(R.string.str_lang_system_language), text)) {
                         type = Constants.lang_system_language;
-                        LanguageUtils.applySystemLanguage(MainActivity.class);
+                        LanguageUtils.applySystemLanguage(true);
                     } else if (ObjectUtils.equals(StringUtils.getString(R.string.str_lang_english), text)) {
                         type = Constants.lang_english;
-                        LanguageUtils.applyLanguage(Locale.US, "");
+                        LanguageUtils.applyLanguage(Locale.US, true);
                     } else if (ObjectUtils.equals(StringUtils.getString(R.string.str_lang_japanese), text)) {
                         type = Constants.lang_japanese;
-                        LanguageUtils.applyLanguage(Locale.JAPAN, "");
+                        LanguageUtils.applyLanguage(Locale.JAPAN, true);
                     } else if (ObjectUtils.equals(StringUtils.getString(R.string.str_lang_korean), text)) {
                         type = Constants.lang_korean;
-                        LanguageUtils.applyLanguage(Locale.KOREA, "");
+                        LanguageUtils.applyLanguage(Locale.KOREA, true);
                     } else if (ObjectUtils.equals(StringUtils.getString(R.string.str_lang_simplified_chinese), text)) {
                         type = Constants.lang_simplified_chinese;
-                        LanguageUtils.applyLanguage(Locale.SIMPLIFIED_CHINESE, "");
+                        LanguageUtils.applyLanguage(Locale.SIMPLIFIED_CHINESE, true);
                     } else if (ObjectUtils.equals(StringUtils.getString(R.string.str_lang_traditional_chinese), text)) {
                         type = Constants.lang_traditional_chinese;
-                        LanguageUtils.applyLanguage(Locale.TRADITIONAL_CHINESE, "");
+                        LanguageUtils.applyLanguage(Locale.TRADITIONAL_CHINESE, true);
                     }
                     SPUtils.getInstance(Constants.SP_WALLET).put(Constants.KEY_LANGUAGE_SETUP, type);
                     updatePitchView(type);

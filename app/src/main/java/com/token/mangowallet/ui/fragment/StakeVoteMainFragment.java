@@ -161,9 +161,9 @@ public class StakeVoteMainFragment extends BaseFragment {
     @Override
     protected void initView() {
         topBar.setTitle("StakeVote");
-        topBar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        topBar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 if (isManage) {
                     isManage = false;
                     updateUI();
@@ -173,9 +173,9 @@ public class StakeVoteMainFragment extends BaseFragment {
             }
         });
         mRightBtn = topBar.addRightTextButton(R.string.str_management, R.id.topbar_right_change_button);
-        mRightBtn.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        mRightBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 if (!isManage) {
                     isManage = true;
                     updateUI();
@@ -330,9 +330,9 @@ public class StakeVoteMainFragment extends BaseFragment {
             }
         });
 
-        becomeNodeTv.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        becomeNodeTv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 if (mGlobalRowsBean != null) {
                     Bundle bundle = new Bundle();
                     bundle.putParcelable(EXTRA_WALLET, mangoWallet);
@@ -343,9 +343,9 @@ public class StakeVoteMainFragment extends BaseFragment {
             }
         });
 
-        unpaidIv.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        unpaidIv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
 //                if (passwordQmuiDialog == null) {
 //                    passwordQmuiDialog = DialogHelper.showEditTextDialog(getActivity(), getString(R.string.str_password_authentification),
 //                            getString(R.string.str_enter_password), getString(android.R.string.ok), getString(android.R.string.cancel), listener, true);
@@ -369,9 +369,9 @@ public class StakeVoteMainFragment extends BaseFragment {
             }
         });
 
-        viewRuleTv.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        viewRuleTv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 startFragment("RuleFragment");
             }
         });

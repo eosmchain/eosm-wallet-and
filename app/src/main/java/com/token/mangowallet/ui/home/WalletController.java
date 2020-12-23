@@ -138,15 +138,15 @@ public class WalletController extends QMUIWindowInsetLayout implements PopCreati
 
     private void initAction() {
         topbar.setTitle(R.string.app_name);
-        topbar.addLeftImageButton(R.mipmap.ic_menu_2, R.id.topbar_left_change_button).setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        topbar.addLeftImageButton(R.mipmap.ic_menu_2, R.id.topbar_left_change_button).setOnClickListener(new OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 showWalletPopupWindow(v);
             }
         });
-        topbar.addRightImageButton(R.mipmap.icon_scan2, R.id.topbar_right_change_button).setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        topbar.addRightImageButton(R.mipmap.icon_scan2, R.id.topbar_right_change_button).setOnClickListener(new OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 startQrCode();
             }
         });
@@ -287,6 +287,7 @@ public class WalletController extends QMUIWindowInsetLayout implements PopCreati
 
     public void updateView() {
         if (baseFragment.mangoWallet != null) {
+            baseFragment.verifyWallet();
             mCurrentWalletType = Constants.WalletType.getPagerFromPositon(baseFragment.mangoWallet.getWalletType());
             walletAddress = baseFragment.mangoWallet.getWalletAddress();
             privatekey = baseFragment.mangoWallet.getPrivateKey();
@@ -297,11 +298,7 @@ public class WalletController extends QMUIWindowInsetLayout implements PopCreati
             String walletName = mCurrentWalletType + "-Wallet";
             walletCardView.setWalletAddress(ObjectUtils.isNotEmpty(walletAddress), walletAddress, "");
             walletCardView.setWalletType(mCurrentWalletType);
-            if (homeFragment.isActivate) {
-                walletCardView.setIsBackup(homeFragment.mangoWallet.getIsBackup());
-            } else {
-                walletCardView.setIsActivate(false);
-            }
+            updataWalletState();
             walletCardView.setWalletName(walletName.contains("-") ? walletName : mCurrentWalletType + "-" + walletName);
             if (mCurrentWalletType == EOS || mCurrentWalletType == MGP) {
                 walletInfoLayout.setVisibility(View.VISIBLE);
@@ -346,6 +343,16 @@ public class WalletController extends QMUIWindowInsetLayout implements PopCreati
         }
     }
 
+    public void updataWalletState() {//更新钱包状态
+        if (homeFragment.isActivate) {
+            walletCardView.setIsBackup(homeFragment.mangoWallet.getIsBackup());
+        } else {
+            if (Constants.WalletType.getPagerFromPositon(homeFragment.mangoWallet.getWalletType()) == MGP) {
+                walletCardView.setIsActivate(false);
+            }
+        }
+    }
+
     private void userRegisterSuccess(JsonObject jsonObject) {
         homeFragment.dismissTipDialog();
         LogUtils.eTag(LOG_TAG, "userRegisterSuccess = " + GsonUtils.toJson(jsonObject));
@@ -354,11 +361,7 @@ public class WalletController extends QMUIWindowInsetLayout implements PopCreati
             if (baseBean != null) {
                 if (baseBean.getCode() == 0) {
                     homeFragment.isActivate = true;
-                    if (homeFragment.isActivate) {
-                        walletCardView.setIsBackup(homeFragment.mangoWallet.getIsBackup());
-                    } else {
-                        walletCardView.setIsActivate(false);
-                    }
+                    updataWalletState();
                     ToastUtils.showShort(R.string.str_activate_succeed);
                 } else {
                     MsgCodeBean msgCodeBean = GsonUtils.fromJson(GsonUtils.toJson(jsonObject), MsgCodeBean.class);

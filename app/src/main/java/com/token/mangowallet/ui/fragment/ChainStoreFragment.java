@@ -218,9 +218,9 @@ public class ChainStoreFragment extends BaseFragment {
 
     @Override
     protected void initAction() {
-        toolbar.setNavigationOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 popBackStack();
             }
         });

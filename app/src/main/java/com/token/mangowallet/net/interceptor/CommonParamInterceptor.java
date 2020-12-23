@@ -230,7 +230,7 @@ public class CommonParamInterceptor implements Interceptor {
 
     private String getLangParams() {
         String lang = "";
-        Locale locale = LanguageUtils.getCurrentLocale();
+        Locale locale = LanguageUtils.getAppContextLanguage();
         String language = locale.getLanguage();
         String country = locale.getCountry();
         if (ObjectUtils.equals("en", language)) {

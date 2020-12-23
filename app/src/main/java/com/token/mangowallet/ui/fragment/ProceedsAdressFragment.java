@@ -84,15 +84,15 @@ public class ProceedsAdressFragment extends BaseFragment {
     @Override
     protected void initView() {
         topBar.setTitle(isWalletAdress ? getString(R.string.str_proceeds) : getString(R.string.str_invitation_code));
-        topBar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        topBar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 popBackStack();
             }
         });
-        topBar.addRightImageButton(R.mipmap.ic_share, R.id.topbar_right_change_button).setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        topBar.addRightImageButton(R.mipmap.ic_share, R.id.topbar_right_change_button).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 if (qrBitmap != null) {
                     Intent imageIntent = new Intent(Intent.ACTION_SEND);
                     imageIntent.setType("image/*");  //设置分享内容的类型

@@ -57,16 +57,16 @@ public class AssociationAdapter extends BaseQuickAdapter<MortgageAssociationBean
         mgpTv.setText((ObjectUtils.isEmpty(teamListBean.getCoinNum()) ? "0.0000" : teamListBean.getCoinNum()) + walletType);
         dollarTv.setText(BalanceUtils.currencyToBase(ObjectUtils.isEmpty(teamListBean.getCoinValue()) ? "0.00" : teamListBean.getCoinValue(), 2, RoundingMode.FLOOR));
 
-        midTv.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        midTv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 ClipboardUtils.copyText(teamListBean.getCode());
                 ToastUtils.showShort(StringUtils.getString(R.string.str_copy_success));
             }
         });
-        addressTv.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        addressTv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 ClipboardUtils.copyText(teamListBean.getTeamAddress());
                 ToastUtils.showShort(StringUtils.getString(R.string.str_copy_success));
             }

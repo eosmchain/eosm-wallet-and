@@ -71,9 +71,9 @@ public class LanguageFragment extends BaseFragment {
     @Override
     public void initView() {
         topbar.setTitle(StringUtils.getString(R.string.str_language_settings));
-        topbar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        topbar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 popBackStack();
             }
         });
@@ -134,30 +134,30 @@ public class LanguageFragment extends BaseFragment {
 //        traditionalChineseItem.setOrientation(QMUICommonListItemView.VERTICAL);
 //        traditionalChineseItem.addAccessoryCustomView(imageView5);
 
-        ClickUtils.OnDebouncingClickListener onClickListener = new ClickUtils.OnDebouncingClickListener() {
+        View.OnClickListener onClickListener =new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 int type = Constants.lang_system_language;
                 if (v instanceof QMUICommonListItemView) {
                     CharSequence text = ((QMUICommonListItemView) v).getText();
                     if (ObjectUtils.equals(StringUtils.getString(R.string.str_lang_system_language), text)) {
                         type = Constants.lang_system_language;
-                        LanguageUtils.applySystemLanguage(MainActivity.class);
+                        LanguageUtils.applySystemLanguage(true);
                     } else if (ObjectUtils.equals(StringUtils.getString(R.string.str_lang_english), text)) {
                         type = Constants.lang_english;
-                        LanguageUtils.applyLanguage(Locale.US,"");
+                        LanguageUtils.applyLanguage(Locale.US,true);
                     } else if (ObjectUtils.equals(StringUtils.getString(R.string.str_lang_japanese), text)) {
                         type = Constants.lang_japanese;
-                        LanguageUtils.applyLanguage(Locale.JAPAN,"");
+                        LanguageUtils.applyLanguage(Locale.JAPAN,true);
                     } else if (ObjectUtils.equals(StringUtils.getString(R.string.str_lang_korean), text)) {
                         type = Constants.lang_korean;
-                        LanguageUtils.applyLanguage(Locale.KOREA,"");
+                        LanguageUtils.applyLanguage(Locale.KOREA,true);
                     } else if (ObjectUtils.equals(StringUtils.getString(R.string.str_lang_simplified_chinese), text)) {
                         type = Constants.lang_simplified_chinese;
-                        LanguageUtils.applyLanguage(Locale.SIMPLIFIED_CHINESE,"");
+                        LanguageUtils.applyLanguage(Locale.SIMPLIFIED_CHINESE,true);
                     } else if (ObjectUtils.equals(StringUtils.getString(R.string.str_lang_traditional_chinese), text)) {
                         type = Constants.lang_traditional_chinese;
-                        LanguageUtils.applyLanguage(Locale.TRADITIONAL_CHINESE,"");
+                        LanguageUtils.applyLanguage(Locale.TRADITIONAL_CHINESE,true);
                     }
                     SPUtils.getInstance(Constants.SP_WALLET).put(Constants.KEY_LANGUAGE_SETUP, type);
                     updatePitchView(type);

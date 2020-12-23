@@ -130,9 +130,9 @@ public class ProClassifyfragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        toolbar.setNavigationOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 if (isSearch) {
                     productName = "";
                     proList();
@@ -183,9 +183,9 @@ public class ProClassifyfragment extends BaseFragment {
             }
         });
 
-        layoutSwitchIv.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        layoutSwitchIv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 isChecked = !isChecked;
                 LogUtils.dTag(LOG_TAG, "layoutSwitchIv isChecked = " + isChecked);
                 if (isChecked) {

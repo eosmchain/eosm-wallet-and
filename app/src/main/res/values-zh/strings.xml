@@ -722,6 +722,20 @@
     <string name="str_candidate_node">候选节点</string>
     <string name="str_hypothecation">质押</string>
     <string name="str_award_get_success">奖励领取成功</string>
+    <string name="str_account_hint">a-z 与 1-5 组合的 12 位字符</string>
+    <string name="str_create_import_account">创建/导入账号</string>
+    <string name="str_please_enter_account">请输入账号</string>
+    <string name="str_account_available">账号可用</string>
+    <string name="str_skip">跳过</string>
+    <string name="str_create_wallet_fail">创建钱包失败</string>
+    <string name="str_no_backup">您还未备份助记词</string>
+    <string name="str_set_wallet_address">设置您的钱包账户名</string>
+    <string name="str_backup_tip">妥善备份钱包助记词才能保障资金安全。
+删除程序或钱包后，您需要通过导入助记词来恢复钱包。</string>
+    <string name="str_go_activate">激活</string>
+    <string name="str_activate_succeed">激活成功</string>
+    <string name="str_activate_fail">激活失败</string>
+
 
     <string name="str_aleft">👈</string>
     <string name="str_right">👉</string>

@@ -153,9 +153,9 @@ public class StakeAddVoteFragment extends BaseFragment {
     @Override
     protected void initView() {
         topBar.setTitle(R.string.str_add_node);
-        topBar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        topBar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 popBackStack();
             }
         });
@@ -165,9 +165,9 @@ public class StakeAddVoteFragment extends BaseFragment {
 
     @Override
     protected void initAction() {
-        imageIv.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        imageIv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 if (isHasHeader) {
                     mHeaderImge = "";
                     filePath = "";
@@ -179,9 +179,9 @@ public class StakeAddVoteFragment extends BaseFragment {
                 }
             }
         });
-        delBtn.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        delBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 mHeaderImge = "";
                 filePath = "";
                 isHasHeader = false;
@@ -221,9 +221,9 @@ public class StakeAddVoteFragment extends BaseFragment {
             }
         });
 
-        paymentBtn.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        paymentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 if (isVerify()) {
                     if (isAdd) {
                         toPayNum = ObjectUtils.isEmpty(mGlobalRowsBean.getMin_bp_list_quantity()) ? "0.0000 MGP" : mGlobalRowsBean.getMin_bp_list_quantity();

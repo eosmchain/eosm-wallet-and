@@ -42,9 +42,9 @@ public class BottomSheetAdapter extends BaseQuickAdapter<PayConfigBean.DataBean,
         AppCompatImageView iconIv = baseViewHolder.getView(R.id.iconIv);
         radioButton.setText(dataBean.getName());
         Glide.with(iconIv).load(dataBean.getPic()).placeholder(R.mipmap.ic_placeholder).error(R.mipmap.ic_placeholder).into(iconIv);
-        radioButton.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        radioButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 listener.onItemView(radioButton, baseViewHolder.getLayoutPosition());
             }
         });

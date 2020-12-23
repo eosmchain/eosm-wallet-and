@@ -107,17 +107,17 @@ public class StakeVoteDetailsFragment extends BaseFragment {
     @Override
     protected void initView() {
         topBar.setTitle("StakeVote");
-        topBar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        topBar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 popBackStack();
             }
         });
 
         if (isMy) {
-            topBar.addRightTextButton(R.string.str_account, R.id.topbar_right_change_button).setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+            topBar.addRightTextButton(R.string.str_account, R.id.topbar_right_change_button).setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onDebouncingClick(View v) {
+                public void onClick(View v) {
                     Bundle bundle = new Bundle();
                     bundle.putParcelable(EXTRA_WALLET, mangoWallet);
 //                    bundle.putParcelable("RowsBean", mRowsBean);
@@ -151,9 +151,9 @@ public class StakeVoteDetailsFragment extends BaseFragment {
 
     @Override
     protected void initAction() {
-        popularVoteBtn.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        popularVoteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(EXTRA_WALLET, mangoWallet);
                 bundle.putParcelable("NodeDetailBean.DataBean", mDataBean);
@@ -163,9 +163,9 @@ public class StakeVoteDetailsFragment extends BaseFragment {
                 startFragment("StakeVotePaymentFragment", bundle);
             }
         });
-        compileVoteBtn.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        compileVoteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(EXTRA_WALLET, mangoWallet);
                 bundle.putBoolean("isAdd", false);

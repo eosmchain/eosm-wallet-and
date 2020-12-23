@@ -57,17 +57,17 @@ public class ReceivingAddressAdapter extends BaseQuickAdapter<ShippingAddressBea
                 }
             }
         });
-        baseViewHolder.getView(R.id.editAddressTv).setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        baseViewHolder.getView(R.id.editAddressTv).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 if (listener != null) {
                     listener.onEditAddress(baseViewHolder.getLayoutPosition());
                 }
             }
         });
-        baseViewHolder.getView(R.id.delAddressTv).setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        baseViewHolder.getView(R.id.delAddressTv).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 if (listener != null) {
                     listener.onDeleteAddress(baseViewHolder.getLayoutPosition());
                 }

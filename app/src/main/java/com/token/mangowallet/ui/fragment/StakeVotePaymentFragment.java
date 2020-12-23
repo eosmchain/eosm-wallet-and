@@ -121,9 +121,9 @@ public class StakeVotePaymentFragment extends BaseFragment {
     @Override
     protected void initView() {
         topBar.setTitle(R.string.str_vote);
-        topBar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        topBar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 popBackStack();
             }
         });
@@ -187,9 +187,9 @@ public class StakeVotePaymentFragment extends BaseFragment {
             }
         });
 
-        voteBtn.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        voteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 if (ObjectUtils.isEmpty(transferAmountEt.getText())) {
                     ToastUtils.showLong(R.string.str_input_quantity);
                     return;

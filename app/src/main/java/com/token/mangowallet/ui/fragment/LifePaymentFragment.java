@@ -169,15 +169,15 @@ public class LifePaymentFragment extends BaseFragment {
     @Override
     protected void initView() {
         topBar.setTitle(R.string.str_pay_bill);
-        topBar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        topBar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 popBackStack();
             }
         });
-        topBar.addRightTextButton(R.string.str_record, R.id.topbar_right_change_button).setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        topBar.addRightTextButton(R.string.str_record, R.id.topbar_right_change_button).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(EXTRA_WALLET, mangoWallet);
                 startFragment("LifePaymentRecordFragment", bundle);

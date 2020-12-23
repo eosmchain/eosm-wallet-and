@@ -139,18 +139,18 @@ public class MarginFragment extends BaseFragment {
     @Override
     protected void initView() {
         topBar.setTitle(type == 0 ? (isBindUsdt == 0 ? R.string.str_apply_activation : R.string.str_additional_margin) : R.string.str_vote_t);
-        topBar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        topBar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 popBackStack();
             }
         });
         walletAccountTv.setText(walletAddress);
         if (type == 0) {
             if (isBindUsdt != 0) {
-                topBar.addRightTextButton(R.string.str_transaction_record, R.id.topbar_right_change_button).setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+                topBar.addRightTextButton(R.string.str_transaction_record, R.id.topbar_right_change_button).setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onDebouncingClick(View v) {
+                    public void onClick(View v) {
                         Bundle bundle = new Bundle();
                         bundle.putParcelable(EXTRA_WALLET, mangoWallet);
                         startFragment("MarginRecordFragment", bundle);

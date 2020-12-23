@@ -184,9 +184,9 @@ public class LoginFragment extends BaseFragment {
             }
         });
 
-        loginBtn.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
 //                loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEt.getText().toString(),
                         passwordEt.getText().toString());

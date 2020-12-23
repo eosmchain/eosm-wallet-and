@@ -37,7 +37,9 @@ import com.token.mangowallet.bean.AccountInfo;
 import com.token.mangowallet.bean.TransactionBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.listener.DialogConfirmListener;
+import com.token.mangowallet.net.common.DelegatebwParams;
 import com.token.mangowallet.net.eosmgp.EOSParams;
+import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.ui.viewmodel.ResManModelFactory;
 import com.token.mangowallet.ui.viewmodel.ResManViewModel;
 import com.token.mangowallet.utils.Constants;
@@ -49,6 +51,8 @@ import com.token.mangowallet.view.DialogHelper;
 import com.token.mangowallet.view.ViewUtils;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -58,10 +62,14 @@ import butterknife.Unbinder;
 
 import static com.token.mangowallet.utils.Constants.DELEGATEBW_ACTION;
 import static com.token.mangowallet.utils.Constants.EOSIO_SYSTEM_CONTRACT_CODE;
+import static com.token.mangowallet.utils.Constants.EOSIO_TOKEN_CONTRACT_CODE;
 import static com.token.mangowallet.utils.Constants.EXTRA_ACCOUNT_INFO;
 import static com.token.mangowallet.utils.Constants.EXTRA_TRANSACTION;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
+import static com.token.mangowallet.utils.Constants.LOG_TAG;
+import static com.token.mangowallet.utils.Constants.TRANSFER_ACTION;
 import static com.token.mangowallet.utils.Constants.UNDELEGATEBW_ACTION;
+import static com.token.mangowallet.utils.Constants.isTest;
 import static com.token.mangowallet.utils.Constants.percent;
 import static com.token.mangowallet.utils.Constants.thousand;
 
@@ -135,14 +143,13 @@ public class MortgageOrRedeemFragment extends BaseFragment implements QMUISlider
     private String pledgeNet = "0";
     private String pledgeCpu = "0";
     private String walletAddress;
-    private int progress = 0;
+    private int progress = 40;
     //    private String pledge = "0";
     private String cpu_quantity = "0";
     private String net_quantity = "0";
     private BigDecimal bdProgress;
     private String amount = "0";
     private BigDecimal bdAmount;
-    private MangoWallet wallet;
     private String privatekey;
     private String balance;
     private String balanceUnit;
@@ -185,9 +192,9 @@ public class MortgageOrRedeemFragment extends BaseFragment implements QMUISlider
     @Override
     protected void initView() {
         topbar.setTitle(getString(R.string.str_network));
-        topbar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        topbar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 popBackStack();
             }
         });
@@ -260,7 +267,7 @@ public class MortgageOrRedeemFragment extends BaseFragment implements QMUISlider
     }
 
     private void updateView() {
-        mortgageRatesSlider.setCurrentProgress(40);
+        mortgageRatesSlider.setCurrentProgress(progress);
         if (!ObjectUtils.isEmpty(accountInfo)) {
             walletAddress = accountInfo.getAccount_name();
             receptionAccountEt.setText(walletAddress);
@@ -425,12 +432,26 @@ public class MortgageOrRedeemFragment extends BaseFragment implements QMUISlider
             bdCpu_quantity = new BigDecimal(cpu_quantity);
             cpu_quantity = bdCpu_quantity.setScale(4, BigDecimal.ROUND_HALF_DOWN).toPlainString();
 
-            bdNet_quantity = new BigDecimal(cpu_quantity);
+            bdNet_quantity = new BigDecimal(net_quantity);
             net_quantity = bdNet_quantity.setScale(4, BigDecimal.ROUND_HALF_DOWN).toPlainString();
 
-            Map delegatebwParams = EOSParams.getDelegatebw(walletAddress, walletAddress, cpu_quantity + " " + walletType,
-                    net_quantity + " " + walletType, transfer);
+            Map delegatebwParams = EOSParams.getDelegatebw(walletAddress, walletAddress, net_quantity  + " " + walletType,
+                    cpu_quantity + " " + walletType, false);
             jsonData = GsonUtils.toJson(delegatebwParams);
+//            '["masteraychen","dragonmaster","1.0000 MGP", "1.0000 MGP",0]
+//            List list = new ArrayList();
+//            list.add(walletAddress);
+//            list.add(walletAddress);
+//            list.add(cpu_quantity + " " + walletType);
+//            list.add(net_quantity + " " + walletType);
+//            list.add(transfer);
+//            DelegatebwParams delegatebwParams = new DelegatebwParams();
+//            delegatebwParams.setFrom(walletAddress);
+//            delegatebwParams.setReceiver(walletAddress);
+//            delegatebwParams.setStake_cpu_quantity(cpu_quantity + " " + walletType);
+//            delegatebwParams.setStake_net_quantity(net_quantity + " " + walletType);
+//            delegatebwParams.setTransfer(transfer);
+//            jsonData = GsonUtils.toJson(list);
         } else {
             String amount2 = EOSAmountEt2.getText().toString().trim();
             if (ObjectUtils.isEmpty(amount2)) {
@@ -455,8 +476,8 @@ public class MortgageOrRedeemFragment extends BaseFragment implements QMUISlider
             bdNet_quantity = new BigDecimal(net_quantity);
             net_quantity = bdNet_quantity.setScale(4, BigDecimal.ROUND_HALF_DOWN).toPlainString();
 
-            Map undelegatebwParams = EOSParams.getDelegatebw(walletAddress, walletAddress, cpu_quantity + " " + walletType,
-                    net_quantity + " " + walletType, transfer);
+            Map undelegatebwParams = EOSParams.getUnDelegatebw(walletAddress, walletAddress, cpu_quantity + " " + walletType,
+                    net_quantity + " " + walletType);
 
             jsonData = GsonUtils.toJson(undelegatebwParams);
         }
@@ -474,7 +495,7 @@ public class MortgageOrRedeemFragment extends BaseFragment implements QMUISlider
         public void onClick(QMUIDialog dialog, View view, int index) {
             EditText editText = ((EditText) view);
             String contrastPassword = editText.getText().toString().trim();
-            if (ObjectUtils.equals(Md5Utils.md5(contrastPassword), wallet.getWalletPassword())) {
+            if (ObjectUtils.equals(Md5Utils.md5(contrastPassword), mangoWallet.getWalletPassword())) {
                 NETCPUTransaction();
             } else {
                 ToastUtils.showShort(getString(R.string.str_wrong_password));
@@ -485,8 +506,20 @@ public class MortgageOrRedeemFragment extends BaseFragment implements QMUISlider
     };
 
     private void NETCPUTransaction() {
-        resManViewModel.sendTransaction(isPledge ? DELEGATEBW_ACTION : UNDELEGATEBW_ACTION, EOSIO_SYSTEM_CONTRACT_CODE, jsonData);
+        if (isPledge) {
+            EMWalletRepository emWalletRepository = new EMWalletRepository();
+            emWalletRepository.sendTransaction(DELEGATEBW_ACTION, mangoWallet.getPrivateKey(), walletAddress, EOSIO_SYSTEM_CONTRACT_CODE, jsonData, walletType)
+                    .subscribe(this::onTransaction, this::onError);
+        } else {
+            resManViewModel.sendTransaction(isPledge ? DELEGATEBW_ACTION : UNDELEGATEBW_ACTION, EOSIO_SYSTEM_CONTRACT_CODE, jsonData);
+        }
         jsonData = "";
+    }
+
+    private void onError(Throwable e) {
+        dismissTipDialog();
+        LogUtils.eTag(LOG_TAG, "e = " + e.toString() + " ===== " + e.getMessage());
+//        ToastUtils.showLong(R.string.str_network_error);
     }
 
     @Override

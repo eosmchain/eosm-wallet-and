@@ -154,17 +154,17 @@ public class OrderAdapter extends BaseQuickAdapter<OrderGoodsBean.DataBean, Base
         } else {
             goodsBtn2.setVisibility(View.GONE);
         }
-        goodsBtn1.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        goodsBtn1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 if (listener != null) {
                     listener.onOrder((QMUIRoundButton) v, baseViewHolder.getLayoutPosition());
                 }
             }
         });
-        goodsBtn2.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        goodsBtn2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 if (listener != null) {
                     listener.onOrder((QMUIRoundButton) v, baseViewHolder.getLayoutPosition());
                 }

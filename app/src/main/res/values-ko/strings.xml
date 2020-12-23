@@ -722,6 +722,19 @@
     <string name="str_candidate_node">후보 노드</string>
     <string name="str_hypothecation">서약</string>
     <string name="str_award_get_success">성공적인 보상</string>
+    <string name="str_account_hint">a-z 및 12 자의 1-5 조합</string>
+    <string name="str_create_import_account">계정 생성 / 가져 오기</string>
+    <string name="str_please_enter_account">사용자 이름을 입력하십시오</string>
+    <string name="str_account_available">사용 가능한 계정</string>
+    <string name="str_skip">뛰어 넘다</string>
+    <string name="str_create_wallet_fail">지갑을 생성하지 못했습니다.</string>
+    <string name="str_no_backup">니모닉을 백업하지 않았습니다.</string>
+    <string name="str_set_wallet_address">지갑 계정 이름 설정</string>
+    <string name="str_backup_tip">자금의 안전을 보장하기 위해 지갑 니모닉을 올바르게 백업하십시오.
+프로그램 또는 지갑을 삭제 한 후 니모닉을 가져 와서 지갑을 복원해야합니다.</string>
+    <string name="str_go_activate">활성화</string>
+    <string name="str_activate_succeed">성공적으로 활성화되었습니다.</string>
+    <string name="str_activate_fail">활성화 실패</string>
 
     <string name="str_aleft">👈</string>
     <string name="str_right">👉</string>

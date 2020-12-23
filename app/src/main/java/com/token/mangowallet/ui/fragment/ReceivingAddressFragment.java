@@ -91,15 +91,15 @@ public class ReceivingAddressFragment extends BaseFragment {
     @Override
     protected void initView() {
         topBar.setTitle(R.string.address_title_manage);
-        topBar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        topBar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 popBackStack();
             }
         });
-        topBar.addRightImageButton(R.mipmap.ic_add_black, R.id.topbar_right_change_button).setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        topBar.addRightImageButton(R.mipmap.ic_add_black, R.id.topbar_right_change_button).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 toAddAddress();
             }
         });

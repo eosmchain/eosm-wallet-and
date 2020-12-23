@@ -39,9 +39,9 @@ public class LifeAdapter extends BaseQuickAdapter<AppStoreLifeBean.DataBean, Bas
         AppCompatTextView storeAddressTv = baseViewHolder.getView(R.id.storeAddressTv);
         AppCompatTextView doBusinessTv = baseViewHolder.getView(R.id.doBusinessTv);
         QMUIRoundButton paymentBtn = baseViewHolder.getView(R.id.paymentBtn);
-        paymentBtn.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        paymentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 if (listener != null) {
                     listener.onGoPayment(dataBean);
                 }

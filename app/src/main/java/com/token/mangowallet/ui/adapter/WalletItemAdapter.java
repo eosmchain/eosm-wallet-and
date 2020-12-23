@@ -63,9 +63,9 @@ public class WalletItemAdapter extends BaseQuickAdapter<MangoWallet, BaseViewHol
                 break;
         }
 
-        moreIv.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        moreIv.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 if (listener != null) {
                     listener.onToWalletMore(wallet);
                 }

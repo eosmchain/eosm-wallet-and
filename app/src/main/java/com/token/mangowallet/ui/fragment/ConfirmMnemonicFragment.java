@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat;
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.BusUtils;
 import com.blankj.utilcode.util.ClickUtils;
+import com.blankj.utilcode.util.CollectionUtils;
 import com.blankj.utilcode.util.ColorUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
@@ -211,11 +212,11 @@ public class ConfirmMnemonicFragment extends BaseFragment {
         if (wallet == null) {
             return;
         }
-        wallet.setIsBackup(true);
+
         if (isCreate) {
             WalletDaoUtils.insertNewWallet(wallet);
         } else {
-            WalletDaoUtils.mangoWalletDao.update(wallet);
+            updateWallet();
         }
 
         if (isCreate) {
@@ -227,6 +228,18 @@ public class ConfirmMnemonicFragment extends BaseFragment {
         }
         WalletDaoUtils.updateCurrent(wallet);
         BusUtils.post(BUS_TO_WALLET, new ToWallet(wallet, BUS_CUT_WALLET));
+    }
+
+
+    private void updateWallet() {
+        List<MangoWallet> allWalletList = WalletDaoUtils.loadAll();
+        for (MangoWallet wallet : allWalletList) {
+            List<String> mnemonicCodeList = wallet.getMnemonicCode();
+            if (CollectionUtils.isEqualCollection(originList, mnemonicCodeList)) {
+                wallet.setIsBackup(true);
+                WalletDaoUtils.mangoWalletDao.update(wallet);
+            }
+        }
     }
 
     /**

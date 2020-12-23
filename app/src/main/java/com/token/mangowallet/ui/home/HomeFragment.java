@@ -411,16 +411,24 @@ public class HomeFragment extends BaseFragment {
         }
     }
 
+    public void verifyWallet() {
+        if (tokensViewModel.getVerifyWallet(mangoWallet) != null) {
+            tokensViewModel.getVerifyWallet(mangoWallet).subscribe(this::jumpToVerifyWallet, this::verifyWalletError);
+        }
+    }
+
     private void userLoginSuccess(JsonObject jsonObject) {
 
     }
 
     private void jumpToVerifyWallet(AccountInfo accountInfo) {
         isActivate = true;
+        walletController.updataWalletState();
     }
 
     public void verifyWalletError(Throwable errorInfo) {
         isActivate = false;
+        walletController.updataWalletState();
     }
 
     private void onError(Throwable e) {
@@ -438,9 +446,6 @@ public class HomeFragment extends BaseFragment {
         super.onResume();
         BarUtils.setStatusBarColor(getBaseFragmentActivity(), ContextCompat.getColor(getBaseFragmentActivity(), R.color.qmui_config_color_white));
         tokensViewModel.prepare();
-        if (tokensViewModel.getVerifyWallet(mangoWallet) != null) {
-            tokensViewModel.getVerifyWallet(mangoWallet).subscribe(this::jumpToVerifyWallet, this::verifyWalletError);
-        }
     }
 
     @Override

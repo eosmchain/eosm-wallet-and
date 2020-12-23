@@ -133,9 +133,9 @@ public class MainActivity extends BaseFragmentActivity {
                                             if (Integer.parseInt(versioncode) > AppUtils.getAppVersionCode()) {
                                                 String url = dataBean.getDownload();
                                                 String versiondes = dataBean.getVersionNum();
-                                                updateDialog = DialogHelper.showUpdateDialog(MainActivity.this, dataBean, new ClickUtils.OnDebouncingClickListener() {
+                                                updateDialog = DialogHelper.showUpdateDialog(MainActivity.this, dataBean, new View.OnClickListener() {
                                                     @Override
-                                                    public void onDebouncingClick(View v) {
+                                                    public void onClick(View v) {
                                                         if (updateDialog != null) {
                                                             updateDialog.dismiss();
                                                         }
@@ -228,9 +228,9 @@ public class MainActivity extends BaseFragmentActivity {
         commodityPriceTv.setText(BalanceUtils.currencyToBase(ObjectUtils.isEmpty(proBean.getPrice()) ? "0" : proBean.getPrice(),
                 2, RoundingMode.FLOOR));
 
-        viewDetailsBtn.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
+        viewDetailsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDebouncingClick(View v) {
+            public void onClick(View v) {
                 qmuiPopups.dismiss();
                 MangoWallet wallet = WalletDaoUtils.getCurrentWallet();
                 Bundle bundle = new Bundle();

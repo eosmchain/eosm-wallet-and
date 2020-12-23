@@ -723,6 +723,19 @@
     <string name="str_candidate_node">Candidate node</string>
     <string name="str_hypothecation">Pledge</string>
     <string name="str_award_get_success">Successful reward</string>
+    <string name="str_account_hint">a-z and 1-5 combination of 12 characters</string>
+    <string name="str_create_import_account">Create/import account</string>
+    <string name="str_please_enter_account">Please input Username</string>
+    <string name="str_account_available">Account available</string>
+    <string name="str_skip">jump over</string>
+    <string name="str_create_wallet_fail">Failed to create wallet</string>
+    <string name="str_no_backup">You have not backed up the mnemonic</string>
+    <string name="str_set_wallet_address">Set your wallet account name</string>
+    <string name="str_backup_tip">Properly back up the wallet mnemonic to ensure the safety of funds.
+After deleting the program or wallet, you need to restore the wallet by importing mnemonics.</string>
+    <string name="str_go_activate">Activation</string>
+    <string name="str_activate_succeed">Activated successfully</string>
+    <string name="str_activate_fail">Activation fails</string>
 
     <string name="str_aleft">👈</string>
     <string name="str_right">👉</string>
