@@ -17,5 +17,7 @@ release
 androidTest
 test
 .idea
-/app/src/main/java/com/token/mangowallet/utils/NRSAUtils.java
-/app/src/main/java/com/token/mangowallet/utils/RSAUtils.java
+#/app/src/main/java/com/token/mangowallet/utils/NRSAUtils.java
+#/app/src/main/java/com/token/mangowallet/utils/RSAUtils.java
+
+/app/src/main/res/values/private.xml
