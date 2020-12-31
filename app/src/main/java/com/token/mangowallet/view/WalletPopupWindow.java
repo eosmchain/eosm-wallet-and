@@ -77,6 +77,7 @@ public class WalletPopupWindow extends BasePopup {
     private OnAddWalletClickListener listener;
     private List<MangoWallet> allWalletList;
     private List<MangoWallet> filterWalletList = CollectionUtils.newArrayList();
+    private Constants.WalletType mCurWalletType = ALL;
 
     public WalletPopupWindow(Activity activity) {
         super(activity);
@@ -106,9 +107,9 @@ public class WalletPopupWindow extends BasePopup {
         walletTypeList = CollectionUtils.newArrayList();
         walletTypeList.add(ALL);
         walletTypeList.add(MGP);
-        walletTypeList.add(ETH);
+//        walletTypeList.add(ETH);
 //        walletTypeList.add(BTC);
-//        walletTypeList.add(EOS);
+        walletTypeList.add(EOS);
     }
 
     @Override
@@ -154,40 +155,26 @@ public class WalletPopupWindow extends BasePopup {
         walletTypeAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-                Constants.WalletType walletType = walletTypeList.get(position);
+                mCurWalletType = walletTypeList.get(position);
                 if (listener != null) {
-                    listener.onSelectWalletType(walletType);
+                    listener.onSelectWalletType(mCurWalletType);
                 }
                 setItemChecked(position);
-
-                filterWalletList.clear();
-                if (walletType == ALL) {
-                    addWalletIv.setVisibility(View.GONE);
-                    filterWalletList.addAll(allWalletList);
-                } else {
-                    addWalletIv.setVisibility(View.VISIBLE);
-                    for (int i = 0, size = allWalletList.size(); i < size; i++) {
-                        MangoWallet wallet = allWalletList.get(i);
-                        if (Constants.WalletType.getPagerFromPositon(wallet.getWalletType()) == walletType) {
-                            filterWalletList.add(wallet);
-                        }
-                    }
-                }
-
+                filterWallet();
                 int title;
-                if (walletType == MGP) {
+                if (mCurWalletType == MGP) {
                     title = R.string.str_mgptoken;
-                } else if (walletType == ETH) {
+                } else if (mCurWalletType == ETH) {
                     title = R.string.str_ethereum;
-                } else if (walletType == BTC) {
+                } else if (mCurWalletType == BTC) {
                     title = R.string.str_bitcoin;
-                } else if (walletType == EOS) {
+                } else if (mCurWalletType == EOS) {
                     title = R.string.str_eosio;
                 } else {
                     title = R.string.str_identity_wallet;
                 }
                 titleTv.setText(title);
-                walletItemAdapter.setNewData(filterWalletList);
+//                walletItemAdapter.setNewData(filterWalletList);
                 walletItemAdapter.notifyDataSetChanged();
             }
         });
@@ -198,6 +185,23 @@ public class WalletPopupWindow extends BasePopup {
                 dismiss();
             }
         });
+    }
+
+
+    private void filterWallet() {
+        filterWalletList.clear();
+        if (mCurWalletType == ALL) {
+            addWalletIv.setVisibility(View.GONE);
+            filterWalletList.addAll(allWalletList);
+        } else {
+            addWalletIv.setVisibility(View.VISIBLE);
+            for (int i = 0, size = allWalletList.size(); i < size; i++) {
+                MangoWallet wallet = allWalletList.get(i);
+                if (Constants.WalletType.getPagerFromPositon(wallet.getWalletType()) == mCurWalletType) {
+                    filterWalletList.add(wallet);
+                }
+            }
+        }
     }
 
     /**
@@ -224,6 +228,7 @@ public class WalletPopupWindow extends BasePopup {
 
     public void showPop(View playview) {
         allWalletList = WalletDaoUtils.loadAll();
+        filterWallet();
         this.showAtLocation(playview, Gravity.BOTTOM, 0, 0);
         walletItemAdapter.notifyDataSetChanged();
     }

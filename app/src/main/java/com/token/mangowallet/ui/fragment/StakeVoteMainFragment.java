@@ -61,6 +61,7 @@ import com.token.mangowallet.net.common.BaseUrlUtils;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.ui.adapter.StakeVotesMainAdapter;
+import com.token.mangowallet.utils.APPUtils;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.Md5Utils;
 import com.token.mangowallet.utils.NRSAUtils;
@@ -83,6 +84,7 @@ import one.block.eosiojava.models.rpcProvider.response.GetInfoResponse;
 import static com.token.mangowallet.utils.Constants.CANCEL_NODE;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
+import static com.token.mangowallet.utils.Constants.MGP_SYMBOL;
 import static com.token.mangowallet.utils.Constants.USDT_SYMBOL;
 import static com.token.mangowallet.utils.Constants.WITHDRAW_VOTE;
 
@@ -193,7 +195,7 @@ public class StakeVoteMainFragment extends BaseFragment {
         voteNumBtn = mMainHeaderView.findViewById(R.id.voteNumBtn);
         rateBtn = mMainHeaderView.findViewById(R.id.rateBtn);
         progressBar.setMax(100);
-        progressTv.setText(String.format(getString(R.string.str_vote_progress), "0"));
+        progressTv.setText(String.format(getString(R.string.str_vote_progress), "0 MGP"));
 
         mSubHeaderView = LayoutInflater.from(getActivity()).inflate(R.layout.view_manage_header, null, false);
         unpaidValueTv = mSubHeaderView.findViewById(R.id.unpaidValueTv);
@@ -212,6 +214,7 @@ public class StakeVoteMainFragment extends BaseFragment {
         getTableRowsGlobal();//配置表
         getDIGICCYPrice();
         getInfo();
+        getVoteContractBalance();
     }
 
     private void updateUI() {
@@ -461,6 +464,22 @@ public class StakeVoteMainFragment extends BaseFragment {
             voteNumBtn.setTextColor(ContextCompat.getColor(getActivity(), R.color.app_color_common_dark_black));
             rateBtn.setTextColor(ContextCompat.getColor(getActivity(), R.color.white));
         }
+    }
+
+    /**
+     * 投票配置表 比如：过多长时间才能撤回自己参加的投票（refund_delay_sec）；发布节点最小支付数额（min_bp_list_quantity）
+     */
+    private void getVoteContractBalance() {
+        try {
+            showTipDialog(getString(R.string.str_loading));
+            emWalletRepository.fetchBalance(mVoteContract, walletType).subscribe(this::voteContractBalanceSuccess, this::onError);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void voteContractBalanceSuccess(BigDecimal bigDecimal) {
+        progressTv.setText(String.format(getString(R.string.str_vote_progress), ObjectUtils.isEmpty(mGlobalRowsBean.getTotal_voted()) ? "0 MGP" : APPUtils.dataFormat(bigDecimal.toPlainString()) + " " + MGP_SYMBOL));
     }
 
     /**
@@ -774,7 +793,6 @@ public class StakeVoteMainFragment extends BaseFragment {
             if (ObjectUtils.isNotEmpty(globalBean.getRows())) {
                 mGlobalRowsBean = globalBean.getRows().get(0);
                 if (mGlobalRowsBean != null) {
-                    progressTv.setText(String.format(getString(R.string.str_vote_progress), ObjectUtils.isEmpty(mGlobalRowsBean.getTotal_voted()) ? "0" : mGlobalRowsBean.getTotal_voted()));
                     votesMainAdapter.setRefundDelaySec(mGlobalRowsBean.getRefund_delay_sec());
                     votesMainAdapter.notifyDataSetChanged();
                 }
@@ -874,7 +892,7 @@ public class StakeVoteMainFragment extends BaseFragment {
         } else {
             ToastUtils.showLong(data.getMsg());
         }
-        biNumTv.setText(bdMGPprice.toPlainString() + " " + USDT_SYMBOL);
+        biNumTv.setText(APPUtils.dataFormat(bdMGPprice.toPlainString()) + " " + USDT_SYMBOL);
     }
 
     private void infoSuccess(GetInfoResponse infoResponse) {

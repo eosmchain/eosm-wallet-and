@@ -1,6 +1,5 @@
 package com.token.mangowallet.ui.fragment;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -14,10 +13,8 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.ClickUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.MapUtils;
@@ -36,9 +33,7 @@ import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
-import com.token.mangowallet.bean.CountryBean;
 import com.token.mangowallet.bean.CurrencyPrice;
-import com.token.mangowallet.bean.GoodsTypeBean;
 import com.token.mangowallet.bean.OrderSysBean;
 import com.token.mangowallet.bean.TransactionBean;
 import com.token.mangowallet.db.MangoWallet;
@@ -65,14 +60,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 import static com.token.mangowallet.ui.fragment.OperatingStepsFragment.FIRST_MIX_MORTGAGE_TYPE;
-import static com.token.mangowallet.ui.fragment.OperatingStepsFragment.TWICE_MIX_MORTGAGE_TYPE;
 import static com.token.mangowallet.utils.Constants.EOSIO_TOKEN_CONTRACT_CODE;
-import static com.token.mangowallet.utils.Constants.EXTRA_IS_FIRST;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
 import static com.token.mangowallet.utils.Constants.HMIO_SYMBOL;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
 import static com.token.mangowallet.utils.Constants.TRANSFER_ACTION;
-import static com.token.mangowallet.utils.Constants.percent;
 
 public class MiningMortgageFragment extends BaseFragment {
 
@@ -130,7 +122,7 @@ public class MiningMortgageFragment extends BaseFragment {
     private boolean isMortgage;
     private QMUIBottomSheet bottomSheet;
     private String numHMIO;
-    private BigDecimal mHmioDuty = BigDecimal.ZERO;
+    private BigDecimal mHmioDuty = BigDecimal.ZERO;//混合比例
     private BigDecimal bdQuantity;
     private BigDecimal bdNumHMIO = BigDecimal.ZERO;
     private BigDecimal bdMgpValue = BigDecimal.ZERO;
@@ -167,7 +159,6 @@ public class MiningMortgageFragment extends BaseFragment {
         mortgageViewModel.getTicker();
 //        presenter.requestCurrencyBalance(Params.getBalancePamars(accountName, EOSIO_TOKEN_CONTRACT_CODE, MGP_SYMBOL));
 //        presenter.requestPortData(Constants.PRICE_MGP, PRICE);
-        orderSys();
     }
 
     @Override
@@ -287,17 +278,15 @@ public class MiningMortgageFragment extends BaseFragment {
 
     @OnClick(R.id.nextstepBtn)
     public void onViewClicked() {
-        String quantity = quantityEt.getText().toString();
-        if (ObjectUtils.isEmpty(quantity)) {
+        if (ObjectUtils.isEmpty(quantityEt.getText())) {
             ToastUtils.showLong(R.string.str_cannot_empty);
             return;
         }
+        String quantity = quantityEt.getText().toString();
         // 如果指定的数与参数相等返回0。
         // 如果指定的数小于参数返回 -1。
         // 如果指定的数大于参数返回  1。
         bdQuantity = new BigDecimal(quantity.trim());
-        bdNumHMIO = bdQuantity.multiply(mHmioDuty);
-        numHMIO = bdNumHMIO.toPlainString();
 //        if (isMortgage && bdMGPValue.compareTo(new BigDecimal(100)) < 0) {
 //            ToastUtils.showLong(R.string.str_cant_less_than_100);
 //            return;
@@ -395,17 +384,8 @@ public class MiningMortgageFragment extends BaseFragment {
                                 }
                                 qmuiDialog.show();
                             } else if (position == 1) {
-                                bdMgpValue = bdQuantity.subtract(bdNumHMIO);
-//                                if (isMortgage && bdMgpValue.compareTo(balance) > 0) {
-//                                    ToastUtils.showLong(R.string.str_cannot_greater_balance);
-//                                    return;
-//                                }
-                                Bundle bundle = new Bundle();
-                                bundle.putParcelable(EXTRA_WALLET, mangoWallet);
-                                bundle.putInt("type", FIRST_MIX_MORTGAGE_TYPE);
-                                bundle.putString("num", numHMIO);
-                                bundle.putString("SYMBOL", HMIO_SYMBOL);
-                                startFragment("OperatingStepsFragment", bundle);
+                                orderSys();
+//                                toOperatingStepsFragment();
                             }
                         }
                     });
@@ -418,10 +398,26 @@ public class MiningMortgageFragment extends BaseFragment {
         }
     }
 
+    private void toOperatingStepsFragment() {
+        bdNumHMIO = bdQuantity.multiply(mHmioDuty);
+        numHMIO = bdNumHMIO.toPlainString();
+        bdMgpValue = bdQuantity.subtract(bdNumHMIO);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(EXTRA_WALLET, mangoWallet);
+        bundle.putInt("type", FIRST_MIX_MORTGAGE_TYPE);
+        bundle.putString("num", numHMIO);
+        bundle.putString("SYMBOL", HMIO_SYMBOL);
+        startFragment("OperatingStepsFragment", bundle);
+    }
+
     private void orderSys() {
         showTipDialog(getString(R.string.str_loading));
         try {
-            NetWorkManager.getRequest().orderSys()
+            Map params = MapUtils.newHashMap();
+            params.put("num", quantityEt.getText().toString());
+            String json = GsonUtils.toJson(params);
+            String content = NRSAUtils.encrypt(json);
+            NetWorkManager.getRequest().orderSys(content)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::orderSysSuccess, this::onError);
@@ -437,6 +433,7 @@ public class MiningMortgageFragment extends BaseFragment {
             if (orderSysBean.getCode() == 0) {
                 if (ObjectUtils.isNotEmpty(orderSysBean.getData())) {
                     mHmioDuty = orderSysBean.getData().getHmio_pro();
+                    toOperatingStepsFragment();
                 }
             } else {
                 ToastUtils.showLong(orderSysBean.getMsg());

@@ -1287,18 +1287,12 @@ public interface RequestApi {
     Observable<JsonObject> participateUpdate(@Header("content") String content);
 
     /**
-     * 混合抵押比例
-     * voteId  外层voteId
-     * address
-     * voteTitle   主题
-     * voteContent  主题描述
-     * schemeContent  方案
-     *
+     *num 追加的币数
      * @Header("content:") String content
      */
     @Headers("urlname:" + Constants.CORPORATION_URL)
-    @POST("/api/userOrder/blend/orderSys")
-    Observable<JsonObject> orderSys();
+    @POST("/api/userOrder/blend/blendOrderRatioByDollar")
+    Observable<JsonObject> orderSys(@Header("content") String content);
 
     /**
      * 获取投递方案需要的押金

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/accountNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_20"
+        android:text="sssss"
+        android:textColor="@color/app_color_common_deputy"
+        android:textSize="@dimen/small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/priceTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="5dp"
+        android:text="¥0.72"
+        android:textSize="@dimen/big_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/accountNameTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/unitTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="/MGP"
+        android:textColor="@color/app_color_common_deputy"
+        android:textSize="@dimen/small"
+        app:layout_constraintBaseline_toBaselineOf="@id/priceTv"
+        app:layout_constraintStart_toEndOf="@id/priceTv"
+        app:layout_constraintTop_toBottomOf="@id/accountNameTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/quantityTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="5dp"
+        android:text="@string/str_quantity"
+        android:textColor="@color/app_color_common_deputy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/priceTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/quantityValueTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="5dp"
+        android:text="22552.5214 MGP"
+        android:textColor="@color/app_color_common_dark_black"
+        android:textSize="@dimen/small"
+        app:layout_constraintStart_toEndOf="@id/quantityTv"
+        app:layout_constraintTop_toBottomOf="@id/priceTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/quotaTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginBottom="@dimen/album_dp_20"
+        android:text="@string/str_quota"
+        android:textColor="@color/app_color_common_deputy"
+        android:textSize="@dimen/small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/quantityTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/quotaValueTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginBottom="@dimen/album_dp_20"
+        android:text="¥0.72 - ¥0.72"
+        android:textColor="@color/app_color_common_dark_black"
+        android:textSize="@dimen/small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/quantityTv"
+        app:layout_constraintTop_toBottomOf="@id/quantityValueTv" />
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/purchaseBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/album_dp_20"
+        android:layout_marginBottom="@dimen/album_dp_20"
+        android:paddingLeft="@dimen/album_dp_30"
+        android:paddingTop="5dp"
+        android:paddingRight="@dimen/album_dp_30"
+        android:paddingBottom="5dp"
+        android:text="@string/str_purchase"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:qmui_backgroundColor="@color/app_color_blue"
+        app:qmui_borderWidth="@dimen/album_dp_0"
+        app:qmui_radius="5dp" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bankCardIv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/album_dp_10"
+        android:layout_marginBottom="8dp"
+        android:src="@android:drawable/sym_contact_card"
+        app:layout_constraintBottom_toTopOf="@id/purchaseBtn"
+        app:layout_constraintEnd_toStartOf="@id/alipayIv" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/alipayIv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/album_dp_10"
+        android:layout_marginBottom="8dp"
+        android:src="@android:drawable/sym_contact_card"
+        app:layout_constraintBottom_toTopOf="@id/purchaseBtn"
+        app:layout_constraintEnd_toStartOf="@id/wechatIv" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/wechatIv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/album_dp_20"
+        android:layout_marginBottom="8dp"
+        android:src="@android:drawable/sym_contact_card"
+        app:layout_constraintBottom_toTopOf="@id/purchaseBtn"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/mgpPriceTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/item_divider_bg_color"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/str_current_mgp_price"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/unitPriceTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_20"
+        android:layout_marginTop="@dimen/album_dp_30"
+        android:text="@string/str_unit_price"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mgpPriceTv" />
+
+    <include
+        android:id="@+id/subtractorLayout"
+        layout="@layout/view_strength_box"
+        android:layout_width="@dimen/album_dp_100"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_30"
+        android:layout_marginRight="@dimen/album_dp_20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mgpPriceTv" />
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/list_divider_height"
+        android:layout_marginLeft="@dimen/album_dp_20"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_20"
+        android:background="@drawable/qmui_divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/unitPriceTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/quantityTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_20"
+        android:layout_marginTop="@dimen/album_dp_20"
+        android:text="@string/str_quantity"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line1" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/quantityEt"
+        android:layout_width="@dimen/album_dp_0"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_40"
+        android:background="@null"
+        android:gravity="right"
+        android:hint="@string/str_enter_quantity_sale"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintBaseline_toBaselineOf="@id/quantityTv"
+        app:layout_constraintEnd_toStartOf="@id/totalTv"
+        app:layout_constraintStart_toEndOf="@id/quantityTv"
+        app:layout_constraintTop_toBottomOf="@id/line1" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/totalTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_20"
+        android:layout_marginRight="@dimen/album_dp_20"
+        android:gravity="right"
+        android:text=" | 全部"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintBaseline_toBaselineOf="@id/quantityTv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/quantityEt"
+        app:layout_constraintTop_toBottomOf="@id/line1"
+        app:layout_constraintWidth_percent="0.15" />
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/list_divider_height"
+        android:layout_marginLeft="@dimen/album_dp_20"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_20"
+        android:background="@drawable/qmui_divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/quantityTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/balanceTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_10"
+        android:layout_marginRight="@dimen/album_dp_20"
+        android:text="@string/str_balance_value"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line2" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/minSaleAmountTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_20"
+        android:layout_marginTop="@dimen/album_dp_20"
+        android:text="@string/str_min_sale_amount"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/balanceTv" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/minSaleAmountEt"
+        android:layout_width="@dimen/album_dp_0"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_40"
+        android:background="@null"
+        android:gravity="right"
+        android:hint="@string/str_enter_min_sale_amount"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintBaseline_toBaselineOf="@id/minSaleAmountTv"
+        app:layout_constraintEnd_toStartOf="@id/fiatMoneyUnitTv"
+        app:layout_constraintStart_toEndOf="@id/minSaleAmountTv"
+        app:layout_constraintTop_toBottomOf="@id/balanceTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/fiatMoneyUnitTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_20"
+        android:layout_marginRight="@dimen/album_dp_20"
+        android:gravity="right"
+        android:text="CNY"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintBaseline_toBaselineOf="@id/minSaleAmountTv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/minSaleAmountEt"
+        app:layout_constraintTop_toBottomOf="@id/balanceTv"
+        app:layout_constraintWidth_percent="0.15" />
+
+    <View
+        android:id="@+id/line3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/list_divider_height"
+        android:layout_marginLeft="@dimen/album_dp_20"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_20"
+        android:background="@drawable/qmui_divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/minSaleAmountTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/totalMoneyTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_20"
+        android:layout_marginTop="@dimen/album_dp_20"
+        android:text="@string/str_total_money"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line3" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/totalMoneyValueTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_40"
+        android:gravity="right"
+        android:text=""
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintBaseline_toBaselineOf="@id/totalMoneyTv"
+        app:layout_constraintEnd_toStartOf="@id/fiatMoneyUnitTv2"
+        app:layout_constraintStart_toEndOf="@id/totalMoneyTv"
+        app:layout_constraintTop_toBottomOf="@id/line3" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/fiatMoneyUnitTv2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_20"
+        android:layout_marginRight="@dimen/album_dp_20"
+        android:gravity="right"
+        android:text="CNY"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintBaseline_toBaselineOf="@id/totalMoneyTv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/totalMoneyValueTv"
+        app:layout_constraintTop_toBottomOf="@id/line3"
+        app:layout_constraintWidth_percent="0.15" />
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/album_dp_10"
+        android:paddingBottom="@dimen/album_dp_10"
+        android:text="@string/str_release_sale"
+        android:textColor="@color/durban_White"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/totalMoneyTv"
+        app:layout_constraintWidth_percent="0.6"
+        app:qmui_backgroundColor="@color/app_color_dark_blue"
+        app:qmui_borderWidth="@dimen/album_dp_0"
+        app:qmui_radius="5dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

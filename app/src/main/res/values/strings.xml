@@ -736,6 +736,18 @@
     <string name="str_go_activate">激活</string>
     <string name="str_activate_succeed">激活成功</string>
     <string name="str_activate_fail">激活失败</string>
+    <string name="str_order">订单</string>
+    <string name="str_quantity">数量</string>
+    <string name="str_quota">限额</string>
+    <string name="str_purchase">购买</string>
+    <string name="str_current_mgp_price">当前MGP价格 %1$s</string>
+    <string name="str_unit_price">单价</string>
+    <string name="str_enter_quantity_sale">输入出售数量</string>
+    <string name="str_min_sale_amount">最小出售金额</string>
+    <string name="str_enter_min_sale_amount">输入最小出售金额</string>
+    <string name="str_total_money">总金额</string>
+    <string name="str_release_sale">发布委托卖单</string>
+    <string name="str_buy_mgp">购买MGP</string>
 
     <string name="str_aleft">👈</string>
     <string name="str_right">👉</string>

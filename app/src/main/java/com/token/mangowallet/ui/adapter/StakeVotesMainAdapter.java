@@ -154,7 +154,7 @@ public class StakeVotesMainAdapter extends BaseSectionQuickAdapter<NodeSection, 
                 } else {
                     voteBtn.setVisibility(View.INVISIBLE);
                 }
-                mVoteStr = getContext().getString(R.string.str_total_vote);
+
                 mNodeUrl = ObjectUtils.isEmpty(nodeBean.getNode_url()) ? "" : nodeBean.getNode_url();
                 mProfitRatio = ObjectUtils.isEmpty(nodeBean.getShare_ratio()) ? "" : Constants.percent.subtract(nodeBean.getShare_ratio().divide(Constants.percent)) + "%";
             } else if (baseFragment.type == 2) {//2：获取我的节点；

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/durban_dp_70"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/topbar">
+
+        <com.qmuiteam.qmui.widget.tab.QMUITabSegment
+            android:id="@+id/tabSegment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/durban_White"
+            app:layout_constraintEnd_toStartOf="@id/orderBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:qmui_bottomDividerColor="?attr/qmui_skin_support_color_separator"
+            app:qmui_bottomDividerHeight="1px"
+            app:qmui_tab_has_indicator="true"
+            app:qmui_tab_indicator_height="@dimen/album_dp_2"
+            app:qmui_tab_indicator_with_follow_content="true"
+            app:qmui_tab_mode="scrollable"
+            app:qmui_tab_select_no_animation="true" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/orderBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/album_dp_30"
+            android:drawableTop="@mipmap/ic_order"
+            android:drawablePadding="5dp"
+            android:text="@string/str_order"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tabSegment"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <fragment
+        android:id="@+id/nav_host_fragment"
+        android:name="com.token.mangowallet.ui.fragment.mgp_deal.BuyMGPFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout"
+        tools:layout="@layout/fragment_mgp_buy" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
