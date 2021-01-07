@@ -4,6 +4,7 @@ import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
 
+import java.math.BigDecimal;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,7 +17,7 @@ public class CashierInputFilter implements InputFilter {
     Pattern mPattern;
 
     //输入的最大金额
-    private long MAX_VALUE = Long.MAX_VALUE;
+    private BigDecimal MAX_VALUE = BigDecimal.ZERO;
     //小数点后的位数
     private int POINTER_LENGTH = 4;
 
@@ -28,7 +29,7 @@ public class CashierInputFilter implements InputFilter {
         mPattern = Pattern.compile("([0-9]|\\.)*");
     }
 
-    public CashierInputFilter(long max, int pointer) {
+    public CashierInputFilter(BigDecimal max, int pointer) {
         MAX_VALUE = max;
         POINTER_LENGTH = pointer;
         mPattern = Pattern.compile("([0-9]|\\.)*");
@@ -89,8 +90,8 @@ public class CashierInputFilter implements InputFilter {
         }
 
         //验证输入金额的大小
-        double sumText = Double.parseDouble(destText + sourceText);
-        if (sumText > MAX_VALUE) {
+        BigDecimal sumText = new BigDecimal(destText + sourceText);
+        if (sumText.compareTo(MAX_VALUE) > 0) {//-1表示小于，0是等于，1是大于。
             return dest.subSequence(dstart, dend);
         }
 

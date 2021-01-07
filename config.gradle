@@ -4,6 +4,7 @@ ext {
             compileSdkVersion: 29,
             buildToolsVersion: "29.0.3",
             applicationId    : "com.token.mangowallet",
+            testapplicationId    : "com.token.mangowallettest",
             minSdkVersion    : 21,
             targetSdkVersion : 29,
             versionCode      : 61,

@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/durban_White">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/accountNameTv"
@@ -10,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/album_dp_15"
         android:layout_marginTop="@dimen/album_dp_20"
-        android:text="sssss"
+        android:text=""
         android:textColor="@color/app_color_common_deputy"
         android:textSize="@dimen/small"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/album_dp_15"
         android:layout_marginTop="5dp"
-        android:text="¥0.72"
+        android:text=""
+        android:textColor="@color/app_color_orange"
         android:textSize="@dimen/big_medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/accountNameTv" />
@@ -56,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/album_dp_15"
         android:layout_marginTop="5dp"
-        android:text="22552.5214 MGP"
+        android:text="0.0000 MGP"
         android:textColor="@color/app_color_common_dark_black"
         android:textSize="@dimen/small"
         app:layout_constraintStart_toEndOf="@id/quantityTv"
@@ -81,7 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/album_dp_15"
         android:layout_marginBottom="@dimen/album_dp_20"
-        android:text="¥0.72 - ¥0.72"
+        android:text="¥0.00 - ¥0.00"
         android:textColor="@color/app_color_common_dark_black"
         android:textSize="@dimen/small"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -102,7 +104,7 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:qmui_backgroundColor="@color/app_color_blue"
+        app:qmui_backgroundColor="@color/app_color_dark_blue2"
         app:qmui_borderWidth="@dimen/album_dp_0"
         app:qmui_radius="5dp" />
 
@@ -112,7 +114,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/album_dp_10"
         android:layout_marginBottom="8dp"
-        android:src="@android:drawable/sym_contact_card"
+        android:src="@mipmap/ic_bank_card"
         app:layout_constraintBottom_toTopOf="@id/purchaseBtn"
         app:layout_constraintEnd_toStartOf="@id/alipayIv" />
 
@@ -122,7 +124,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/album_dp_10"
         android:layout_marginBottom="8dp"
-        android:src="@android:drawable/sym_contact_card"
+        android:src="@mipmap/ic_alipay"
         app:layout_constraintBottom_toTopOf="@id/purchaseBtn"
         app:layout_constraintEnd_toStartOf="@id/wechatIv" />
 
@@ -132,7 +134,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/album_dp_20"
         android:layout_marginBottom="8dp"
-        android:src="@android:drawable/sym_contact_card"
+        android:src="@mipmap/ic_wechat"
         app:layout_constraintBottom_toTopOf="@id/purchaseBtn"
         app:layout_constraintEnd_toEndOf="parent" />
 

@@ -26,13 +26,12 @@ import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
-import com.token.mangowallet.bean.GlobalBean;
 import com.token.mangowallet.bean.VoteListBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.ui.adapter.StakeVotesListAdapter;
 import com.token.mangowallet.utils.Constants;
-import com.token.mangowallet.view.DragFloatActionButton;
+import com.token.mangowallet.view.DragFloatActionButton2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +54,7 @@ public class StakeVoteListFragment extends BaseFragment {
     @BindView(R.id.tabs)
     QMUITabSegment tabs;
     @BindView(R.id.layout_for_shadow)
-    DragFloatActionButton sendFloating;
+    DragFloatActionButton2 sendFloating;
     @BindView(R.id.becomeNodeTv)
     QMUIRoundButton becomeNodeTv;
 

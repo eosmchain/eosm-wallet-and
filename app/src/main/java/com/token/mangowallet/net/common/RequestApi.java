@@ -1287,7 +1287,8 @@ public interface RequestApi {
     Observable<JsonObject> participateUpdate(@Header("content") String content);
 
     /**
-     *num 追加的币数
+     * num 追加的币数
+     *
      * @Header("content:") String content
      */
     @Headers("urlname:" + Constants.CORPORATION_URL)
@@ -1422,4 +1423,16 @@ public interface RequestApi {
     @Headers("urlname:" + Constants.CORPORATION_URL)
     @POST("/user/userRegister")
     Observable<JsonObject> userRegister(@Header("content") String content);
+
+    /**
+     * 账号自动激活
+     * mgpName mgp账户
+     * type :买家=0，卖家=1；
+     *
+     * @Header("content:") String content
+     */
+    @Headers("urlname:" + Constants.VOTEURL)
+    @POST("/otcapi/api/moUsers/isBind")
+    Observable<JsonObject> isBind(@Header("content") String content);
+
 }

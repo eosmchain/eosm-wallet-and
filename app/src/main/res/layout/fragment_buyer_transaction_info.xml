@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/durban_White">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/buyerStatusTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:text="@string/str_pay_seller"
+        android:textSize="@dimen/small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topbar" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/buyerStatusValTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_10"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:text="￥1,000.00"
+        android:textSize="@dimen/big_medium"
+        android:textColor="@color/app_color_orange"
+        app:layout_constraintBaseline_toBaselineOf="@id/buyerStatusTv"
+        app:layout_constraintStart_toEndOf="@id/buyerStatusTv"
+        app:layout_constraintTop_toBottomOf="@id/topbar" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/paymentTimeRemainingTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_10"
+        android:text="@string/str_payment_time_remaining"
+        android:textSize="@dimen/small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buyerStatusValTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/paymentTimeRemainingValTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_10"
+        android:text=""
+        android:textSize="@dimen/small"
+        android:textColor="@color/app_color_common_dark_black"
+        app:layout_constraintStart_toEndOf="@id/paymentTimeRemainingTv"
+        app:layout_constraintTop_toBottomOf="@id/buyerStatusValTv" />
+
+    <com.qmuiteam.qmui.widget.tab.QMUITabSegment
+        android:id="@+id/tabSegment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/album_dp_45"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="@dimen/album_dp_15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/paymentTimeRemainingTv"
+        app:qmui_bottomDividerColor="?attr/qmui_skin_support_color_separator"
+        app:qmui_bottomDividerHeight="1px"
+        app:qmui_tab_has_indicator="true"
+        app:qmui_tab_indicator_height="@dimen/album_dp_2"
+        app:qmui_tab_indicator_with_follow_content="true"
+        app:qmui_tab_mode="scrollable"
+        app:qmui_tab_select_no_animation="true" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/album_dp_0"
+        app:layout_constraintBottom_toTopOf="@id/btnLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabSegment">
+
+        <com.qmuiteam.qmui.layout.QMUIConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <fragment
+                android:id="@+id/paymentInfoFragment"
+                android:name="com.token.mangowallet.ui.fragment.mgp_deal.PaymentInfoFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_10"
+                android:layout_marginTop="@dimen/album_dp_10"
+                android:layout_marginRight="@dimen/album_dp_10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout="@layout/view_payment_info" />
+
+            <fragment
+                android:id="@+id/dealContactFragment"
+                android:name="com.token.mangowallet.ui.fragment.mgp_deal.ContactMethodFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_10"
+                android:layout_marginTop="@dimen/album_dp_10"
+                android:layout_marginRight="@dimen/album_dp_10"
+                app:layout_constraintTop_toBottomOf="@id/paymentInfoFragment"
+                tools:layout="@layout/view_deal_contact" />
+
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="@dimen/album_dp_10"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/qmui_divider"
+                app:layout_constraintTop_toBottomOf="@id/dealContactFragment" />
+
+            <fragment
+                android:id="@+id/transactionDetailFragment"
+                android:name="com.token.mangowallet.ui.fragment.mgp_deal.TransactionDetailFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_10"
+                android:layout_marginTop="@dimen/album_dp_10"
+                android:layout_marginRight="@dimen/album_dp_10"
+                app:layout_constraintTop_toBottomOf="@id/line1"
+                tools:layout="@layout/view_transaction_detail" />
+
+            <View
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="@dimen/album_dp_10"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/qmui_divider"
+                app:layout_constraintTop_toBottomOf="@id/transactionDetailFragment" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/serviceTipTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:text="@string/str_service_tip"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line2" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/serviceWechatNumberTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:layout_marginBottom="@dimen/album_dp_45"
+                android:text="@string/str_wechat_number"
+                android:textColor="@color/app_color_common_deputy"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/serviceTipTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/serviceWechatNumberValTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/album_dp_15"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="@dimen/album_dp_45"
+                android:drawableRight="@mipmap/copy_icon"
+                android:drawablePadding="5dp"
+                android:text=""
+                android:textColor="@color/app_color_common_dark_black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/serviceTipTv" />
+        </com.qmuiteam.qmui.layout.QMUIConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btnLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_120"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollView">
+
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/cancelOrderBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="@dimen/album_dp_15"
+            android:paddingLeft="25dp"
+            android:paddingTop="@dimen/album_dp_15"
+            android:paddingRight="25dp"
+            android:paddingBottom="@dimen/album_dp_15"
+            android:text="@string/str_cancel_order"
+            android:textColor="@color/app_color_red"
+            android:textSize="@dimen/big_small"
+            app:layout_constraintEnd_toStartOf="@id/paidPutCoinBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:qmui_borderColor="@color/qmui_config_color_gray_9"
+            app:qmui_radius="8dp" />
+
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/paidPutCoinBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="@dimen/album_dp_15"
+            android:paddingLeft="15dp"
+            android:paddingTop="@dimen/album_dp_15"
+            android:paddingRight="15dp"
+            android:paddingBottom="@dimen/album_dp_15"
+            android:text="@string/str_paid_put_coin"
+            android:textColor="@color/durban_White"
+            android:textSize="@dimen/big_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cancelOrderBtn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:qmui_backgroundColor="@color/blueColor"
+            app:qmui_borderWidth="@dimen/album_dp_0"
+            app:qmui_radius="8dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

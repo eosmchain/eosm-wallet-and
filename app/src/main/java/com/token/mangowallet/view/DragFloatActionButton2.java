@@ -9,8 +9,6 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.animation.DecelerateInterpolator;
 
-import androidx.appcompat.widget.AppCompatImageView;
-
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
 
@@ -21,7 +19,7 @@ import com.qmuiteam.qmui.widget.QMUIRadiusImageView2;
  * Time: 2019/2/23 9:34
  * Desc: TODO
  */
-public class DragFloatActionButton extends QMUIRadiusImageView {
+public class DragFloatActionButton2 extends QMUIRadiusImageView2 {
 
     private int parentHeight;
     private int parentWidth;
@@ -34,15 +32,15 @@ public class DragFloatActionButton extends QMUIRadiusImageView {
     private ViewGroup parent;
     private OnClickListener onClickListener;
 
-    public DragFloatActionButton(Context context) {
+    public DragFloatActionButton2(Context context) {
         super(context);
     }
 
-    public DragFloatActionButton(Context context, AttributeSet attrs) {
+    public DragFloatActionButton2(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public DragFloatActionButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public DragFloatActionButton2(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

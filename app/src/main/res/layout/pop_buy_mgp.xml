@@ -1,33 +1,235 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.qmuiteam.qmui.layout.QMUIConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/content"
     android:background="@color/durban_White">
 
+    <!--    <androidx.appcompat.widget.AppCompatImageView-->
+    <!--        android:id="@+id/pullDownIv"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center_horizontal"-->
+    <!--        android:layout_marginTop="30dp"-->
+    <!--        android:src="@mipmap/ic_pull_down"-->
+    <!--        android:visibility="gone"-->
+    <!--        app:layout_constraintBottom_toTopOf="@id/content"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent" />-->
+
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--        android:id="@+id/content"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="@dimen/album_dp_0"-->
+    <!--        android:background="@color/durban_White"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintHeight_percent="0.6">-->
+    <com.qmuiteam.qmui.layout.QMUIConstraintLayout
+        android:id="@id/titleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F7F6FB"
+        app:layout_constraintBottom_toTopOf="@id/tabSegment"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/titleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/album_dp_20"
+            android:layout_marginTop="@dimen/album_dp_20"
+            android:text="@string/str_buy_mgp"
+            android:textColor="@color/app_color_common_dark_black"
+            android:textSize="@dimen/big_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/priceTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/album_dp_20"
+            android:layout_marginTop="5dp"
+            android:text="@string/str_unit_price"
+            android:textColor="@color/app_color_common_black"
+            android:textSize="@dimen/small"
+            android:layout_marginBottom="@dimen/album_dp_15"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleTv" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/priceValTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/album_dp_10"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/app_color_orange"
+            android:textSize="@dimen/small"
+            app:layout_constraintStart_toEndOf="@id/priceTv"
+            app:layout_constraintTop_toBottomOf="@id/titleTv" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/mgpIv"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="@dimen/album_dp_30"
+            android:src="@mipmap/ic_mgp_oval"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </com.qmuiteam.qmui.layout.QMUIConstraintLayout>
+
+    <com.qmuiteam.qmui.widget.tab.QMUITabSegment
+        android:id="@+id/tabSegment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/home_tab_height"
+        android:layout_marginLeft="@dimen/album_dp_20"
+        android:background="@color/durban_White"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleLayout"
+        app:qmui_bottomDividerColor="?attr/qmui_skin_support_color_separator"
+        app:qmui_bottomDividerHeight="1px"
+        app:qmui_tab_has_indicator="true"
+        app:qmui_tab_indicator_height="@dimen/album_dp_2"
+        app:qmui_tab_indicator_with_follow_content="true"
+        app:qmui_tab_mode="scrollable"
+        app:qmui_tab_select_no_animation="true" />
+
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/titleTv"
+        android:id="@+id/quotaTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_20"
+        android:layout_marginTop="@dimen/album_dp_10"
+        android:text="@string/str_quota"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabSegment" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/editLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/home_tab_height"
+        android:layout_marginLeft="@dimen/album_dp_20"
+        android:layout_marginTop="@dimen/album_dp_10"
+        android:layout_marginRight="@dimen/album_dp_20"
+        android:background="@drawable/sideline_radius_8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/quotaTv">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/editText"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:padding="@dimen/album_dp_10"
+            android:inputType="numberDecimal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/unitTv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/unitTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/album_dp_15"
+            android:text="CNY"
+            android:textColor="@color/app_color_common_deputy"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/line1"
+            app:layout_constraintStart_toEndOf="@id/editText"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/album_dp_15"
+            android:layout_marginTop="@dimen/album_dp_10"
+            android:layout_marginBottom="@dimen/album_dp_10"
+            android:background="@color/app_color_common_deputy"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/allBuyTv"
+            app:layout_constraintStart_toEndOf="@id/unitTv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/allBuyTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/album_dp_15"
+            android:layout_marginRight="@dimen/album_dp_15"
+            android:text="@string/str_all_buy"
+            android:textColor="@color/app_color_orange"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/line1"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/numberTransactionTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/album_dp_20"
         android:layout_marginTop="@dimen/album_dp_20"
-        android:text="@string/str_buy_mgp"
-        android:textColor="@color/app_color_common_dark_black"
-        android:textSize="@dimen/big_medium"
+        android:text="@string/str_number_transaction"
+        android:textColor="@color/app_color_common_deputy"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/editLayout" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/priceTv"
+        android:id="@+id/numberTransactionValTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_20"
+        android:layout_marginRight="@dimen/album_dp_20"
+        android:text="0.0000 MGP"
+        android:textColor="@color/app_color_common_dark_black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editLayout" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/disbursementsTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/album_dp_20"
-        android:layout_marginTop="5dp"
-        android:text="@string/str_unit_price"
-        android:textColor="@color/app_color_common_black"
-        android:textSize="@dimen/small"
+        android:layout_marginTop="@dimen/album_dp_10"
+        android:text="@string/str_disbursements"
+        android:textColor="@color/app_color_common_deputy"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleTv" />
+        app:layout_constraintTop_toBottomOf="@id/numberTransactionTv" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/disbursementsValTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_10"
+        android:layout_marginRight="@dimen/album_dp_20"
+        android:text="￥0.00"
+        android:textColor="@color/app_color_orange"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/numberTransactionValTv" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/ordersBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/album_dp_45"
+        android:layout_marginLeft="@dimen/album_dp_20"
+        android:layout_marginTop="@dimen/album_dp_45"
+        android:layout_marginRight="@dimen/album_dp_20"
+        android:layout_marginBottom="@dimen/album_dp_45"
+        android:text="@string/str_orders"
+        android:textColor="@color/durban_White"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/disbursementsTv"
+        app:qmui_backgroundColor="@color/app_color_dark_blue2"
+        app:qmui_borderWidth="@dimen/album_dp_0"
+        app:qmui_radius="8dp" />
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+</com.qmuiteam.qmui.layout.QMUIConstraintLayout>

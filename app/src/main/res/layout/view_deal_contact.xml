@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/album_dp_10"
+    android:layout_marginTop="@dimen/album_dp_10"
+    android:layout_marginRight="@dimen/album_dp_10"
+    android:paddingBottom="@dimen/album_dp_15">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/contactTilteTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:text="@string/str_seller_contact"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/mgpAccountTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:text="@string/str_mgp_account"
+        app:layout_constraintEnd_toStartOf="@id/mgpAccountValTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contactTilteTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/mgpAccountValTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:drawableRight="@mipmap/copy_icon"
+        android:drawablePadding="5dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/mgpAccountTv"
+        app:layout_constraintTop_toBottomOf="@id/contactTilteTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/emailAddressTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:text="@string/str_email_address"
+        app:layout_constraintEnd_toStartOf="@id/emailAddressValTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mgpAccountTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/emailAddressValTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:drawableRight="@mipmap/copy_icon"
+        android:drawablePadding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/emailAddressTv"
+        app:layout_constraintTop_toBottomOf="@id/mgpAccountValTv" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/phoneTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:text="@string/str_phone"
+        app:layout_constraintEnd_toStartOf="@id/phoneValTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emailAddressTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/phoneValTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:drawableRight="@mipmap/copy_icon"
+        android:drawablePadding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/phoneTv"
+        app:layout_constraintTop_toBottomOf="@id/emailAddressValTv" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/wechatNumberTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:text="@string/str_wechat_number"
+        app:layout_constraintEnd_toStartOf="@id/wechatNumberValTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/phoneTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/wechatNumberValTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:drawableRight="@mipmap/copy_icon"
+        android:drawablePadding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/wechatNumberTv"
+        app:layout_constraintTop_toBottomOf="@id/phoneValTv" />
+
+    <!--    <androidx.constraintlayout.widget.Group-->
+    <!--        android:id="@+id/sellerGroup"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:visibility="visible"-->
+    <!--        app:constraint_referenced_ids="" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

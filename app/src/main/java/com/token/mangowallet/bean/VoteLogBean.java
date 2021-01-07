@@ -1,5 +1,6 @@
 package com.token.mangowallet.bean;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class VoteLogBean {
@@ -53,7 +54,7 @@ public class VoteLogBean {
         private int id;
         private int awardId;
         private String address;
-        private int money;
+        private BigDecimal money;
         private int voteCount;
         private int voteId;
         private int type;
@@ -84,11 +85,11 @@ public class VoteLogBean {
             this.address = address;
         }
 
-        public int getMoney() {
+        public BigDecimal getMoney() {
             return money;
         }
 
-        public void setMoney(int money) {
+        public void setMoney(BigDecimal money) {
             this.money = money;
         }
 

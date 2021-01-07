@@ -79,13 +79,13 @@
             app:qmui_borderColor="@color/qmui_config_color_gray_9"
             app:qmui_borderWidth="@dimen/album_dp_0" />
 
-        <com.token.mangowallet.view.DragFloatActionButton
+        <com.token.mangowallet.view.DragFloatActionButton2
             android:id="@id/layout_for_shadow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/durban_dp_16"
-            android:background="@color/app_color_theme_7"
+            android:background="@drawable/oval_bg"
             android:padding="@dimen/dp_15"
             android:src="@mipmap/ic_send"
             app:qmui_is_circle="true" />

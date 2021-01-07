@@ -160,7 +160,7 @@ public class StakeAddVoteFragment extends BaseFragment {
             }
         });
 
-        ratioEt.setFilters(new InputFilter[]{new CashierInputFilter(100, 2)});
+        ratioEt.setFilters(new InputFilter[]{new CashierInputFilter(percent, 2)});
     }
 
     @Override

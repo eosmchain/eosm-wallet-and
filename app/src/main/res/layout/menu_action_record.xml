@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.AppCompatTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/setupTv"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:drawableTop="@mipmap/ic_order"
+
+    android:gravity="center"
+    android:paddingLeft="@dimen/album_dp_10"
+    android:paddingRight="@dimen/album_dp_10"
+    android:text="@string/str_order" />

@@ -13,7 +13,7 @@ public interface Constants {
     String PRODUCT_URL = "https://api.mgpchain.com/";//https://api.mgpchain.com/api/appVersion/getVersion
     String TEST_URL = "https://api.coom.pub/";//http://47.56.124.233:18888/";
     String GUOYU_TEST_URL = "http://192.168.0.101:8888/";
-    String AYING_TEST_URL = "http://192.168.31.50:28888"; //"http://47.56.127.227:8888";
+    String AYING_TEST_URL = "https://api.coom.pub/";//"http://192.168.31.50:28888"; //"http://47.56.127.227:8888";
     //MGP
     String MIAN_MGP_URL = "http://sh-expnode.vm.mgps.me:8888";//"http://m1.vm.mgps.me:8010";//"http://23.252.162.93:8000";//http://m1.vm.mgps.me:8010";//"http://explorer.mgpchain.io:8000";
     String TEST_MGP_URL = "https://jungle2.cryptolions.io";
@@ -24,7 +24,7 @@ public interface Constants {
     String TEST_EOS_URL = "http://eosnetworkmonitor.io";
     //获取代币Token
     String ETHPLORER_API_URL = "https://api.ethplorer.io";
-    String VOTE_TEST_API_URL = "http://192.168.31.50:9000";//"http://vote.mgpchain.io";// "http://192.168.31.49:9000";
+    String VOTE_TEST_API_URL = "http://m.test.mgps.me/";//"http://vote.mgpchain.io";// "http://192.168.31.49:9000";
     String VOTE_API_URL = "http://vote.mgpchain.io";
     /**
      * 查询币价地址
@@ -131,6 +131,7 @@ public interface Constants {
     String TEST_VOTE_CONTRACT = "bpvotingo3o5";
     String WITHDRAW_VOTE = "unvote";//撤回投票
     String CANCEL_NODE = "delist";//取消节点  cancel
+    String DEAL_CONTRACT =  "mgp.otcstore";//买卖合约地址
     ///////////////////////////////////////////
     String BaseFilePath = Environment.getExternalStorageDirectory() + File.separator + "MangoWallet";
     String CrashFilePath = BaseFilePath + File.separator + "Crash";

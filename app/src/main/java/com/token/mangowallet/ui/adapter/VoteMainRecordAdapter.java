@@ -35,7 +35,7 @@ public class VoteMainRecordAdapter extends BaseQuickAdapter<VoteLogBean.DataBean
         if (ObjectUtils.isNotEmpty(token)) {
             mixMortgageTv.setText(ObjectUtils.isNotEmpty(token.getTypeName()) ? token.getTypeName() : "");
             mixMortgageStatusTv.setText(ObjectUtils.isNotEmpty(token.getCreateTime()) ? token.getCreateTime() : "");
-            numTv.setText((ObjectUtils.isNotEmpty(token.getMoney()) ? token.getMoney() : "0") + MGP_SYMBOL);
+            numTv.setText((ObjectUtils.isNotEmpty(token.getMoney()) ? token.getMoney().toPlainString() : "0") + MGP_SYMBOL);
         } else {
             mixMortgageTv.setText("");
             mixMortgageStatusTv.setText("");

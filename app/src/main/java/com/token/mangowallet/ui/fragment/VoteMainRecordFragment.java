@@ -36,7 +36,7 @@ import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.ui.adapter.VoteMainAdapter;
 import com.token.mangowallet.ui.adapter.VoteMainRecordAdapter;
 import com.token.mangowallet.utils.NRSAUtils;
-import com.token.mangowallet.view.DragFloatActionButton;
+import com.token.mangowallet.view.DragFloatActionButton2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +59,7 @@ public class VoteMainRecordFragment extends BaseFragment {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.layout_for_shadow)
-    DragFloatActionButton sendFloating;
+    DragFloatActionButton2 sendFloating;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
 

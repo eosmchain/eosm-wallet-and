@@ -36,7 +36,7 @@ import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.ui.adapter.VoteMainAdapter;
 import com.token.mangowallet.utils.NRSAUtils;
-import com.token.mangowallet.view.DragFloatActionButton;
+import com.token.mangowallet.view.DragFloatActionButton2;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -59,7 +59,7 @@ public class VoteMainFragment extends BaseFragment {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.layout_for_shadow)
-    DragFloatActionButton sendFloating;
+    DragFloatActionButton2 sendFloating;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
 
@@ -143,7 +143,7 @@ public class VoteMainFragment extends BaseFragment {
 
     @Override
     protected void initAction() {
-        sendFloating.setOnClickListener(new DragFloatActionButton.OnClickListener() {
+        sendFloating.setOnClickListener(new DragFloatActionButton2.OnClickListener() {
             @Override
             public void onClick() {
                 isScheme();

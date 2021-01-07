@@ -17,6 +17,7 @@
     <color name="app_color_common_deputy">#666666</color><!-- 副文字体颜色 -->
     <color name="app_color_common_hint">#999999</color><!-- 提示文案文字体颜色 -->
     <color name="app_color_dark_blue">#3167FF</color>
+    <color name="app_color_dark_blue2">#0066EE</color>
     <color name="app_color_description">@color/qmui_config_color_gray_5</color>
     <color name="item_divider_bg_color">#CAC9C9</color>
 
@@ -66,5 +67,7 @@
     <color name="colorHelper_square_to_ratio_background">@color/app_color_theme_3</color>
     <color name="color_gold">#ffd700</color><!--金色 -->
     <color name="color_coppery">#B87333</color><!--铜色 -->
+    <color name="bgcolor">#F7F6FB</color>
+    <color name="cautionColor">#FFD574</color>
 
 </resources>

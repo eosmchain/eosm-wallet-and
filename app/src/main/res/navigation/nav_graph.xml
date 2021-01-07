@@ -3,22 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/HomeFragment">
+    app:startDestination="@id/PaymentInfoFragment">
+
+<!--    <fragment-->
+<!--        android:id="@+id/BuyerTransactionInfoFragment"-->
+<!--        android:name="com.token.mangowallet.ui.fragment.mgp_deal.BuyerTransactionInfoFragment"-->
+<!--        android:label="@string/str_order_info"-->
+<!--        tools:layout="@layout/fragment_buyer_transaction_info">-->
+
+<!--&lt;!&ndash;        <action&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:id="@+id/action_PaymentInfoFragment"&ndash;&gt;-->
+<!--        &lt;!&ndash;            app:destination="@id/PaymentInfoFragment" />&ndash;&gt;-->
+<!--        &lt;!&ndash;        <action&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:id="@+id/action_ContactMethodFragment"&ndash;&gt;-->
+<!--        &lt;!&ndash;            app:destination="@id/ContactMethodFragment" />&ndash;&gt;-->
+<!--        &lt;!&ndash;        <action&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:id="@+id/action_TransactionDetailFragment"&ndash;&gt;-->
+<!--        &lt;!&ndash;            app:destination="@id/TransactionDetailFragment" />&ndash;&gt;-->
+<!--    </fragment>-->
 
     <fragment
-        android:id="@+id/HomeFragment"
-        android:name="com.token.mangowallet.ui.home.HomeFragment"
-        android:label="@string/str_home"
-        tools:layout="@layout/fragment_home">
+        android:id="@+id/PaymentInfoFragment"
+        android:name="com.token.mangowallet.ui.fragment.mgp_deal.PaymentInfoFragment"
+        android:label="@string/str_payment_method"
+        tools:layout="@layout/view_payment_info" />
 
-        <action
-            android:id="@+id/action_HomeFragment_to_WalletFragment"
-            app:destination="@id/navigation_home" />
-        <action
-            android:id="@+id/action_HomeFragment_to_DashboardFragment"
-            app:destination="@id/navigation_apps" />
-        <action
-            android:id="@+id/action_HomeFragment_to_NotificationsFragment"
-            app:destination="@id/navigation_my" />
-    </fragment>
+    <fragment
+        android:id="@+id/ContactMethodFragment"
+        android:name="com.token.mangowallet.ui.fragment.mgp_deal.ContactMethodFragment"
+        android:label="@string/str_seller_contact"
+        tools:layout="@layout/view_deal_contact" />
+
+    <fragment
+        android:id="@+id/TransactionDetailFragment"
+        android:name="com.token.mangowallet.ui.fragment.mgp_deal.TransactionDetailFragment"
+        android:label="@string/str_transaction_detail"
+        tools:layout="@layout/view_transaction_detail" />
+
 </navigation>

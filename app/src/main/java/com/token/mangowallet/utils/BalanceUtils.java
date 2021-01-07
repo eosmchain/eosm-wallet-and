@@ -103,7 +103,7 @@ public class BalanceUtils {
         if (ObjectUtils.isNotEmpty(data) && ObjectUtils.isNotEmpty(amount)) {
             if (ObjectUtils.isNotEmpty(data.getPrice())) {
                 BigDecimal decimal = new BigDecimal(amount).multiply(new BigDecimal(data.getPrice())).setScale(scale, roundingMode);
-                return data.getSymbol() + decimal.toPlainString();
+                return data.getSymbol() + APPUtils.dataFormat(decimal.toPlainString());
             }
         }
         return "$" + APPUtils.dataFormat(amount);

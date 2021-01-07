@@ -5,9 +5,65 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarlayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/item_mgp_deal" />
+        android:layout_height="wrap_content"
+        android:background="@color/durban_White"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.DayNight.ActionBar"
+            app:layout_collapseMode="pin"
+            app:menu="@menu/menu_otc"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:popupTheme="@style/ThemeOverlay.AppCompat"
+            app:title="@string/str_quick_buy_mgp" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appbarlayout"
+        app:srlEnablePreviewInEditMode="false">
+
+        <com.scwang.smart.refresh.header.ClassicsHeader
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srlAccentColor="@android:color/background_dark"
+            app:srlPrimaryColor="@android:color/transparent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_mgp_deal" />
+
+        <com.scwang.smart.refresh.footer.ClassicsFooter
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srlAccentColor="@android:color/background_dark"
+            app:srlPrimaryColor="@android:color/transparent" />
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+    <com.token.mangowallet.view.DragFloatActionButton
+        android:id="@+id/mysellDragBtn"
+        android:layout_width="@dimen/durban_dp_70"
+        android:layout_height="@dimen/durban_dp_70"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/durban_dp_16"
+        android:alpha="0.8"
+        android:src="@mipmap/ic_mysell"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:qmui_border_width="@dimen/album_dp_0"
+        app:qmui_is_circle="true" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,7 +18,10 @@ import com.token.mangowallet.bean.ThemesBean;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.math.BigDecimal;
 import java.util.List;
+
+import static com.token.mangowallet.utils.Constants.percent;
 
 public class VoteMainAdapter extends BaseQuickAdapter<ThemesBean.DataBean, BaseViewHolder> {
 
@@ -39,7 +42,7 @@ public class VoteMainAdapter extends BaseQuickAdapter<ThemesBean.DataBean, BaseV
         AppCompatTextView rateTv = baseViewHolder.getView(R.id.rateTv);
         ContentLoadingProgressBar rectProgressBar = baseViewHolder.getView(R.id.rectProgressBar);
 
-        double mRate = 0;
+        BigDecimal mRate = BigDecimal.ZERO;//.setScale(2).toPlainString()
         int mSort = 1;
         int mTextColor = R.color.app_color_common_deputy;
         int mTextSize = 24;
@@ -47,10 +50,10 @@ public class VoteMainAdapter extends BaseQuickAdapter<ThemesBean.DataBean, BaseV
         if (ObjectUtils.isNotEmpty(token)) {
             voteTitleTv.setText(ObjectUtils.isNotEmpty(token.getVoteTitle()) ? token.getVoteTitle() : "");
             voteSchemeTv.setText(ObjectUtils.isNotEmpty(token.getVoteContent()) ? token.getVoteContent() : "");
-            mRate = ObjectUtils.isNotEmpty(token.getRate()) ? (token.getRate() * 100) : 0;
+            mRate = ObjectUtils.isNotEmpty(token.getRate()) ? (token.getRate().multiply(percent)) : BigDecimal.ZERO;
             mSort = ObjectUtils.isNotEmpty(token.getSort()) ? token.getSort() : 1;
-            rectProgressBar.setProgress((int) mRate, true);
-            rateTv.setText(mRate + "%");
+            rectProgressBar.setProgress(mRate.intValue(), true);
+            rateTv.setText(mRate.setScale(2).toPlainString() + "%");
             if (isMyScheme) {
                 //type 0待支付 1待审核 2审核失败展示mark 3投票中 4投票结束 5待投票
                 //6支付中
@@ -103,7 +106,7 @@ public class VoteMainAdapter extends BaseQuickAdapter<ThemesBean.DataBean, BaseV
         rankingTv.setTextColor(ContextCompat.getColor(getContext(), mTextColor));
         rankingTv.setTextSize(mTextSize);
         rankingTv.setText(mSort + "");
-        rectProgressBar.setProgress((int) mRate, true);
+        rectProgressBar.setProgress(mRate.intValue(), true);
         rateTv.setText(mRate + "%");
     }
 }

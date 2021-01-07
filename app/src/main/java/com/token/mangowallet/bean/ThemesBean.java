@@ -3,6 +3,7 @@ package com.token.mangowallet.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ThemesBean {
@@ -81,7 +82,7 @@ public class ThemesBean {
         private int type;
         private boolean isRemit;
         private int voteCount;
-        private double rate;
+        private BigDecimal rate;
         private boolean isStart;
         private int sort;
         private int voteId;
@@ -103,7 +104,7 @@ public class ThemesBean {
             type = in.readInt();
             isRemit = in.readByte() != 0;
             voteCount = in.readInt();
-            rate = in.readDouble();
+            rate = new BigDecimal(in.readString());
             isStart = in.readByte() != 0;
             sort = in.readInt();
             voteId = in.readInt();
@@ -127,7 +128,7 @@ public class ThemesBean {
             dest.writeInt(type);
             dest.writeByte((byte) (isRemit ? 1 : 0));
             dest.writeInt(voteCount);
-            dest.writeDouble(rate);
+            dest.writeString(rate.toPlainString());
             dest.writeByte((byte) (isStart ? 1 : 0));
             dest.writeInt(sort);
             dest.writeInt(voteId);
@@ -278,11 +279,11 @@ public class ThemesBean {
             this.voteCount = voteCount;
         }
 
-        public double getRate() {
+        public BigDecimal getRate() {
             return rate;
         }
 
-        public void setRate(double rate) {
+        public void setRate(BigDecimal rate) {
             this.rate = rate;
         }
 

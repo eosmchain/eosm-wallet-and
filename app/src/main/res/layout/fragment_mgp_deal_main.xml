@@ -49,7 +49,7 @@
 
     <fragment
         android:id="@+id/nav_host_fragment"
-        android:name="com.token.mangowallet.ui.fragment.mgp_deal.BuyMGPFragment"
+        android:name="com.token.mangowallet.ui.fragment.mgp_deal.PaymentInfoFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

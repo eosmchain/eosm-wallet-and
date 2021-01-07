@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qmuiteam.qmui.layout.QMUIConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/album_dp_10"
+    android:layout_marginTop="@dimen/album_dp_10"
+    android:layout_marginRight="@dimen/album_dp_10"
+    android:background="@color/bgcolor">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/paymentTilteTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:drawableLeft="@mipmap/ic_bank_card"
+        android:drawablePadding="5dp"
+        android:gravity="center"
+        android:text="@string/str_bank_card"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/userNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:text="@string/str_username"
+        android:textColor="@color/app_color_common_deputy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/paymentTilteTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/userNameValTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:drawableRight="@mipmap/ic_copy_2"
+        android:drawablePadding="5dp"
+        android:text=""
+        android:textColor="@color/app_color_common_dark_black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/paymentTilteTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/paymentIDTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:text="@string/str_bank_id"
+        android:textColor="@color/app_color_common_deputy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userNameTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/paymentIDValTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:drawableRight="@mipmap/ic_copy_2"
+        android:drawablePadding="5dp"
+        android:text=""
+        android:textColor="@color/app_color_common_dark_black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userNameValTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/bankNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:text="@string/str_bank_name"
+        android:textColor="@color/app_color_common_deputy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/paymentIDTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/bankNameValTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:drawableRight="@mipmap/ic_copy_2"
+        android:drawablePadding="5dp"
+        android:text=""
+        android:textColor="@color/app_color_common_dark_black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/paymentIDValTv" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/openSubbranchTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:text="@string/str_open_subbranch"
+        android:textColor="@color/app_color_common_deputy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bankNameTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/openSubbranchValTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:drawableRight="@mipmap/ic_copy_2"
+        android:drawablePadding="5dp"
+        android:text=""
+        android:textColor="@color/app_color_common_dark_black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bankNameValTv" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/bankCardGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="bankNameTv,bankNameValTv,openSubbranchTv,openSubbranchValTv" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/alipayGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="paymentCodeIv,seeLargerPictureTv" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/paymentCodeIv"
+        android:layout_width="@dimen/album_dp_80"
+        android:layout_height="@dimen/album_dp_100"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:src="@mipmap/launch_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/paymentIDTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/seeLargerPictureTv"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:layout_marginBottom="@dimen/album_dp_10"
+        android:gravity="bottom"
+        android:text="@string/str_see_larger_picture"
+        android:textColor="@color/app_color_common_dark_black"
+        app:layout_constraintBottom_toBottomOf="@id/paymentCodeIv"
+        app:layout_constraintStart_toEndOf="@id/paymentCodeIv"
+        app:layout_constraintTop_toTopOf="@id/paymentCodeIv" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="openSubbranchTv,openSubbranchValTv,paymentCodeIv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/transferTipTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:layout_marginBottom="@dimen/album_dp_20"
+        android:background="@color/app_color_red"
+        android:padding="8dp"
+        android:text="@string/str_transfer_tip"
+        android:textColor="@color/durban_White"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/barrier1" />
+</com.qmuiteam.qmui.layout.QMUIConstraintLayout>

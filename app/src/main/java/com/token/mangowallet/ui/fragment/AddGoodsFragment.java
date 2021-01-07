@@ -261,9 +261,9 @@ public class AddGoodsFragment extends BaseFragment {
                 }
             }
         });
-        actualChargeSellerEt.setFilters(new InputFilter[]{new CashierInputFilter(100, 2)});
-        bonusIncentivesEt.setFilters(new InputFilter[]{new CashierInputFilter(100, 2)});
-        mortgageAwayEt.setFilters(new InputFilter[]{new CashierInputFilter(100, 2)});
+        actualChargeSellerEt.setFilters(new InputFilter[]{new CashierInputFilter(percent, 2)});
+        bonusIncentivesEt.setFilters(new InputFilter[]{new CashierInputFilter(percent, 2)});
+        mortgageAwayEt.setFilters(new InputFilter[]{new CashierInputFilter(percent, 2)});
         MultiEditTextListening(actualChargeSellerEt);
         MultiEditTextListening(bonusIncentivesEt);
         MultiEditTextListening(mortgageAwayEt);

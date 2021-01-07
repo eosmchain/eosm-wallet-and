@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/album_dp_10"
+    android:layout_marginTop="@dimen/album_dp_10"
+    android:layout_marginRight="@dimen/album_dp_10"
+    android:paddingBottom="@dimen/album_dp_45">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/transactionDetailTitleTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:text="@string/str_transaction_detail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/totalPricesTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:text="@string/str_total_prices"
+        app:layout_constraintEnd_toStartOf="@id/totalPricesValTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/transactionDetailTitleTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/totalPricesValTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:drawablePadding="5dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/totalPricesTv"
+        app:layout_constraintTop_toBottomOf="@id/transactionDetailTitleTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/priceTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:text="@string/str_price_1"
+        app:layout_constraintEnd_toStartOf="@id/priceValTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/totalPricesTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/priceValTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:drawablePadding="5dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/priceTv"
+        app:layout_constraintTop_toBottomOf="@id/totalPricesValTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/quantityTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:text="@string/str_quantity"
+        app:layout_constraintEnd_toStartOf="@id/quantityValTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/priceTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/quantityValTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:drawablePadding="5dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/quantityTv"
+        app:layout_constraintTop_toBottomOf="@id/priceValTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/orderNumberTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:text="@string/str_order_number"
+        app:layout_constraintEnd_toStartOf="@id/orderNumberValTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/quantityTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/orderNumberValTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:drawableRight="@mipmap/copy_icon"
+        android:drawablePadding="5dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/orderNumberTv"
+        app:layout_constraintTop_toBottomOf="@id/quantityValTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/paymentMethodTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:text="@string/str_payment_method"
+        app:layout_constraintEnd_toStartOf="@id/paymentMethodValTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/orderNumberTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/paymentMethodValTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:drawablePadding="5dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/paymentMethodTv"
+        app:layout_constraintTop_toBottomOf="@id/orderNumberValTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/putCoinHashTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:text="@string/str_put_coin_hash"
+        app:layout_constraintEnd_toStartOf="@id/putCoinHashValTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/paymentMethodTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/putCoinHashValTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:drawableRight="@mipmap/copy_icon"
+        android:drawablePadding="5dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/putCoinHashTv"
+        app:layout_constraintTop_toBottomOf="@id/paymentMethodValTv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

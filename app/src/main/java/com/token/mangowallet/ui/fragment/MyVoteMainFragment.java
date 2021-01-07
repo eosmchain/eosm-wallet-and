@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.ClickUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.MapUtils;
@@ -51,7 +50,7 @@ import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.Md5Utils;
 import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.DialogHelper;
-import com.token.mangowallet.view.DragFloatActionButton;
+import com.token.mangowallet.view.DragFloatActionButton2;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -78,7 +77,7 @@ public class MyVoteMainFragment extends BaseFragment {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.layout_for_shadow)
-    DragFloatActionButton sendFloating;
+    DragFloatActionButton2 sendFloating;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
     @BindView(R.id.tabs)
