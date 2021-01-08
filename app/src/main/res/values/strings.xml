@@ -795,7 +795,18 @@
     <string name="str_no_pospledge_msg">您还未进行POS抵押</string>
     <string name="str_to_add">去添加</string>
     <string name="str_to_pledge">去抵押</string>
-
+    <string name="str_contact_way">联系方式</string>
+    <string name="str_payment_term">收款方式</string>
+    <string name="str_otc_setup">我的设置</string>
+    <string name="str_import_email">请输入邮箱</string>
+    <string name="str_import_verification_code">请输入验证码</string>
+    <string name="str_bind_email">请绑定邮箱</string>
+    <string name="str_import_phone_number">请输入手机号码</string>
+    <string name="str_import_wechat_number">请输入微信号</string>
+    <string name="str_mailbox_verification">邮箱验证</string>
+    <string name="str_resend">重新发送</string>
+    <string name="str_mailbox_format_incorrect">邮箱格式不正确</string>
+    <string name="str_add">添加</string>
 
     <string name="str_aleft">👈</string>
     <string name="str_right">👉</string>

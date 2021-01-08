@@ -70,6 +70,9 @@ import com.token.mangowallet.ui.fragment.WalletManagementFragment;
 import com.token.mangowallet.ui.fragment.mgp_deal.BuyerTransactionInfoFragment;
 import com.token.mangowallet.ui.fragment.mgp_deal.OTCDealFragment;
 import com.token.mangowallet.ui.fragment.mgp_deal.OTCSellFragment;
+import com.token.mangowallet.ui.fragment.mgp_deal.setup.OTCSetupFragment;
+import com.token.mangowallet.ui.fragment.mgp_deal.setup.SetupContactFragment;
+import com.token.mangowallet.ui.fragment.mgp_deal.setup.SetupPaymentFragment;
 import com.token.mangowallet.ui.home.HomeFragment;
 
 import java.util.Map;
@@ -162,6 +165,9 @@ public class MangoFragmentManager {
         mapFragments.put("OTCDealFragment", OTCDealFragment.class);
         mapFragments.put("BuyerTransactionInfoFragment", BuyerTransactionInfoFragment.class);
         mapFragments.put("OTCSellFragment", OTCSellFragment.class);
+        mapFragments.put("OTCSetupFragment", OTCSetupFragment.class);
+        mapFragments.put("SetupContactFragment", SetupContactFragment.class);
+        mapFragments.put("SetupPaymentFragment", SetupPaymentFragment.class);
     }
 
     public Class<? extends BaseFragment> getFragment(String fragmentName) {

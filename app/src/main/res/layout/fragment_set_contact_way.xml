@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/durban_White">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/emailTv"
+        android:layout_width="wrap_content"
+        android:layout_height="?qmui_list_item_height"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:gravity="center"
+        android:text="@string/str_email"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintEnd_toStartOf="@id/emailValTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topbar" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/emailValTv"
+        android:layout_width="0dp"
+        android:layout_height="?qmui_list_item_height"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:background="@null"
+        android:gravity="right"
+        android:hint="@string/str_bind_email"
+        android:inputType="textEmailAddress"
+        android:padding="@dimen/album_dp_15"
+        android:selectAllOnFocus="true"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintEnd_toStartOf="@id/goBindBtn"
+        app:layout_constraintStart_toEndOf="@id/emailTv"
+        app:layout_constraintTop_toBottomOf="@id/topbar" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/goBindBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:src="@mipmap/icon_arrows"
+        app:layout_constraintBottom_toTopOf="@id/line1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/emailValTv"
+        app:layout_constraintTop_toBottomOf="@id/topbar"
+        app:qmui_backgroundColor="@color/app_color_dark_blue2"
+        app:qmui_radius="5dp" />
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:background="@color/app_color_common_deputy"
+        app:layout_constraintTop_toBottomOf="@id/emailValTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/phoneNumberTv"
+        android:layout_width="wrap_content"
+        android:layout_height="?qmui_list_item_height"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:gravity="center"
+        android:text="@string/address_tel"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintEnd_toStartOf="@id/phoneNumberValTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line1" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/phoneNumberValTv"
+        android:layout_width="0dp"
+        android:layout_height="?qmui_list_item_height"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:background="@null"
+        android:gravity="right"
+        android:hint="@string/str_import_phone_number"
+        android:inputType="phone"
+        android:padding="@dimen/album_dp_15"
+        android:selectAllOnFocus="true"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/phoneNumberTv"
+        app:layout_constraintTop_toBottomOf="@id/line1" />
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:background="@color/app_color_common_deputy"
+        app:layout_constraintTop_toBottomOf="@id/phoneNumberTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/wechatIDTv"
+        android:layout_width="wrap_content"
+        android:layout_height="?qmui_list_item_height"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:gravity="center"
+        android:text="@string/str_wechat_number"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintEnd_toStartOf="@id/wechatIDValTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line2" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/wechatIDValTv"
+        android:layout_width="0dp"
+        android:layout_height="?qmui_list_item_height"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:background="@null"
+        android:gravity="right"
+        android:hint="@string/str_import_wechat_number"
+        android:padding="@dimen/album_dp_15"
+        android:selectAllOnFocus="true"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/wechatIDTv"
+        app:layout_constraintTop_toBottomOf="@id/line2" />
+
+    <View
+        android:id="@+id/line3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:background="@color/app_color_common_deputy"
+        app:layout_constraintTop_toBottomOf="@id/wechatIDTv" />
+</androidx.constraintlayout.widget.ConstraintLayout>

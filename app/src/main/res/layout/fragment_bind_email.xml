@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/emailTv"
+        android:layout_width="wrap_content"
+        android:layout_height="?qmui_list_item_height"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:gravity="center"
+        android:text="@string/str_email"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintEnd_toStartOf="@id/emailEt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topbar" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/emailEt"
+        android:layout_width="0dp"
+        android:layout_height="?qmui_list_item_height"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:background="@null"
+        android:gravity="right"
+        android:hint="@string/str_import_email"
+        android:inputType="textEmailAddress"
+        android:padding="@dimen/album_dp_15"
+        android:selectAllOnFocus="true"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/emailTv"
+        app:layout_constraintTop_toBottomOf="@id/topbar" />
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:background="@color/app_color_common_deputy"
+        app:layout_constraintTop_toBottomOf="@id/emailTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/verificationCodeTv"
+        android:layout_width="wrap_content"
+        android:layout_height="?qmui_list_item_height"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:gravity="center"
+        android:text="@string/str_verification_code"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintEnd_toStartOf="@id/verificationCodeEt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line1" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/verificationCodeEt"
+        android:layout_width="0dp"
+        android:layout_height="?qmui_list_item_height"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:background="@null"
+        android:gravity="right"
+        android:hint="@string/str_import_verification_code"
+        android:inputType="textEmailAddress"
+        android:padding="@dimen/album_dp_15"
+        android:selectAllOnFocus="true"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintEnd_toStartOf="@id/sendCodeBtn"
+        app:layout_constraintStart_toEndOf="@id/verificationCodeTv"
+        app:layout_constraintTop_toBottomOf="@id/line1" />
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/sendCodeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:paddingLeft="@dimen/album_dp_15"
+        android:paddingTop="@dimen/album_dp_10"
+        android:paddingRight="@dimen/album_dp_15"
+        android:paddingBottom="@dimen/album_dp_10"
+        android:text="@string/str_phonenumber_verification_code"
+        android:textColor="@color/durban_White"
+        app:layout_constraintBottom_toTopOf="@id/line2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/verificationCodeEt"
+        app:layout_constraintTop_toBottomOf="@id/line1"
+        app:qmui_backgroundColor="@color/app_color_dark_blue2"
+        app:qmui_radius="5dp" />
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:background="@color/app_color_common_deputy"
+        app:layout_constraintTop_toBottomOf="@id/verificationCodeTv" />
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/confirmBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_80"
+        android:layout_marginTop="@dimen/album_dp_50"
+        android:layout_marginRight="@dimen/album_dp_80"
+        android:paddingTop="@dimen/album_dp_10"
+        android:paddingBottom="@dimen/album_dp_10"
+        android:text="@string/str_ok"
+        android:textColor="@color/durban_White"
+        android:textSize="@dimen/medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line2"
+        app:qmui_backgroundColor="@color/app_color_dark_blue2"
+        app:qmui_radius="5dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

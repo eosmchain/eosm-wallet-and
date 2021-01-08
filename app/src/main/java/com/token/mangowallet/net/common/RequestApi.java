@@ -1435,4 +1435,50 @@ public interface RequestApi {
     @POST("/otcapi/api/moUsers/isBind")
     Observable<JsonObject> isBind(@Header("content") String content);
 
+    /**
+     * 账号自动激活
+     * mgpName mgp账户
+     * type :买家=0，卖家=1；
+     *
+     * @Header("content:") String content
+     */
+    @Headers("urlname:" + Constants.VOTEURL)
+    @POST("/otcapi/api/moUsers/find")
+    Observable<JsonObject> getContactInfo(@Header("content") String content);
+
+    /**
+     * 保存联系方式
+     * mgpName
+     * 邮箱 type =0； mail ；code；
+     * 手机号码 type =1；phone；
+     * 微信号 type =2；weixin；
+     *
+     * @Header("content:") String content
+     */
+    @Headers("urlname:" + Constants.VOTEURL)
+    @POST("/otcapi/api/moUsers/save")
+    Observable<JsonObject> saveContactInfo(@Header("content") String content);
+
+    /**
+     * 发送验证码
+     * 1、 mail: String,  1. 绑定时的邮箱 ；type=2、3不传mail；
+     * 2、 mgpName: String,  type: 1当前账户； 2卖家账户 ； 3 买家账户；
+     * 3、 type: Int,  1邮箱绑定；2订单支付通知；3.放行；
+     * 4、money: Double?   type： 1：不传money； 2：购买的MGP； 3需要打款的MGP
+     *
+     * @Header("content:") String content
+     */
+    @Headers("urlname:" + Constants.VOTEURL)
+    @POST("/otcapi/api/email/send")
+    Observable<JsonObject> sendVerificationCode(@Header("content") String content);
+
+    /**
+     * 获取收款方式
+     * mgpName
+     *
+     * @Header("content:") String content
+     */
+    @Headers("urlname:" + Constants.VOTEURL)
+    @POST("/otcapi/api/moPayInfo/list")
+    Observable<JsonObject> getPayInfoList(@Header("content") String content);
 }

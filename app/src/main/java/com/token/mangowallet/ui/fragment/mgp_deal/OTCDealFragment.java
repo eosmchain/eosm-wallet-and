@@ -226,8 +226,22 @@ public class OTCDealFragment extends BaseFragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_otc, menu); //通过反射让menu的图标可见
-        menu.findItem(R.id.action_setting).setVisible(true);
-        menu.findItem(R.id.action_record).setVisible(true);
+        MenuItem settingItem = menu.findItem(R.id.action_setting);
+        MenuItem orderItem = menu.findItem(R.id.action_order);
+        settingItem.getActionView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(EXTRA_WALLET, mangoWallet);
+                startFragment("OTCSetupFragment", bundle);
+            }
+        });
+        orderItem.getActionView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -237,12 +251,6 @@ public class OTCDealFragment extends BaseFragment {
             //当点击一个条目时，不显示另外一个
             case android.R.id.home:
                 popBackStack();
-                break;
-            case R.id.action_setting:
-                ToastUtils.showLong("action_setting");
-                break;
-            case R.id.action_record:
-                ToastUtils.showLong("action_record");
                 break;
         }
         return true;
