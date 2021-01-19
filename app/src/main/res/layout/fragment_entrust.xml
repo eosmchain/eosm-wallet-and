@@ -2,11 +2,45 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/album_dp_10"
-    android:layout_marginTop="@dimen/album_dp_10"
-    android:layout_marginRight="@dimen/album_dp_10"
-    android:paddingBottom="@dimen/album_dp_20">
+    android:layout_height="match_parent"
+    android:background="@color/durban_White">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/statusValTv"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/album_dp_50"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:gravity="center_vertical"
+        android:text="@string/str_entrust_selling"
+        android:textColor="@color/app_color_orange"
+        android:textSize="@dimen/big_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topbar" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/entrustSellTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:text="@string/str_entrust_sell"
+        android:textColor="@color/app_color_common_deputy"
+        android:textSize="@dimen/small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statusValTv" />
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="@dimen/album_dp_10"
+        android:background="@color/app_color_common_hint"
+        app:layout_constraintTop_toBottomOf="@id/entrustSellTv" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/transactionDetailTitleTv"
@@ -18,31 +52,7 @@
         android:textColor="@color/app_color_common_dark_black"
         android:textSize="@dimen/big_small"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/totalPricesTv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/album_dp_15"
-        android:layout_marginTop="@dimen/album_dp_15"
-        android:text="@string/str_total_prices"
-        app:layout_constraintEnd_toStartOf="@id/totalPricesValTv"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/transactionDetailTitleTv" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/totalPricesValTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/album_dp_15"
-        android:layout_marginRight="@dimen/album_dp_15"
-        android:drawablePadding="5dp"
-        android:text=""
-        android:textColor="@color/app_color_orange"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/totalPricesTv"
-        app:layout_constraintTop_toBottomOf="@id/transactionDetailTitleTv" />
+        app:layout_constraintTop_toBottomOf="@id/line1" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/priceTv"
@@ -53,7 +63,7 @@
         android:text="@string/str_price_1"
         app:layout_constraintEnd_toStartOf="@id/priceValTv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/totalPricesTv" />
+        app:layout_constraintTop_toBottomOf="@id/transactionDetailTitleTv" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/priceValTv"
@@ -66,7 +76,7 @@
         android:textColor="@color/app_color_orange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/priceTv"
-        app:layout_constraintTop_toBottomOf="@id/totalPricesValTv" />
+        app:layout_constraintTop_toBottomOf="@id/transactionDetailTitleTv" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/quantityTv"
@@ -87,81 +97,82 @@
         android:layout_marginRight="@dimen/album_dp_15"
         android:drawablePadding="5dp"
         android:text=""
+        android:textColor="@color/app_color_common_dark_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/quantityTv"
         app:layout_constraintTop_toBottomOf="@id/priceValTv" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/orderNumberTv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/album_dp_15"
-        android:layout_marginTop="@dimen/album_dp_15"
-        android:text="@string/str_order_number"
-        app:layout_constraintEnd_toStartOf="@id/orderNumberValTv"
-        app:layout_constraintStart_toStartOf="parent"
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="@dimen/album_dp_10"
+        android:background="@color/app_color_common_hint"
         app:layout_constraintTop_toBottomOf="@id/quantityTv" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/orderNumberValTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/album_dp_15"
-        android:layout_marginRight="@dimen/album_dp_15"
-        android:drawableRight="@mipmap/ic_copy_2"
-        android:drawablePadding="5dp"
-        android:text=""
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/orderNumberTv"
-        app:layout_constraintTop_toBottomOf="@id/quantityValTv" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/paymentMethodTv"
+        android:id="@+id/haveSellTv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/album_dp_15"
         android:layout_marginTop="@dimen/album_dp_15"
-        android:text="@string/str_payment_method"
-        app:layout_constraintEnd_toStartOf="@id/paymentMethodValTv"
+        android:text="@string/str_sell_succeed"
+        app:layout_constraintEnd_toStartOf="@id/haveSellValTv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/orderNumberTv" />
+        app:layout_constraintTop_toBottomOf="@id/line2" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/paymentMethodValTv"
+        android:id="@+id/haveSellValTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/album_dp_15"
         android:layout_marginRight="@dimen/album_dp_15"
         android:drawablePadding="5dp"
         android:text=""
+        android:textColor="@color/app_color_common_dark_black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/paymentMethodTv"
-        app:layout_constraintTop_toBottomOf="@id/orderNumberValTv" />
+        app:layout_constraintStart_toEndOf="@id/haveSellTv"
+        app:layout_constraintTop_toBottomOf="@id/line2" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/putCoinHashTv"
+        android:id="@+id/haveFreezeTv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/album_dp_15"
         android:layout_marginTop="@dimen/album_dp_15"
-        android:text="@string/str_put_coin_hash"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@id/putCoinHashValTv"
+        android:text="@string/str_have_freeze"
+        app:layout_constraintEnd_toStartOf="@id/haveFreezeValTv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/paymentMethodTv" />
+        app:layout_constraintTop_toBottomOf="@id/haveSellTv" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/putCoinHashValTv"
+        android:id="@+id/haveFreezeValTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/album_dp_15"
         android:layout_marginRight="@dimen/album_dp_15"
-        android:drawableRight="@mipmap/ic_copy_2"
         android:drawablePadding="5dp"
         android:text=""
-        android:visibility="gone"
+        android:textColor="@color/app_color_common_dark_black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/putCoinHashTv"
-        app:layout_constraintTop_toBottomOf="@id/paymentMethodValTv" />
+        app:layout_constraintStart_toEndOf="@id/haveFreezeTv"
+        app:layout_constraintTop_toBottomOf="@id/haveSellTv" />
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/repealEntrustBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/album_dp_40"
+        android:layout_marginLeft="@dimen/album_dp_50"
+        android:layout_marginTop="@dimen/album_dp_45"
+        android:layout_marginRight="@dimen/album_dp_50"
+        android:text="@string/str_repeal_entrust"
+        android:textColor="@color/durban_White"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/haveFreezeTv"
+        app:qmui_backgroundColor="@color/app_color_orange"
+        app:qmui_borderWidth="@dimen/album_dp_0"
+        app:qmui_radius="5dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

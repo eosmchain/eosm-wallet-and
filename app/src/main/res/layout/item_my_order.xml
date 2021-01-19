@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/durban_White">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/totalSaleTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="5dp"
+        android:textSize="@dimen/big_small"
+        android:text="@string/str_total_sale"
+        android:textColor="@color/app_color_common_dark_black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/orderStatusTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:drawableRight="@mipmap/ic_arrow2"
+        android:drawablePadding="5dp"
+        android:textSize="@dimen/big_small"
+        android:text="@string/str_complete_transaction"
+        android:textColor="@color/app_color_common_dark_black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/timeTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:text="@string/str_time"
+        android:textColor="@color/app_color_common_deputy"
+        app:layout_constraintEnd_toStartOf="@id/mgpnumTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/totalSaleTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/timeValTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:text=""
+        android:textColor="@color/app_color_common_black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/mgpnumValTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/timeTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/mgpnumTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:text="@string/str_time"
+        android:textColor="@color/app_color_common_deputy"
+        app:layout_constraintEnd_toStartOf="@id/transactionAmountTv"
+        app:layout_constraintStart_toEndOf="@id/timeTv"
+        app:layout_constraintTop_toBottomOf="@id/totalSaleTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/mgpnumValTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:text=""
+        android:textColor="@color/app_color_common_black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/transactionAmountValTv"
+        app:layout_constraintStart_toEndOf="@id/timeValTv"
+        app:layout_constraintTop_toBottomOf="@id/timeTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/transactionAmountTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:text="@string/str_amount_trade"
+        android:textColor="@color/app_color_common_deputy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/mgpnumTv"
+        app:layout_constraintTop_toBottomOf="@id/totalSaleTv" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/transactionAmountValTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:layout_marginBottom="5dp"
+        android:text=""
+        android:textColor="@color/qmui_config_color_red"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/mgpnumValTv"
+        app:layout_constraintTop_toBottomOf="@id/timeTv" />
+</androidx.constraintlayout.widget.ConstraintLayout>

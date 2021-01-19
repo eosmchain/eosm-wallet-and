@@ -212,7 +212,7 @@ public class LifePaymentFragment extends BaseFragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String mCurMoney = ObjectUtils.isEmpty(s) ? "0" : s.toString();
-                usDecimal = new BigDecimal(mCurMoney).divide(new BigDecimal(currencyData.getPrice()), 2, RoundingMode.CEILING);
+                usDecimal = new BigDecimal(mCurMoney).divide(currencyData.getPrice(), 2, RoundingMode.CEILING);
 //                String mCurrency = BalanceUtils.currencyToBase(mCurMoney, 2, RoundingMode.FLOOR);
                 toCurrencyValueTv.setText("≈$" + usDecimal.toPlainString());
                 if (mCurrencyPrice == null) {
@@ -308,9 +308,9 @@ public class LifePaymentFragment extends BaseFragment {
             //MGP = 金额/美元价格/mgp价格*比例 商家
             //本次支付 = MGP+(MGP*手续费) 或者 MGP*（1+手续费比）
             if (IsMer) {
-                mgpDecimal = mCurrencyDecimal.divide(new BigDecimal(currencyData.getPrice()), 6, HALF_UP).multiply(mBuyerProDecimal).divide(bdMGPprice, 6, RoundingMode.HALF_UP);
+                mgpDecimal = mCurrencyDecimal.divide(currencyData.getPrice(), 6, HALF_UP).multiply(mBuyerProDecimal).divide(bdMGPprice, 6, RoundingMode.HALF_UP);
             } else {
-                mgpDecimal = mCurrencyDecimal.divide(new BigDecimal(currencyData.getPrice()), 6, HALF_UP).divide(bdMGPprice, 6, RoundingMode.HALF_UP);
+                mgpDecimal = mCurrencyDecimal.divide(currencyData.getPrice(), 6, HALF_UP).divide(bdMGPprice, 6, RoundingMode.HALF_UP);
             }
             mgpDecimal = mgpDecimal.add(mgpDecimal.multiply(mServiceChargePro)).setScale(4, RoundingMode.HALF_UP);
             String rewardPro = mCurrencyDecimal.multiply(mBuyerProDecimal).multiply(mThreeDecimal).setScale(2, ROUND_DOWN).toPlainString();

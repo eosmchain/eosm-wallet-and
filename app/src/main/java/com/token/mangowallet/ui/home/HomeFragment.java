@@ -41,6 +41,7 @@ import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.bean.AccountInfo;
 import com.token.mangowallet.bean.AppHomeBean;
 import com.token.mangowallet.bean.CurrencyPrice;
+import com.token.mangowallet.bean.CurrencySetupBean;
 import com.token.mangowallet.bus.ToWallet;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.entity.ErrorEnvelope;
@@ -65,7 +66,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 import static com.token.mangowallet.utils.Constants.BUS_TO_WALLET;
+import static com.token.mangowallet.utils.Constants.KEY_COIN_SYMBOL;
+import static com.token.mangowallet.utils.Constants.KEY_CURRENCY_SYMBOL;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
+import static com.token.mangowallet.utils.Constants.SP_MangoWallet_info;
 
 public class HomeFragment extends BaseFragment {
     @BindView(R.id.pager)
@@ -106,9 +110,9 @@ public class HomeFragment extends BaseFragment {
         tokensViewModel.prices().observe(this, this::onPrices);
         tokensViewModel.appHomeData().observe(this, this::onAppHomeData);
         tokensViewModel.error().observe(this, this::onError);
+        getCoinSymbol();
         initTabs();
         initPagers();
-
     }
 
     @Override
@@ -414,6 +418,30 @@ public class HomeFragment extends BaseFragment {
     public void verifyWallet() {
         if (tokensViewModel.getVerifyWallet(mangoWallet) != null) {
             tokensViewModel.getVerifyWallet(mangoWallet).subscribe(this::jumpToVerifyWallet, this::verifyWalletError);
+        }
+    }
+
+    private void getCoinSymbol() {
+        showTipDialog(getString(R.string.str_loading));
+        try {
+            NetWorkManager.getRequest().getCoinSymbol()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::coinSymbolSuccess, this::onError);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void coinSymbolSuccess(JsonObject jsonObject) {
+        dismissTipDialog();
+        if (jsonObject != null) {
+            String json = GsonUtils.toJson(jsonObject);
+            LogUtils.dTag(LOG_TAG, "data = " + json);
+            CurrencySetupBean currencySetupBean = GsonUtils.fromJson(json, CurrencySetupBean.class);
+            if (currencySetupBean.getCode() == 0) {
+                SPUtils.getInstance(SP_MangoWallet_info).put(KEY_COIN_SYMBOL, json);
+            }
         }
     }
 

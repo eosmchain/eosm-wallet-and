@@ -478,7 +478,7 @@ public class StakeVoteMainFragment extends BaseFragment {
     }
 
     private void voteContractBalanceSuccess(BigDecimal bigDecimal) {
-        progressTv.setText(String.format(getString(R.string.str_vote_progress), ObjectUtils.isEmpty(mGlobalRowsBean.getTotal_voted()) ? "0 MGP" : APPUtils.dataFormat(bigDecimal.toPlainString()) + " " + MGP_SYMBOL));
+        progressTv.setText(String.format(getString(R.string.str_vote_progress), ObjectUtils.isEmpty(bigDecimal) ? "0 MGP" : APPUtils.dataFormat(bigDecimal.toPlainString()) + " " + MGP_SYMBOL));
     }
 
     /**

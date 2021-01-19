@@ -2,87 +2,91 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/durban_White">
+    android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/titleTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/album_dp_20"
-        android:text="@string/str_confirm_cancellation"
-        android:textColor="@color/app_color_common_dark_black"
-        android:textSize="@dimen/big_medium"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/messageTv"
-        android:layout_width="0dp"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/album_dp_30"
-        android:layout_marginTop="@dimen/album_dp_30"
-        android:text="@string/str_cancellation_msg"
-        android:textColor="@color/app_color_common_black"
-        android:textSize="@dimen/big_small"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleTv" />
-
-    <androidx.appcompat.widget.AppCompatCheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/album_dp_30"
-        android:layout_marginTop="@dimen/album_dp_15"
-        android:button="@drawable/btn_tab_text_selector"
-        android:padding="@dimen/album_dp_10"
-        android:text="@string/str_cancellation_tip"
-        android:textColor="@color/app_color_common_deputy"
-        android:textSize="@dimen/big_small"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/messageTv" />
-
-
-    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
-        android:id="@+id/actionBtn1"
-        android:layout_width="@dimen/album_dp_0"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/album_dp_30"
-        android:layout_marginTop="@dimen/album_dp_20"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="@dimen/album_dp_15"
-        android:paddingTop="@dimen/album_dp_15"
-        android:paddingBottom="@dimen/album_dp_15"
-        android:text="@string/str_think_again"
-        android:textSize="@dimen/big_small"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/actionBtn2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/checkBox"
-        app:qmui_backgroundColor="@color/durban_White"
-        app:qmui_radius="8dp" />
-
-    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
-        android:id="@+id/actionBtn2"
-        android:layout_width="@dimen/album_dp_0"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="@dimen/album_dp_20"
         android:layout_marginRight="@dimen/album_dp_30"
-        android:layout_marginBottom="@dimen/album_dp_15"
-        android:paddingTop="@dimen/album_dp_15"
-        android:paddingBottom="@dimen/album_dp_15"
-        android:text="@string/str_confirm"
-        android:textColor="@color/durban_White"
-        android:textSize="@dimen/big_small"
+        android:background="@color/durban_White"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/actionBtn1"
-        app:layout_constraintTop_toBottomOf="@id/checkBox"
-        app:qmui_backgroundColor="@color/blueColor"
-        app:qmui_borderWidth="@dimen/album_dp_0"
-        app:qmui_radius="8dp" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/titleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/album_dp_20"
+            android:text="@string/str_confirm_cancellation"
+            android:textColor="@color/app_color_common_dark_black"
+            android:textSize="@dimen/big_medium" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/messageTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titleTv"
+            android:layout_marginLeft="@dimen/album_dp_30"
+            android:layout_marginTop="@dimen/album_dp_30"
+            android:text="@string/str_cancellation_msg"
+            android:textColor="@color/app_color_common_black"
+            android:textSize="@dimen/big_small" />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/messageTv"
+            android:layout_marginLeft="@dimen/album_dp_30"
+            android:layout_marginTop="@dimen/album_dp_15"
+            android:button="@drawable/btn_tab_text_selector"
+            android:padding="@dimen/album_dp_10"
+            android:text="@string/str_cancellation_tip"
+            android:textColor="@color/app_color_common_deputy"
+            android:textSize="@dimen/big_small" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/checkBox"
+
+            android:layout_marginLeft="@dimen/album_dp_30"
+            android:layout_marginTop="@dimen/album_dp_20"
+            android:layout_marginRight="@dimen/album_dp_30">
+
+            <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                android:id="@+id/actionBtn1"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="@dimen/album_dp_15"
+                android:layout_weight="1"
+                android:paddingTop="@dimen/album_dp_15"
+                android:paddingBottom="@dimen/album_dp_15"
+                android:text="@string/str_think_again"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/big_small"
+                app:qmui_backgroundColor="@color/qmui_config_color_gray_8"
+                app:qmui_borderWidth="@dimen/album_dp_0"
+                app:qmui_radius="8dp" />
+
+            <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                android:id="@+id/actionBtn2"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="@dimen/album_dp_15"
+                android:layout_weight="1"
+                android:paddingTop="@dimen/album_dp_15"
+                android:paddingBottom="@dimen/album_dp_15"
+                android:text="@string/str_confirm"
+                android:textColor="@color/durban_White"
+                android:textSize="@dimen/big_small"
+                app:qmui_backgroundColor="@color/blueColor"
+                app:qmui_borderWidth="@dimen/album_dp_0"
+                app:qmui_radius="8dp" />
+        </LinearLayout>
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

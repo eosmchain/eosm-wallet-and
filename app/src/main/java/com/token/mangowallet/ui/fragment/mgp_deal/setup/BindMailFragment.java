@@ -163,9 +163,9 @@ public class BindMailFragment extends BaseFragment {
 
     /**
      * 发送验证码
-     * 1、 mail: String,  1. 绑定时的邮箱 ；type=2、3不传mail；
+     * 1、 mail: String,  0. 绑定时的邮箱 ；type=2、3不传mail；
      * 2、 mgpName: String,  type: 1当前账户； 2卖家账户 ； 3 买家账户；
-     * 3、 type: Int,  1邮箱绑定；2订单支付通知；3.放行；
+     * 3、 type: Int,  0邮箱绑定；1订单支付通知；2.放行；
      * 4、money: Double?   type： 1：不传money； 2：购买的MGP； 3需要打款的MGP
      */
     private void sendVerificationCode() {
@@ -174,7 +174,7 @@ public class BindMailFragment extends BaseFragment {
             Map params = MapUtils.newHashMap();
             params.put("mgpName", mangoWallet.getWalletAddress());
             params.put("mail", emailEt.getText().toString());
-            params.put("type", "1");
+            params.put("type", "0");
             String json = GsonUtils.toJson(params);
             String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().sendVerificationCode(content)

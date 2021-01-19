@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,9 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.ClickUtils;
+import com.blankj.utilcode.util.CollectionUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.MapUtils;
+import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -62,6 +65,8 @@ public class VoteMainFragment extends BaseFragment {
     DragFloatActionButton2 sendFloating;
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
+    @BindView(R.id.startTimeTv)
+    AppCompatTextView startTimeTv;
 
     private VoteMainAdapter voteMainAdapter;
     private Unbinder unbinder = null;
@@ -236,6 +241,13 @@ public class VoteMainFragment extends BaseFragment {
             ThemesBean themesBean = GsonUtils.fromJson(GsonUtils.toJson(jsonObject), ThemesBean.class);
             if (themesBean.getCode() == 0) {
                 if (pageInfo.isFirstPage()) {
+                    if (CollectionUtils.isNotEmpty(themesBean.getData())) {
+                        ThemesBean.DataBean dataBean = themesBean.getData().get(0);
+                        startTimeTv.setText((ObjectUtils.isEmpty(dataBean.getVoteStartTime()) ? "" : dataBean.getVoteStartTime()) + (ObjectUtils.isEmpty(dataBean.getVoteEndTime()) ? "" : dataBean.getVoteEndTime()));
+                        startTimeTv.setVisibility(View.VISIBLE);
+                    } else {
+                        startTimeTv.setVisibility(View.GONE);
+                    }
                     themesList.clear();
                     themesList.addAll(themesBean.getData());
                 } else {

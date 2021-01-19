@@ -734,6 +734,22 @@
     <string name="str_go_activate">アクティベーション</string>
     <string name="str_activate_succeed">正常にアクティブ化されました</string>
     <string name="str_activate_fail">アクティベーションが失敗する</string>
+    <string name="str_chinese_title">中国のタイトル</string>
+    <string name="str_english_title">英語のタイトル</string>
+    <string name="str_japan_title">日本のタイトル</string>
+    <string name="str_korean_title">韓国のタイトル</string>
+    <string name="str_chinese_describe">中国の説明</string>
+    <string name="str_english_describe">英語の説明</string>
+    <string name="str_japan_describe">日本語の説明</string>
+    <string name="str_korean_describe">韓国語の説明</string>
+    <string name="str_import_chinese_title">中国のタイトルを入力してください</string>
+    <string name="str_import_english_title">英語のタイトルを入力してください</string>
+    <string name="str_import_japan_title">日本のタイトルを入力してください</string>
+    <string name="str_import_korean_title">韓国語のタイトルを入力してください</string>
+    <string name="str_import_chinese_describe">中国の説明を入力してください</string>
+    <string name="str_import_english_describe">英語の説明を入力してください</string>
+    <string name="str_import_japan_describe">日本語の説明を入力してください</string>
+    <string name="str_import_korean_describe">韓国語で説明を入力してください</string>
 
 
     <string name="str_aleft">👈</string>

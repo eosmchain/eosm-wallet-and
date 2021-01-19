@@ -63,20 +63,25 @@ public class SendVoteMainFragment extends BaseFragment {
 
     @BindView(R.id.topBar)
     QMUITopBar topBar;
-    @BindView(R.id.voteThemeTv)
-    RequiredTextView voteThemeTv;
-    @BindView(R.id.voteThemeEt)
-    AppCompatEditText voteThemeEt;
-    @BindView(R.id.voteDescribeTv)
-    RequiredTextView voteDescribeTv;
-    @BindView(R.id.voteDescribeEt)
-    AppCompatEditText voteDescribeEt;
-    @BindView(R.id.voteDescribeLayout)
-    FrameLayout voteDescribeLayout;
-    @BindView(R.id.voteSchemeTv)
-    RequiredTextView voteSchemeTv;
-    @BindView(R.id.voteSchemeEt)
-    AppCompatEditText voteSchemeEt;
+    @BindView(R.id.voteThemeZHEt)
+    AppCompatEditText voteThemeZHEt;
+    @BindView(R.id.voteDescribeZHEt)
+    AppCompatEditText voteDescribeZHEt;
+
+    @BindView(R.id.voteThemeENEt)
+    AppCompatEditText voteThemeENEt;
+    @BindView(R.id.voteDescribeENEt)
+    AppCompatEditText voteDescribeENEt;
+
+    @BindView(R.id.voteThemeJAEt)
+    AppCompatEditText voteThemeJAEt;
+    @BindView(R.id.voteDescribeJAEt)
+    AppCompatEditText voteDescribeJAEt;
+
+    @BindView(R.id.voteThemeKOEt)
+    AppCompatEditText voteThemeKOEt;
+    @BindView(R.id.voteDescribeKOEt)
+    AppCompatEditText voteDescribeKOEt;
     @BindView(R.id.submitBtn)
     QMUIRoundButton submitBtn;
 
@@ -126,8 +131,14 @@ public class SendVoteMainFragment extends BaseFragment {
 
         if (isEdit) {
             if (dataBean != null) {
-                voteThemeEt.setText(ObjectUtils.isEmpty(dataBean.getVoteTitle()) ? "" : dataBean.getVoteTitle());
-                voteDescribeEt.setText(ObjectUtils.isEmpty(dataBean.getVoteContent()) ? "" : dataBean.getVoteContent());
+                voteThemeZHEt.setText(ObjectUtils.isEmpty(dataBean.getVoteTitleZh()) ? "" : dataBean.getVoteTitleZh());
+                voteDescribeZHEt.setText(ObjectUtils.isEmpty(dataBean.getVoteContentZh()) ? "" : dataBean.getVoteContentZh());
+                voteThemeENEt.setText(ObjectUtils.isEmpty(dataBean.getVoteTitleEn()) ? "" : dataBean.getVoteTitleEn());
+                voteDescribeENEt.setText(ObjectUtils.isEmpty(dataBean.getVoteContentEn()) ? "" : dataBean.getVoteContentEn());
+                voteThemeJAEt.setText(ObjectUtils.isEmpty(dataBean.getVoteTitleJa()) ? "" : dataBean.getVoteTitleJa());
+                voteDescribeJAEt.setText(ObjectUtils.isEmpty(dataBean.getVoteContentJa()) ? "" : dataBean.getVoteContentJa());
+                voteThemeKOEt.setText(ObjectUtils.isEmpty(dataBean.getVoteTitleKo()) ? "" : dataBean.getVoteTitleKo());
+                voteDescribeKOEt.setText(ObjectUtils.isEmpty(dataBean.getVoteContentKo()) ? "" : dataBean.getVoteContentKo());
             }
         }
     }
@@ -140,22 +151,42 @@ public class SendVoteMainFragment extends BaseFragment {
 
     @OnClick(R.id.submitBtn)
     public void onViewClicked() {
-        if (ObjectUtils.isEmpty(voteThemeEt.getText())) {
-            ToastUtils.showLong(R.string.str_enter_vote_theme);
+        if (ObjectUtils.isEmpty(voteThemeZHEt.getText())) {
+            ToastUtils.showLong(R.string.str_import_chinese_title);
             return;
         }
-        if (ObjectUtils.isEmpty(voteDescribeEt.getText())) {
-            ToastUtils.showLong(R.string.str_enter_vote_describe);
+        if (ObjectUtils.isEmpty(voteDescribeZHEt.getText())) {
+            ToastUtils.showLong(R.string.str_import_chinese_describe);
             return;
         }
-//        if (ObjectUtils.isEmpty(voteSchemeEt.getText())) {
-//            ToastUtils.showLong(getString(R.string.str_please_import) + " " + getString(R.string.str_vote_scheme));
-//            return;
-//        }
+        if (ObjectUtils.isEmpty(voteThemeENEt.getText())) {
+            ToastUtils.showLong(R.string.str_import_english_title);
+            return;
+        }
+        if (ObjectUtils.isEmpty(voteDescribeENEt.getText())) {
+            ToastUtils.showLong(R.string.str_import_english_describe);
+            return;
+        }
+        if (ObjectUtils.isEmpty(voteThemeJAEt.getText())) {
+            ToastUtils.showLong(R.string.str_import_japan_title);
+            return;
+        }
+        if (ObjectUtils.isEmpty(voteDescribeJAEt.getText())) {
+            ToastUtils.showLong(R.string.str_import_japan_describe);
+            return;
+        }
+        if (ObjectUtils.isEmpty(voteThemeKOEt.getText())) {
+            ToastUtils.showLong(R.string.str_import_korean_title);
+            return;
+        }
+        if (ObjectUtils.isEmpty(voteDescribeKOEt.getText())) {
+            ToastUtils.showLong(R.string.str_import_korean_describe);
+            return;
+        }
         if (isEdit) {
-            votesUpdate(voteThemeEt.getText().toString(), voteDescribeEt.getText().toString(), null);
+            votesUpdate();
         } else {
-            addTheme(voteThemeEt.getText().toString(), voteDescribeEt.getText().toString(), null);
+            addTheme();
         }
     }
 
@@ -177,13 +208,19 @@ public class SendVoteMainFragment extends BaseFragment {
     /**
      * 是否开启投递方案
      */
-    private void votesUpdate(String voteTitle, String voteContent, String schemeContent) {
+    private void votesUpdate() {
         showTipDialog(getString(R.string.str_loading));
         Map params = MapUtils.newHashMap();
         params.put("voteId", String.valueOf(dataBean.getVoteId()));
         params.put("address", walletAddress);
-        params.put("voteTitle", voteTitle);
-        params.put("voteContent", voteContent);
+        params.put("voteTitle", voteThemeZHEt.getText().toString());
+        params.put("voteContent", voteDescribeZHEt.getText().toString());
+        params.put("voteTitleEn", voteThemeENEt.getText().toString());
+        params.put("voteContentEn", voteDescribeENEt.getText().toString());
+        params.put("voteTitleJa", voteThemeJAEt.getText().toString());
+        params.put("voteContentJa", voteDescribeJAEt.getText().toString());
+        params.put("voteTitleKo", voteThemeKOEt.getText().toString());
+        params.put("voteContentKo", voteDescribeKOEt.getText().toString());
 //        params.put("schemeContent", schemeContent);
         String json = GsonUtils.toJson(params);
         try {
@@ -200,12 +237,18 @@ public class SendVoteMainFragment extends BaseFragment {
     /**
      * 是否开启投递方案
      */
-    private void addTheme(String voteTitle, String voteContent, String schemeContent) {
+    private void addTheme() {
         showTipDialog(getString(R.string.str_loading));
         Map params = MapUtils.newHashMap();
         params.put("address", walletAddress);
-        params.put("voteTitle", voteTitle);
-        params.put("voteContent", voteContent);
+        params.put("voteTitle", voteThemeZHEt.getText().toString());
+        params.put("voteContent", voteDescribeZHEt.getText().toString());
+        params.put("voteTitleEn", voteThemeENEt.getText().toString());
+        params.put("voteContentEn", voteDescribeENEt.getText().toString());
+        params.put("voteTitleJa", voteThemeJAEt.getText().toString());
+        params.put("voteContentJa", voteDescribeJAEt.getText().toString());
+        params.put("voteTitleKo", voteThemeKOEt.getText().toString());
+        params.put("voteContentKo", voteDescribeKOEt.getText().toString());
 //        params.put("schemeContent", schemeContent);
         String json = GsonUtils.toJson(params);
         try {

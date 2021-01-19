@@ -3,6 +3,7 @@ package com.token.mangowallet.ui.fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.widget.AppCompatButton;
@@ -19,13 +20,17 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.JsonObject;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUITopBar;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
+import com.token.mangowallet.bean.CheckSuperNodeBean;
 import com.token.mangowallet.bean.MsgCodeBean;
 import com.token.mangowallet.bean.ThemesBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.utils.NRSAUtils;
+import com.token.mangowallet.view.DialogHelper;
 
 import java.util.Map;
 
@@ -63,6 +68,9 @@ public class VoteDetailsFragment extends BaseFragment {
     private MangoWallet mangoWallet;
     private String walletAddress;
     private ThemesBean.DataBean dataBean;
+    private Button mRightBtn;
+    private QMUIDialog qmuiDialog;
+    private CheckSuperNodeBean.DataBean checkSuperBean;
 
     @Override
     protected View onCreateView() {
@@ -78,7 +86,6 @@ public class VoteDetailsFragment extends BaseFragment {
         Bundle bundle = getArguments();
         mangoWallet = bundle.getParcelable(EXTRA_WALLET);
         dataBean = bundle.getParcelable(EXTRA_VOTE_DATA);
-
         walletAddress = mangoWallet.getWalletAddress();
     }
 
@@ -91,18 +98,45 @@ public class VoteDetailsFragment extends BaseFragment {
                 popBackStack();
             }
         });
+        mRightBtn = topBar.addRightTextButton(R.string.str_vote, R.id.topbar_right_change_button);
+        mRightBtn.setVisibility(View.GONE);
+        mRightBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (qmuiDialog == null) {
+                    qmuiDialog = DialogHelper.showMessageDialog(getActivity(), getString(R.string.str_supernode_voting)
+                            , String.format(getString(R.string.str_supernode_voting_msg), String.valueOf(dataBean.getVoteCount())), getString(R.string.str_cancel), getString(R.string.str_vote_t), new QMUIDialogAction.ActionListener() {
+                                @Override
+                                public void onClick(QMUIDialog dialog, int index) {
+                                    dialog.dismiss();
+                                }
+                            }, new QMUIDialogAction.ActionListener() {
+                                @Override
+                                public void onClick(QMUIDialog dialog, int index) {
+                                    addSuperVote();
+                                    dialog.dismiss();
+                                }
+                            });
+                }
+
+                if (!qmuiDialog.isShowing()) {
+                    qmuiDialog.show();
+                }
+            }
+        });
         if (ObjectUtils.isNotEmpty(dataBean)) {
             voteTitleTv.setText(ObjectUtils.isEmpty(dataBean.getVoteTitle()) ? "" : dataBean.getVoteTitle());
             usernameTv.setText(ObjectUtils.isEmpty(dataBean.getAddress()) ? "" : dataBean.getAddress());
             fireVoteTv.setText(ObjectUtils.isEmpty(dataBean.getVoteCount()) ? "0" + getString(R.string.str_vote_ticket) : dataBean.getVoteCount() + getString(R.string.str_vote_ticket));
             voteContentTv.setText(ObjectUtils.isEmpty(dataBean.getVoteContent()) ? "" : dataBean.getVoteContent());
             voteTimeTv.setText(ObjectUtils.isEmpty(dataBean.getCreateTime()) ? "" : dataBean.getCreateTime());
-            if (dataBean.getType() != 3) {
-                submitBtn.setVisibility(View.GONE);
-            } else {
+            if (dataBean.getType() != 4) {
                 submitBtn.setVisibility(View.VISIBLE);
+            } else {
+                submitBtn.setVisibility(View.GONE);
             }
         }
+        checkSuperNode();
     }
 
     @Override
@@ -131,6 +165,78 @@ public class VoteDetailsFragment extends BaseFragment {
                     .subscribe(this::isVoteSuccess, this::onError);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * 检测是不是超级节点
+     */
+    private void checkSuperNode() {
+        showTipDialog(getString(R.string.str_loading));
+        Map params = MapUtils.newHashMap();
+        params.put("mgpName", walletAddress);
+        String json = GsonUtils.toJson(params);
+        try {
+            String content = NRSAUtils.encrypt(json);
+            NetWorkManager.getRequest().checkSuperNode(content)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::checkSuperNodeSuccess, this::onError);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 检测是不是超级节点
+     */
+    private void addSuperVote() {
+        showTipDialog(getString(R.string.str_loading));
+        Map params = MapUtils.newHashMap();
+        params.put("address", walletAddress);
+        params.put("voteId", String.valueOf(dataBean.getVoteId()));
+        params.put("money", String.valueOf(checkSuperBean.getMoney()));
+        String json = GsonUtils.toJson(params);
+        try {
+            String content = NRSAUtils.encrypt(json);
+            NetWorkManager.getRequest().addSuperVote(content)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::addSuperVoteSuccess, this::onError);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void addSuperVoteSuccess(JsonObject jsonObject) {
+        dismissTipDialog();
+        if (jsonObject != null) {
+            MsgCodeBean msgCodeBean = GsonUtils.fromJson(GsonUtils.toJson(jsonObject), MsgCodeBean.class);
+            if (msgCodeBean.getCode() == 0) {
+                ToastUtils.showLong(R.string.str_vote_success);
+                popBackStack();
+            } else {
+                ToastUtils.showLong(msgCodeBean.getMsg());
+            }
+        }
+    }
+
+    private void checkSuperNodeSuccess(JsonObject jsonObject) {
+        dismissTipDialog();
+        if (jsonObject != null) {
+            CheckSuperNodeBean checkSuperNodeBean = GsonUtils.fromJson(GsonUtils.toJson(jsonObject), CheckSuperNodeBean.class);
+            if (checkSuperNodeBean.getCode() == 0) {
+                checkSuperBean = checkSuperNodeBean.getData();
+                if (checkSuperBean != null) {
+                    if ((checkSuperBean.getIsSuperNode() == 1 && checkSuperBean.getIsVote() == 0) && dataBean.getType() != 4) {
+                        mRightBtn.setVisibility(View.VISIBLE);
+                    } else {
+                        mRightBtn.setVisibility(View.GONE);
+                    }
+                }
+            } else {
+                ToastUtils.showLong(checkSuperNodeBean.getMsg());
+            }
         }
     }
 

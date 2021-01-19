@@ -17,7 +17,7 @@ public class CashierInputFilter implements InputFilter {
     Pattern mPattern;
 
     //输入的最大金额
-    private BigDecimal MAX_VALUE = BigDecimal.ZERO;
+    private BigDecimal MAX_VALUE = new BigDecimal(Long.MAX_VALUE);
     //小数点后的位数
     private int POINTER_LENGTH = 4;
 

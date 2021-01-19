@@ -26,6 +26,7 @@ public interface Constants {
     String ETHPLORER_API_URL = "https://api.ethplorer.io";
     String VOTE_TEST_API_URL = "http://m.test.mgps.me/";//"http://vote.mgpchain.io";// "http://192.168.31.49:9000";
     String VOTE_API_URL = "http://vote.mgpchain.io";
+    String MMGPS_API_URL = "http://m.mgps.me";
     /**
      * 查询币价地址
      */
@@ -41,6 +42,7 @@ public interface Constants {
     String FAJIAN_URL = "FAJIAN_URL";
     String TOKENURL = "ETHPLORER_URL";
     String VOTEURL = "VOTE_URL";
+    String MMGPSME = "m.mgps.me";
     ///查询数字货币价格 price
     String DIGICCY_PRICE_URL = "DIGICCY_PRICE_URL";
 
@@ -131,7 +133,9 @@ public interface Constants {
     String TEST_VOTE_CONTRACT = "bpvotingo3o5";
     String WITHDRAW_VOTE = "unvote";//撤回投票
     String CANCEL_NODE = "delist";//取消节点  cancel
-    String DEAL_CONTRACT =  "mgp.otcstore";//买卖合约地址
+    String DEAL_CONTRACT = "qmgpotcstore";//""mgp.otcstore";//买卖合约地址
+    String OPEN_ORDER = "openorder";
+    String OLOSE_ORDER = "closeorder";
     ///////////////////////////////////////////
     String BaseFilePath = Environment.getExternalStorageDirectory() + File.separator + "MangoWallet";
     String CrashFilePath = BaseFilePath + File.separator + "Crash";
@@ -190,6 +194,7 @@ public interface Constants {
     String KEY_DIGICCY_SERVER = "key_digiccy_server";
     String KEY_CURRENCY_DATA = "key_currency_data";
     String KEY_CURRENCY_SYMBOL = "key_currency_symbolName";
+    String KEY_COIN_SYMBOL = "key_coin_symbol";
     /////////////////BusUtils////////////////////////
     String BUS_TO_WALLET = "bus_to_wallet";
     String BUS_DELETE_WALLET = "bus_delete_wallet";
@@ -266,4 +271,8 @@ public interface Constants {
     int ADD_WALLET_FAIL = 0;//添加钱包失败
     int ADD_WALLET_SUCCEED = 1;//添加钱包成功
 
+    //0 ： 卖家， 1 : 买家 ， 2 ：客服
+    int OTC_BUYER_ORDERS = 1;//买家 buyer  1
+    int OTC_SELLER_ORDERS = 0;//卖家 seller  0
+    int OTC_ARBITER_ORDERS = 2;//客服 arbiter  2
 }

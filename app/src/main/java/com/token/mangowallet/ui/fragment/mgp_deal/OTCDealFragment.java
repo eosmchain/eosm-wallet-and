@@ -41,7 +41,9 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
+import com.token.mangowallet.bean.DealsOrderBean;
 import com.token.mangowallet.bean.IsBindBean;
+import com.token.mangowallet.bean.PayInfoUserInfoBean;
 import com.token.mangowallet.bean.SelordersBean;
 import com.token.mangowallet.bean.TransactionBean;
 import com.token.mangowallet.db.MangoWallet;
@@ -54,6 +56,7 @@ import com.token.mangowallet.view.DealMGPPopup;
 import com.token.mangowallet.view.DialogHelper;
 import com.token.mangowallet.view.DragFloatActionButton;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -70,6 +73,7 @@ import static com.token.mangowallet.utils.Constants.DEAL_CONTRACT;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
 import static com.token.mangowallet.utils.Constants.MGP_SYMBOL;
+import static com.token.mangowallet.utils.Constants.OTC_BUYER_ORDERS;
 
 public class OTCDealFragment extends BaseFragment {
 
@@ -99,6 +103,8 @@ public class OTCDealFragment extends BaseFragment {
     private List<SelordersBean.RowsBean> rowsBeanList = new ArrayList<>();
     private boolean isBind = false;
     private Bundle orderBundle;
+    private String order_sn = "";
+    private int adapterPosition = 0;
 
     @Override
     protected View onCreateView() {
@@ -160,6 +166,7 @@ public class OTCDealFragment extends BaseFragment {
         otcDealAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
             @Override
             public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
+                adapterPosition = position;
                 if (view.getId() == R.id.purchaseBtn) {
                     if (isBind) {
                         SelordersBean.RowsBean rowsBean = rowsBeanList.get(position);
@@ -170,13 +177,14 @@ public class OTCDealFragment extends BaseFragment {
                 }
             }
         });
-    }
-
-    @OnClick(R.id.mysellDragBtn)
-    public void onViewClicked() {
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(EXTRA_WALLET, mangoWallet);
-        startFragment("OTCSellFragment");
+        mysellDragBtn.setOnClickListener(new DragFloatActionButton.OnClickListener() {
+            @Override
+            public void onClick() {
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(EXTRA_WALLET, mangoWallet);
+                startFragment("OTCSellFragment", bundle);
+            }
+        });
     }
 
     private void showDialog() {
@@ -209,10 +217,11 @@ public class OTCDealFragment extends BaseFragment {
                 @Override
                 public void onOrders(int ordersId, int index, String num, String amountPaid, String buyNum) {
                     getOrders(String.valueOf(ordersId), buyNum);
+                    PayInfoUserInfoBean.DataBean dataBean = otcDealAdapter.mUserInfoHashMap.get(adapterPosition);
                     orderBundle = new Bundle();
-                    orderBundle.putInt("index", index);
-                    orderBundle.putString("num", num);
+                    orderBundle.putInt("OTC_TYPE", OTC_BUYER_ORDERS);
                     orderBundle.putString("amountPaid", amountPaid);
+                    orderBundle.putParcelable("PayInfoUserInfoBean", dataBean);
                     orderBundle.putParcelable(EXTRA_WALLET, mangoWallet);
                 }
             });
@@ -239,7 +248,9 @@ public class OTCDealFragment extends BaseFragment {
         orderItem.getActionView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(EXTRA_WALLET, mangoWallet);
+                startFragment("MyOrderFragment", bundle);
             }
         });
         super.onCreateOptionsMenu(menu, inflater);
@@ -261,6 +272,7 @@ public class OTCDealFragment extends BaseFragment {
      * 账号自动激活
      */
     private void isBind() {
+        showTipDialog(getString(R.string.str_loading));
         try {
             Map params = MapUtils.newHashMap();
             params.put("mgpName", mangoWallet.getWalletAddress());
@@ -283,9 +295,9 @@ public class OTCDealFragment extends BaseFragment {
      * @param deal_quantity MGP数量
      */
     private void getOrders(String order_id, String deal_quantity) {
+        showTipDialog(getString(R.string.str_loading));
         try {
-            String order_sn = TimeUtils.getNowMills() + order_id + deal_quantity.replace(".", "");
-            showTipDialog(getString(R.string.str_loading));
+            order_sn = TimeUtils.getNowMills() + "";// + order_id + deal_quantity.replace(".", "");
             Map param = MapUtils.newHashMap();
             param.put("taker", mangoWallet.getWalletAddress());
             param.put("order_id", order_id);
@@ -318,6 +330,43 @@ public class OTCDealFragment extends BaseFragment {
         }
     }
 
+    /**
+     * 获取交易订单
+     */
+    private void getTradeOrder(String order_sn) {
+        try {
+//            showTipDialog(getString(R.string.str_loading));
+            Map mapTableRows = MapUtils.newHashMap();
+            mapTableRows.put("json", true);
+            mapTableRows.put("scope", DEAL_CONTRACT);
+            mapTableRows.put("code", DEAL_CONTRACT);
+            mapTableRows.put("index_position", "6");
+            mapTableRows.put("table", "deals");
+            mapTableRows.put("key_type", "i64");
+            mapTableRows.put("lower_bound", order_sn);
+            mapTableRows.put("upper_bound", order_sn);
+            emWalletRepository.fetchTableRowsStr(mapTableRows, walletType)
+                    .subscribe(this::onTradeOrderSuccess, this::onError);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void onTradeOrderSuccess(Object o) {
+        dismissTipDialog();
+        if (ObjectUtils.isNotEmpty(o)) {
+            DealsOrderBean dealsOrderBean = GsonUtils.fromJson(o.toString(), DealsOrderBean.class);
+            if (dealsOrderBean != null) {
+                List<DealsOrderBean.RowsBean> rowsBeanList = dealsOrderBean.getRows();
+                if (CollectionUtils.isNotEmpty(rowsBeanList)) {
+                    DealsOrderBean.RowsBean rowsBean = rowsBeanList.get(0);
+                    orderBundle.putParcelable("RowsBean", rowsBean);
+                    startFragment("BuyerTransactionInfoFragment", orderBundle);
+                }
+            }
+        }
+    }
+
     private void onIsBindSuccess(JsonObject jsonObject) {
         dismissTipDialog();
         if (ObjectUtils.isNotEmpty(jsonObject)) {
@@ -333,6 +382,7 @@ public class OTCDealFragment extends BaseFragment {
         dismissTipDialog();
         refreshLayout.finishRefresh();
         refreshLayout.finishLoadMore();
+        rowsBeanList.clear();
         if (ObjectUtils.isNotEmpty(o)) {
             SelordersBean selordersBean = GsonUtils.fromJson(o.toString(), SelordersBean.class);
             if (selordersBean != null) {
@@ -340,8 +390,43 @@ public class OTCDealFragment extends BaseFragment {
                     rowsBeanList.addAll(selordersBean.getRows());
                     CollectionUtils.filter(rowsBeanList, new CollectionUtils.Predicate<SelordersBean.RowsBean>() {
                         @Override
-                        public boolean evaluate(SelordersBean.RowsBean item) {
-                            return ObjectUtils.equals(0, item.getClosed());
+                        public boolean evaluate(SelordersBean.RowsBean item) {//过滤closed=1、MGP数量小于最小购买值的不要
+                            BigDecimal min_accept_quantity = BigDecimal.ZERO;
+                            BigDecimal min_mgp_num = BigDecimal.ZERO;
+                            BigDecimal price = BigDecimal.ZERO;
+                            BigDecimal quantity = BigDecimal.ZERO;
+                            BigDecimal frozen_quantity = BigDecimal.ZERO;
+                            BigDecimal fufilled_quantity = BigDecimal.ZERO;
+                            BigDecimal remaining_quantity = BigDecimal.ZERO;
+                            if (ObjectUtils.isNotEmpty(item.getPrice())) { // 价格
+                                String priceStr = item.getPrice();
+                                priceStr = priceStr.split(" ")[0];
+                                price = new BigDecimal(ObjectUtils.isEmpty(priceStr) ? "0" : priceStr);
+                            }
+                            if (ObjectUtils.isNotEmpty(item.getMin_accept_quantity())) {
+                                String min_accept_quantityStr = item.getMin_accept_quantity();
+                                min_accept_quantityStr = min_accept_quantityStr.split(" ")[0];
+                                min_accept_quantity = new BigDecimal(ObjectUtils.isEmpty(min_accept_quantityStr) ? "0" : min_accept_quantityStr);
+                            }
+                            if (ObjectUtils.isNotEmpty(item.getQuantity())) {// 总数
+                                String quantityStr = item.getQuantity();
+                                quantityStr = quantityStr.split(" ")[0];
+                                quantity = new BigDecimal(ObjectUtils.isEmpty(quantityStr) ? "0" : quantityStr);
+                            }
+                            if (ObjectUtils.isNotEmpty(item.getFrozen_quantity())) {// 冻结币
+                                String frozen_quantityStr = item.getFrozen_quantity();
+                                frozen_quantityStr = frozen_quantityStr.split(" ")[0];
+                                frozen_quantity = new BigDecimal(ObjectUtils.isEmpty(frozen_quantityStr) ? "0" : frozen_quantityStr);
+                            }
+                            if (ObjectUtils.isNotEmpty(item.getFufilled_quantity())) {//交易完成数量
+                                String fufilled_quantityStr = item.getFufilled_quantity();
+                                fufilled_quantityStr = fufilled_quantityStr.split(" ")[0];
+                                fufilled_quantity = new BigDecimal(ObjectUtils.isEmpty(fufilled_quantityStr) ? "0" : fufilled_quantityStr);
+                            }
+                            remaining_quantity = quantity.subtract(frozen_quantity).subtract(fufilled_quantity);
+                            min_mgp_num = min_accept_quantity.divide(price, 4, BigDecimal.ROUND_HALF_UP);
+                            LogUtils.dTag("evaluate==", quantity.toPlainString() + " - " + min_mgp_num.toPlainString() + " = ");
+                            return ObjectUtils.equals(0, item.getClosed()) && remaining_quantity.compareTo(min_mgp_num) >= 0;//-1表示小于，0是等于，1是大于。
                         }
                     });
                     Collections.reverse(rowsBeanList);
@@ -352,12 +437,12 @@ public class OTCDealFragment extends BaseFragment {
     }
 
     private void onTransactionSuccess(TransactionBean transactionBean) {
-        dismissTipDialog();
         if (transactionBean != null) {
             if (transactionBean.isSuccess) {
+                getTradeOrder(order_sn);
                 mDealMGPPopup.dismiss();
-                startFragment("BuyerTransactionInfoFragment", orderBundle);
             } else {
+                dismissTipDialog();
                 ToastUtils.showLong(transactionBean.msg);
             }
         }
@@ -373,6 +458,12 @@ public class OTCDealFragment extends BaseFragment {
 //            refreshLayout.finishLoadMore(false);
 //        }
         LogUtils.eTag(LOG_TAG, "e = " + e.toString());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getOrdersTableRows();
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.token.mangowallet.bean;
 
+import java.math.BigDecimal;
+
 public class CurrencyData {
     /**
      * name : 人民币
@@ -11,7 +13,7 @@ public class CurrencyData {
 
     private String name;
     private String symbol;
-    private String price;
+    private BigDecimal price;
     private int sort;
     private String symbolName;
 
@@ -31,11 +33,11 @@ public class CurrencyData {
         this.symbol = symbol;
     }
 
-    public String getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

@@ -1,9 +1,11 @@
 package com.token.mangowallet.utils;
 
+import com.blankj.utilcode.util.CollectionUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.token.mangowallet.bean.CurrencyData;
+import com.token.mangowallet.bean.CurrencySetupBean;
 
 import org.web3j.utils.Convert;
 
@@ -11,6 +13,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 
+import static com.token.mangowallet.utils.Constants.KEY_COIN_SYMBOL;
 import static com.token.mangowallet.utils.Constants.KEY_CURRENCY_DATA;
 import static com.token.mangowallet.utils.Constants.SP_MangoWallet_info;
 
@@ -102,7 +105,7 @@ public class BalanceUtils {
         CurrencyData data = getCurrencyData();
         if (ObjectUtils.isNotEmpty(data) && ObjectUtils.isNotEmpty(amount)) {
             if (ObjectUtils.isNotEmpty(data.getPrice())) {
-                BigDecimal decimal = new BigDecimal(amount).multiply(new BigDecimal(data.getPrice())).setScale(scale, roundingMode);
+                BigDecimal decimal = new BigDecimal(amount).multiply(data.getPrice()).setScale(scale, roundingMode);
                 return data.getSymbol() + APPUtils.dataFormat(decimal.toPlainString());
             }
         }
@@ -113,6 +116,19 @@ public class BalanceUtils {
         String currencyData = SPUtils.getInstance(SP_MangoWallet_info).getString(KEY_CURRENCY_DATA, "");
         if (ObjectUtils.isNotEmpty(currencyData)) {
             return GsonUtils.fromJson(currencyData, CurrencyData.class);
+        }
+        String json = SPUtils.getInstance(SP_MangoWallet_info).getString(KEY_COIN_SYMBOL, "");
+        if (ObjectUtils.isNotEmpty(json)) {
+            CurrencySetupBean currencySetupBean = GsonUtils.fromJson(json, CurrencySetupBean.class);
+            if (CollectionUtils.isNotEmpty(currencySetupBean.getData())) {
+                for (int i = 0; i < currencySetupBean.getData().size(); i++) {
+                    CurrencyData data = currencySetupBean.getData().get(i);
+                    if (ObjectUtils.equals("$", data.getSymbol())) {
+                        SPUtils.getInstance(SP_MangoWallet_info).put(KEY_CURRENCY_DATA, GsonUtils.toJson(data));
+                        return data;
+                    }
+                }
+            }
         }
         return null;
     }

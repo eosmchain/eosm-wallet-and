@@ -446,4 +446,10 @@ public class MyVoteMainFragment extends BaseFragment {
             startFragment("VoteMainRecordFragment", bundle);
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        participateThemes();
+    }
 }

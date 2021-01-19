@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,9 +18,13 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.MapUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.google.gson.JsonObject;
+import com.qmuiteam.qmui.skin.QMUISkinManager;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUITopBar;
+import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.bean.PayInfoBean;
@@ -82,7 +88,7 @@ public class SetupPaymentFragment extends BaseFragment {
         rightBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showAddPaymentTermPop();
             }
         });
         payInfoAdapter = new PayInfoAdapter(payInfoList);
@@ -92,7 +98,17 @@ public class SetupPaymentFragment extends BaseFragment {
 
     @Override
     protected void initAction() {
-
+        payInfoAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+                PayInfoBean.DataBean payInfoBean = payInfoList.get(position);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(EXTRA_WALLET, mangoWallet);
+                bundle.putParcelable("PayInfoBean", payInfoBean);
+                bundle.putInt("payId", payInfoBean.getPayId());
+                startFragment("AddPaymentFragment", bundle);
+            }
+        });
     }
 
     /**
@@ -137,4 +153,34 @@ public class SetupPaymentFragment extends BaseFragment {
         LogUtils.eTag(LOG_TAG, "e = " + e.toString());
     }
 
+    private void showAddPaymentTermPop() {
+        QMUIBottomSheet.BottomListSheetBuilder builder = new QMUIBottomSheet.BottomListSheetBuilder(getActivity());
+        builder.setGravityCenter(false)
+                .setSkinManager(QMUISkinManager.defaultInstance(getContext()))
+                .setTitle(getString(R.string.str_add_payment_term))
+                .setAddCancelBtn(true)
+                .setAllowDrag(true)
+                .setOnSheetItemClickListener(new QMUIBottomSheet.BottomListSheetBuilder.OnSheetItemClickListener() {
+                    @Override
+                    public void onClick(QMUIBottomSheet dialog, View itemView, int position, String tag) {
+                        dialog.dismiss();
+                        Bundle bundle = new Bundle();
+                        bundle.putParcelable(EXTRA_WALLET, mangoWallet);
+                        bundle.putParcelable("PayInfoBean", null);
+                        //1、银行卡；2、微信支付；3、支付宝
+                        bundle.putInt("payId", position + 1);
+                        startFragment("AddPaymentFragment", bundle);
+                    }
+                });
+        builder.addItem(ContextCompat.getDrawable(getContext(), R.mipmap.ic_bank_card), getString(R.string.str_bank_card));
+        builder.addItem(ContextCompat.getDrawable(getContext(), R.mipmap.ic_wechat), getString(R.string.str_wechat_pay));
+        builder.addItem(ContextCompat.getDrawable(getContext(), R.mipmap.ic_alipay), getString(R.string.str_alipay));
+        builder.build().show();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getPayInfoList();
+    }
 }

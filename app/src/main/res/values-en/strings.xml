@@ -736,6 +736,23 @@ After deleting the program or wallet, you need to restore the wallet by importin
     <string name="str_go_activate">Activation</string>
     <string name="str_activate_succeed">Activated successfully</string>
     <string name="str_activate_fail">Activation fails</string>
+    <string name="str_chinese_title">Chinese title</string>
+    <string name="str_english_title">English title</string>
+    <string name="str_japan_title">Japan title</string>
+    <string name="str_korean_title">Korean title</string>
+    <string name="str_chinese_describe">Chinese description</string>
+    <string name="str_english_describe">English description</string>
+    <string name="str_japan_describe">Japan description</string>
+    <string name="str_korean_describe">Korean description</string>
+    <string name="str_import_chinese_title">Please enter Chinese title</string>
+    <string name="str_import_english_title">Please enter English title</string>
+    <string name="str_import_japan_title">Please enter Japan title</string>
+    <string name="str_import_korean_title">Please enter Korean title</string>
+    <string name="str_import_chinese_describe">Please enter Chinese description</string>
+    <string name="str_import_english_describe">Please enter English description</string>
+    <string name="str_import_japan_describe">Please enter Japan description</string>
+    <string name="str_import_korean_describe">Please enter Korean description</string>
+
 
     <string name="str_aleft">👈</string>
     <string name="str_right">👉</string>

@@ -46,6 +46,16 @@
                     app:qmui_tab_icon_position="bottom"
                     app:qmui_topDividerColor="@color/qmui_config_color_separator" />
 
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/startTimeTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/qmui_config_color_gray_8"
+                    android:paddingLeft="@dimen/album_dp_15"
+                    android:paddingTop="@dimen/album_dp_10"
+                    android:paddingBottom="@dimen/album_dp_10"
+                    android:text="" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"

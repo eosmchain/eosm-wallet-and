@@ -51,6 +51,7 @@ import io.reactivex.schedulers.Schedulers;
 
 import static com.blankj.utilcode.util.StringUtils.getString;
 import static com.token.mangowallet.utils.Constants.CORPORATION_URL;
+import static com.token.mangowallet.utils.Constants.KEY_COIN_SYMBOL;
 import static com.token.mangowallet.utils.Constants.KEY_CURRENCY_DATA;
 import static com.token.mangowallet.utils.Constants.KEY_CURRENCY_SYMBOL;
 import static com.token.mangowallet.utils.Constants.KEY_SERVER;
@@ -186,9 +187,11 @@ public class CurrencySetupFragmeng extends BaseFragment {
     private void coinSymbolSuccess(JsonObject jsonObject) {
         dismissTipDialog();
         if (jsonObject != null) {
-            LogUtils.dTag(LOG_TAG, "data = " + GsonUtils.toJson(jsonObject));
-            CurrencySetupBean currencySetupBean = GsonUtils.fromJson(GsonUtils.toJson(jsonObject), CurrencySetupBean.class);
+            String json = GsonUtils.toJson(jsonObject);
+            LogUtils.dTag(LOG_TAG, "data = " + json);
+            CurrencySetupBean currencySetupBean = GsonUtils.fromJson(json, CurrencySetupBean.class);
             if (currencySetupBean.getCode() == 0) {
+                SPUtils.getInstance(SP_MangoWallet_info).put(KEY_COIN_SYMBOL, json);
                 currencyList = currencySetupBean.getData();
                 updataGroupListView();
             }

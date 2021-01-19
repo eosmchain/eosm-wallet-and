@@ -10,83 +10,96 @@
         android:layout_height="?attr/qmui_topbar_height"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/voteTitleTv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/album_dp_15"
-        android:layout_marginTop="@dimen/album_dp_10"
-        android:text=""
-        android:textSize="@dimen/big_medium"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topBar" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/album_dp_0"
+        app:layout_constraintBottom_toTopOf="@id/submitBtn"
+        app:layout_constraintTop_toBottomOf="@id/topBar">
 
-    <LinearLayout
-        android:id="@+id/layout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/voteTitleTv">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/usernameTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/album_dp_15"
-            android:text=""
-            android:textColor="@color/app_color_dark_blue"
-            android:textSize="@dimen/big_small"
-            app:layout_constraintEnd_toStartOf="@id/fireVoteTv"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/voteTitleTv" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/voteTitleTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_15"
+                android:layout_marginTop="@dimen/album_dp_10"
+                android:text=""
+                android:textSize="@dimen/big_medium"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/fireVoteTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/album_dp_20"
-            android:drawableLeft="@mipmap/ic_fire_vote"
-            android:drawablePadding="5dp"
-            android:text=""
-            android:textColor="@color/app_color_saffron_yellow"
-            android:textSize="@dimen/big_small"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/usernameTv"
-            app:layout_constraintTop_toBottomOf="@id/voteTitleTv" />
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/voteTitleTv">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/voteContentTv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/album_dp_20"
-        android:layout_marginTop="@dimen/album_dp_20"
-        android:layout_marginRight="@dimen/album_dp_20"
-        android:text=""
-        android:textColor="@color/app_color_common_black"
-        android:textSize="@dimen/big_small"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/usernameTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/album_dp_15"
+                    android:text=""
+                    android:textColor="@color/app_color_dark_blue"
+                    android:textSize="@dimen/big_small"
+                    app:layout_constraintEnd_toStartOf="@id/fireVoteTv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/voteTitleTv" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/voteTimeTv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/album_dp_20"
-        android:layout_marginTop="@dimen/album_dp_20"
-        android:layout_marginRight="@dimen/album_dp_20"
-        android:gravity="right"
-        android:text=""
-        android:textColor="@color/app_color_common_deputy"
-        android:textSize="@dimen/big_small"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/voteContentTv" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/fireVoteTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/album_dp_20"
+                    android:drawableLeft="@mipmap/ic_fire_vote"
+                    android:drawablePadding="5dp"
+                    android:text=""
+                    android:textColor="@color/app_color_saffron_yellow"
+                    android:textSize="@dimen/big_small"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/usernameTv"
+                    app:layout_constraintTop_toBottomOf="@id/voteTitleTv" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/voteContentTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_20"
+                android:layout_marginTop="@dimen/album_dp_20"
+                android:layout_marginRight="@dimen/album_dp_20"
+                android:text=""
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/big_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/voteTimeTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_20"
+                android:layout_marginTop="@dimen/album_dp_20"
+                android:layout_marginRight="@dimen/album_dp_20"
+                android:gravity="right"
+                android:text=""
+                android:textColor="@color/app_color_common_deputy"
+                android:textSize="@dimen/big_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/voteContentTv" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/submitBtn"

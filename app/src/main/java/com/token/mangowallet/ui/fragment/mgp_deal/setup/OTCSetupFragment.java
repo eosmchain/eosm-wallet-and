@@ -50,7 +50,6 @@ public class OTCSetupFragment extends BaseFragment {
     protected void initData() {
         Bundle bundle = getArguments();
         mangoWallet = bundle.getParcelable(EXTRA_WALLET);
-
     }
 
     @Override

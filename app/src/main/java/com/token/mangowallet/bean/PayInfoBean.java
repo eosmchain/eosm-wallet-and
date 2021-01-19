@@ -1,5 +1,8 @@
 package com.token.mangowallet.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -40,7 +43,7 @@ public class PayInfoBean {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Parcelable {
         /**
          * updateAt : 2021-01-07 09:24:20
          * del : false
@@ -67,12 +70,64 @@ public class PayInfoBean {
         private boolean isDefault;
         @SerializedName("default")
         private boolean defaultX;
-        private Object qrCode;
+        private String qrCode;
         private int payInfoId;
         private String name;
         private int payId;
         private boolean isDel;
         private String username;
+
+        protected DataBean(Parcel in) {
+            updateAt = in.readString();
+            del = in.readByte() != 0;
+            userId = in.readInt();
+            branch = in.readString();
+            createAt = in.readString();
+            cardNum = in.readString();
+            isDefault = in.readByte() != 0;
+            defaultX = in.readByte() != 0;
+            qrCode = in.readString();
+            payInfoId = in.readInt();
+            name = in.readString();
+            payId = in.readInt();
+            isDel = in.readByte() != 0;
+            username = in.readString();
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(updateAt);
+            dest.writeByte((byte) (del ? 1 : 0));
+            dest.writeInt(userId);
+            dest.writeString(branch);
+            dest.writeString(createAt);
+            dest.writeString(cardNum);
+            dest.writeByte((byte) (isDefault ? 1 : 0));
+            dest.writeByte((byte) (defaultX ? 1 : 0));
+            dest.writeString(qrCode);
+            dest.writeInt(payInfoId);
+            dest.writeString(name);
+            dest.writeInt(payId);
+            dest.writeByte((byte) (isDel ? 1 : 0));
+            dest.writeString(username);
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        public static final Creator<DataBean> CREATOR = new Creator<DataBean>() {
+            @Override
+            public DataBean createFromParcel(Parcel in) {
+                return new DataBean(in);
+            }
+
+            @Override
+            public DataBean[] newArray(int size) {
+                return new DataBean[size];
+            }
+        };
 
         public String getUpdateAt() {
             return updateAt;
@@ -138,11 +193,11 @@ public class PayInfoBean {
             this.defaultX = defaultX;
         }
 
-        public Object getQrCode() {
+        public String getQrCode() {
             return qrCode;
         }
 
-        public void setQrCode(Object qrCode) {
+        public void setQrCode(String qrCode) {
             this.qrCode = qrCode;
         }
 

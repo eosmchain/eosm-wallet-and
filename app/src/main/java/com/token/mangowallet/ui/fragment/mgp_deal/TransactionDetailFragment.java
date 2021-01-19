@@ -9,10 +9,15 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 
 import com.blankj.utilcode.util.BarUtils;
+import com.blankj.utilcode.util.ObjectUtils;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
+import com.token.mangowallet.bean.DealsOrderBean;
 import com.token.mangowallet.db.MangoWallet;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,9 +57,8 @@ public class TransactionDetailFragment extends BaseFragment {
     private Unbinder unbinder;
     private Bundle bundle;
     private MangoWallet mangoWallet;
-    private int index = 0;
-    private String num = "0";
     private String amountPaid = "0";
+    private DealsOrderBean.RowsBean mRowsBean;
 
     @Override
     protected View onCreateView() {
@@ -67,18 +71,13 @@ public class TransactionDetailFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-
-    }
-
-    @Override
-    public void setArguments(@Nullable Bundle args) {
-        super.setArguments(args);
         bundle = getArguments();
         mangoWallet = bundle.getParcelable(EXTRA_WALLET);
-        index = bundle.getInt("index", index);
-        num = bundle.getString("num", num);
         amountPaid = bundle.getString("amountPaid", amountPaid);
+        mRowsBean = bundle.getParcelable("RowsBean");
+        updataView();
     }
+
 
     @Override
     protected void initView() {
@@ -106,6 +105,42 @@ public class TransactionDetailFragment extends BaseFragment {
                 break;
             case R.id.putCoinHashValTv:
                 break;
+        }
+    }
+
+    BigDecimal dealQuantityDecimal = BigDecimal.ZERO;// 购买MGP的单价价格
+    BigDecimal orderPriceDecimal = BigDecimal.ZERO;// 本次交易数量
+    BigDecimal totalPricesDecimal = BigDecimal.ZERO;// 总价
+
+    private void updataView() {
+        if (mRowsBean != null) {
+            String deal_quantity = ObjectUtils.isEmpty(mRowsBean.getDeal_quantity()) ? "0.0000 MGP" : mRowsBean.getDeal_quantity();
+            String order_price = ObjectUtils.isEmpty(mRowsBean.getOrder_price()) ? "0.00 CNY" : mRowsBean.getOrder_price();
+
+            dealQuantityDecimal = new BigDecimal(deal_quantity.split(" ")[0]);
+            orderPriceDecimal = new BigDecimal(order_price.split(" ")[0]);
+            totalPricesDecimal = dealQuantityDecimal.multiply(orderPriceDecimal);
+            totalPricesValTv.setText("¥" + totalPricesDecimal.setScale(2, RoundingMode.HALF_UP).toPlainString());
+            priceValTv.setText("¥" + orderPriceDecimal.toPlainString());
+            quantityValTv.setText(deal_quantity);//pay_type
+            orderNumberValTv.setText(ObjectUtils.isEmpty(mRowsBean.getOrder_sn()) ? "" : mRowsBean.getOrder_sn());
+
+            String tabText = null;
+            if (mRowsBean.getPay_type() == 1) {
+                tabText = getString(R.string.str_bank_card);
+            } else if (mRowsBean.getPay_type() == 2) {
+                tabText = getString(R.string.str_wechat_pay);
+            } else if (mRowsBean.getPay_type() == 3) {
+                tabText = getString(R.string.str_alipay);
+            }
+            if (ObjectUtils.isNotEmpty(tabText)) {
+                paymentMethodValTv.setText(tabText);
+                paymentMethodTv.setVisibility(View.VISIBLE);
+                paymentMethodValTv.setVisibility(View.VISIBLE);
+            } else {
+                paymentMethodTv.setVisibility(View.GONE);
+                paymentMethodValTv.setVisibility(View.GONE);
+            }
         }
     }
 }

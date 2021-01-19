@@ -63,7 +63,7 @@ public class VoteMainAdapter extends BaseQuickAdapter<ThemesBean.DataBean, BaseV
                     statusStr = getContext().getString(R.string.str_check_pending);
                 } else if (token.getType() == 2) {
                     statusStr = getContext().getString(R.string.str_audit_failure);
-                    voteSchemeTv.setText(token.getMark());
+                    voteSchemeTv.setText(getContext().getString(R.string.str_check_pending));
                 } else if (token.getType() == 3) {
                     statusStr = getContext().getString(R.string.str_voteing);
                 } else if (token.getType() == 4) {

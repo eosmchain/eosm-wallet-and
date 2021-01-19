@@ -203,14 +203,19 @@ public class DealMGPPopup extends BasePopup {
 
             min_mgp_num = min_accept_quantity.divide(price, 4, BigDecimal.ROUND_HALF_UP);
 
-            String amountInterval = BalanceUtils.currencyToBase(min_accept_quantity.toPlainString(), 2, RoundingMode.CEILING)
-                    + "-" + BalanceUtils.currencyToBase(max_accept_quantity.toPlainString(), 2, RoundingMode.CEILING);
+//            String amountInterval = BalanceUtils.currencyToBase(min_accept_quantity.toPlainString(), 2, RoundingMode.CEILING)
+//                    + "-" + BalanceUtils.currencyToBase(max_accept_quantity.toPlainString(), 2, RoundingMode.CEILING);
+//            String mgpNumInterval = APPUtils.dataFormat(min_mgp_num.toPlainString())
+//                    + "-" + APPUtils.dataFormat(remaining_quantity.toPlainString())
+//                    + " " + MGP_SYMBOL;
+            String amountInterval = min_accept_quantity.toPlainString()
+                    + "-" + max_accept_quantity.toPlainString() + " CNY";
             String mgpNumInterval = APPUtils.dataFormat(min_mgp_num.toPlainString())
                     + "-" + APPUtils.dataFormat(remaining_quantity.toPlainString())
                     + " " + MGP_SYMBOL;
             editText.setFilters(new InputFilter[]{new CashierInputFilter(mCurIndex == 0 ? max_accept_quantity.setScale(2, CEILING)
                     : remaining_quantity.setScale(4, FLOOR), mCurIndex == 0 ? 2 : 4)});
-            priceValTv.setText(BalanceUtils.currencyToBase(price.toPlainString(), 2, RoundingMode.FLOOR));
+            priceValTv.setText(price.toPlainString());//BalanceUtils.currencyToBase(price.toPlainString(), 2, RoundingMode.FLOOR));
             quotaTv.setText(getString(R.string.str_quota) + " " + (mCurIndex == 0 ? amountInterval : mgpNumInterval));
             unitTv.setText(mCurIndex == 0 ? "CNY" : "MGP");
         }
@@ -220,15 +225,17 @@ public class DealMGPPopup extends BasePopup {
         if (ObjectUtils.isNotEmpty(num)) {
             if (!ObjectUtils.equals(num, purchaseNum) || mCurIndex == index) {
                 BigDecimal bigDecimal = new BigDecimal(num);
-                BigDecimal buyNum = bigDecimal.divide(price, 4, BigDecimal.ROUND_HALF_UP);
+
                 if (mCurIndex == 0) {
-                    this.buyNum = buyNum.setScale(4, FLOOR).toPlainString();
+                    BigDecimal buyNum = bigDecimal.divide(price, 4, BigDecimal.ROUND_HALF_UP);
+                    this.buyNum = buyNum.toPlainString();
                     numberTransactionValTv.setText(buyNum + " " + MGP_SYMBOL);
-                    disbursementsValTv.setText(BalanceUtils.currencyToBase(num, 2, RoundingMode.FLOOR));
+                    disbursementsValTv.setText(num + " CNY");//BalanceUtils.currencyToBase(num, 2, RoundingMode.FLOOR));
                 } else {
+                    BigDecimal buyA = bigDecimal.multiply(price);
                     this.buyNum = bigDecimal.setScale(4, FLOOR).toPlainString();
                     numberTransactionValTv.setText(num + " " + MGP_SYMBOL);
-                    disbursementsValTv.setText(BalanceUtils.currencyToBase(buyNum.toPlainString(), 2, RoundingMode.FLOOR));
+                    disbursementsValTv.setText(buyA.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + " CNY");//BalanceUtils.currencyToBase(buyNum.toPlainString(), 2, RoundingMode.FLOOR));
                 }
             }
         }
@@ -278,6 +285,7 @@ public class DealMGPPopup extends BasePopup {
          * @param index      0=按金额；1=按MGP数量
          * @param num        index=0=金额数；index=1=MGP数量
          * @param amountPaid 实付金额
+         * @param buyNum     实付mgp数量
          */
         void onOrders(int ordersId, int index, String num, String amountPaid, String buyNum);
     }

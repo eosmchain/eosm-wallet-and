@@ -735,6 +735,22 @@
     <string name="str_go_activate">활성화</string>
     <string name="str_activate_succeed">성공적으로 활성화되었습니다.</string>
     <string name="str_activate_fail">활성화 실패</string>
+    <string name="str_chinese_title">중국어 제목</string>
+    <string name="str_english_title">영어 제목</string>
+    <string name="str_japan_title">일본어 제목</string>
+    <string name="str_korean_title">한국어 제목</string>
+    <string name="str_chinese_describe">중국어 설명</string>
+    <string name="str_english_describe">영어 설명</string>
+    <string name="str_japan_describe">일본어 설명</string>
+    <string name="str_korean_describe">한국어 설명</string>
+    <string name="str_import_chinese_title">중국어 제목을 입력하세요</string>
+    <string name="str_import_english_title">영어 제목을 입력하세요</string>
+    <string name="str_import_japan_title">일본어 제목을 입력하세요</string>
+    <string name="str_import_korean_title">한국어 제목을 입력하세요</string>
+    <string name="str_import_chinese_describe">중국어 설명을 입력하세요</string>
+    <string name="str_import_english_describe">영어 설명을 입력하세요</string>
+    <string name="str_import_japan_describe">일본어 설명을 입력하세요</string>
+    <string name="str_import_korean_describe">한국어로 설명을 입력하세요</string>
 
     <string name="str_aleft">👈</string>
     <string name="str_right">👉</string>

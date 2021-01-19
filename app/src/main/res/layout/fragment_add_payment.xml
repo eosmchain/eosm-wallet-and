@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/durban_White">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/userNameTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_20"
+                android:layout_marginTop="@dimen/album_dp_20"
+                android:text="@string/str_username"
+                android:textColor="@color/app_color_common_deputy"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/userNameValEt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_20"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="@dimen/album_dp_20"
+                android:hint="@string/str_import_collection_name"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/userNameTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/accountNumberTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_20"
+                android:layout_marginTop="@dimen/album_dp_30"
+                android:text="@string/str_account_number"
+                android:textColor="@color/app_color_common_deputy"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/userNameValEt" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/accountNumberValEt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_20"
+                android:layout_marginTop="@dimen/album_dp_20"
+                android:layout_marginRight="@dimen/album_dp_20"
+                android:hint="@string/str_import_collection_account"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/accountNumberTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/collectionQRTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_20"
+                android:layout_marginTop="@dimen/album_dp_30"
+                android:text="@string/str_add_collection_qr"
+                android:textColor="@color/app_color_common_deputy"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/accountNumberValEt" />
+
+            <FrameLayout
+                android:id="@+id/addCollectionQRLayout"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_20"
+                android:layout_marginTop="@dimen/album_dp_20"
+                android:layout_marginRight="@dimen/album_dp_20"
+                android:maxHeight="@dimen/album_dp_80"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/collectionQRTv">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/collectionQRValIv"
+                    android:layout_width="@dimen/album_dp_80"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/album_dp_10"
+                    android:src="@mipmap/ic_add_pic" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/deleteBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:src="@mipmap/ic_delete_oval"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/bankNameTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_20"
+                android:layout_marginTop="@dimen/album_dp_30"
+                android:text="@string/str_bank_name"
+                android:textColor="@color/app_color_common_deputy"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/accountNumberValEt" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/bankNameValEt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_20"
+                android:layout_marginTop="@dimen/album_dp_20"
+                android:layout_marginRight="@dimen/album_dp_20"
+                android:hint="@string/str_import_bank_name"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bankNameTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/bankSubbranchTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_20"
+                android:layout_marginTop="@dimen/album_dp_30"
+                android:text="@string/str_open_subbranch"
+                android:textColor="@color/app_color_common_deputy"
+                android:textSize="@dimen/small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bankNameValEt" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/bankSubbranchValEt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_20"
+                android:layout_marginTop="@dimen/album_dp_20"
+                android:layout_marginRight="@dimen/album_dp_20"
+                android:hint="@string/str_import_bank_name"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bankSubbranchTv" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/phonePayGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:constraint_referenced_ids="addCollectionQRLayout,collectionQRTv" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/bankPayGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="bankNameTv,bankNameValEt,bankSubbranchTv,bankSubbranchValEt" />
+
+            <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                android:id="@+id/saveBtn"
+                android:layout_width="@dimen/album_dp_0"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_50"
+                android:layout_marginTop="@dimen/album_dp_50"
+                android:layout_marginRight="@dimen/album_dp_50"
+                android:paddingTop="@dimen/album_dp_10"
+                android:paddingBottom="@dimen/album_dp_10"
+                android:text="@string/str_save"
+                android:textColor="@color/durban_White"
+                android:textSize="@dimen/big_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/addCollectionQRLayout"
+                app:qmui_backgroundColor="@color/app_color_dark_blue2"
+                app:qmui_radius="5dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

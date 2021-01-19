@@ -1223,6 +1223,28 @@ public interface RequestApi {
     Observable<JsonObject> isVote(@Header("content") String content);
 
     /**
+     * 检测是不是超级节点
+     * mgpName
+     *
+     * @Header("content:") String content
+     */
+    @Headers("urlname:" + Constants.CORPORATION_URL)
+    @POST("/voteTheme/checkSuperNode")
+    Observable<JsonObject> checkSuperNode(@Header("content") String content);
+
+    /**
+     * 超级节点发起投票
+     * address 超级节点账户
+     * voteId 方案ID
+     * money 金额
+     *
+     * @Header("content:") String content
+     */
+    @Headers("urlname:" + Constants.CORPORATION_URL)
+    @POST("/voteTheme/addSuperVote")
+    Observable<JsonObject> addSuperVote(@Header("content") String content);
+
+    /**
      * 提交hash及抵押金额
      * voteId  添加投票方案返回的内容
      * hash
@@ -1481,4 +1503,48 @@ public interface RequestApi {
     @Headers("urlname:" + Constants.VOTEURL)
     @POST("/otcapi/api/moPayInfo/list")
     Observable<JsonObject> getPayInfoList(@Header("content") String content);
+
+    /**
+     * 添加及修改支付信息
+     * mgpName
+     * cardNum 银行卡号 微信账户 支付宝账户
+     * id 用户返回的掉save接口时使用
+     * name payId,1:银行名称，2.3可以不填
+     * payId 支付方式1银行2微信3支付宝
+     * qrCode 微信支付宝支付二维码
+     * branch 银行支行
+     * username 用户名
+     * payInfoId 用户信息返回的payInfoId，如果存在就是修改不存在就是新增
+     *
+     * @Header("content:") String content
+     */
+    @Headers("urlname:" + Constants.VOTEURL)
+    @POST("/otcapi/api/moPayInfo/save")
+    Observable<JsonObject> savePayWay(@Header("content") String content);
+
+
+    /**
+     * 获取收款方式
+     * mgpName
+     * bucket otcstore.mgps.me
+     * appName MGP
+     *
+     * @Header("content:") String content
+     */
+    @Headers("urlname:" + Constants.MMGPSME)
+    @Multipart
+    @POST("/fileapi/file/uploadFile")
+    Observable<JsonObject> uploadFile(@Part("file") MultipartBody multipartBody, @Query("bucket") String bucket, @Query("appName") String appName);
+
+    /**
+     * 获取收款方式
+     * mgpName
+     * bucket otcstore.mgps.me
+     * appName MGP
+     *
+     * @Header("content:") String content
+     */
+    @Headers("urlname:" + Constants.VOTEURL)
+    @POST("/otcapi/api/moUsers/payInfo")
+    Observable<JsonObject> payInfo(@Header("content") String content);
 }

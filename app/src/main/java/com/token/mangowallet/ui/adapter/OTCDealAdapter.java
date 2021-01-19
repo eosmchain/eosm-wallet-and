@@ -2,6 +2,8 @@ package com.token.mangowallet.ui.adapter;
 
 import android.view.View;
 
+import androidx.appcompat.widget.AppCompatImageView;
+
 import com.blankj.utilcode.util.CollectionUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
@@ -9,12 +11,17 @@ import com.blankj.utilcode.util.MapUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.google.gson.JsonObject;
 import com.token.mangowallet.R;
 import com.token.mangowallet.bean.OrderGoodsBean;
+import com.token.mangowallet.bean.PayInfoUserInfoBean;
 import com.token.mangowallet.bean.SelordersBean;
+import com.token.mangowallet.net.common.NetWorkManager;
+import com.token.mangowallet.net.common.RxSubscriber;
 import com.token.mangowallet.ui.fragment.mgp_deal.OTCDealFragment;
 import com.token.mangowallet.utils.APPUtils;
 import com.token.mangowallet.utils.BalanceUtils;
+import com.token.mangowallet.utils.NRSAUtils;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -22,8 +29,12 @@ import org.jetbrains.annotations.Nullable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 import static com.token.mangowallet.utils.Constants.DEAL_CONTRACT;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
@@ -31,6 +42,7 @@ import static com.token.mangowallet.utils.Constants.MGP_SYMBOL;
 
 public class OTCDealAdapter extends BaseQuickAdapter<SelordersBean.RowsBean, BaseViewHolder> {
     private OTCDealFragment otcDealFragment;
+    public HashMap<Integer, PayInfoUserInfoBean.DataBean> mUserInfoHashMap = new HashMap<>();
 
     public OTCDealAdapter(OTCDealFragment otcDealFragment, @Nullable List<SelordersBean.RowsBean> data) {
         super(R.layout.item_mgp_deal, data);
@@ -39,7 +51,54 @@ public class OTCDealAdapter extends BaseQuickAdapter<SelordersBean.RowsBean, Bas
 
     @Override
     protected void convert(@NotNull BaseViewHolder baseViewHolder, SelordersBean.RowsBean rowsBean) {
-//        getBusinessTableRows(rowsBean.getOwner());
+//        getBusinessTableRows(rowsBean.getOwner(), baseViewHolder.getAdapterPosition());
+        AppCompatImageView bankCardIv = baseViewHolder.getView(R.id.bankCardIv);
+        AppCompatImageView alipayIv = baseViewHolder.getView(R.id.alipayIv);
+        AppCompatImageView wechatIv = baseViewHolder.getView(R.id.wechatIv);
+        try {
+            Map params = MapUtils.newHashMap();
+            params.put("mgpName", rowsBean.getOwner());
+            String json = GsonUtils.toJson(params);
+            String content = NRSAUtils.encrypt(json);
+            NetWorkManager.getRequest().payInfo(content)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new RxSubscriber<JsonObject>(otcDealFragment.getActivity(), false) {
+                        @Override
+                        public void onFail(String failMsg) {
+                            LogUtils.eTag(LOG_TAG, "failMsg = " + failMsg);
+                        }
+
+                        @Override
+                        public void onSuccess(JsonObject jsonObject) {
+                            if (ObjectUtils.isNotEmpty(jsonObject)) {
+                                PayInfoUserInfoBean payInfoUserInfoBean = GsonUtils.fromJson(GsonUtils.toJson(jsonObject), PayInfoUserInfoBean.class);
+                                if (payInfoUserInfoBean != null) {
+                                    if (payInfoUserInfoBean.getCode() == 0) {
+                                        PayInfoUserInfoBean.DataBean dataBean = payInfoUserInfoBean.getData();
+                                        mUserInfoHashMap.put(baseViewHolder.getAdapterPosition(), dataBean);
+                                        List<PayInfoUserInfoBean.DataBean.PayInfosBean> payInfosBeanList = dataBean.getPayInfos();
+//                                        PayInfoUserInfoBean.DataBean.UserInfoBean userInfo = dataBean.getUserInfo();
+                                        if (CollectionUtils.isNotEmpty(payInfosBeanList)) {
+                                            for (int i = 0; i < payInfosBeanList.size(); i++) {
+                                                PayInfoUserInfoBean.DataBean.PayInfosBean payInfosBean = payInfosBeanList.get(i);
+                                                if (payInfosBean.getPayId() == 1) {
+                                                    bankCardIv.setVisibility(View.VISIBLE);
+                                                } else if (payInfosBean.getPayId() == 2) {
+                                                    wechatIv.setVisibility(View.VISIBLE);
+                                                } else if (payInfosBean.getPayId() == 3) {
+                                                    alipayIv.setVisibility(View.VISIBLE);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         /**
          *   "id": 0, // 订单ID
          *       "owner": "mgptest11111", // 挂售人
@@ -98,7 +157,7 @@ public class OTCDealAdapter extends BaseQuickAdapter<SelordersBean.RowsBean, Bas
     /**
      * 商家信息
      */
-    private void getBusinessTableRows(String owner) {
+    private void getBusinessTableRows(String owner, int position) {
         try {
             Map mapTableRows = MapUtils.newHashMap();
             mapTableRows.put("table", "sellers");
@@ -109,19 +168,21 @@ public class OTCDealAdapter extends BaseQuickAdapter<SelordersBean.RowsBean, Bas
             mapTableRows.put("json", true);
             mapTableRows.put("limit", "500");
             otcDealFragment.emWalletRepository.fetchTableRowsStr(mapTableRows, otcDealFragment.walletType)
-                    .subscribe(this::onOrdersSuccess, this::onError);
+                    .subscribe(new RxSubscriber<JsonObject>(otcDealFragment.getActivity(), false) {
+                        @Override
+                        public void onFail(String failMsg) {
+                            LogUtils.eTag(LOG_TAG, "failMsg = " + failMsg);
+                        }
+
+                        @Override
+                        public void onSuccess(JsonObject jsonObject) {
+                            if (ObjectUtils.isNotEmpty(jsonObject)) {
+
+                            }
+                        }
+                    });
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private void onOrdersSuccess(Object o) {
-        if (ObjectUtils.isNotEmpty(o)) {
-
-        }
-    }
-
-    private void onError(Object e) {
-        LogUtils.eTag(LOG_TAG, "e = " + e.toString());
     }
 }

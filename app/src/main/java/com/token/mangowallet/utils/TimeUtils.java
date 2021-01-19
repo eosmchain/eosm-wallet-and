@@ -10,13 +10,30 @@ import java.util.TimeZone;
 
 public class TimeUtils {
 
-    DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
-    DateFormat defaultFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+    static DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+    static DateFormat defaultFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+    static DateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+    static DateFormat defaultFormat2 = new SimpleDateFormat("HH:mm MM/dd", Locale.getDefault());
 
-    public String getStringTime(String timef) {
+    public static String getStringTime(String timef) {
         formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
         long millis = com.blankj.utilcode.util.TimeUtils.string2Millis(timef, formatter);
         return com.blankj.utilcode.util.TimeUtils.millis2String(millis, defaultFormat);
+    }
+
+    public static long getSurplusMillisTime(String timef) {
+        formatter2.setTimeZone(TimeZone.getTimeZone("UTC"));
+        long millis = com.blankj.utilcode.util.TimeUtils.string2Millis(timef, formatter2);
+        String mTime = com.blankj.utilcode.util.TimeUtils.millis2String(millis, defaultFormat);
+        long expirationMillis = com.blankj.utilcode.util.TimeUtils.string2Millis(mTime);
+        long curMillis = com.blankj.utilcode.util.TimeUtils.getNowMills();
+        return expirationMillis - curMillis;
+    }
+
+    public static String getStringTime2(String timef) {
+        formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+        long millis = com.blankj.utilcode.util.TimeUtils.string2Millis(timef, formatter2);
+        return com.blankj.utilcode.util.TimeUtils.millis2String(millis, defaultFormat2);
     }
 
     /**

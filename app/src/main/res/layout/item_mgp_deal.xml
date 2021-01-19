@@ -115,6 +115,7 @@
         android:layout_marginRight="@dimen/album_dp_10"
         android:layout_marginBottom="8dp"
         android:src="@mipmap/ic_bank_card"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/purchaseBtn"
         app:layout_constraintEnd_toStartOf="@id/alipayIv" />
 
@@ -125,6 +126,7 @@
         android:layout_marginRight="@dimen/album_dp_10"
         android:layout_marginBottom="8dp"
         android:src="@mipmap/ic_alipay"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/purchaseBtn"
         app:layout_constraintEnd_toStartOf="@id/wechatIv" />
 
@@ -135,6 +137,7 @@
         android:layout_marginRight="@dimen/album_dp_20"
         android:layout_marginBottom="8dp"
         android:src="@mipmap/ic_wechat"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/purchaseBtn"
         app:layout_constraintEnd_toEndOf="parent" />
 

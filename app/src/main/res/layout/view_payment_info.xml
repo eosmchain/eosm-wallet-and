@@ -18,6 +18,8 @@
         android:drawablePadding="5dp"
         android:gravity="center"
         android:text="@string/str_bank_card"
+        android:textColor="@color/app_color_common_dark_black"
+        android:textSize="@dimen/big_small"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -138,7 +140,7 @@
         android:layout_height="@dimen/album_dp_100"
         android:layout_marginLeft="@dimen/album_dp_15"
         android:layout_marginTop="@dimen/album_dp_15"
-        android:src="@mipmap/launch_bg"
+        android:src="@mipmap/ercode_bg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/paymentIDTv" />
 

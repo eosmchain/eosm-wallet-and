@@ -735,6 +735,25 @@
     <string name="str_go_activate">激活</string>
     <string name="str_activate_succeed">激活成功</string>
     <string name="str_activate_fail">激活失败</string>
+    <string name="str_chinese_title">中文标题</string>
+    <string name="str_english_title">英文标题</string>
+    <string name="str_japan_title">日本标题</string>
+    <string name="str_korean_title">韩文标题</string>
+    <string name="str_chinese_describe">中文描述</string>
+    <string name="str_english_describe">英文描述</string>
+    <string name="str_japan_describe">日本描述</string>
+    <string name="str_korean_describe">韩文描述</string>
+    <string name="str_import_chinese_title">请输入中文标题</string>
+    <string name="str_import_english_title">请输入英文标题</string>
+    <string name="str_import_japan_title">请输入日本标题</string>
+    <string name="str_import_korean_title">请输入韩文标题</string>
+    <string name="str_import_chinese_describe">请输入中文描述</string>
+    <string name="str_import_english_describe">请输入英文描述</string>
+    <string name="str_import_japan_describe">请输入日本描述</string>
+    <string name="str_import_korean_describe">请输入韩文描述</string>
+
+
+
 
 
     <string name="str_aleft">👈</string>
