@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/titleTv"
             android:layout_marginLeft="@dimen/album_dp_30"
+            android:layout_marginRight="@dimen/album_dp_30"
             android:layout_marginTop="@dimen/album_dp_30"
             android:text="@string/str_cancellation_msg"
             android:textColor="@color/app_color_common_black"

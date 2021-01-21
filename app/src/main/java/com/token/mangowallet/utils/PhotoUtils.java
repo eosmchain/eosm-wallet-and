@@ -18,6 +18,7 @@ import android.util.Base64;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import com.blankj.utilcode.util.ScreenUtils;
 import com.token.mangowallet.R;
@@ -149,7 +150,29 @@ public class PhotoUtils {
         //裁剪图片
         Durban.with(activity).title(activity.getString(R.string.str_crop_image)).inputImagePaths(photoPath).outputDirectory
                 (CropimageFilePath).maxWidthHeight(ScreenUtils.getScreenWidth(), ScreenUtils.getScreenHeight())
-                .compressFormat(Durban.COMPRESS_JPEG).compressQuality(90).aspectRatio(1.6f, 1f).gesture(Durban.GESTURE_ALL).controller(
+                .compressFormat(Durban.COMPRESS_PNG).compressQuality(90).aspectRatio(1.6f, 1f).gesture(Durban.GESTURE_ALL).controller(
+                Controller.newBuilder()
+                        .enable(false)
+                        .rotation(true)
+                        .rotationTitle(true)
+                        .scale(true)
+                        .scaleTitle(true)
+                        .build()).requestCode(200).start();
+    }
+
+    /**
+     * 裁剪图片
+     *
+     * @param fragment
+     * @param photoPath   图片路径
+     * @param widthRatio  宽度裁剪比例
+     * @param heightRatio 高度裁剪比例
+     */
+    public void cropImage(Fragment fragment, final String photoPath, final float widthRatio, final float heightRatio) {
+        //裁剪图片
+        Durban.with(fragment).title(fragment.getString(R.string.str_crop_image)).inputImagePaths(photoPath).outputDirectory
+                (CropimageFilePath).maxWidthHeight(ScreenUtils.getScreenWidth(), ScreenUtils.getScreenHeight())
+                .compressFormat(Durban.COMPRESS_PNG).compressQuality(90).aspectRatio(1f, 1f).gesture(Durban.GESTURE_ALL).controller(
                 Controller.newBuilder()
                         .enable(false)
                         .rotation(true)
@@ -221,7 +244,7 @@ public class PhotoUtils {
      * @param file
      * @return base64编码的字符串
      */
-    public byte[]  imageToBytes(File file) {
+    public byte[] imageToBytes(File file) {
         byte[] buffer = new byte[0];
         FileInputStream fis = null;
         try {

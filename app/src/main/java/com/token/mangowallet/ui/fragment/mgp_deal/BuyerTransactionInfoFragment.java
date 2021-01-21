@@ -136,9 +136,9 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
      * // 支付超时
      * close = 1
      * <p>
-     * orderStatus = 订单状态：0:代付款;1:待放行;2:交易完成;3:交易失败;4:支付超时;
+     * orderStatus 订单状态：0:代付款;1:超时取消;2:待放行;3:放行超时;4:交易完成;5:交易取消;
      */
-    private long orderStatus = 0;//订单状态：0:代付款;1:待放行;2:交易完成;3:交易失败;4:支付超时;
+    private long orderStatus = 0;//orderStatus 订单状态：0:代付款;1:超时取消;2:待放行;3:放行超时;4:交易完成;5:交易取消;
     public EMWalletRepository emWalletRepository;
     private Constants.WalletType walletType;
     private Dialog payWayTipDialog;
@@ -195,13 +195,13 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.cancelOrderBtn:
-                //orderStatus 订单状态：0:代付款;1:待放行;2:交易完成;3:交易失败;4:支付超时;
+                //orderStatus 订单状态：0:代付款;1:超时取消;2:待放行;3:放行超时;4:交易完成;5:交易取消;
                 if (OTC_TYPE == OTC_BUYER_ORDERS) {
                     if (orderStatus == 0) {
                         showConfirmMessageDialog();
                     }
                 } else if (OTC_TYPE == OTC_SELLER_ORDERS) {
-                    if (orderStatus == 1) {
+                    if (orderStatus == 2) {
                         ToastUtils.showLong(getString(R.string.str_arbitration_collection));
                     }
                 }
@@ -212,7 +212,7 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
                         showPayWayTipDialog();
                     }
                 } else if (OTC_TYPE == OTC_SELLER_ORDERS) {
-                    if (orderStatus == 1) {
+                    if (orderStatus == 2) {
                         showConfirmReceiptDialog();
                     }
                 }
@@ -424,6 +424,14 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
             }
             if (mRowsBean.getTaker_passed() == 0 && taker_passed == 0 && mRowsBean.getClosed() == 0) {
                 //代付款 taker_passed = 0， taker_passed_at= 1970-01-01T00:00:00", close = 0
+                mStartTime = ObjectUtils.isEmpty(mRowsBean.getExpired_at()) ? "0" : mRowsBean.getExpired_at();
+                long mistiming = TimeUtils.getSurplusMillisTime(mStartTime);//expiration_at
+                //orderStatus 订单状态：0:代付款;1:超时取消;2:待放行;3:放行超时;4:交易完成;5:交易取消;
+                if (mistiming > 0) {
+                    orderStatus = 0;
+                } else {
+                    orderStatus = 1;
+                }
                 if (OTC_TYPE == OTC_BUYER_ORDERS) {
                     initTabSegment();
                     mTabSegment.setVisibility(View.VISIBLE);
@@ -436,12 +444,16 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
                             .replace(R.id.paymentInfoFragment, mPaymentInfoFragment, "PaymentInfoFragment")
                             .addToBackStack(null)
                             .commit();
-                    btnLayout.setVisibility(View.VISIBLE);
                     buyerStatusTv.setText(getString(R.string.str_pay_seller));
+                    if (orderStatus == 0) {
+                        btnLayout.setVisibility(View.VISIBLE);
+                    } else {
+                        btnLayout.setVisibility(View.GONE);
+                    }
                 } else if (OTC_TYPE == OTC_SELLER_ORDERS) {
                     mTabSegment.setVisibility(View.GONE);
-                    btnLayout.setVisibility(View.GONE);
                     buyerStatusTv.setText(getString(R.string.str_wait_buyer_payment));
+                    btnLayout.setVisibility(View.GONE);
                 }
 
                 mContactMethodFragment = new ContactMethodFragment();
@@ -459,16 +471,24 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
                         .addToBackStack(null)
                         .commit();
 
-                orderStatus = 0;
-                mStartTime = ObjectUtils.isEmpty(mRowsBean.getExpiration_at()) ? "0" : mRowsBean.getExpiration_at();
                 cancelOrderBtn.setVisibility(View.VISIBLE);
                 paidPutCoinBtn.setVisibility(View.VISIBLE);
                 cancelOrderBtn.setText(getString(R.string.str_cancel_order));
                 paidPutCoinBtn.setText(getString(R.string.str_paid_put_coin));
-                orderStatusTimeStr = getString(R.string.str_expire_nonpayment);//
-            } else if (mRowsBean.getTaker_passed() == 1 && taker_passed == 1 && mRowsBean.getClosed() == 0) {
+                orderStatusTimeStr = getString(R.string.str_expire_nonpayment);
+            } else if (mRowsBean.getTaker_passed() == 1
+                    && !ObjectUtils.equals("1970-01-01T00:00:00", mRowsBean.getTaker_passed_at())
+                    && mRowsBean.getClosed() == 0) {
                 //待放行 taker_passed = 1， taker_passed_at  != 1970-01-01T00:00:00 ,close = 0 , maker_expiration_at
+                mStartTime = ObjectUtils.isEmpty(mRowsBean.getMaker_expired_at()) ? "0" : mRowsBean.getMaker_expired_at();
+                long mistiming = TimeUtils.getSurplusMillisTime(mStartTime);//maker_expiration_at
+                if (mistiming > 0) {
+                    orderStatus = 2;
+                } else {
+                    orderStatus = 3;
+                }
                 if (OTC_TYPE == OTC_BUYER_ORDERS) {
+                    mTabSegment.setVisibility(View.VISIBLE);
                     buyerStatusTv.setVisibility(View.GONE);
                     buyerStatusValTv.setText(getString(R.string.str_waiting_seller_discharged));
 
@@ -481,23 +501,25 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
                             .commit();
 
                     btnLayout.setVisibility(View.GONE);
-                    mStartTime = ObjectUtils.isEmpty(mRowsBean.getMaker_expiration_at()) ? "0" : mRowsBean.getMaker_expiration_at();
                 } else {
                     String order_price = (ObjectUtils.isEmpty(mRowsBean.getOrder_price()) ? "0.00 CNY" : mRowsBean.getOrder_price()).split(" ")[0];
                     String deal_quantity = (ObjectUtils.isEmpty(mRowsBean.getDeal_quantity()) ? "0.0000 MGP" : mRowsBean.getDeal_quantity()).split(" ")[0];
                     String transactionAmountVal = new BigDecimal(order_price).multiply(new BigDecimal(deal_quantity)).setScale(2, RoundingMode.FLOOR).toPlainString();
+                    mTabSegment.setVisibility(View.GONE);
                     buyerStatusTv.setText(getString(R.string.str_buyer_account_paid));
                     buyerStatusValTv.setText("￥" + transactionAmountVal);
-                    btnLayout.setVisibility(View.VISIBLE);
+                    if (orderStatus == 2) {
+                        btnLayout.setVisibility(View.VISIBLE);
+                    } else {
+                        btnLayout.setVisibility(View.GONE);
+                    }
                     cancelOrderBtn.setText(getString(R.string.str_apply_arbitration));
                     paidPutCoinBtn.setText(getString(R.string.str_confirmed_collection));
                 }
-                mStartTime = ObjectUtils.isEmpty(mRowsBean.getMaker_expiration_at()) ? "0" : mRowsBean.getMaker_expiration_at();
+                mStartTime = ObjectUtils.isEmpty(mRowsBean.getMaker_expired_at()) ? "0" : mRowsBean.getMaker_expired_at();
                 paymentTimeRemainingTv.setText(getString(R.string.str_discharged_time_remaining));
                 orderStatusTimeStr = getString(R.string.str_expire_notrelease);
-                orderStatus = 1;
                 paymentTimeRemainingValTv.setVisibility(View.VISIBLE);
-                mTabSegment.setVisibility(View.GONE);
 
                 mContactMethodFragment = new ContactMethodFragment();
                 mContactMethodFragment.setArguments(bundle);
@@ -520,12 +542,14 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
                         .replace(R.id.transactionDetailFragment, mTransactionDetailFragment, "TransactionDetailFragment")
                         .addToBackStack(null)
                         .commit();
-            } else if ((maker_passed + taker_passed + arbiter_passed) > 1 && mRowsBean.getClosed() == 1) {
+            } else if ((maker_passed + taker_passed + arbiter_passed) > 1
+                    && (mRowsBean.getTaker_passed() + mRowsBean.getMaker_passed() + mRowsBean.getArbiter_passed()) > 1
+                    && mRowsBean.getClosed() == 1) {
                 //maker_passed_at 商家通过时间
                 //taker_passed_at 买家通过时间
                 //arbiter_passed_at 客服通过时间
                 // 交易完成  三者和时间通过三个有两个及以上!= 1970-01-01T00:00:00，close = 1
-                orderStatus = 2;
+                orderStatus = 4;
                 mTabSegment.setVisibility(View.GONE);
                 buyerStatusTv.setVisibility(View.GONE);
                 btnLayout.setVisibility(View.GONE);
@@ -558,34 +582,36 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
                         .replace(R.id.transactionDetailFragment, mTransactionDetailFragment, "TransactionDetailFragment")
                         .addToBackStack(null)
                         .commit();
-            } else if ((maker_passed + taker_passed + arbiter_passed) > 1 && mRowsBean.getClosed() == 0) {
-                //交易失败 时间上三个有两个及以上!= 1970-01-01T00:00:00~~~~ 三者有两个及以上没有通过,close = 0
-                orderStatus = 3;
-                mTabSegment.setVisibility(View.GONE);
-                buyerStatusTv.setVisibility(View.GONE);
-                paymentTimeRemainingTv.setVisibility(View.GONE);
-                paymentTimeRemainingValTv.setVisibility(View.GONE);
-                buyerStatusValTv.setText(R.string.str_transaction_fail);
-                paymentInfoFragment.setVisibility(View.GONE);
-                dealContactFragment.setVisibility(View.GONE);
-                btnLayout.setVisibility(View.GONE);
-                line1.setVisibility(View.GONE);
-
-                mTransactionDetailFragment = new TransactionDetailFragment();
-                getChildFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.transactionDetailFragment, mTransactionDetailFragment, "TransactionDetailFragment")
-                        .addToBackStack(null)
-                        .commit();
-                mTransactionDetailFragment.setArguments(bundle);
-            } else if (mRowsBean.getClosed() == 1) {
+            }
+//            else if ((maker_passed + taker_passed + arbiter_passed) > 1 && mRowsBean.getClosed() == 0) {
+//                //交易失败 时间上三个有两个及以上!= 1970-01-01T00:00:00~~~~ 三者有两个及以上没有通过,close = 0
+//                orderStatus = 3;
+//                mTabSegment.setVisibility(View.GONE);
+//                buyerStatusTv.setVisibility(View.GONE);
+//                paymentTimeRemainingTv.setVisibility(View.GONE);
+//                paymentTimeRemainingValTv.setVisibility(View.GONE);
+//                buyerStatusValTv.setText(R.string.str_transaction_fail);
+//                paymentInfoFragment.setVisibility(View.GONE);
+//                dealContactFragment.setVisibility(View.GONE);
+//                btnLayout.setVisibility(View.GONE);
+//                line1.setVisibility(View.GONE);
+//
+//                mTransactionDetailFragment = new TransactionDetailFragment();
+//                getChildFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.transactionDetailFragment, mTransactionDetailFragment, "TransactionDetailFragment")
+//                        .addToBackStack(null)
+//                        .commit();
+//                mTransactionDetailFragment.setArguments(bundle);
+//            }
+            else if (mRowsBean.getClosed() == 1) {
                 //支付超时 close = 1
-                orderStatus = 4;
+                orderStatus = 5;
                 mTabSegment.setVisibility(View.GONE);
                 buyerStatusTv.setVisibility(View.GONE);
                 paymentTimeRemainingTv.setVisibility(View.GONE);
                 paymentTimeRemainingValTv.setVisibility(View.GONE);
-                buyerStatusValTv.setText(R.string.str_transaction_timeout);
+                buyerStatusValTv.setText(R.string.str_transaction_cancelled);
                 paymentInfoFragment.setVisibility(View.GONE);
                 dealContactFragment.setVisibility(View.GONE);
                 btnLayout.setVisibility(View.GONE);
@@ -664,7 +690,7 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
             try {
                 showTipDialog(getString(R.string.str_loading));
                 Map param = MapUtils.newHashMap();
-                param.put("owner", mRowsBean.getOrder_taker());
+                param.put("owner", mangoWallet.getWalletAddress());
                 param.put("user_type", String.valueOf(OTC_TYPE));
                 param.put("deal_id", String.valueOf(mRowsBean.getId()));
                 param.put("pass", true);
@@ -687,30 +713,30 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
      *
      * @"已通知商家放行"
      * @{@"mgpName":self.dicData[@"order_maker"],@"money":self.dicData[@"deal_quantity"],@"type":@"1",@"payMgpName":self.dicData[@"order_taker"]}
-     * @"已通知会员查收"
-     * @{@"owner":self.dicData[@"order_maker"],@"deal_id":self.dicData[@"id"],@"pass":@"1",@"user_type":@"0",@"pay_type":self.dicData[@"pay_type"]}
      */
     private void sendVerificationCode() {
-        if (mPayInfoUserInfoBean != null) {
-            PayInfoUserInfoBean.DataBean.UserInfoBean userInfoBean = mPayInfoUserInfoBean.getUserInfo();
-            if (userInfoBean != null) {
-                try {
-                    showTipDialog(getString(R.string.str_loading));
-                    Map params = MapUtils.newHashMap();
-                    params.put("mgpName", mRowsBean.getOrder_maker());
-                    params.put("type", "1");
-                    params.put("payMgpName", mRowsBean.getOrder_taker());
-                    params.put("money", mRowsBean.getDeal_quantity());
-                    String json = GsonUtils.toJson(params);
-                    String content = NRSAUtils.encrypt(json);
-                    NetWorkManager.getRequest().sendVerificationCode(content)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(this::onSendMailSuccess, this::onError);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        try {
+            showTipDialog(getString(R.string.str_loading));
+            Map params = MapUtils.newHashMap();
+            if (OTC_TYPE == OTC_BUYER_ORDERS) {
+                params.put("mgpName", mRowsBean.getOrder_maker());
+                params.put("money", mRowsBean.getDeal_quantity());
+                params.put("type", "1");
+                params.put("payMgpName", mangoWallet.getWalletAddress());
+            } else if (OTC_TYPE == OTC_SELLER_ORDERS) {
+                params.put("type", "2");
+                params.put("mgpName", mRowsBean.getOrder_taker());
+                params.put("money", mRowsBean.getDeal_quantity());
+                params.put("payMgpName", mangoWallet.getWalletAddress());
             }
+            String json = GsonUtils.toJson(params);
+            String content = NRSAUtils.encrypt(json);
+            NetWorkManager.getRequest().sendVerificationCode(content)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::onSendMailSuccess, this::onError);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

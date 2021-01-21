@@ -450,8 +450,7 @@ public class LifePaymentFragment extends BaseFragment {
         params.put("quantity", mgpDecimal.toPlainString() + " " + walletType);
         String jsonData = GsonUtils.toJson(params);
         String privatekey = mangoWallet.getPrivateKey();
-        LogUtils.dTag(Constants.LOG_TAG, " privatekey = " + privatekey
-                + "accountName = " + walletAddress
+        LogUtils.dTag(Constants.LOG_TAG, "accountName = " + walletAddress
                 + "params = " + jsonData);
         emWalletRepository.sendTransaction(TRANSFER_ACTION, privatekey, walletAddress, EOSIO_TOKEN_CONTRACT_CODE, jsonData, walletType)
                 .subscribe(this::onTransaction, this::onError);

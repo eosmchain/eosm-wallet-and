@@ -73,6 +73,7 @@ import com.token.mangowallet.ui.fragment.mgp_deal.MyOrderFragment;
 import com.token.mangowallet.ui.fragment.mgp_deal.OTCDealFragment;
 import com.token.mangowallet.ui.fragment.mgp_deal.OTCSellFragment;
 import com.token.mangowallet.ui.fragment.mgp_deal.setup.BindMailFragment;
+import com.token.mangowallet.ui.fragment.mgp_deal.setup.OTCArbitrationFragment;
 import com.token.mangowallet.ui.fragment.mgp_deal.setup.OTCSetupFragment;
 import com.token.mangowallet.ui.fragment.mgp_deal.setup.SetupContactFragment;
 import com.token.mangowallet.ui.fragment.mgp_deal.setup.SetupPaymentFragment;
@@ -176,6 +177,7 @@ public class MangoFragmentManager {
         mapFragments.put("AddPaymentFragment", AddPaymentFragment.class);
         mapFragments.put("MyOrderFragment", MyOrderFragment.class);
         mapFragments.put("EntrustFragment", EntrustFragment.class);
+        mapFragments.put("OTCArbitrationFragment", OTCArbitrationFragment.class);
     }
 
     public Class<? extends BaseFragment> getFragment(String fragmentName) {

@@ -1,10 +1,12 @@
 package com.token.mangowallet.ui.fragment.mgp_deal.setup;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -13,6 +15,7 @@ import androidx.constraintlayout.widget.Group;
 import androidx.core.content.ContextCompat;
 
 import com.blankj.utilcode.util.BarUtils;
+import com.blankj.utilcode.util.CollectionUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.MapUtils;
@@ -20,8 +23,11 @@ import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.google.gson.JsonObject;
+import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUITopBar;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
@@ -33,9 +39,12 @@ import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.utils.AppFilePath;
 import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.utils.PhotoUtils;
+import com.token.mangowallet.view.DialogHelper;
+import com.yanzhenjie.durban.Durban;
 
 import java.io.File;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -79,12 +88,16 @@ public class AddPaymentFragment extends BaseFragment {
     QMUIRoundButton saveBtn;
     private Unbinder unbinder;
     private MangoWallet mangoWallet;
-    private int payId = 0;
+    private int payId = 0;//1、银行卡；2、微信支付；3、支付宝；
     private PayInfoBean.DataBean payInfoBean;
     private boolean isAdd = true;
     private PhotoUtils photoUtils;
     private boolean isAddPic = false;
     private String picUrl = "";
+    private String picPath = "";
+    private boolean isEdit = false;
+    private QMUIDialog delQMUIDialog;
+    private ArrayList<String> mImageList;
 
     @Override
     protected View onCreateView() {
@@ -101,7 +114,9 @@ public class AddPaymentFragment extends BaseFragment {
         mangoWallet = bundle.getParcelable(EXTRA_WALLET);
         payId = bundle.getInt("payId");
         payInfoBean = bundle.getParcelable("PayInfoBean");
+        isEdit = bundle.getBoolean("isEdit");
         photoUtils = new PhotoUtils();
+        mImageList = new ArrayList<>();
     }
 
     @Override
@@ -151,6 +166,30 @@ public class AddPaymentFragment extends BaseFragment {
                 popBackStack();
             }
         });
+        if (isEdit) {
+            topbar.addRightTextButton(R.string.str_delete, R.id.topbar_right_change_button).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (delQMUIDialog == null) {
+                        delQMUIDialog = DialogHelper.showMessageDialog(getActivity(), getString(R.string.str_del_pay_way_title), String.format(getString(R.string.str_del_pay_way_msg), payInfoBean.getName())
+                                , getString(R.string.str_cancel), getString(R.string.str_ok)
+                                , new QMUIDialogAction.ActionListener() {
+                                    @Override
+                                    public void onClick(QMUIDialog dialog, int index) {
+                                        dialog.dismiss();
+                                    }
+                                }, new QMUIDialogAction.ActionListener() {
+                                    @Override
+                                    public void onClick(QMUIDialog dialog, int index) {
+                                        dialog.dismiss();
+                                        deletePayWay();
+                                    }
+                                });
+                    }
+                    delQMUIDialog.show();
+                }
+            });
+        }
         updateView();
     }
 
@@ -159,7 +198,8 @@ public class AddPaymentFragment extends BaseFragment {
         photoUtils.setPhotoPathListener(new PhotoUtils.PhotoPathListener() {
             @Override
             public void getPathSuccess(Object result) {
-                uploadFile((String) result);
+                picPath = (String) result;
+                photoUtils.cropImage(AddPaymentFragment.this, picPath, QMUIDisplayHelper.getScreenWidth(getActivity()), QMUIDisplayHelper.getScreenWidth(getActivity()));
             }
         });
     }
@@ -195,7 +235,12 @@ public class AddPaymentFragment extends BaseFragment {
                         return;
                     }
                 }
-                savePayWay();
+                //1、银行卡；2、微信支付；3、支付宝
+                if (payId == 1) {
+                    savePayWay();
+                } else {
+                    uploadFile(picPath);
+                }
                 break;
         }
     }
@@ -231,7 +276,7 @@ public class AddPaymentFragment extends BaseFragment {
             params.put("username", userNameValEt.getText().toString());
             params.put("cardNum", accountNumberValEt.getText().toString());
             params.put("payId", String.valueOf(payId));
-            if (payId == 1) {
+            if (payId == 1) {//1、银行卡；2、微信支付；3、支付宝
                 params.put("name", bankNameValEt.getText().toString());
                 params.put("branch", bankSubbranchValEt.getText().toString());
             } else {
@@ -246,6 +291,25 @@ public class AddPaymentFragment extends BaseFragment {
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::onSavePayWaySuccess, this::onError);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 删除收款方式
+     */
+    private void deletePayWay() {
+        try {
+            showTipDialog(getString(R.string.str_loading));
+            Map params = MapUtils.newHashMap();
+            params.put("payInfoId", String.valueOf(payInfoBean.getPayInfoId()));
+            String json = GsonUtils.toJson(params);
+            String content = NRSAUtils.encrypt(json);
+            NetWorkManager.getRequest().delPayWay(content)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::onDelPayWaySuccess, this::onError);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -290,7 +354,7 @@ public class AddPaymentFragment extends BaseFragment {
                         isAddPic = true;
                         deleteBtn.setVisibility(View.VISIBLE);
                         picUrl = ObjectUtils.isEmpty(dataBean.getUrl()) ? "" : dataBean.getUrl();
-                        Glide.with(getActivity()).load(picUrl).error(R.drawable.placeholder).into(collectionQRValIv);
+                        savePayWay();
                     }
                 } else {
                     ToastUtils.showLong(updataFileBean.getMsg());
@@ -310,6 +374,34 @@ public class AddPaymentFragment extends BaseFragment {
                 } else {
                     ToastUtils.showLong(isBindBean.getMsg());
                 }
+            }
+        }
+    }
+
+    private void onDelPayWaySuccess(JsonObject jsonObject) {
+        dismissTipDialog();
+        if (ObjectUtils.isNotEmpty(jsonObject)) {
+            IsBindBean isBindBean = GsonUtils.fromJson(GsonUtils.toJson(jsonObject), IsBindBean.class);
+            if (isBindBean != null) {
+                if (isBindBean.getCode() == 0) {
+                    ToastUtils.showLong(R.string.str_delete_succeed);
+                    popBackStack();
+                } else {
+                    ToastUtils.showLong(isBindBean.getMsg());
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK) return;
+        if (requestCode == 200) {
+            mImageList = Durban.parseResult(data);
+            if (CollectionUtils.isNotEmpty(mImageList)) {
+                picPath = mImageList.get(0);
+                Glide.with(getActivity()).load(picPath).error(R.drawable.placeholder).into(collectionQRValIv);
             }
         }
     }

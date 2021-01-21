@@ -1547,4 +1547,23 @@ public interface RequestApi {
     @Headers("urlname:" + Constants.VOTEURL)
     @POST("/otcapi/api/moUsers/payInfo")
     Observable<JsonObject> payInfo(@Header("content") String content);
+
+
+    /**
+     * 添加及修改支付信息
+     * mgpName
+     * cardNum 银行卡号 微信账户 支付宝账户
+     * id 用户返回的掉save接口时使用
+     * name payId,1:银行名称，2.3可以不填
+     * payId 支付方式1银行2微信3支付宝
+     * qrCode 微信支付宝支付二维码
+     * branch 银行支行
+     * username 用户名
+     * payInfoId 用户信息返回的payInfoId，如果存在就是修改不存在就是新增
+     *
+     * @Header("content:") String content
+     */
+    @Headers("urlname:" + Constants.VOTEURL)
+    @POST("/otcapi//api/moPayInfo/del")
+    Observable<JsonObject> delPayWay(@Header("content") String content);
 }

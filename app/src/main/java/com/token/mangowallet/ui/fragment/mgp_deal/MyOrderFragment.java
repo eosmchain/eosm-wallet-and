@@ -153,14 +153,14 @@ public class MyOrderFragment extends BaseFragment {
                 DealsOrderBean.RowsBean mDealsOrderBean = null;
                 SelordersBean.RowsBean mSelordersBean;
                 orderBundle.putParcelable(EXTRA_WALLET, mangoWallet);
-                //orderStatus 订单状态：0:代付款;1:待放行;2:交易完成;3:交易失败;4:支付超时;
+                //orderStatus 订单状态：0:代付款;1:超时取消;2:待放行;3:放行超时;4:交易完成;5:交易取消;
                 int orderStatus = (int) dataMap.get("orderStatus");
                 if (mCurIndex == 0) {
                     mDealsOrderBean = (DealsOrderBean.RowsBean) o;
                     orderBundle.putInt("OTC_TYPE", OTC_BUYER_ORDERS);
                     orderBundle.putString("amountPaid", String.valueOf(dataMap.get("transactionAmountVal")));
                     orderBundle.putParcelable("RowsBean", mDealsOrderBean);
-                    if (orderStatus == 0 || orderStatus == 1 || orderStatus == 2) {
+                    if (orderStatus == 0 || orderStatus == 1 || orderStatus == 2 || orderStatus == 4) {
                         getPayInfo(mDealsOrderBean.getOrder_maker());
                     } else {
                         startFragment("BuyerTransactionInfoFragment", orderBundle);
@@ -170,7 +170,7 @@ public class MyOrderFragment extends BaseFragment {
                     orderBundle.putInt("OTC_TYPE", OTC_SELLER_ORDERS);
                     orderBundle.putString("amountPaid", String.valueOf(dataMap.get("transactionAmountVal")));
                     orderBundle.putParcelable("RowsBean", mDealsOrderBean);
-                    if (orderStatus == 0 || orderStatus == 1 || orderStatus == 2) {
+                    if (orderStatus == 0 || orderStatus == 1 || orderStatus == 2 || orderStatus == 4) {
                         getPayInfo(mDealsOrderBean.getOrder_maker());
                     } else {
                         startFragment("BuyerTransactionInfoFragment", orderBundle);

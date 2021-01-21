@@ -168,8 +168,7 @@ public class BindETHFragment extends BaseFragment {
         params.put("address", bindAddress);
         String jsonData = GsonUtils.toJson(params);
         String privatekey = mangoWallet.getPrivateKey();
-        LogUtils.dTag(LOG_TAG, " privatekey = " + privatekey
-                + "accountName = " + walletAddress
+        LogUtils.dTag(LOG_TAG,  "accountName = " + walletAddress
                 + "params = " + jsonData);
         emWalletRepository.sendTransaction(BIND_ACTION, privatekey, walletAddress, Constants.contractAddress, jsonData, walletType)
                 .subscribe(this::onTransaction, this::onError);

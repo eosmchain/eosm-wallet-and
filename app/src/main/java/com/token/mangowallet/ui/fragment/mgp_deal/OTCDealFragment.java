@@ -59,6 +59,7 @@ import com.token.mangowallet.view.DragFloatActionButton;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -143,13 +144,13 @@ public class OTCDealFragment extends BaseFragment {
 
     @Override
     protected void initAction() {
-        otcDealAdapter.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-                SelordersBean.RowsBean rowsBean = rowsBeanList.get(position);
-                showDealMGPPopup(view, rowsBean);
-            }
-        });
+//        otcDealAdapter.setOnItemClickListener(new OnItemClickListener() {
+//            @Override
+//            public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
+//                SelordersBean.RowsBean rowsBean = rowsBeanList.get(position);
+//                showDealMGPPopup(view, rowsBean);
+//            }
+//        });
         refreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
@@ -192,14 +193,17 @@ public class OTCDealFragment extends BaseFragment {
             mQMUIDialog = DialogHelper.showMessageDialog(getActivity(), getString(R.string.str_add_contact_title), getString(R.string.str_add_contact_msg), getString(R.string.str_cancel), getString(R.string.str_add_contact_title), new QMUIDialogAction.ActionListener() {
                 @Override
                 public void onClick(QMUIDialog dialog, int index) {
-                    ToastUtils.showLong(getString(R.string.str_cancel));
+//                    ToastUtils.showLong(getString(R.string.str_cancel));
                     dialog.dismiss();
                 }
             }, new QMUIDialogAction.ActionListener() {
                 @Override
                 public void onClick(QMUIDialog dialog, int index) {
-                    ToastUtils.showLong(getString(R.string.str_add_contact_title));
+//                    ToastUtils.showLong(getString(R.string.str_add_contact_title));
                     dialog.dismiss();
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable(EXTRA_WALLET, mangoWallet);
+                    startFragment("SetupContactFragment", bundle);
                 }
             });
         }
@@ -429,7 +433,26 @@ public class OTCDealFragment extends BaseFragment {
                             return ObjectUtils.equals(0, item.getClosed()) && remaining_quantity.compareTo(min_mgp_num) >= 0;//-1表示小于，0是等于，1是大于。
                         }
                     });
-                    Collections.reverse(rowsBeanList);
+                    Collections.sort(rowsBeanList, new Comparator<SelordersBean.RowsBean>() {
+                        @Override
+                        public int compare(SelordersBean.RowsBean o1, SelordersBean.RowsBean o2) {
+                            int compare;
+                            String price1 = ObjectUtils.isEmpty(o1.getPrice()) ? "0.00 CNY" : o1.getPrice();
+                            String price2 = ObjectUtils.isEmpty(o2.getPrice()) ? "0.00 CNY" : o2.getPrice();
+                            price1 = price1.split(" ")[0];
+                            price2 = price2.split(" ")[0];
+                            BigDecimal priceDecimal1 = new BigDecimal(ObjectUtils.isEmpty(price1) ? "0" : price1);
+                            BigDecimal priceDecimal2 = new BigDecimal(ObjectUtils.isEmpty(price2) ? "0" : price2);
+                            if (priceDecimal1.compareTo(priceDecimal2) > 0) {//-1表示小于，0是等于，1是大于。
+                                compare = 1;
+                            } else if (priceDecimal1.compareTo(priceDecimal2) < 0) {
+                                compare = -1;
+                            } else {
+                                compare = 0;
+                            }
+                            return compare;
+                        }
+                    });
                     otcDealAdapter.notifyDataSetChanged();
                 }
             }

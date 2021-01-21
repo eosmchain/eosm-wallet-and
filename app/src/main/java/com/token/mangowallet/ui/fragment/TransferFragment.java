@@ -280,8 +280,7 @@ public class TransferFragment extends BaseFragment {
 
 
     private void transferTransaction() {
-        LogUtils.dTag(Constants.LOG_TAG, " privatekey = " + privatekey
-                + "accountName = " + walletAddress
+        LogUtils.dTag(Constants.LOG_TAG,  "accountName = " + walletAddress
                 + "params = " + jsonData);
         transactionViewModel.sendTransaction(TRANSFER_ACTION, EOSIO_TOKEN_CONTRACT_CODE, jsonData);
         jsonData = "";

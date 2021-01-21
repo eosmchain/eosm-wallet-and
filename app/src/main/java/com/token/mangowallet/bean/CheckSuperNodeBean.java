@@ -1,11 +1,13 @@
 package com.token.mangowallet.bean;
 
+import java.math.BigDecimal;
+
 public class CheckSuperNodeBean {
 
     /**
      * code : 0
      * msg : success
-     * data : {"isSuperNode":1,"isVote":0,"money":185694}
+     * data : {"isSuperNode":1,"money":331821.1064,"isVote":0}
      */
 
     private int code;
@@ -39,13 +41,13 @@ public class CheckSuperNodeBean {
     public static class DataBean {
         /**
          * isSuperNode : 1
+         * money : 331821.1064
          * isVote : 0
-         * money : 185694
          */
 
         private int isSuperNode;
+        private BigDecimal money;
         private int isVote;
-        private int money;
 
         public int getIsSuperNode() {
             return isSuperNode;
@@ -55,20 +57,20 @@ public class CheckSuperNodeBean {
             this.isSuperNode = isSuperNode;
         }
 
+        public BigDecimal getMoney() {
+            return money;
+        }
+
+        public void setMoney(BigDecimal money) {
+            this.money = money;
+        }
+
         public int getIsVote() {
             return isVote;
         }
 
         public void setIsVote(int isVote) {
             this.isVote = isVote;
-        }
-
-        public int getMoney() {
-            return money;
-        }
-
-        public void setMoney(int money) {
-            this.money = money;
         }
     }
 }

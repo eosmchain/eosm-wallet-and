@@ -875,6 +875,15 @@
     <string name="str_entrust_selling">委托出售中</string>
     <string name="str_repeal_entrust_msg">撤销委托订单后，将自动从合约赎回</string>
     <string name="str_freeze_tip">您还有冻结金额，无法进行撤销操作</string>
+    <string name="str_otcarbitration_order_management">OTC订单管理（仲裁）</string>
+    <string name="str_otc_search_order">搜索订单号</string>
+    <string name="str_otc_arbitration">OTC仲裁</string>
+    <string name="str_sell_quantity_tip">出售的MGP数量必须大于最小出售的MGP数量</string>
+    <string name="str_timeout_cancel">超时取消</string>
+    <string name="str_timeout_pass">放行超时</string>
+    <string name="str_transaction_cancelled">交易取消</string>
+    <string name="str_del_pay_way_title">删除支付方式</string>
+    <string name="str_del_pay_way_msg">您确定要删除[%s]支付方式吗？</string>
 
     <string name="str_aleft">👈</string>
     <string name="str_right">👉</string>

@@ -1,6 +1,7 @@
 package com.token.mangowallet.utils;
 
 import com.blankj.utilcode.util.MapUtils;
+import com.blankj.utilcode.util.ObjectUtils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -22,12 +23,16 @@ public class TimeUtils {
     }
 
     public static long getSurplusMillisTime(String timef) {
-        formatter2.setTimeZone(TimeZone.getTimeZone("UTC"));
-        long millis = com.blankj.utilcode.util.TimeUtils.string2Millis(timef, formatter2);
-        String mTime = com.blankj.utilcode.util.TimeUtils.millis2String(millis, defaultFormat);
-        long expirationMillis = com.blankj.utilcode.util.TimeUtils.string2Millis(mTime);
-        long curMillis = com.blankj.utilcode.util.TimeUtils.getNowMills();
-        return expirationMillis - curMillis;
+        if (ObjectUtils.isNotEmpty(timef)) {
+            formatter2.setTimeZone(TimeZone.getTimeZone("UTC"));
+            long millis = com.blankj.utilcode.util.TimeUtils.string2Millis(timef, formatter2);
+            String mTime = com.blankj.utilcode.util.TimeUtils.millis2String(millis, defaultFormat);
+            long expirationMillis = com.blankj.utilcode.util.TimeUtils.string2Millis(mTime);
+            long curMillis = com.blankj.utilcode.util.TimeUtils.getNowMills();
+            return expirationMillis - curMillis;
+        } else {
+            return 0;
+        }
     }
 
     public static String getStringTime2(String timef) {

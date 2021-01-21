@@ -7,8 +7,8 @@ ext {
             testapplicationId    : "com.token.mangowallettest",
             minSdkVersion    : 21,
             targetSdkVersion : 29,
-            versionCode      : 64,
-            versionName      : "2.0.4.23",
+            versionCode      : 67,
+            versionName      : "2.0.4.26",
     ]
     //version配置
     versions = [

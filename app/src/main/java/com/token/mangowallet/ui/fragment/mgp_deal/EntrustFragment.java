@@ -140,7 +140,7 @@ public class EntrustFragment extends BaseFragment {
         } else {
             orderStatus = mSelordersBean.getClosed() == 1 ? 12 : 10;
         }
-        //订单状态：0:代付款;1:待放行;2:交易完成;3:交易失败;4:支付超时; 10:出售中；11:已完成；12：已撤销;
+        //订单状态：10:出售中；11:已完成；12：已撤销;
         String orderStatusStr = "";
         if (orderStatus == 10) {
             orderStatusStr = getString(R.string.str_entrust_selling);

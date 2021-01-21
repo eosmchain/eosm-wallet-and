@@ -148,10 +148,10 @@ public class BindMailFragment extends BaseFragment {
      * 倒计时显示
      */
     private void countDown() {
-        timer = new CountDownTimer(60, 1000) {
+        timer = new CountDownTimer(60 * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                sendCodeBtn.setText(millisUntilFinished + "s");
+                sendCodeBtn.setText(millisUntilFinished / 1000 + "s");
             }
 
             @Override
@@ -242,4 +242,11 @@ public class BindMailFragment extends BaseFragment {
         LogUtils.eTag(LOG_TAG, "e = " + e.toString());
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (timer != null) {
+            timer.cancel();
+        }
+    }
 }

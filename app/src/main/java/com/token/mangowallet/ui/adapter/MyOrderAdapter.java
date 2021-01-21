@@ -104,9 +104,8 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object, BaseViewHolder> {
             }
             remaining_quantity = quantity.subtract(frozen_quantity).subtract(fufilled_quantity);
 
-            mgpnumVal = ObjectUtils.isEmpty(entrustRowsBean.getQuantity()) ? "0.0000 MGP" : entrustRowsBean.getQuantity();
-            totalSaleStr = getContext().getString(R.string.str_total_sale) + mgpnumVal;
-            //订单状态：0:代付款;1:待放行;2:交易完成;3:交易失败;4:支付超时; 10:出售中；11:已完成；12：已撤销;
+            totalSaleStr = getContext().getString(R.string.str_total_sale) + (ObjectUtils.isEmpty(entrustRowsBean.getQuantity()) ? "0.0000 MGP" : entrustRowsBean.getQuantity());
+            //订单状态：0:代付款;1:待放行;2:交易完成;3:交易失败;4:支付超时;10:出售中;11:已完成;12:已撤销;
             if (remaining_quantity.compareTo(BigDecimal.ZERO) <= 0) {//-1表示小于，0是等于，1是大于。
                 orderStatusStr = getContext().getString(R.string.str_completed);
                 orderStatus = 11;
@@ -115,8 +114,9 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object, BaseViewHolder> {
                 orderStatus = entrustRowsBean.getClosed() == 1 ? 12 : 10;
             }
             mgpnumTitle = getContext().getString(R.string.str_residue) + "(MGP)";
+            mgpnumVal = remaining_quantity.setScale(4).toPlainString() + " MGP";
             timeVal = entrustRowsBean.getCreated_at();
-            transactionAmountVal = price.multiply(fufilled_quantity).setScale(2, RoundingMode.FLOOR).toPlainString();
+            transactionAmountVal = price.multiply(remaining_quantity).setScale(2, RoundingMode.FLOOR).toPlainString();
         }
 
         if ((fragment.mCurIndex == 0 || fragment.mCurIndex == 1) && dealRowsBean != null) {
@@ -126,31 +126,49 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object, BaseViewHolder> {
             String order_price = (ObjectUtils.isEmpty(dealRowsBean.getOrder_price()) ? "0.00 CNY" : dealRowsBean.getOrder_price()).split(" ")[0];
             String deal_quantity = (ObjectUtils.isEmpty(dealRowsBean.getDeal_quantity()) ? "0.0000 MGP" : dealRowsBean.getDeal_quantity()).split(" ")[0];
             transactionAmountVal = new BigDecimal(order_price).multiply(new BigDecimal(deal_quantity)).setScale(2, RoundingMode.FLOOR).toPlainString();
-            //orderStatus 订单状态：0:代付款;1:待放行;2:交易完成;3:交易失败;4:支付超时;
+
+            //orderStatus 订单状态：0:代付款;1:超时取消;2:待放行;3:放行超时;4:交易完成;5:交易取消;
             if (dealRowsBean.getTaker_passed() == 0 && taker_passed == 0 && dealRowsBean.getClosed() == 0) {
                 //代付款 taker_passed = 0， taker_passed_at= 1970-01-01T00:00:00", close = 0
-                orderStatus = 0;
-                orderStatusStr = getContext().getString(R.string.str_obligation);
-            } else if (dealRowsBean.getTaker_passed() == 1 && taker_passed == 1 && dealRowsBean.getClosed() == 0) {
+                long mistiming = TimeUtils.getSurplusMillisTime(dealRowsBean.getExpired_at());//expiration_at
+                if (mistiming > 0) {
+                    orderStatus = 0;
+                    orderStatusStr = getContext().getString(R.string.str_obligation);
+                } else {
+                    orderStatus = 1;
+                    orderStatusStr = getContext().getString(R.string.str_timeout_cancel);
+                }
+            } else if (dealRowsBean.getTaker_passed() == 1
+                    && !ObjectUtils.equals("1970-01-01T00:00:00", dealRowsBean.getTaker_passed_at())
+                    && dealRowsBean.getClosed() == 0) {
                 //待放行 taker_passed = 1， taker_passed_at  != 1970-01-01T00:00:00 ,close = 0
-                orderStatus = 1;
-                orderStatusStr = getContext().getString(R.string.str_be_released);
-            } else if ((maker_passed + taker_passed + arbiter_passed) > 1 && dealRowsBean.getClosed() == 1) {
+                long mistiming = TimeUtils.getSurplusMillisTime(dealRowsBean.getMaker_expired_at());//maker_expiration_at
+                if (mistiming > 0) {
+                    orderStatus = 2;
+                    orderStatusStr = getContext().getString(R.string.str_be_released);
+                } else {
+                    orderStatus = 3;
+                    orderStatusStr = getContext().getString(R.string.str_timeout_pass);
+                }
+            } else if ((maker_passed + taker_passed + arbiter_passed) > 1
+                    && (dealRowsBean.getTaker_passed() + dealRowsBean.getMaker_passed() + dealRowsBean.getArbiter_passed()) > 1
+                    && dealRowsBean.getClosed() == 1) {
                 //maker_passed_at 商家通过时间
                 //taker_passed_at 买家通过时间
                 //arbiter_passed_at 客服通过时间
                 // 交易完成  三者和时间通过三个有两个及以上!= 1970-01-01T00:00:00，close = 1
-                orderStatus = 2;
+                orderStatus = 4;
                 orderStatusStr = getContext().getString(R.string.str_complete_transaction);
-            } else if ((maker_passed + taker_passed + arbiter_passed) > 1 && dealRowsBean.getClosed() == 0) {
-                //交易失败 时间上三个有两个及以上!= 1970-01-01T00:00:00~~~~ 三者有两个及以上没有通过,close = 0
-                orderStatus = 3;
-                orderStatusStr = getContext().getString(R.string.str_transaction_fail);
             } else if (dealRowsBean.getClosed() == 1) {
                 //支付超时 close = 1
-                orderStatus = 4;
-                orderStatusStr = getContext().getString(R.string.str_pay_overtime);
+                orderStatus = 5;
+                orderStatusStr = getContext().getString(R.string.str_transaction_cancelled);
             }
+            //            else if ((maker_passed + taker_passed + arbiter_passed) > 1 && dealRowsBean.getClosed() == 0) {
+//                //交易失败 时间上三个有两个及以上!= 1970-01-01T00:00:00~~~~ 三者有两个及以上没有通过,close = 0
+//                orderStatus = 3;
+//                orderStatusStr = getContext().getString(R.string.str_transaction_fail);
+//            }
         }
 
         totalSaleTv.setText(totalSaleStr);

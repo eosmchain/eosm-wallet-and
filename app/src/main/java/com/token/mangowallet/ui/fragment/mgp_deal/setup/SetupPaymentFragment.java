@@ -102,11 +102,13 @@ public class SetupPaymentFragment extends BaseFragment {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 PayInfoBean.DataBean payInfoBean = payInfoList.get(position);
-                Bundle bundle = new Bundle();
-                bundle.putParcelable(EXTRA_WALLET, mangoWallet);
-                bundle.putParcelable("PayInfoBean", payInfoBean);
-                bundle.putInt("payId", payInfoBean.getPayId());
-                startFragment("AddPaymentFragment", bundle);
+//                Bundle bundle = new Bundle();
+//                bundle.putParcelable(EXTRA_WALLET, mangoWallet);
+//                bundle.putParcelable("PayInfoBean", payInfoBean);
+//                bundle.putInt("payId", payInfoBean.getPayId());
+//                bundle.putBoolean("isEdit", true);
+//                startFragment("AddPaymentFragment", bundle);
+                toAddPaymentFragment(payInfoBean.getPayId(), payInfoBean, true);
             }
         });
     }
@@ -164,18 +166,29 @@ public class SetupPaymentFragment extends BaseFragment {
                     @Override
                     public void onClick(QMUIBottomSheet dialog, View itemView, int position, String tag) {
                         dialog.dismiss();
-                        Bundle bundle = new Bundle();
-                        bundle.putParcelable(EXTRA_WALLET, mangoWallet);
-                        bundle.putParcelable("PayInfoBean", null);
-                        //1、银行卡；2、微信支付；3、支付宝
-                        bundle.putInt("payId", position + 1);
-                        startFragment("AddPaymentFragment", bundle);
+//                        Bundle bundle = new Bundle();
+//                        bundle.putParcelable(EXTRA_WALLET, mangoWallet);
+//                        bundle.putParcelable("PayInfoBean", null);
+//                        //1、银行卡；2、微信支付；3、支付宝
+//                        bundle.putInt("payId", position + 1);
+//                        startFragment("AddPaymentFragment", bundle);
+                        toAddPaymentFragment(position + 1, null, false);
                     }
                 });
         builder.addItem(ContextCompat.getDrawable(getContext(), R.mipmap.ic_bank_card), getString(R.string.str_bank_card));
         builder.addItem(ContextCompat.getDrawable(getContext(), R.mipmap.ic_wechat), getString(R.string.str_wechat_pay));
         builder.addItem(ContextCompat.getDrawable(getContext(), R.mipmap.ic_alipay), getString(R.string.str_alipay));
         builder.build().show();
+    }
+
+    private void toAddPaymentFragment(int payId, PayInfoBean.DataBean payInfoBean, boolean isEdit) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(EXTRA_WALLET, mangoWallet);
+        bundle.putParcelable("PayInfoBean", payInfoBean);
+        //1、银行卡；2、微信支付；3、支付宝
+        bundle.putInt("payId", payId);
+        bundle.putBoolean("isEdit", isEdit);
+        startFragment("AddPaymentFragment", bundle);
     }
 
     @Override

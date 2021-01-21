@@ -7,6 +7,7 @@ import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 
 import androidx.appcompat.widget.AppCompatEditText;
@@ -20,12 +21,14 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.MapUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.JsonObject;
 import com.qmuiteam.qmui.skin.QMUISkinManager;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
@@ -36,13 +39,16 @@ import com.token.mangowallet.bean.IsBindBean;
 import com.token.mangowallet.bean.TableRowsBean;
 import com.token.mangowallet.bean.TransactionBean;
 import com.token.mangowallet.db.MangoWallet;
+import com.token.mangowallet.listener.DialogConfirmListener;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.utils.APPUtils;
 import com.token.mangowallet.utils.BalanceUtils;
 import com.token.mangowallet.utils.Constants;
+import com.token.mangowallet.utils.Md5Utils;
 import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.CashierInputFilter;
+import com.token.mangowallet.view.DialogHelper;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -84,7 +90,7 @@ public class OTCSellFragment extends BaseFragment {
     @BindView(R.id.subtractBtn)
     QMUIRoundButton subtractBtn;
     @BindView(R.id.numTv)
-    AppCompatTextView numTv;
+    AppCompatEditText numTv;
     @BindView(R.id.additionBtn)
     QMUIRoundButton additionBtn;
     @BindView(R.id.quantityTv)
@@ -129,11 +135,15 @@ public class OTCSellFragment extends BaseFragment {
     private BigDecimal CNYPriceDecimal = BigDecimal.ZERO;//人民币兑美元的单价价额
     private BigDecimal minCNYDecimal = BigDecimal.ZERO;//最小出售价额（最小出售MGP数量*CNYPriceDecimal）
     private BigDecimal maxCNYDecimal = BigDecimal.ZERO;//当前MGP单价
+    private BigDecimal quantityDecimal = BigDecimal.ZERO;//输入的MGP数量
+    private BigDecimal minDecimal = BigDecimal.ZERO;//最小出售输入框的值
+
     private boolean isMinAmount = true;
     private boolean isQuantity = false;
     private boolean isMinSale = false;
     private boolean isTransfer = true;
     private CurrencyData currencyData;
+    private QMUIDialog passwordQmuiDialog;
 
     @Override
     protected View onCreateView() {
@@ -195,6 +205,7 @@ public class OTCSellFragment extends BaseFragment {
     protected void initAction() {
         addEditTextListener(quantityEt);
         addEditTextListener(minSaleAmountEt);
+        addEditTextListener(numTv);
     }
 
     private void addEditTextListener(AppCompatEditText editText) {
@@ -227,8 +238,11 @@ public class OTCSellFragment extends BaseFragment {
                         if (isMinAmount) {
                             minCNYDecimal = minBigDecimal;
                         } else {
-                            minCNYDecimal = minBigDecimal.multiply(CNYDecimal);
+                            minCNYDecimal = minBigDecimal.multiply(priceDecimal);
                         }
+                        break;
+                    case R.id.numTv:
+                        priceDecimal = new BigDecimal(ObjectUtils.isEmpty(numTv.getText()) ? "0" : numTv.getText().toString());
                         break;
                 }
                 if (isQuantity && isMinSale && isBind && isPledge) {
@@ -263,8 +277,11 @@ public class OTCSellFragment extends BaseFragment {
                         if (isMinAmount) {
                             minCNYDecimal = minBigDecimal;
                         } else {
-                            minCNYDecimal = minBigDecimal.multiply(CNYDecimal);
+                            minCNYDecimal = minBigDecimal.multiply(priceDecimal);
                         }
+                        break;
+                    case R.id.numTv:
+                        priceDecimal = new BigDecimal(ObjectUtils.isEmpty(numTv.getText()) ? "0" : numTv.getText().toString());
                         break;
                 }
                 if (isQuantity && isMinSale && isBind && isPledge) {
@@ -301,7 +318,23 @@ public class OTCSellFragment extends BaseFragment {
                 unitPrice(true);
                 break;
             case R.id.sellBtn:
-                transferTransaction();
+                quantityDecimal = new BigDecimal(ObjectUtils.isEmpty(quantityEt.getText()) ? "0" : quantityEt.getText().toString());
+                minDecimal = new BigDecimal(ObjectUtils.isEmpty(minSaleAmountEt.getText()) ? "0" : minSaleAmountEt.getText().toString());
+                BigDecimal minMGPDecimal = BigDecimal.ZERO;
+                if (isMinAmount) {
+                    minMGPDecimal = minDecimal.divide(priceDecimal, 4, RoundingMode.FLOOR);
+                } else {
+                    minMGPDecimal = minDecimal;
+                }
+                if (quantityDecimal.compareTo(minMGPDecimal) >= 0) {
+                    if (passwordQmuiDialog == null) {
+                        passwordQmuiDialog = DialogHelper.showEditTextDialog(getActivity(), getString(R.string.str_password_authentification),
+                                getString(R.string.str_enter_password), getString(android.R.string.ok), getString(android.R.string.cancel), listener, true);
+                    }
+                    passwordQmuiDialog.show();
+                } else {
+                    ToastUtils.showLong(R.string.str_sell_quantity_tip);
+                }
                 break;
             case R.id.totalTv:
                 quantityEt.setText(balanceDecimal.toPlainString());
@@ -313,6 +346,21 @@ public class OTCSellFragment extends BaseFragment {
                 break;
         }
     }
+
+    DialogConfirmListener listener = new DialogConfirmListener() {
+        @Override
+        public void onClick(QMUIDialog dialog, View view, int index) {
+            EditText editText = ((EditText) view);
+            String text = editText.getText().toString().trim();
+            if (ObjectUtils.equals(Md5Utils.md5(text), mangoWallet.getWalletPassword())) {
+                transferTransaction();
+            } else {
+                ToastUtils.showShort(StringUtils.getString(R.string.str_wrong_password));
+            }
+            editText.setText("");
+            dialog.dismiss();
+        }
+    };
 
     private void unitPrice(boolean isAdd) {
         BigDecimal numDecimal = new BigDecimal(ObjectUtils.isEmpty(numTv.getText()) ? "0" : numTv.getText().toString());
@@ -328,7 +376,6 @@ public class OTCSellFragment extends BaseFragment {
                 numTv.setText(priceDecimal.toPlainString());
             }
         }
-
         toCNY();
     }
 
@@ -430,6 +477,7 @@ public class OTCSellFragment extends BaseFragment {
         Map params = MapUtils.newHashMap();
         String action;
         String code;
+        priceDecimal = new BigDecimal(ObjectUtils.isEmpty(numTv.getText()) ? "0" : numTv.getText().toString());
         if (isTransfer) {
             action = TRANSFER_ACTION;
             code = EOSIO_TOKEN_CONTRACT_CODE;
@@ -437,27 +485,24 @@ public class OTCSellFragment extends BaseFragment {
             params.put("memo", memo);
             params.put("from", walletAddress);
             params.put("to", DEAL_CONTRACT);
-            params.put("quantity", new BigDecimal(quantityEt.getText().toString()).setScale(4) + " " + walletType);
+            params.put("quantity", quantityDecimal.setScale(4) + " " + walletType);
         } else {
             action = OPEN_ORDER;
             code = DEAL_CONTRACT;
-            BigDecimal bigDecimal = new BigDecimal(minSaleAmountEt.getText().toString());
             if (isMinAmount) {
-                minCNYDecimal = bigDecimal;
+                minCNYDecimal = minDecimal;
             } else {
-                minCNYDecimal = bigDecimal.multiply(CNYDecimal);
+                minCNYDecimal = minDecimal.multiply(priceDecimal);
             }
-
             params.put("owner", walletAddress);
             params.put("quantity", new BigDecimal(quantityEt.getText().toString()).setScale(4) + " " + MGP_SYMBOL);
-            params.put("price", CNYDecimal.setScale(2).toPlainString() + " CNY");
+            params.put("price", priceDecimal.setScale(2).toPlainString() + " CNY");
             params.put("min_accept_quantity", minCNYDecimal.setScale(2).toPlainString() + " CNY");
         }
 
         String jsonData = GsonUtils.toJson(params);
         String privatekey = mangoWallet.getPrivateKey();
-        LogUtils.dTag(Constants.LOG_TAG, " privatekey = " + privatekey
-                + "accountName = " + walletAddress
+        LogUtils.dTag(Constants.LOG_TAG, "accountName = " + walletAddress
                 + "params = " + jsonData);
         //openorder
         emWalletRepository.sendTransaction(action, privatekey, walletAddress, code, jsonData, walletType)
@@ -517,11 +562,11 @@ public class OTCSellFragment extends BaseFragment {
             }
         }
 
-        if (ObjectUtils.isNotEmpty(currencyData) && ObjectUtils.isNotEmpty(price)) {
+        if (ObjectUtils.isNotEmpty(CNYPriceDecimal) && ObjectUtils.isNotEmpty(price)) {
             if (ObjectUtils.isNotEmpty(currencyData.getPrice())) {
-                priceDecimal = price.multiply(currencyDecimal).setScale(2, RoundingMode.FLOOR);
+                priceDecimal = price.multiply(CNYPriceDecimal).setScale(2, RoundingMode.FLOOR);
                 numTv.setText(priceDecimal.toPlainString());
-                mgpPriceTv.setText(String.format(getString(R.string.str_current_mgp_price), currencyData.getSymbol() + priceDecimal.toPlainString()));
+                mgpPriceTv.setText(String.format(getString(R.string.str_current_mgp_price), "￥" + priceDecimal.toPlainString()));
             }
         } else {
             priceDecimal = price.setScale(2, RoundingMode.FLOOR);
@@ -534,8 +579,8 @@ public class OTCSellFragment extends BaseFragment {
     }
 
     private void toCNY() {
-        CNYDecimal = priceDecimal.multiply(CNYPriceDecimal).divide(currencyDecimal, 2, RoundingMode.FLOOR);
-        cnyTv.setText("≈ " + CNYDecimal.toPlainString() + " CNY");
+//        CNYDecimal = priceDecimal.multiply(CNYPriceDecimal).divide(currencyDecimal, 2, RoundingMode.FLOOR);
+//        cnyTv.setText("≈ " + CNYDecimal.toPlainString() + " CNY");
     }
 
     private void onIsBindSuccess(JsonObject jsonObject) {
@@ -584,4 +629,14 @@ public class OTCSellFragment extends BaseFragment {
         LogUtils.eTag(LOG_TAG, "e = " + e.toString());
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!isBind) {
+            isBind();
+        }
+        if (!isPledge) {
+            isPosPledge();
+        }
+    }
 }

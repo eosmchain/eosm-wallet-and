@@ -235,6 +235,12 @@ public class SetupContactFragment extends BaseFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getContactInfo();
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         KeyboardUtils.unregisterSoftInputChangedListener(getActivity().getWindow());

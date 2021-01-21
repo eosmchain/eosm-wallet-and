@@ -69,10 +69,11 @@
     <include
         android:id="@+id/subtractorLayout"
         layout="@layout/view_strength_box"
-        android:layout_width="@dimen/album_dp_100"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/album_dp_30"
         android:layout_marginRight="@dimen/album_dp_20"
+        app:layout_constraintBottom_toTopOf="@id/line1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mgpPriceTv" />
 
@@ -263,6 +264,7 @@
         android:layout_marginRight="@dimen/album_dp_20"
         android:text="≈ 0.00 CNY"
         android:textColor="@color/qmui_config_color_red"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fiatMoneyUnitTv2" />
 
