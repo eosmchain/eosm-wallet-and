@@ -884,6 +884,7 @@
     <string name="str_transaction_cancelled">交易取消</string>
     <string name="str_del_pay_way_title">删除支付方式</string>
     <string name="str_del_pay_way_msg">您确定要删除[%s]支付方式吗？</string>
+    <string name="str_buyer_notice_discharged">已通知买家验收</string>
 
     <string name="str_aleft">👈</string>
     <string name="str_right">👉</string>

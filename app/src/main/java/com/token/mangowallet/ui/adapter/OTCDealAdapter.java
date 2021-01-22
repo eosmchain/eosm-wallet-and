@@ -146,10 +146,13 @@ public class OTCDealAdapter extends BaseQuickAdapter<SelordersBean.RowsBean, Bas
         BigDecimal max_accept_quantity = remaining_quantity.multiply(price);
 
         baseViewHolder.setText(R.id.accountNameTv, ObjectUtils.isEmpty(rowsBean.getOwner()) ? "" : rowsBean.getOwner());
-        baseViewHolder.setText(R.id.priceTv, BalanceUtils.currencyToBase(price.toPlainString(), 2, RoundingMode.FLOOR));
+        baseViewHolder.setText(R.id.priceTv, "￥" + price.setScale(2, RoundingMode.FLOOR).toPlainString());
+        //BalanceUtils.currencyToBase(price.toPlainString(), 2, RoundingMode.FLOOR));
         baseViewHolder.setText(R.id.quantityValueTv, APPUtils.dataFormat(ObjectUtils.isEmpty(remaining_quantity) ? "0" : remaining_quantity.toPlainString()) + " " + MGP_SYMBOL);
-        baseViewHolder.setText(R.id.quotaValueTv, BalanceUtils.currencyToBase(min_accept_quantity.toPlainString(), 2, RoundingMode.FLOOR)
-                + "-" + BalanceUtils.currencyToBase(max_accept_quantity.toPlainString(), 2, RoundingMode.FLOOR));
+//        baseViewHolder.setText(R.id.quotaValueTv, BalanceUtils.currencyToBase(min_accept_quantity.toPlainString(), 2, RoundingMode.FLOOR)
+//                + "-" + BalanceUtils.currencyToBase(max_accept_quantity.toPlainString(), 2, RoundingMode.FLOOR));
+        baseViewHolder.setText(R.id.quotaValueTv, "￥" + min_accept_quantity.setScale(2, RoundingMode.FLOOR).toPlainString()
+                + "-" + "￥" + max_accept_quantity.setScale(2, RoundingMode.FLOOR).toPlainString());
 
 
     }

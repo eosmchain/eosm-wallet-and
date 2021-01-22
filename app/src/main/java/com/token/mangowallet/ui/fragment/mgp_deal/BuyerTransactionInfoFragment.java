@@ -783,7 +783,11 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
         if (ObjectUtils.isNotEmpty(jsonObject)) {
             IsBindBean verificationCodeBean = GsonUtils.fromJson(GsonUtils.toJson(jsonObject), IsBindBean.class);
             if (verificationCodeBean.getCode() == 0) {
-                ToastUtils.showLong(R.string.str_notice_discharged);
+                if (OTC_TYPE == OTC_BUYER_ORDERS) {
+                    ToastUtils.showLong(R.string.str_notice_discharged);
+                } else if (OTC_TYPE == OTC_SELLER_ORDERS) {
+                    ToastUtils.showLong(R.string.str_buyer_notice_discharged);
+                }
                 popBackStack();
             } else {
                 ToastUtils.showLong(verificationCodeBean.getMsg());

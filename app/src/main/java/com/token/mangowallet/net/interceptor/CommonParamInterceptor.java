@@ -3,6 +3,7 @@ package com.token.mangowallet.net.interceptor;
 import android.os.Build;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.DeviceUtils;
 import com.blankj.utilcode.util.GsonUtils;
@@ -26,6 +27,7 @@ import java.util.Map;
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
+import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
@@ -136,13 +138,25 @@ public class CommonParamInterceptor implements Interceptor {
             }
         }
 //        Map<String, Object> paramsMap = new HashMap<>();
-        StringBuffer formBody = getPostString(builder, request);
-        url = requestPath(request.url(), formBody);
-        LogUtils.dTag(Constants.LOG_TAG, "CommonParamInterceptor url: " + url);
-        return request.newBuilder().url(url)
-                .addHeader("Content-Type", "application/x-www-form-urlencoded")
+        FormBody formBody = getPostString(builder, request);
+//        Map<String, Object> paramsMap = new HashMap<>();
+//        for (int i = 0; i < formBody.size(); i++) {
+//            if (formBody.value(i).contains("[")) {
+//                paramsMap.put(formBody.name(i), JSONArray.parseArray(formBody.value(i)));
+//            } else {
+//                paramsMap.put(formBody.name(i), formBody.value(i));
+//            }
+//        }
+//        url = requestPath(request.url(), formBody);
+//        JSONObject jsonObject = new JSONObject(paramsMap);
+//        LogUtils.e("params:", jsonObject.toString());
+        return request.newBuilder().post(formBody)
+//                .addHeader("Content-Type", "application/json")
                 .removeHeader("content")
                 .build();
+//        return request.newBuilder().post(RequestBody.create(formBody.toString(), MediaType.parse("application/json; charset=utf-8")))
+//                .addHeader("Accept", "application/json")
+//                .build();
     }
 
     private static String requestPath(HttpUrl url, StringBuffer formBody) {
@@ -150,6 +164,12 @@ public class CommonParamInterceptor implements Interceptor {
         String query = url.encodedQuery();
         return url.scheme() + "://" + url.host() + (query != null ? (path + '?' + query + '&' + (ObjectUtils.isEmpty(formBody) ? "" : formBody.toString()))
                 : path + (ObjectUtils.isEmpty(formBody) ? "" : '?' + formBody.toString()));
+    }
+
+    private static String requestPath(HttpUrl url) {
+        String path = url.encodedPath();
+        String query = url.encodedQuery();
+        return url.scheme() + "://" + url.host() + path;
     }
 
     /**
@@ -268,7 +288,7 @@ public class CommonParamInterceptor implements Interceptor {
      * @param builder
      * @return
      */
-    private StringBuffer getPostString(FormBody.Builder builder, Request request) {
+    private FormBody getPostString(FormBody.Builder builder, Request request) {
 //        if (request.toString().contains(BaseUrlUtils.getInstance().getOTCUrl())) {
 //            builder.add(LANG, getLangParams());
 //            builder.add(APPTYPE, "android");
@@ -302,7 +322,7 @@ public class CommonParamInterceptor implements Interceptor {
         }
 
         LogUtils.e("params:" + tempParams);
-        return tempParams;
+        return formBody;
     }
 
     private static String bodyToString(final RequestBody request) {

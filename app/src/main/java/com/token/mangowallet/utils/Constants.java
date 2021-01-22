@@ -26,7 +26,7 @@ public interface Constants {
     String ETHPLORER_API_URL = "https://api.ethplorer.io";
     String VOTE_TEST_API_URL = "http://m.test.mgps.me/";//"http://vote.mgpchain.io";// "http://192.168.31.49:9000";
     String VOTE_API_URL = "http://vote.mgpchain.io";
-    String OTC_API_URL = "http://m.mgps.me/";
+    String OTC_API_URL = "https://m.mgps.me/";
     String OTC_TEST_API_URL = "http://m.test.mgps.me/";
     String MMGPS_API_URL = "http://m.mgps.me";
     /**
@@ -136,7 +136,7 @@ public interface Constants {
     String TEST_VOTE_CONTRACT = "bpvotingo3o5";
     String WITHDRAW_VOTE = "unvote";//撤回投票
     String CANCEL_NODE = "delist";//取消节点  cancel
-    String DEAL_CONTRACT = "qmgpotcstore";//""mgp.otcstore";//买卖合约地址
+    String DEAL_CONTRACT = "mgp.otcstore";//"qmgpotcstore"mgp.otcstore";//买卖合约地址
     String OPEN_ORDER = "openorder";
     String OLOSE_ORDER = "closeorder";
     ///////////////////////////////////////////

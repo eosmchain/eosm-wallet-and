@@ -131,9 +131,11 @@ public class SetupContactFragment extends BaseFragment {
                 switch (editText.getId()) {
                     case R.id.phoneNumberValTv:
                         isPhoneNumber = true;
+//                        saveContactInfo();
                         break;
                     case R.id.wechatIDValTv:
                         isPhoneNumber = false;
+//                        saveContactInfo();
                         break;
                 }
             }
@@ -244,5 +246,13 @@ public class SetupContactFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         KeyboardUtils.unregisterSoftInputChangedListener(getActivity().getWindow());
+        if (!ObjectUtils.equals(ObjectUtils.isEmpty(phoneNumberValTv.getText()) ? "" : phoneNumberValTv.getText(), dataBean == null ? "" : dataBean.getPhone())) {
+            isPhoneNumber = true;
+            saveContactInfo();
+        }
+        if (!ObjectUtils.equals(ObjectUtils.isEmpty(wechatIDValTv.getText()) ? "" : wechatIDValTv.getText(), dataBean == null ? "" : dataBean.getWeixin())) {
+            isPhoneNumber = false;
+            saveContactInfo();
+        }
     }
 }

@@ -239,7 +239,11 @@ public class AddPaymentFragment extends BaseFragment {
                 if (payId == 1) {
                     savePayWay();
                 } else {
-                    uploadFile(picPath);
+                    if (ObjectUtils.isNotEmpty(picPath)) {
+                        uploadFile(picPath);
+                    } else {
+                        savePayWay();
+                    }
                 }
                 break;
         }
@@ -319,7 +323,6 @@ public class AddPaymentFragment extends BaseFragment {
      * 上传图片
      */
     private void uploadFile(String filePath) {
-        showTipDialog(getString(R.string.str_loading));
         try {
             MultipartBody.Builder mMultipartBodyBuilder = new MultipartBody.Builder();
             File file = new File(filePath);
@@ -334,6 +337,7 @@ public class AddPaymentFragment extends BaseFragment {
             if (multipartBody.size() <= 0) {
                 return;
             }
+            showTipDialog(getString(R.string.str_loading));
             NetWorkManager.getRequest().uploadFile(multipartBody, "otcstore.mgps.me", "MGP")
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
