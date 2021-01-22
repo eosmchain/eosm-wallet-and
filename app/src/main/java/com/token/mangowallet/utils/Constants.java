@@ -26,6 +26,8 @@ public interface Constants {
     String ETHPLORER_API_URL = "https://api.ethplorer.io";
     String VOTE_TEST_API_URL = "http://m.test.mgps.me/";//"http://vote.mgpchain.io";// "http://192.168.31.49:9000";
     String VOTE_API_URL = "http://vote.mgpchain.io";
+    String OTC_API_URL = "http://m.mgps.me/";
+    String OTC_TEST_API_URL = "http://m.test.mgps.me/";
     String MMGPS_API_URL = "http://m.mgps.me";
     /**
      * 查询币价地址
@@ -42,6 +44,7 @@ public interface Constants {
     String FAJIAN_URL = "FAJIAN_URL";
     String TOKENURL = "ETHPLORER_URL";
     String VOTEURL = "VOTE_URL";
+    String OTCURL = "OTC_URL";
     String MMGPSME = "m.mgps.me";
     ///查询数字货币价格 price
     String DIGICCY_PRICE_URL = "DIGICCY_PRICE_URL";

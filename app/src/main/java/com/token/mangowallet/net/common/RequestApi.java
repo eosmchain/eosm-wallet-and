@@ -1453,7 +1453,7 @@ public interface RequestApi {
      *
      * @Header("content:") String content
      */
-    @Headers("urlname:" + Constants.VOTEURL)
+    @Headers("urlname:" + Constants.OTCURL)
     @POST("/otcapi/api/moUsers/isBind")
     Observable<JsonObject> isBind(@Header("content") String content);
 
@@ -1464,7 +1464,7 @@ public interface RequestApi {
      *
      * @Header("content:") String content
      */
-    @Headers("urlname:" + Constants.VOTEURL)
+    @Headers("urlname:" + Constants.OTCURL)
     @POST("/otcapi/api/moUsers/find")
     Observable<JsonObject> getContactInfo(@Header("content") String content);
 
@@ -1477,7 +1477,7 @@ public interface RequestApi {
      *
      * @Header("content:") String content
      */
-    @Headers("urlname:" + Constants.VOTEURL)
+    @Headers("urlname:" + Constants.OTCURL)
     @POST("/otcapi/api/moUsers/save")
     Observable<JsonObject> saveContactInfo(@Header("content") String content);
 
@@ -1490,7 +1490,7 @@ public interface RequestApi {
      *
      * @Header("content:") String content
      */
-    @Headers("urlname:" + Constants.VOTEURL)
+    @Headers("urlname:" + Constants.OTCURL)
     @POST("/otcapi/api/email/send")
     Observable<JsonObject> sendVerificationCode(@Header("content") String content);
 
@@ -1500,7 +1500,7 @@ public interface RequestApi {
      *
      * @Header("content:") String content
      */
-    @Headers("urlname:" + Constants.VOTEURL)
+    @Headers("urlname:" + Constants.OTCURL)
     @POST("/otcapi/api/moPayInfo/list")
     Observable<JsonObject> getPayInfoList(@Header("content") String content);
 
@@ -1518,7 +1518,7 @@ public interface RequestApi {
      *
      * @Header("content:") String content
      */
-    @Headers("urlname:" + Constants.VOTEURL)
+    @Headers("urlname:" + Constants.OTCURL)
     @POST("/otcapi/api/moPayInfo/save")
     Observable<JsonObject> savePayWay(@Header("content") String content);
 
@@ -1544,7 +1544,7 @@ public interface RequestApi {
      *
      * @Header("content:") String content
      */
-    @Headers("urlname:" + Constants.VOTEURL)
+    @Headers("urlname:" + Constants.OTCURL)
     @POST("/otcapi/api/moUsers/payInfo")
     Observable<JsonObject> payInfo(@Header("content") String content);
 
@@ -1563,7 +1563,7 @@ public interface RequestApi {
      *
      * @Header("content:") String content
      */
-    @Headers("urlname:" + Constants.VOTEURL)
-    @POST("/otcapi//api/moPayInfo/del")
+    @Headers("urlname:" + Constants.OTCURL)
+    @POST("/otcapi/api/moPayInfo/del")
     Observable<JsonObject> delPayWay(@Header("content") String content);
 }

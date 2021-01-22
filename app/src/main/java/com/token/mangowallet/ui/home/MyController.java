@@ -117,10 +117,8 @@ public class MyController extends QMUIWindowInsetLayout {
             @Override
             public void onDebouncingClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, String.valueOf(10));
-                bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "V" + AppUtils.getAppVersionName());
-                bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "version");
-                MyApplication.mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+                bundle.putParcelable(EXTRA_WALLET, baseFragment.mangoWallet);
+                baseFragment.startFragment("OTCDealFragment", bundle);
             }
         });
     }

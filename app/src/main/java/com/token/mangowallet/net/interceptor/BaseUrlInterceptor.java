@@ -49,6 +49,13 @@ public class BaseUrlInterceptor implements Interceptor {
                 } else {
                     newBaseUrl = HttpUrl.parse(baseUrl);
                 }
+            } else if (Constants.OTCURL.equals(headerValue)) {
+                String baseUrl = BaseUrlUtils.getInstance().getOTCUrl();
+                if (ObjectUtils.isEmpty(baseUrl)) {
+                    newBaseUrl = oldHttpUrl;
+                } else {
+                    newBaseUrl = HttpUrl.parse(baseUrl);
+                }
             } else if (Constants.MMGPSME.equals(headerValue)) {
                 newBaseUrl = HttpUrl.parse(Constants.MMGPS_API_URL);
             } else {

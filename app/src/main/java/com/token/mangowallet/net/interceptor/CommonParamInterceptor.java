@@ -70,12 +70,16 @@ public class CommonParamInterceptor implements Interceptor {
         boolean bol2 = request.toString().contains(BaseUrlUtils.getInstance().getVoteUrl());
         boolean bol3 = ObjectUtils.equals(Constants.EOS_URL, headerValue);
         boolean bol4 = request.toString().contains("/file/upload");
+        boolean bol5 = request.toString().contains(BaseUrlUtils.getInstance().getOTCUrl());
+        boolean bol6 = request.toString().contains("/file/uploadFile");
         if ((bol1 || bol2) && !bol3 && !bol4) {
             if (REQUEST_METHOD_GET.equals(request.method())) {
                 request = addGetBaseParams(request);
             } else if (REQUEST_METHOD_POST.equals(request.method())) {
                 request = addPostBaseParams(request);
             }
+        } else if (bol5) {
+            request = addPostURLBaseParams(request);
         }
         request.newBuilder().addHeader("application/x-www-form-urlencoded", "charset=utf-8").build();
         LogUtils.dTag(Constants.LOG_TAG, "CommonParamInterceptor: " + request.toString());
@@ -104,6 +108,48 @@ public class CommonParamInterceptor implements Interceptor {
         request = request.newBuilder().url(httpUrl).build();
         return request;
 
+    }
+
+
+    /**
+     * 添加POST方法基础参数
+     *
+     * @param request
+     * @return
+     */
+    private Request addPostURLBaseParams(Request request) {
+        String url = "";
+        /**
+         * request.body() instanceof FormBody 为true的条件为：
+         * 在ApiService 中将POST请求中设置
+         * 1，请求参数注解为@FieldMap
+         * 2，方法注解为@FormUrlEncoded
+         */
+        FormBody.Builder builder = new FormBody.Builder();
+        if (request.body() instanceof FormBody) {
+            FormBody oldFormBody = (FormBody) request.body();
+            for (int i = 0; i < oldFormBody.size(); i++) {
+                //@FieldMap 注解 Map元素中 key 与 value 皆不能为null,否则会出现NullPointerException
+                if (oldFormBody.value(i) != null) {
+                    builder.add(oldFormBody.name(i), oldFormBody.value(i));
+                }
+            }
+        }
+//        Map<String, Object> paramsMap = new HashMap<>();
+        StringBuffer formBody = getPostString(builder, request);
+        url = requestPath(request.url(), formBody);
+        LogUtils.dTag(Constants.LOG_TAG, "CommonParamInterceptor url: " + url);
+        return request.newBuilder().url(url)
+                .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                .removeHeader("content")
+                .build();
+    }
+
+    private static String requestPath(HttpUrl url, StringBuffer formBody) {
+        String path = url.encodedPath();
+        String query = url.encodedQuery();
+        return url.scheme() + "://" + url.host() + (query != null ? (path + '?' + query + '&' + (ObjectUtils.isEmpty(formBody) ? "" : formBody.toString()))
+                : path + (ObjectUtils.isEmpty(formBody) ? "" : '?' + formBody.toString()));
     }
 
     /**
@@ -178,7 +224,8 @@ public class CommonParamInterceptor implements Interceptor {
      * @return
      */
     private FormBody getPostFormBody(FormBody.Builder builder, Request request) {
-        if (request.toString().contains(BaseUrlUtils.getInstance().getCompanyBaseUrl()) || request.toString().contains(BaseUrlUtils.getInstance().getVoteUrl())) {
+        if (request.toString().contains(BaseUrlUtils.getInstance().getCompanyBaseUrl())
+                || request.toString().contains(BaseUrlUtils.getInstance().getVoteUrl())) {
             builder.add(LANG, getLangParams());
             builder.add(APPTYPE, "android");
             builder.add(APKNAME, "mangowalletnew");
@@ -212,6 +259,50 @@ public class CommonParamInterceptor implements Interceptor {
 
         LogUtils.e("params:" + tempParams);
         return formBody;
+    }
+
+
+    /**
+     * post添加公共参数
+     *
+     * @param builder
+     * @return
+     */
+    private StringBuffer getPostString(FormBody.Builder builder, Request request) {
+//        if (request.toString().contains(BaseUrlUtils.getInstance().getOTCUrl())) {
+//            builder.add(LANG, getLangParams());
+//            builder.add(APPTYPE, "android");
+//            builder.add(APKNAME, "mangowalletnew");
+//            builder.add(VERSION, String.valueOf(AppUtils.getAppVersionCode()));
+//            builder.add(UUID, DeviceUtils.getUniqueDeviceId());
+//        }
+        String content = request.header("content");
+        if (ObjectUtils.isNotEmpty(content)) {
+            String decryptJson = NRSAUtils.decrypt(content);
+            try {
+                Map map = GsonUtils.fromJson(decryptJson, Map.class);
+                Iterator<String> iter = map.keySet().iterator();
+                while (iter.hasNext()) {
+                    String key = iter.next();
+                    Object value = map.get(key);
+                    builder.add(key, value + "");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                ToastUtils.showShort("接收数据解析异常");
+            }
+        }
+        FormBody formBody = builder.build();
+        StringBuffer tempParams = new StringBuffer();
+        for (int i = 0; i < formBody.size(); i++) {
+            tempParams.append(formBody.name(i)).append("=").append(formBody.value(i)).append("&");
+        }
+        if (!ObjectUtils.isEmpty(tempParams)) {
+            tempParams.deleteCharAt(tempParams.lastIndexOf("&"));
+        }
+
+        LogUtils.e("params:" + tempParams);
+        return tempParams;
     }
 
     private static String bodyToString(final RequestBody request) {

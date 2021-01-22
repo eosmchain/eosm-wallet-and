@@ -18,6 +18,8 @@ import static com.token.mangowallet.utils.Constants.GUOYU_TEST_URL;
 import static com.token.mangowallet.utils.Constants.GUOYU_URL;
 import static com.token.mangowallet.utils.Constants.KEY_DIGICCY_SERVER;
 import static com.token.mangowallet.utils.Constants.MIAN_MGP_URL;
+import static com.token.mangowallet.utils.Constants.OTC_API_URL;
+import static com.token.mangowallet.utils.Constants.OTC_TEST_API_URL;
 import static com.token.mangowallet.utils.Constants.PRODUCT_URL;
 import static com.token.mangowallet.utils.Constants.TESTURL;
 import static com.token.mangowallet.utils.Constants.TEST_URL;
@@ -69,6 +71,16 @@ public class BaseUrlUtils {
             return VOTE_TEST_API_URL;
         } else {
             return VOTE_API_URL;
+        }
+    }
+
+    public String getOTCUrl() {
+        String serverName = SPUtils.getInstance(Constants.SP_MangoWallet_info).getString(Constants.KEY_SERVER, Constants.isTest ? TESTURL : CORPORATION_URL);
+        ServerInfo serverInfo = serverInfoMap.get(serverName);
+        if (serverInfo.isTest()) {
+            return OTC_TEST_API_URL;
+        } else {
+            return OTC_API_URL;
         }
     }
 
