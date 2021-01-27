@@ -251,8 +251,8 @@ public class MortgageBigFragment extends BaseFragment {
             mapTableRows.put("table", "balances");
             mapTableRows.put("json", true);
             mapTableRows.put("table_key", "");
-            mapTableRows.put("lower_bound", walletAddress);
-            mapTableRows.put("upper_bound", walletAddress);
+            mapTableRows.put("lower_bound"," " + walletAddress);
+            mapTableRows.put("upper_bound"," " + walletAddress);
             mortgageViewModel.fetchTableRows(mapTableRows);
 
             Map mapOrderIndex = MapUtils.newHashMap();

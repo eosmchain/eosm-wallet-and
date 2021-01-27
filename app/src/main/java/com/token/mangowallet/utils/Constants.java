@@ -136,9 +136,15 @@ public interface Constants {
     String TEST_VOTE_CONTRACT = "bpvotingo3o5";
     String WITHDRAW_VOTE = "unvote";//撤回投票
     String CANCEL_NODE = "delist";//取消节点  cancel
-    String DEAL_CONTRACT = "mgp.otcstore";//"qmgpotcstore"mgp.otcstore";//买卖合约地址
-    String OPEN_ORDER = "openorder";
-    String OLOSE_ORDER = "closeorder";
+    String DEAL_CONTRACT = "mgp.otcstore";//"qmgpotcstore","mgp.otcstore";//买卖合约地址
+    String OPEN_ORDER = "openorder";//商家挂单
+    String OLOSE_ORDER = "closeorder";//商家撤单
+    String BUYER_REVOKE = "closedeal";//买家撤单
+    String BUYER_DEAL = "opendeal";//买家买单
+    String PASS_DEAL = "passdeal";//交易确认
+    String MERCHANT_WITHDRAW = "withdraw";//商家提现
+    String RESTART_ORDER = "restart";//订单重启 （仲裁者账号）
+    String BACKDEAL_ORDER = "backdeal";//款项异常（订单变成代付款）
     ///////////////////////////////////////////
     String BaseFilePath = Environment.getExternalStorageDirectory() + File.separator + "MangoWallet";
     String CrashFilePath = BaseFilePath + File.separator + "Crash";

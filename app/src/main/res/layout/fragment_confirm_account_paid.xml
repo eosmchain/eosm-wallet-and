@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/remarkEt"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/album_dp_200"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edit_input_shape"
+        android:gravity="start"
+        android:hint="@string/str_input_operate_reason"
+        android:padding="@dimen/dp_10"
+        android:text=""
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintTop_toBottomOf="@id/topbar" />
+
+    <FrameLayout
+        android:id="@+id/addCollectionQRLayout"
+        android:layout_width="85dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_20"
+        android:layout_marginTop="@dimen/album_dp_20"
+        android:layout_marginRight="@dimen/album_dp_20"
+        android:maxHeight="@dimen/album_dp_80"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/remarkEt">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/collectionQRValIv"
+            android:layout_width="@dimen/album_dp_80"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/album_dp_10"
+            android:src="@mipmap/ic_add_pic" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/deleteBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:src="@mipmap/ic_delete_oval"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/uploadDocumentsTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/album_dp_10"
+        android:text="@string/str_upload_documents"
+        android:textColor="@color/qmui_config_color_gray_4"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintEnd_toEndOf="@id/addCollectionQRLayout"
+        app:layout_constraintStart_toStartOf="@id/addCollectionQRLayout"
+        app:layout_constraintTop_toBottomOf="@id/addCollectionQRLayout" />
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/buyerSpendConfirmBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/album_dp_45"
+        android:paddingLeft="@dimen/album_dp_45"
+        android:paddingRight="@dimen/album_dp_45"
+        android:text="@string/str_buyer_spend_confirm"
+        android:textColor="@color/durban_White"
+        android:textSize="@dimen/medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/uploadDocumentsTv"
+        app:qmui_backgroundColor="@color/blueColor"
+        app:qmui_radius="8dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

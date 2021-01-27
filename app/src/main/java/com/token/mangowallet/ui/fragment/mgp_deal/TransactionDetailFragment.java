@@ -10,11 +10,14 @@ import androidx.core.content.ContextCompat;
 
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.ObjectUtils;
+import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.bean.DealsOrderBean;
 import com.token.mangowallet.db.MangoWallet;
+import com.token.mangowallet.utils.ClipboardUtils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -100,10 +103,16 @@ public class TransactionDetailFragment extends BaseFragment {
             case R.id.quantityValTv:
                 break;
             case R.id.orderNumberValTv:
+                if (ObjectUtils.isNotEmpty(orderNumberTv.getText())) {
+                    ClipboardUtils.copyText(orderNumberTv.getText());
+                    ToastUtils.showShort(StringUtils.getString(R.string.str_copy_success));
+                }
                 break;
             case R.id.paymentMethodValTv:
                 break;
             case R.id.putCoinHashValTv:
+                break;
+            case R.id.orderNumberTv:
                 break;
         }
     }

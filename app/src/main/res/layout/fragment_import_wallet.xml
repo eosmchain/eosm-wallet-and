@@ -32,7 +32,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tabSegment" />
 
-
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/importWalletKeyEt"
         android:layout_width="match_parent"

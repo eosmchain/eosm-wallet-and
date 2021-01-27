@@ -153,39 +153,5 @@ public class OTCDealAdapter extends BaseQuickAdapter<SelordersBean.RowsBean, Bas
 //                + "-" + BalanceUtils.currencyToBase(max_accept_quantity.toPlainString(), 2, RoundingMode.FLOOR));
         baseViewHolder.setText(R.id.quotaValueTv, "￥" + min_accept_quantity.setScale(2, RoundingMode.FLOOR).toPlainString()
                 + "-" + "￥" + max_accept_quantity.setScale(2, RoundingMode.FLOOR).toPlainString());
-
-
-    }
-
-    /**
-     * 商家信息
-     */
-    private void getBusinessTableRows(String owner, int position) {
-        try {
-            Map mapTableRows = MapUtils.newHashMap();
-            mapTableRows.put("table", "sellers");
-            mapTableRows.put("scope", DEAL_CONTRACT);
-            mapTableRows.put("code", DEAL_CONTRACT);
-            mapTableRows.put("lower_bound", owner);
-            mapTableRows.put("upper_bound", owner);
-            mapTableRows.put("json", true);
-            mapTableRows.put("limit", "500");
-            otcDealFragment.emWalletRepository.fetchTableRowsStr(mapTableRows, otcDealFragment.walletType)
-                    .subscribe(new RxSubscriber<JsonObject>(otcDealFragment.getActivity(), false) {
-                        @Override
-                        public void onFail(String failMsg) {
-                            LogUtils.eTag(LOG_TAG, "failMsg = " + failMsg);
-                        }
-
-                        @Override
-                        public void onSuccess(JsonObject jsonObject) {
-                            if (ObjectUtils.isNotEmpty(jsonObject)) {
-
-                            }
-                        }
-                    });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

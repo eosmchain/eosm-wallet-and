@@ -1,5 +1,9 @@
 package com.token.mangowallet.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.math.BigDecimal;
 import java.util.List;
 
 public class OTCGlobalBean {
@@ -38,7 +42,7 @@ public class OTCGlobalBean {
         this.rows = rows;
     }
 
-    public static class RowsBean {
+    public static class RowsBean implements Parcelable {
         /**
          * min_buy_order_quantity : 0.0010 MGP
          * min_sell_order_quantity : 0.0010 MGP
@@ -56,12 +60,56 @@ public class OTCGlobalBean {
         private String min_sell_order_quantity;
         private String min_pos_stake_quantity;
         private String pos_staking_contract;
-        private int withhold_expire_sec;
+        private BigDecimal withhold_expire_sec;
         private String transaction_fee_receiver;
         private int transaction_fee_ratio;
         private String cs_contact_title;
         private String cs_contact;
         private List<String> otc_arbiters;
+
+        protected RowsBean(Parcel in) {
+            min_buy_order_quantity = in.readString();
+            min_sell_order_quantity = in.readString();
+            min_pos_stake_quantity = in.readString();
+            pos_staking_contract = in.readString();
+            withhold_expire_sec = new BigDecimal(in.readString());
+            transaction_fee_receiver = in.readString();
+            transaction_fee_ratio = in.readInt();
+            cs_contact_title = in.readString();
+            cs_contact = in.readString();
+            otc_arbiters = in.createStringArrayList();
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(min_buy_order_quantity);
+            dest.writeString(min_sell_order_quantity);
+            dest.writeString(min_pos_stake_quantity);
+            dest.writeString(pos_staking_contract);
+            dest.writeString(withhold_expire_sec.toPlainString());
+            dest.writeString(transaction_fee_receiver);
+            dest.writeInt(transaction_fee_ratio);
+            dest.writeString(cs_contact_title);
+            dest.writeString(cs_contact);
+            dest.writeStringList(otc_arbiters);
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        public static final Creator<RowsBean> CREATOR = new Creator<RowsBean>() {
+            @Override
+            public RowsBean createFromParcel(Parcel in) {
+                return new RowsBean(in);
+            }
+
+            @Override
+            public RowsBean[] newArray(int size) {
+                return new RowsBean[size];
+            }
+        };
 
         public String getMin_buy_order_quantity() {
             return min_buy_order_quantity;
@@ -95,11 +143,11 @@ public class OTCGlobalBean {
             this.pos_staking_contract = pos_staking_contract;
         }
 
-        public int getWithhold_expire_sec() {
+        public BigDecimal getWithhold_expire_sec() {
             return withhold_expire_sec;
         }
 
-        public void setWithhold_expire_sec(int withhold_expire_sec) {
+        public void setWithhold_expire_sec(BigDecimal withhold_expire_sec) {
             this.withhold_expire_sec = withhold_expire_sec;
         }
 

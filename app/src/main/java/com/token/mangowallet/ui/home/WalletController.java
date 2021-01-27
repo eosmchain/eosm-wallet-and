@@ -344,11 +344,13 @@ public class WalletController extends QMUIWindowInsetLayout implements PopCreati
     }
 
     public void updataWalletState() {//更新钱包状态
-        if (homeFragment.isActivate) {
-            walletCardView.setIsBackup(homeFragment.mangoWallet.getIsBackup());
-        } else {
-            if (Constants.WalletType.getPagerFromPositon(homeFragment.mangoWallet.getWalletType()) == MGP) {
-                walletCardView.setIsActivate(false);
+        if (walletCardView != null) {
+            if (homeFragment.isActivate) {
+                walletCardView.setIsBackup(homeFragment.mangoWallet.getIsBackup());
+            } else {
+                if (Constants.WalletType.getPagerFromPositon(homeFragment.mangoWallet.getWalletType()) == MGP) {
+                    walletCardView.setIsActivate(false);
+                }
             }
         }
     }

@@ -2,17 +2,19 @@ package com.token.mangowallet.ui.fragment.mgp_deal.setup;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.Group;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.CollectionUtils;
@@ -31,6 +33,7 @@ import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
+import com.token.mangowallet.bean.ContactInfoBean;
 import com.token.mangowallet.bean.IsBindBean;
 import com.token.mangowallet.bean.PayInfoBean;
 import com.token.mangowallet.bean.UpdataFileBean;
@@ -40,6 +43,7 @@ import com.token.mangowallet.utils.AppFilePath;
 import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.utils.PhotoUtils;
 import com.token.mangowallet.view.DialogHelper;
+import com.token.mangowallet.view.ViewUtils;
 import com.yanzhenjie.durban.Durban;
 
 import java.io.File;
@@ -80,12 +84,29 @@ public class AddPaymentFragment extends BaseFragment {
     AppCompatEditText bankNameValEt;
     @BindView(R.id.bankSubbranchValEt)
     AppCompatEditText bankSubbranchValEt;
-    @BindView(R.id.phonePayGroup)
-    Group phonePayGroup;
-    @BindView(R.id.bankPayGroup)
-    Group bankPayGroup;
     @BindView(R.id.saveBtn)
     QMUIRoundButton saveBtn;
+    @BindView(R.id.mailTv)
+    AppCompatTextView mailTv;
+    @BindView(R.id.mailValEt)
+    AppCompatEditText mailValEt;
+    @BindView(R.id.verificationTv)
+    AppCompatTextView verificationTv;
+    @BindView(R.id.verificationValEt)
+    AppCompatEditText verificationValEt;
+    @BindView(R.id.sendCodeBtn)
+    QMUIRoundButton sendCodeBtn;
+    @BindView(R.id.userNameTv)
+    AppCompatTextView userNameTv;
+    @BindView(R.id.collectionQRTv)
+    AppCompatTextView collectionQRTv;
+    @BindView(R.id.bankNameTv)
+    AppCompatTextView bankNameTv;
+    @BindView(R.id.bankSubbranchTv)
+    AppCompatTextView bankSubbranchTv;
+    @BindView(R.id.scrollview)
+    NestedScrollView scrollview;
+
     private Unbinder unbinder;
     private MangoWallet mangoWallet;
     private int payId = 0;//1、银行卡；2、微信支付；3、支付宝；
@@ -98,6 +119,8 @@ public class AddPaymentFragment extends BaseFragment {
     private boolean isEdit = false;
     private QMUIDialog delQMUIDialog;
     private ArrayList<String> mImageList;
+    private ContactInfoBean.DataBean dataBean;
+    private CountDownTimer timer;
 
     @Override
     protected View onCreateView() {
@@ -115,48 +138,41 @@ public class AddPaymentFragment extends BaseFragment {
         payId = bundle.getInt("payId");
         payInfoBean = bundle.getParcelable("PayInfoBean");
         isEdit = bundle.getBoolean("isEdit");
+        dataBean = bundle.getParcelable("ContactInfoBean");
         photoUtils = new PhotoUtils();
         mImageList = new ArrayList<>();
     }
 
     @Override
     protected void initView() {
-        ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) saveBtn.getLayoutParams();
         int title;
         switch (payId) {
             case 1://银行卡
                 title = R.string.str_bank_card;
                 accountNumberTv.setText(R.string.str_bank_id);
                 accountNumberValEt.setHint(R.string.str_import_bank_card_account_number);
-                bankPayGroup.setVisibility(View.VISIBLE);
-                phonePayGroup.setVisibility(View.GONE);
-                layoutParams.topToBottom = R.id.bankSubbranchValEt;
-                saveBtn.setLayoutParams(layoutParams);
+                setBankPayGroup(true);
+                setPhonePayGroup(false);
                 break;
             case 2://微信支付
                 title = R.string.str_wechat_pay;
                 accountNumberTv.setText(R.string.str_account_number);
                 accountNumberValEt.setHint(R.string.str_import_collection_account);
-                bankPayGroup.setVisibility(View.GONE);
-                phonePayGroup.setVisibility(View.VISIBLE);
-                layoutParams.topToBottom = R.id.addCollectionQRLayout;
-                saveBtn.setLayoutParams(layoutParams);
+                setBankPayGroup(false);
+                setPhonePayGroup(true);
                 break;
             case 3://支付宝
                 title = R.string.str_alipay;
                 accountNumberTv.setText(R.string.str_account_number);
                 accountNumberValEt.setHint(R.string.str_import_collection_account);
-                bankPayGroup.setVisibility(View.GONE);
-                phonePayGroup.setVisibility(View.VISIBLE);
-                layoutParams.topToBottom = R.id.addCollectionQRLayout;
-                saveBtn.setLayoutParams(layoutParams);
+                setBankPayGroup(false);
+                setPhonePayGroup(true);
+
                 break;
             default:
                 title = R.string.str_bank_card;
-                bankPayGroup.setVisibility(View.VISIBLE);
-                phonePayGroup.setVisibility(View.GONE);
-                layoutParams.topToBottom = R.id.bankSubbranchValEt;
-                saveBtn.setLayoutParams(layoutParams);
+                setBankPayGroup(true);
+                setPhonePayGroup(false);
                 break;
         }
         topbar.setTitle(title);
@@ -171,7 +187,7 @@ public class AddPaymentFragment extends BaseFragment {
                 @Override
                 public void onClick(View v) {
                     if (delQMUIDialog == null) {
-                        delQMUIDialog = DialogHelper.showMessageDialog(getActivity(), getString(R.string.str_del_pay_way_title), String.format(getString(R.string.str_del_pay_way_msg), payInfoBean.getName())
+                        delQMUIDialog = DialogHelper.showMessageDialog(getActivity(), getString(R.string.str_del_pay_way_title), String.format(getString(R.string.str_del_pay_way_msg), ObjectUtils.isEmpty(payInfoBean.getName()) ? "" : payInfoBean.getName())
                                 , getString(R.string.str_cancel), getString(R.string.str_ok)
                                 , new QMUIDialogAction.ActionListener() {
                                     @Override
@@ -189,7 +205,15 @@ public class AddPaymentFragment extends BaseFragment {
                     delQMUIDialog.show();
                 }
             });
+
+            if (dataBean != null) {
+                setMailGroup(true);
+                mailValEt.setText(ObjectUtils.isEmpty(dataBean.getMail()) ? "" : dataBean.getMail());
+            }
+        } else {
+            setMailGroup(false);
         }
+        ViewUtils.setEditableEditText(mailValEt, false);
         updateView();
     }
 
@@ -202,9 +226,10 @@ public class AddPaymentFragment extends BaseFragment {
                 photoUtils.cropImage(AddPaymentFragment.this, picPath, QMUIDisplayHelper.getScreenWidth(getActivity()), QMUIDisplayHelper.getScreenWidth(getActivity()));
             }
         });
+
     }
 
-    @OnClick({R.id.addCollectionQRLayout, R.id.saveBtn})
+    @OnClick({R.id.addCollectionQRLayout, R.id.saveBtn, R.id.sendCodeBtn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.addCollectionQRLayout:
@@ -246,6 +271,9 @@ public class AddPaymentFragment extends BaseFragment {
                     }
                 }
                 break;
+            case R.id.sendCodeBtn:
+                sendVerificationCode();
+                break;
         }
     }
 
@@ -270,6 +298,23 @@ public class AddPaymentFragment extends BaseFragment {
     }
 
     /**
+     * 倒计时显示
+     */
+    private void countDown() {
+        timer = new CountDownTimer(60 * 1000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                sendCodeBtn.setText(millisUntilFinished / 1000 + "s");
+            }
+
+            @Override
+            public void onFinish() {
+                sendCodeBtn.setText(getString(R.string.str_resend));
+            }
+        }.start();
+    }
+
+    /**
      * 添加/修改收款方式
      */
     private void savePayWay() {
@@ -289,6 +334,7 @@ public class AddPaymentFragment extends BaseFragment {
             if (payInfoBean != null) {
                 params.put("payInfoId", String.valueOf(payInfoBean.getPayInfoId()));
             }
+            params.put("code", verificationValEt.getText().toString());
             String json = GsonUtils.toJson(params);
             String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().savePayWay(content)
@@ -297,6 +343,43 @@ public class AddPaymentFragment extends BaseFragment {
                     .subscribe(this::onSavePayWaySuccess, this::onError);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * 发送验证码
+     * 1、 mail: String,  0. 绑定时的邮箱 ；type=2、3不传mail；
+     * 2、 mgpName: String,  type: 1当前账户； 2卖家账户 ； 3 买家账户；
+     * 3、 type: Int,  0邮箱绑定；1订单支付通知；2.放行；
+     * 4、money: Double?   type： 1：不传money； 2：购买的MGP； 3需要打款的MGP
+     */
+    private void sendVerificationCode() {
+        try {
+            showTipDialog(getString(R.string.str_loading));
+            Map params = MapUtils.newHashMap();
+            params.put("mgpName", mangoWallet.getWalletAddress());
+            params.put("mail", mailValEt.getText().toString());
+            params.put("type", "3");
+            String json = GsonUtils.toJson(params);
+            String content = NRSAUtils.encrypt(json);
+            NetWorkManager.getRequest().sendVerificationCode(content)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::onVerificationCodeSuccess, this::onError);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void onVerificationCodeSuccess(JsonObject jsonObject) {
+        dismissTipDialog();
+        if (ObjectUtils.isNotEmpty(jsonObject)) {
+            IsBindBean verificationCodeBean = GsonUtils.fromJson(GsonUtils.toJson(jsonObject), IsBindBean.class);
+            if (verificationCodeBean.getCode() == 0) {
+                countDown();
+            } else {
+                ToastUtils.showLong(verificationCodeBean.getMsg());
+            }
         }
     }
 
@@ -405,13 +488,43 @@ public class AddPaymentFragment extends BaseFragment {
             mImageList = Durban.parseResult(data);
             if (CollectionUtils.isNotEmpty(mImageList)) {
                 picPath = mImageList.get(0);
+                isAddPic = true;
                 Glide.with(getActivity()).load(picPath).error(R.drawable.placeholder).into(collectionQRValIv);
+                deleteBtn.setVisibility(View.VISIBLE);
             }
         }
+    }
+
+    private void setPhonePayGroup(boolean isVisible) {
+        addCollectionQRLayout.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+        collectionQRTv.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+    }
+
+    private void setBankPayGroup(boolean isVisible) {
+        bankNameTv.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+        bankNameValEt.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+        bankSubbranchTv.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+        bankSubbranchValEt.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+    }
+
+    private void setMailGroup(boolean isVisible) {
+        mailTv.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+        mailValEt.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+        verificationValEt.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+        verificationTv.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+        sendCodeBtn.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
 
     private void onError(Object e) {
         dismissTipDialog();
         LogUtils.eTag(LOG_TAG, "e = " + e.toString());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (timer != null) {
+            timer.cancel();
+        }
     }
 }

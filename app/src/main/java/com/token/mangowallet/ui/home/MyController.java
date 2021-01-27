@@ -116,9 +116,9 @@ public class MyController extends QMUIWindowInsetLayout {
         appVersionTv.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
             @Override
             public void onDebouncingClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putParcelable(EXTRA_WALLET, baseFragment.mangoWallet);
-                baseFragment.startFragment("OTCDealFragment", bundle);
+//                Bundle bundle = new Bundle();
+//                bundle.putParcelable(EXTRA_WALLET, baseFragment.mangoWallet);
+//                baseFragment.startFragment("OTCDealFragment", bundle);
             }
         });
     }

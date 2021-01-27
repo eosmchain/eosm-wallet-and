@@ -208,7 +208,7 @@ public class EntrustFragment extends BaseFragment {
     private void onTransaction(TransactionBean transactionBean) {
         dismissTipDialog();
         if (transactionBean.isSuccess) {
-            ToastUtils.showLong(R.string.str_order_succeed);
+            ToastUtils.showLong(R.string.str_withdrawals_succeed);
             popBackStack();
         } else {
             ToastUtils.showLong(transactionBean.msg);
@@ -218,6 +218,7 @@ public class EntrustFragment extends BaseFragment {
     private void onError(Object e) {
         dismissTipDialog();
         LogUtils.eTag(LOG_TAG, "e = " + e.toString());
+        ToastUtils.showLong(R.string.str_withdrawals_fail);
     }
 
 }

@@ -2,6 +2,7 @@ package com.token.mangowallet.repository;
 
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.MapUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.token.mangowallet.MyApplication;
 import com.token.mangowallet.bean.AccountInfo;
@@ -134,6 +135,13 @@ public class EMWalletRepository {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public Observable<TransactionBean> sendTransaction(List<Action> actionList, String privateKey, Constants.WalletType walletType) {
+        return Observable.fromCallable(() -> getTransaction(actionList, privateKey, walletType)
+        ).subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
     public List<Token> getToken(String walletAddress, List<Token> tokens) throws Exception {
         for (Token token : tokens) {
             BigDecimal balance = null;
@@ -226,6 +234,67 @@ public class EMWalletRepository {
         try {
             // Prepare transaction with above action. A transaction can be executed with multiple action.
             processor.prepare(Collections.singletonList(mAction));
+            // Sign and broadcast the transaction.
+            PushTransactionResponse response = processor.signAndBroadcast();
+            LogUtils.dTag(Constants.LOG_TAG, "TransactionTask getTransactionId = " + response.getTransactionId());
+            transactionBean.setData(true, response.getTransactionId());
+            return transactionBean;
+        } catch (TransactionPrepareError transactionPrepareError) {
+            // Happens if preparing transaction unsuccessful
+            transactionPrepareError.printStackTrace();
+            LogUtils.dTag(Constants.LOG_TAG, "TransactionTask TransactionPrepareError = " + transactionPrepareError.getMessage());
+            transactionBean.setData(false, transactionPrepareError.getLocalizedMessage());
+            return transactionBean;
+        } catch (TransactionSignAndBroadCastError transactionSignAndBroadCastError) {
+            // Happens if Sign transaction or broadcast transaction unsuccessful.
+            transactionSignAndBroadCastError.printStackTrace();
+            // try to get backend error if the error come from backend
+            RPCResponseError rpcResponseError = ErrorUtils.getBackendError(transactionSignAndBroadCastError);
+            if (rpcResponseError != null) {
+                String errorDetail = ErrorUtils.getErrorDetail(rpcResponseError);
+                LogUtils.dTag(Constants.LOG_TAG, "TransactionTask backendErrorMessage = " + errorDetail);
+                transactionBean.setData(false, errorDetail);
+                return transactionBean;
+            }
+            LogUtils.dTag(Constants.LOG_TAG, "TransactionTask TransactionSignAndBroadCastError asJsonString= " + transactionSignAndBroadCastError.asJsonString());
+            LogUtils.dTag(Constants.LOG_TAG, "TransactionTask TransactionSignAndBroadCastError = " + transactionSignAndBroadCastError.getMessage());
+            transactionBean.setData(false, transactionSignAndBroadCastError.getMessage());
+            return transactionBean;
+        }
+    }
+
+    public TransactionBean getTransaction(List<Action> actionList, String privateKey, Constants.WalletType walletType) {
+        TransactionBean transactionBean = new TransactionBean();
+        ISerializationProvider serializationProvider;
+        try {
+            serializationProvider = new AbiEosSerializationProviderImpl();
+        } catch (SerializationProviderError serializationProviderError) {
+            serializationProviderError.printStackTrace();
+            return null;
+        }
+        // Creating RPC Provider
+        IRPCProvider rpcProvider = customEosioJavaRpcProvider;
+        IABIProvider abiProvider = new ABIProviderImpl(rpcProvider, serializationProvider);
+        // Creating Signature provider
+        ISignatureProvider signatureProvider = new SoftKeySignatureProviderImpl();
+        try {
+            ((SoftKeySignatureProviderImpl) signatureProvider).importKey(privateKey);
+        } catch (ImportKeyError importKeyError) {
+            importKeyError.printStackTrace();
+            LogUtils.dTag(Constants.LOG_TAG, "TransactionTask importKeyError = " + importKeyError.getMessage());
+//            this.publishProgress(Boolean.toString(false), importKeyError.getMessage());
+            transactionBean.setData(false, importKeyError.getMessage());
+            return transactionBean;
+        }
+        // Creating TransactionProcess
+        TransactionSession session = new TransactionSession(serializationProvider, rpcProvider, abiProvider, signatureProvider);
+        TransactionProcessor processor = session.getTransactionProcessor();
+        // Apply transaction data to Action's data
+        // Creating action with action's data, eosio.token contract and transfer action.
+//        Action mAction = new Action(code, action, Collections.singletonList(new Authorization(fromAccount, "active")), jsonData);
+        try {
+            // Prepare transaction with above action. A transaction can be executed with multiple action.
+            processor.prepare(actionList);
             // Sign and broadcast the transaction.
             PushTransactionResponse response = processor.signAndBroadcast();
             LogUtils.dTag(Constants.LOG_TAG, "TransactionTask getTransactionId = " + response.getTransactionId());

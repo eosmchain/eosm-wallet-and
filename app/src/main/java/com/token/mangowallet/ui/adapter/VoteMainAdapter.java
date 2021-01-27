@@ -13,6 +13,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUIProgressBar;
+import com.qmuiteam.qmui.widget.QMUISlider;
 import com.token.mangowallet.R;
 import com.token.mangowallet.bean.ThemesBean;
 
@@ -40,7 +41,7 @@ public class VoteMainAdapter extends BaseQuickAdapter<ThemesBean.DataBean, BaseV
         AppCompatTextView voteSchemeTv = baseViewHolder.getView(R.id.voteSchemeTv);
         AppCompatTextView voteBtn = baseViewHolder.getView(R.id.voteBtn);
         AppCompatTextView rateTv = baseViewHolder.getView(R.id.rateTv);
-        ContentLoadingProgressBar rectProgressBar = baseViewHolder.getView(R.id.rectProgressBar);
+        QMUISlider rectProgressBar = baseViewHolder.getView(R.id.rectProgressBar);
 
         BigDecimal mRate = BigDecimal.ZERO;//.setScale(2).toPlainString()
         int mSort = 1;
@@ -52,7 +53,7 @@ public class VoteMainAdapter extends BaseQuickAdapter<ThemesBean.DataBean, BaseV
             voteSchemeTv.setText(ObjectUtils.isNotEmpty(token.getVoteContent()) ? token.getVoteContent() : "");
             mRate = ObjectUtils.isNotEmpty(token.getRate()) ? (token.getRate().multiply(percent)) : BigDecimal.ZERO;
             mSort = ObjectUtils.isNotEmpty(token.getSort()) ? token.getSort() : 1;
-            rectProgressBar.setProgress(mRate.intValue(), true);
+            rectProgressBar.setCurrentProgress(mRate.intValue());
             rateTv.setText(mRate.setScale(2).toPlainString() + "%");
             if (isMyScheme) {
                 //type 0待支付 1待审核 2审核失败展示mark 3投票中 4投票结束 5待投票
@@ -106,7 +107,7 @@ public class VoteMainAdapter extends BaseQuickAdapter<ThemesBean.DataBean, BaseV
         rankingTv.setTextColor(ContextCompat.getColor(getContext(), mTextColor));
         rankingTv.setTextSize(mTextSize);
         rankingTv.setText(mSort + "");
-        rectProgressBar.setProgress(mRate.intValue(), true);
+        rectProgressBar.setCurrentProgress(mRate.intValue());
         rateTv.setText(mRate + "%");
     }
 }

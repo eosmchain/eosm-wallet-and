@@ -208,13 +208,14 @@ public class CommonParamInterceptor implements Interceptor {
         String jsonData = GsonUtils.toJson(paramsMap);
         try {
             content = NRSAUtils.encrypt(jsonData);
+            mangoWallet = WalletDaoUtils.getCurrentWallet();
+            if (mangoWallet == null) {
+                mangoWallet = WalletDaoUtils.getCurrentWallet(Utils.getApp());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        mangoWallet = WalletDaoUtils.getCurrentWallet();
-        if (mangoWallet == null) {
-            mangoWallet = WalletDaoUtils.getCurrentWallet(Utils.getApp());
-        }
+
         request.newBuilder().removeHeader("content").build();
         LogUtils.dTag(Constants.LOG_TAG, "CommonParamInterceptor formBody: " + formBody);
         LogUtils.dTag(Constants.LOG_TAG, "CommonParamInterceptor params: " + jsonData + " header content: " + content);
@@ -227,8 +228,8 @@ public class CommonParamInterceptor implements Interceptor {
                 .addHeader(APKNAME, "mangowalletnew")
                 .addHeader(VERSION, String.valueOf(AppUtils.getAppVersionCode()))
                 .addHeader(UUID, DeviceUtils.getUniqueDeviceId())
-                .addHeader("address", mangoWallet.getWalletAddress())
-                .addHeader("publicKey", mangoWallet.getPublicKey())
+                .addHeader("address", mangoWallet == null ? "" : mangoWallet.getWalletAddress())
+                .addHeader("publicKey", mangoWallet == null ? "" : mangoWallet.getPublicKey())
                 .addHeader("content", content)
                 .build();//application/json
 //        return request.newBuilder().post(RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonData))

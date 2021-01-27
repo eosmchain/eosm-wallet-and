@@ -213,7 +213,7 @@ public class DealMGPPopup extends BasePopup {
             String mgpNumInterval = APPUtils.dataFormat(min_mgp_num.toPlainString())
                     + "-" + APPUtils.dataFormat(remaining_quantity.toPlainString())
                     + " " + MGP_SYMBOL;
-            editText.setFilters(new InputFilter[]{new CashierInputFilter(mCurIndex == 0 ? max_accept_quantity.setScale(2, CEILING)
+            editText.setFilters(new InputFilter[]{new CashierInputFilter(mCurIndex == 0 ? max_accept_quantity.setScale(2, FLOOR)
                     : remaining_quantity.setScale(4, FLOOR), mCurIndex == 0 ? 2 : 4)});
             priceValTv.setText(price.toPlainString());//BalanceUtils.currencyToBase(price.toPlainString(), 2, RoundingMode.FLOOR));
             quotaTv.setText(getString(R.string.str_quota) + " " + (mCurIndex == 0 ? amountInterval : mgpNumInterval));
@@ -227,7 +227,7 @@ public class DealMGPPopup extends BasePopup {
                 BigDecimal bigDecimal = new BigDecimal(num);
 
                 if (mCurIndex == 0) {
-                    BigDecimal buyNum = bigDecimal.divide(price, 4, BigDecimal.ROUND_HALF_UP);
+                    BigDecimal buyNum = bigDecimal.divide(price, 4, BigDecimal.ROUND_FLOOR);
                     this.buyNum = buyNum.toPlainString();
                     numberTransactionValTv.setText(buyNum + " " + MGP_SYMBOL);
                     disbursementsValTv.setText(num + " CNY");//BalanceUtils.currencyToBase(num, 2, RoundingMode.FLOOR));
@@ -235,7 +235,7 @@ public class DealMGPPopup extends BasePopup {
                     BigDecimal buyA = bigDecimal.multiply(price);
                     this.buyNum = bigDecimal.setScale(4, FLOOR).toPlainString();
                     numberTransactionValTv.setText(num + " " + MGP_SYMBOL);
-                    disbursementsValTv.setText(buyA.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + " CNY");//BalanceUtils.currencyToBase(buyNum.toPlainString(), 2, RoundingMode.FLOOR));
+                    disbursementsValTv.setText(buyA.setScale(2, BigDecimal.ROUND_FLOOR).toPlainString() + " CNY");//BalanceUtils.currencyToBase(buyNum.toPlainString(), 2, RoundingMode.FLOOR));
                 }
             }
         }
@@ -247,7 +247,7 @@ public class DealMGPPopup extends BasePopup {
         switch (view.getId()) {
             case R.id.allBuyTv:
                 if (mCurIndex == 0) {
-                    editText.setText(max_accept_quantity.setScale(2, CEILING).toPlainString());
+                    editText.setText(max_accept_quantity.setScale(2, FLOOR).toPlainString());
                 } else {
                     editText.setText(remaining_quantity.setScale(4, FLOOR).toPlainString());
                 }

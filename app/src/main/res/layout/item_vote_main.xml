@@ -67,21 +67,22 @@
         app:layout_constraintStart_toEndOf="@id/layout"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.core.widget.ContentLoadingProgressBar
+    <com.qmuiteam.qmui.widget.QMUISlider
         android:id="@+id/rectProgressBar"
-        style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="0dp"
-        android:layout_height="8dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/album_dp_10"
         android:layout_marginTop="@dimen/album_dp_10"
         android:layout_marginRight="@dimen/album_dp_10"
         android:layout_marginBottom="@dimen/album_dp_10"
-
+        app:qmui_slider_bar_constraint_thumb_in_moving="false"
+        app:qmui_slider_bar_thumb_size="@dimen/album_dp_0"
         android:progressDrawable="@drawable/layer_list_progress_drawable"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/rateTv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rankingTv" />
+        app:layout_constraintTop_toBottomOf="@id/rankingTv"
+        app:qmui_slider_bar_height="8dp" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/rateTv"

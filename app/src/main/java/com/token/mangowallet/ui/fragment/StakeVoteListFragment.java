@@ -135,8 +135,8 @@ public class StakeVoteListFragment extends BaseFragment {
             mapTableRows.put("table", "votes");
             mapTableRows.put("key_type", "i64");
             mapTableRows.put("limit", "500");
-            mapTableRows.put("lower_bound", walletAddress);
-            mapTableRows.put("upper_bound", walletAddress);
+            mapTableRows.put("lower_bound", " " +walletAddress);
+            mapTableRows.put("upper_bound"," " + walletAddress);
             emWalletRepository.fetchTableRowsStr(mapTableRows, walletType)
                     .subscribe(this::onTableRowsList, this::onError);
         } catch (Exception e) {

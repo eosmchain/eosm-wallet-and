@@ -61,11 +61,16 @@ import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
+import static com.token.mangowallet.utils.Constants.BACKDEAL_ORDER;
+import static com.token.mangowallet.utils.Constants.BUYER_REVOKE;
 import static com.token.mangowallet.utils.Constants.DEAL_CONTRACT;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
+import static com.token.mangowallet.utils.Constants.OTC_ARBITER_ORDERS;
 import static com.token.mangowallet.utils.Constants.OTC_BUYER_ORDERS;
 import static com.token.mangowallet.utils.Constants.OTC_SELLER_ORDERS;
+import static com.token.mangowallet.utils.Constants.PASS_DEAL;
+import static com.token.mangowallet.utils.Constants.RESTART_ORDER;
 
 public class BuyerTransactionInfoFragment extends BaseFragment {
 
@@ -105,6 +110,8 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
     FrameLayout transactionDetailFragment;
     @BindView(R.id.line2)
     View line2;
+    @BindView(R.id.restartTimerValTv)
+    AppCompatTextView restartTimerValTv;
 
     private Unbinder unbinder;
     private int mCurIndex = 0;
@@ -204,6 +211,10 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
                     if (orderStatus == 2) {
                         ToastUtils.showLong(getString(R.string.str_arbitration_collection));
                     }
+                } else if (OTC_TYPE == OTC_ARBITER_ORDERS) {
+                    if (orderStatus == 3) {
+
+                    }
                 }
                 break;
             case R.id.paidPutCoinBtn:
@@ -215,6 +226,14 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
                     if (orderStatus == 2) {
                         showConfirmReceiptDialog();
                     }
+                } else if (OTC_TYPE == OTC_ARBITER_ORDERS) {
+                    if (orderStatus == 3 || orderStatus == 2) {
+//                        sendBackdealOrder();
+                        Bundle bundle = new Bundle();
+                        bundle.putParcelable(EXTRA_WALLET, mangoWallet);
+                        bundle.putParcelable("RowsBean", mRowsBean);
+                        startFragment("SpendConfirmFragment", bundle);
+                    }
                 }
                 break;
             case R.id.serviceWechatNumberValTv:
@@ -222,6 +241,9 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
                     ClipboardUtils.copyText(serviceWechatNumberValTv.getText().toString());
                     ToastUtils.showShort(StringUtils.getString(R.string.str_copy_success));
                 }
+                break;
+            case R.id.restartTimerValTv:
+                sendRestartOrder();
                 break;
         }
     }
@@ -450,10 +472,21 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
                     } else {
                         btnLayout.setVisibility(View.GONE);
                     }
+                    restartTimerValTv.setVisibility(View.GONE);
                 } else if (OTC_TYPE == OTC_SELLER_ORDERS) {
                     mTabSegment.setVisibility(View.GONE);
                     buyerStatusTv.setText(getString(R.string.str_wait_buyer_payment));
                     btnLayout.setVisibility(View.GONE);
+                    restartTimerValTv.setVisibility(View.GONE);
+                } else if (OTC_TYPE == OTC_ARBITER_ORDERS) {
+                    mTabSegment.setVisibility(View.GONE);
+                    buyerStatusTv.setText(getString(R.string.str_wait_buyer_payment));
+                    btnLayout.setVisibility(View.GONE);
+                    if (orderStatus == 0) {
+                        restartTimerValTv.setVisibility(View.GONE);
+                    } else {
+                        restartTimerValTv.setVisibility(View.VISIBLE);
+                    }
                 }
 
                 mContactMethodFragment = new ContactMethodFragment();
@@ -479,6 +512,7 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
             } else if (mRowsBean.getTaker_passed() == 1
                     && !ObjectUtils.equals("1970-01-01T00:00:00", mRowsBean.getTaker_passed_at())
                     && mRowsBean.getClosed() == 0) {
+                //orderStatus 订单状态：0:代付款;1:超时取消;2:待放行;3:放行超时;4:交易完成;5:交易取消;
                 //待放行 taker_passed = 1， taker_passed_at  != 1970-01-01T00:00:00 ,close = 0 , maker_expiration_at
                 mStartTime = ObjectUtils.isEmpty(mRowsBean.getMaker_expired_at()) ? "0" : mRowsBean.getMaker_expired_at();
                 long mistiming = TimeUtils.getSurplusMillisTime(mStartTime);//maker_expiration_at
@@ -487,6 +521,7 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
                 } else {
                     orderStatus = 3;
                 }
+                orderStatusTimeStr = getString(R.string.str_expire_notrelease);
                 if (OTC_TYPE == OTC_BUYER_ORDERS) {
                     mTabSegment.setVisibility(View.VISIBLE);
                     buyerStatusTv.setVisibility(View.GONE);
@@ -501,7 +536,7 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
                             .commit();
 
                     btnLayout.setVisibility(View.GONE);
-                } else {
+                } else if (OTC_TYPE == OTC_SELLER_ORDERS) {
                     String order_price = (ObjectUtils.isEmpty(mRowsBean.getOrder_price()) ? "0.00 CNY" : mRowsBean.getOrder_price()).split(" ")[0];
                     String deal_quantity = (ObjectUtils.isEmpty(mRowsBean.getDeal_quantity()) ? "0.0000 MGP" : mRowsBean.getDeal_quantity()).split(" ")[0];
                     String transactionAmountVal = new BigDecimal(order_price).multiply(new BigDecimal(deal_quantity)).setScale(2, RoundingMode.FLOOR).toPlainString();
@@ -515,10 +550,25 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
                     }
                     cancelOrderBtn.setText(getString(R.string.str_apply_arbitration));
                     paidPutCoinBtn.setText(getString(R.string.str_confirmed_collection));
+                } else if (OTC_TYPE == OTC_ARBITER_ORDERS) {
+                    mTabSegment.setVisibility(View.GONE);
+                    buyerStatusTv.setText(getString(R.string.str_buyer_account_paid));
+                    btnLayout.setVisibility(View.VISIBLE);
+                    if (orderStatus == 2) {
+                        restartTimerValTv.setVisibility(View.GONE);
+                        cancelOrderBtn.setVisibility(View.GONE);
+                        paidPutCoinBtn.setText(getString(R.string.str_buyer_unpaid_confirm));
+                    } else {
+                        restartTimerValTv.setVisibility(View.VISIBLE);
+                        cancelOrderBtn.setVisibility(View.VISIBLE);
+                        cancelOrderBtn.setText(getString(R.string.str_buyer_spend_confirm));
+                        paidPutCoinBtn.setText(getString(R.string.str_buyer_unpaid_confirm));
+                    }
+                    orderStatusTimeStr = getString(R.string.str_order_timeout);
                 }
                 mStartTime = ObjectUtils.isEmpty(mRowsBean.getMaker_expired_at()) ? "0" : mRowsBean.getMaker_expired_at();
                 paymentTimeRemainingTv.setText(getString(R.string.str_discharged_time_remaining));
-                orderStatusTimeStr = getString(R.string.str_expire_notrelease);
+
                 paymentTimeRemainingValTv.setVisibility(View.VISIBLE);
 
                 mContactMethodFragment = new ContactMethodFragment();
@@ -549,6 +599,7 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
                 //taker_passed_at 买家通过时间
                 //arbiter_passed_at 客服通过时间
                 // 交易完成  三者和时间通过三个有两个及以上!= 1970-01-01T00:00:00，close = 1
+                //orderStatus 订单状态：0:代付款;1:超时取消;2:待放行;3:放行超时;4:交易完成;5:交易取消;
                 orderStatus = 4;
                 mTabSegment.setVisibility(View.GONE);
                 buyerStatusTv.setVisibility(View.GONE);
@@ -672,7 +723,7 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
                 param.put("taker", mRowsBean.getOrder_taker());
                 param.put("deal_id", String.valueOf(mRowsBean.getId()));
                 String json = GsonUtils.toJson(param);
-                emWalletRepository.sendTransaction("closedeal", mangoWallet.getPrivateKey(), mangoWallet.getWalletAddress(), DEAL_CONTRACT, json, walletType)
+                emWalletRepository.sendTransaction(BUYER_REVOKE, mangoWallet.getPrivateKey(), mangoWallet.getWalletAddress(), DEAL_CONTRACT, json, walletType)
                         .subscribe(this::onClosedealOrderSuccess, this::onError);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -696,7 +747,58 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
                 param.put("pass", true);
                 param.put("pay_type", OTC_TYPE == OTC_BUYER_ORDERS ? String.valueOf(curPayInfoBean.getPayId()) : String.valueOf(mRowsBean.getPay_type()));
                 String json = GsonUtils.toJson(param);
-                emWalletRepository.sendTransaction("passdeal", mangoWallet.getPrivateKey(), mangoWallet.getWalletAddress(), DEAL_CONTRACT, json, walletType)
+                emWalletRepository.sendTransaction(PASS_DEAL, mangoWallet.getPrivateKey(), mangoWallet.getWalletAddress(), DEAL_CONTRACT, json, walletType)
+                        .subscribe(this::onPassdealSuccess, this::onError);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 订单重启 （仲裁者账号）
+     * <p>
+     * user_type  0 ：重启待放行 1 重启代付款
+     * //orderStatus 订单状态：0:代付款;1:超时取消;2:待放行;3:放行超时;4:交易完成;5:交易取消;
+     */
+    private void sendRestartOrder() {
+        if (mRowsBean != null) {
+            try {
+                showTipDialog(getString(R.string.str_loading));
+                String user_type = "";
+                if (orderStatus == 1) {
+                    user_type = "1";
+                } else if (orderStatus == 3) {
+                    user_type = "0";
+                }
+                Map param = MapUtils.newHashMap();
+                param.put("owner", mangoWallet.getWalletAddress());
+                param.put("deal_id", String.valueOf(mRowsBean.getId()));//交易订单id
+                param.put("user_type", user_type);
+                String json = GsonUtils.toJson(param);
+                emWalletRepository.sendTransaction(RESTART_ORDER, mangoWallet.getPrivateKey(), mangoWallet.getWalletAddress(), DEAL_CONTRACT, json, walletType)
+                        .subscribe(this::onRestartOrderSuccess, this::onError);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 款项异常（订单变成代付款）
+     * <p>
+     * user_type  0 ：重启待放行 1 重启代付款
+     * //orderStatus 订单状态：0:代付款;1:超时取消;2:待放行;3:放行超时;4:交易完成;5:交易取消;
+     */
+    private void sendBackdealOrder() {
+        if (mRowsBean != null) {
+            try {
+                showTipDialog(getString(R.string.str_loading));
+                Map param = MapUtils.newHashMap();
+                param.put("owner", mangoWallet.getWalletAddress());
+                param.put("deal_id", String.valueOf(mRowsBean.getId()));//交易订单id
+                String json = GsonUtils.toJson(param);
+                emWalletRepository.sendTransaction(BACKDEAL_ORDER, mangoWallet.getPrivateKey(), mangoWallet.getWalletAddress(), DEAL_CONTRACT, json, walletType)
                         .subscribe(this::onPassdealSuccess, this::onError);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -775,6 +877,15 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
                     .subscribe(this::onGlobalSuccess, this::onError);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void onRestartOrderSuccess(TransactionBean transactionBean) {
+        dismissTipDialog();
+        if (transactionBean.isSuccess) {
+            ToastUtils.showLong(R.string.str_restart_timer_succeed);
+        } else {
+            ToastUtils.showLong(R.string.str_restart_timer_fail);
         }
     }
 

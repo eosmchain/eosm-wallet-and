@@ -58,6 +58,7 @@ public class SetupContactFragment extends BaseFragment {
     private MangoWallet mangoWallet;
     private ContactInfoBean.DataBean dataBean;
     private boolean isPhoneNumber = false;
+    private String mEMail = "";
 
     @Override
     protected View onCreateView() {
@@ -72,7 +73,7 @@ public class SetupContactFragment extends BaseFragment {
     protected void initData() {
         Bundle bundle = getArguments();
         mangoWallet = bundle.getParcelable(EXTRA_WALLET);
-        getContactInfo();
+        dataBean = bundle.getParcelable("ContactInfoBean");
     }
 
     @Override
@@ -84,7 +85,7 @@ public class SetupContactFragment extends BaseFragment {
                 popBackStack();
             }
         });
-
+        updateView();
     }
 
     @Override
@@ -105,6 +106,28 @@ public class SetupContactFragment extends BaseFragment {
         });
         addEditTextListener(phoneNumberValTv);
         addEditTextListener(wechatIDValTv);
+
+        phoneNumberValTv.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    // 此处为失去焦点时的处理内容
+                    isPhoneNumber = true;
+                    saveContactInfo();
+                }
+            }
+        });
+
+        wechatIDValTv.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    // 此处为失去焦点时的处理内容
+                    isPhoneNumber = false;
+                    saveContactInfo();
+                }
+            }
+        });
     }
 
     private void addEditTextListener(AppCompatEditText editText) {
@@ -147,16 +170,20 @@ public class SetupContactFragment extends BaseFragment {
         switch (view.getId()) {
             case R.id.emailValTv:
             case R.id.goBindBtn:
-                Bundle bundle = new Bundle();
-                bundle.putParcelable(EXTRA_WALLET, mangoWallet);
-                startFragment("BindMailFragment", bundle);
+                if (ObjectUtils.isEmpty(mEMail)) {
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable(EXTRA_WALLET, mangoWallet);
+                    bundle.putString("EMail", mEMail);
+                    startFragment("BindMailFragment", bundle);
+                }
                 break;
         }
     }
 
     private void updateView() {
         if (dataBean != null) {
-            emailValTv.setText(ObjectUtils.isEmpty(dataBean.getMail()) ? "" : dataBean.getMail());
+            mEMail = ObjectUtils.isEmpty(dataBean.getMail()) ? "" : dataBean.getMail();
+            emailValTv.setText(mEMail);
             phoneNumberValTv.setText(ObjectUtils.isEmpty(dataBean.getPhone()) ? "" : dataBean.getPhone());
             wechatIDValTv.setText(ObjectUtils.isEmpty(dataBean.getWeixin()) ? "" : dataBean.getWeixin());
         }

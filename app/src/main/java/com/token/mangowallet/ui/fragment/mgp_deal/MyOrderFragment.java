@@ -83,9 +83,7 @@ public class MyOrderFragment extends BaseFragment {
     private EMWalletRepository emWalletRepository;
     private MangoWallet mangoWallet;
     private Constants.WalletType walletType;
-    private List<DealsOrderBean.RowsBean> allRowsBeanList = new ArrayList<>();
-    private List<DealsOrderBean.RowsBean> buyRowsBeanList = new ArrayList<>();
-    private List<DealsOrderBean.RowsBean> sellRowsBeanList = new ArrayList<>();
+    private List<DealsOrderBean.RowsBean> mRowsBeanList = new ArrayList<>();
     private List<SelordersBean.RowsBean> entrustRowsBeanList = new ArrayList<>();
     private List<Object> dataList = new ArrayList<>();
     private MyOrderAdapter myOrderAdapter;
@@ -206,14 +204,12 @@ public class MyOrderFragment extends BaseFragment {
             public void onTabSelected(int index) {
                 mCurIndex = index;
                 dataList.clear();
-                if (index == 0) {
-                    dataList.addAll(buyRowsBeanList);
-                } else if (index == 1) {
-                    dataList.addAll(sellRowsBeanList);
-                } else if (index == 2) {
+                if (index == 2) {
                     dataList.addAll(entrustRowsBeanList);
+                    myOrderAdapter.notifyDataSetChanged();
+                } else {
+                    getDealsOrder();
                 }
-                myOrderAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -258,12 +254,23 @@ public class MyOrderFragment extends BaseFragment {
     private void getDealsOrder() {
         try {
             showTipDialog(getString(R.string.str_loading));
+            String index_position = "";
+            if (mCurIndex == 0) {
+                index_position = "4";
+            } else if (mCurIndex == 1) {
+                index_position = "3";
+            }
             Map mapTableRows = MapUtils.newHashMap();
             mapTableRows.put("json", true);
             mapTableRows.put("scope", DEAL_CONTRACT);
             mapTableRows.put("code", DEAL_CONTRACT);
             mapTableRows.put("table", "deals");
             mapTableRows.put("limit", "500");
+
+            mapTableRows.put("key_type", "i64");
+            mapTableRows.put("index_position", index_position);
+            mapTableRows.put("lower_bound", " " + mangoWallet.getWalletAddress());
+            mapTableRows.put("upper_bound", " " + mangoWallet.getWalletAddress());
             emWalletRepository.fetchTableRowsStr(mapTableRows, walletType)
                     .subscribe(this::onTradeOrderSuccess, this::onError);
         } catch (Exception e) {
@@ -286,8 +293,8 @@ public class MyOrderFragment extends BaseFragment {
             mapTableRows.put("limit", "500");
             mapTableRows.put("index_position", "3");
             mapTableRows.put("key_type", "i64");
-            mapTableRows.put("lower_bound", mangoWallet.getWalletAddress());
-            mapTableRows.put("upper_bound", mangoWallet.getWalletAddress());
+            mapTableRows.put("lower_bound", " " + mangoWallet.getWalletAddress());
+            mapTableRows.put("upper_bound", " " + mangoWallet.getWalletAddress());
             emWalletRepository.fetchTableRowsStr(mapTableRows, walletType)
                     .subscribe(this::onSelordersSuccess, this::onError);
         } catch (Exception e) {
@@ -311,44 +318,40 @@ public class MyOrderFragment extends BaseFragment {
         dismissTipDialog();
         refreshLayout.finishRefresh();
         refreshLayout.finishLoadMore();
-        allRowsBeanList.clear();
-        buyRowsBeanList.clear();
-        sellRowsBeanList.clear();
+        mRowsBeanList.clear();
+
         if (ObjectUtils.isNotEmpty(o)) {
             DealsOrderBean dealsOrderBean = GsonUtils.fromJson(o.toString(), DealsOrderBean.class);
             if (dealsOrderBean != null) {
                 List<DealsOrderBean.RowsBean> rowsBeanList = dealsOrderBean.getRows();
                 if (CollectionUtils.isNotEmpty(rowsBeanList)) {
-                    allRowsBeanList.addAll(rowsBeanList);
-                    buyRowsBeanList.addAll(rowsBeanList);
-                    sellRowsBeanList.addAll(rowsBeanList);
-                    //购买
-                    CollectionUtils.filter(buyRowsBeanList, new CollectionUtils.Predicate<DealsOrderBean.RowsBean>() {
-                        @Override
-                        public boolean evaluate(DealsOrderBean.RowsBean item) {//过滤closed=1的不要
-                            return ObjectUtils.equals(mangoWallet.getWalletAddress(), item.getOrder_taker());
-                        }
-                    });
-                    Collections.reverse(buyRowsBeanList);
-                    //出售
-                    CollectionUtils.filter(sellRowsBeanList, new CollectionUtils.Predicate<DealsOrderBean.RowsBean>() {
-                        @Override
-                        public boolean evaluate(DealsOrderBean.RowsBean item) {//过滤closed=1的不要
-                            return ObjectUtils.equals(mangoWallet.getWalletAddress(), item.getOrder_maker());
-                        }
-                    });
-                    Collections.reverse(sellRowsBeanList);
+                    mRowsBeanList.addAll(rowsBeanList);
+                    if (mCurIndex == 0) {
+                        //购买
+                        CollectionUtils.filter(mRowsBeanList, new CollectionUtils.Predicate<DealsOrderBean.RowsBean>() {
+                            @Override
+                            public boolean evaluate(DealsOrderBean.RowsBean item) {//
+                                return ObjectUtils.equals(mangoWallet.getWalletAddress(), item.getOrder_taker());
+                            }
+                        });
+                        Collections.reverse(mRowsBeanList);
+                    } else if (mCurIndex == 1) {
+                        //出售
+                        CollectionUtils.filter(mRowsBeanList, new CollectionUtils.Predicate<DealsOrderBean.RowsBean>() {
+                            @Override
+                            public boolean evaluate(DealsOrderBean.RowsBean item) {//
+                                return ObjectUtils.equals(mangoWallet.getWalletAddress(), item.getOrder_maker());
+                            }
+                        });
+                        Collections.reverse(mRowsBeanList);
+                    }
                 }
             }
         }
 
         if (mCurIndex == 0 || mCurIndex == 1) {
             dataList.clear();
-            if (mCurIndex == 0) {
-                dataList.addAll(buyRowsBeanList);
-            } else if (mCurIndex == 1) {
-                dataList.addAll(sellRowsBeanList);
-            }
+            dataList.addAll(mRowsBeanList);
             myOrderAdapter.notifyDataSetChanged();
         }
     }

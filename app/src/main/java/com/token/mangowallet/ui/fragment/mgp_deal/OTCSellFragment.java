@@ -36,6 +36,7 @@ import com.token.mangowallet.bean.CurrencyData;
 import com.token.mangowallet.bean.CurrencyPrice;
 import com.token.mangowallet.bean.CurrencySetupBean;
 import com.token.mangowallet.bean.IsBindBean;
+import com.token.mangowallet.bean.OTCGlobalBean;
 import com.token.mangowallet.bean.TableRowsBean;
 import com.token.mangowallet.bean.TransactionBean;
 import com.token.mangowallet.db.MangoWallet;
@@ -52,6 +53,8 @@ import com.token.mangowallet.view.DialogHelper;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -61,6 +64,8 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import one.block.eosiojava.models.rpcProvider.Action;
+import one.block.eosiojava.models.rpcProvider.Authorization;
 
 import static com.token.mangowallet.utils.Constants.DEAL_CONTRACT;
 import static com.token.mangowallet.utils.Constants.EOSIO_TOKEN_CONTRACT_CODE;
@@ -141,9 +146,9 @@ public class OTCSellFragment extends BaseFragment {
     private boolean isMinAmount = true;
     private boolean isQuantity = false;
     private boolean isMinSale = false;
-    private boolean isTransfer = true;
     private CurrencyData currencyData;
     private QMUIDialog passwordQmuiDialog;
+    private OTCGlobalBean.RowsBean mOTCGlobalBean;
 
     @Override
     protected View onCreateView() {
@@ -158,6 +163,7 @@ public class OTCSellFragment extends BaseFragment {
     protected void initData() {
         Bundle bundle = getArguments();
         mangoWallet = bundle.getParcelable(EXTRA_WALLET);
+        mOTCGlobalBean = bundle.getParcelable("OTCGlobalBean");
         walletType = Constants.WalletType.getPagerFromPositon(mangoWallet.getWalletType());
         walletAddress = mangoWallet.getWalletAddress();
         emWalletRepository = new EMWalletRepository();
@@ -220,7 +226,7 @@ public class OTCSellFragment extends BaseFragment {
                 switch (editText.getId()) {
                     case R.id.quantityEt:
                         BigDecimal bigDecimal = new BigDecimal(ObjectUtils.isEmpty(s) ? "0" : s.toString());
-                        balanceTv.setText(String.format(getString(R.string.str_balance_value), balanceDecimal.subtract(bigDecimal).setScale(4).toPlainString() + " MGP"));
+                        balanceTv.setText(String.format(getString(R.string.str_balance_value), balanceDecimal.subtract(bigDecimal).setScale(4, RoundingMode.FLOOR).toPlainString() + " MGP"));
                         totalMoneyValueTv.setText(bigDecimal.multiply(priceDecimal).setScale(2, RoundingMode.FLOOR).toPlainString());
                         if (ObjectUtils.isEmpty(s)) {
                             isQuantity = false;
@@ -259,7 +265,7 @@ public class OTCSellFragment extends BaseFragment {
                 switch (editText.getId()) {
                     case R.id.quantityEt:
                         BigDecimal bigDecimal = new BigDecimal(ObjectUtils.isEmpty(s) ? "0" : s.toString());
-                        balanceTv.setText(String.format(getString(R.string.str_balance_value), balanceDecimal.subtract(bigDecimal).setScale(4).toPlainString() + " MGP"));
+                        balanceTv.setText(String.format(getString(R.string.str_balance_value), balanceDecimal.subtract(bigDecimal).setScale(4, RoundingMode.FLOOR).toPlainString() + " MGP"));
                         totalMoneyValueTv.setText(bigDecimal.multiply(priceDecimal).setScale(2, RoundingMode.FLOOR).toPlainString());
                         if (ObjectUtils.isEmpty(s)) {
                             isQuantity = false;
@@ -397,6 +403,8 @@ public class OTCSellFragment extends BaseFragment {
         }
     }
 
+    BigDecimal MAXDecimal = new BigDecimal(Long.MAX_VALUE);
+
     private void showMinSalePop() {
         QMUIBottomSheet.BottomListSheetBuilder builder = new QMUIBottomSheet.BottomListSheetBuilder(getActivity());
         builder.setGravityCenter(true)
@@ -413,13 +421,13 @@ public class OTCSellFragment extends BaseFragment {
                             fiatMoneyUnitTv.setText("| CNY");
                             minSaleAmountTv.setText(getString(R.string.str_min_sale_amount));
                             minSaleAmountEt.setHint(R.string.str_enter_min_sale_amount);
-                            minSaleAmountEt.setFilters(new InputFilter[]{new CashierInputFilter(maxCNYDecimal, 2)});
+                            minSaleAmountEt.setFilters(new InputFilter[]{new CashierInputFilter(MAXDecimal, 2)});
                         } else {
                             isMinAmount = false;
                             fiatMoneyUnitTv.setText("| MGP");
                             minSaleAmountTv.setText(getString(R.string.str_min_sale_quantity));
                             minSaleAmountEt.setHint(R.string.str_import_min_sale_quantity);
-                            minSaleAmountEt.setFilters(new InputFilter[]{new CashierInputFilter(balanceDecimal, 4)});
+                            minSaleAmountEt.setFilters(new InputFilter[]{new CashierInputFilter(MAXDecimal, 4)});
                         }
                     }
                 });
@@ -457,8 +465,8 @@ public class OTCSellFragment extends BaseFragment {
             mapTableRows.put("table", "balances");
             mapTableRows.put("json", true);
             mapTableRows.put("table_key", "");
-            mapTableRows.put("lower_bound", mangoWallet.getWalletAddress());
-            mapTableRows.put("upper_bound", mangoWallet.getWalletAddress());
+            mapTableRows.put("lower_bound", " " + mangoWallet.getWalletAddress());
+            mapTableRows.put("upper_bound", " " + mangoWallet.getWalletAddress());
             emWalletRepository.fetchTableRows(mapTableRows, walletType)
                     .subscribe(this::onTableRows, this::onError);
         } catch (Exception e) {
@@ -471,54 +479,48 @@ public class OTCSellFragment extends BaseFragment {
      * {"orderSn":"MGP1597654887759958804071291","currencyPrice":"0.51","dollar":"160"}
      */
     private void transferTransaction() {
-        if (isTransfer) {
-            showTipDialog(getString(R.string.str_loading));
-        }
+        showTipDialog(getString(R.string.str_loading));
+        List<Action> actionList = new ArrayList<>();
+        Action mAction1;
+        Action mAction2;
         Map params = MapUtils.newHashMap();
-        String action;
-        String code;
         priceDecimal = new BigDecimal(ObjectUtils.isEmpty(numTv.getText()) ? "0" : numTv.getText().toString());
-        if (isTransfer) {
-            action = TRANSFER_ACTION;
-            code = EOSIO_TOKEN_CONTRACT_CODE;
-            String memo = "sell";
-            params.put("memo", memo);
-            params.put("from", walletAddress);
-            params.put("to", DEAL_CONTRACT);
-            params.put("quantity", quantityDecimal.setScale(4) + " " + walletType);
+        String jsonData;
+        String memo = "sell";
+        params.put("memo", memo);
+        params.put("from", walletAddress);
+        params.put("to", DEAL_CONTRACT);
+        params.put("quantity", quantityDecimal.setScale(4, RoundingMode.FLOOR) + " " + walletType);
+        jsonData = GsonUtils.toJson(params);
+        mAction1 = new Action(EOSIO_TOKEN_CONTRACT_CODE, TRANSFER_ACTION, Collections.singletonList(new Authorization(walletAddress, "active")), jsonData);
+        params.clear();
+        ///////////////////////////////////////////////////
+        if (isMinAmount) {
+            minCNYDecimal = minDecimal;
         } else {
-            action = OPEN_ORDER;
-            code = DEAL_CONTRACT;
-            if (isMinAmount) {
-                minCNYDecimal = minDecimal;
-            } else {
-                minCNYDecimal = minDecimal.multiply(priceDecimal);
-            }
-            params.put("owner", walletAddress);
-            params.put("quantity", new BigDecimal(quantityEt.getText().toString()).setScale(4) + " " + MGP_SYMBOL);
-            params.put("price", priceDecimal.setScale(2).toPlainString() + " CNY");
-            params.put("min_accept_quantity", minCNYDecimal.setScale(2).toPlainString() + " CNY");
+            minCNYDecimal = minDecimal.multiply(priceDecimal);
         }
+        params.put("owner", walletAddress);
+        params.put("quantity", new BigDecimal(quantityEt.getText().toString()).setScale(4, RoundingMode.FLOOR) + " " + MGP_SYMBOL);
+        params.put("price", priceDecimal.setScale(2, RoundingMode.FLOOR).toPlainString() + " CNY");
+        params.put("min_accept_quantity", minCNYDecimal.setScale(2, RoundingMode.FLOOR).toPlainString() + " CNY");
+        jsonData = GsonUtils.toJson(params);
+        mAction2 = new Action(DEAL_CONTRACT, OPEN_ORDER, Collections.singletonList(new Authorization(walletAddress, "active")), jsonData);
 
-        String jsonData = GsonUtils.toJson(params);
+        actionList.add(mAction1);
+        actionList.add(mAction2);
         String privatekey = mangoWallet.getPrivateKey();
-        LogUtils.dTag(Constants.LOG_TAG, "accountName = " + walletAddress
-                + "params = " + jsonData);
+        LogUtils.dTag(Constants.LOG_TAG, "mAction = " + GsonUtils.toJson(actionList));
         //openorder
-        emWalletRepository.sendTransaction(action, privatekey, walletAddress, code, jsonData, walletType)
+        emWalletRepository.sendTransaction(actionList, privatekey, walletType)
                 .subscribe(this::onTransaction, this::onError);
     }
 
     private void onTransaction(TransactionBean transactionBean) {
+        dismissTipDialog();
         if (transactionBean.isSuccess) {
-            if (isTransfer) {
-                isTransfer = false;
-                transferTransaction();
-            } else {
-                dismissTipDialog();
-                ToastUtils.showLong(R.string.str_order_succeed);
-                popBackStack();
-            }
+            ToastUtils.showLong(R.string.str_order_succeed);
+            popBackStack();
         } else {
             ToastUtils.showLong(transactionBean.msg);
             dismissTipDialog();
@@ -600,7 +602,7 @@ public class OTCSellFragment extends BaseFragment {
         }
         balanceDecimal = bigDecimal;
         quantityEt.setFilters(new InputFilter[]{new CashierInputFilter(balanceDecimal, 4)});
-        balanceTv.setText(String.format(getString(R.string.str_balance_value), bigDecimal.setScale(4).toPlainString() + " MGP"));
+        balanceTv.setText(String.format(getString(R.string.str_balance_value), bigDecimal.setScale(4, RoundingMode.FLOOR).toPlainString() + " MGP"));
     }
 
     private void onTableRows(Object o) {
@@ -615,7 +617,15 @@ public class OTCSellFragment extends BaseFragment {
                 remaining = rowsBean.getRemaining().split(" ")[0];
             }
             BigDecimal bdRemaining = new BigDecimal(remaining);
-            if (bdRemaining.compareTo(BigDecimal.ZERO) > 0) {//-1表示小于，0是等于，1是大于。
+            BigDecimal minPosStakeQuantityDecimal = BigDecimal.ZERO;
+            if (mOTCGlobalBean != null) {//min_pos_stake_quantity
+                String min_pos_stake_quantity = mOTCGlobalBean.getMin_pos_stake_quantity();
+                if (ObjectUtils.isNotEmpty(min_pos_stake_quantity)) {
+                    min_pos_stake_quantity = ObjectUtils.isEmpty(min_pos_stake_quantity.split(" ")[0]) ? "0" : min_pos_stake_quantity.split(" ")[0];
+                    minPosStakeQuantityDecimal = new BigDecimal(min_pos_stake_quantity);
+                }
+            }
+            if (bdRemaining.compareTo(minPosStakeQuantityDecimal) > 0) {//-1表示小于，0是等于，1是大于。
                 isPledge = true;
             } else {
                 isPledge = false;

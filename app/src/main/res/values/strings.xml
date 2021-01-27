@@ -885,6 +885,22 @@
     <string name="str_del_pay_way_title">删除支付方式</string>
     <string name="str_del_pay_way_msg">您确定要删除[%s]支付方式吗？</string>
     <string name="str_buyer_notice_discharged">已通知买家验收</string>
+    <string name="str_withdrawals_succeed">撤单成功</string>
+    <string name="str_withdrawals_fail">撤单失败</string>
+    <string name="str_add_mailbox">添加邮箱</string>
+    <string name="str_modification_mailbox">修改邮箱</string>
+    <string name="str_order_timeout">订单已超时</string>
+    <string name="str_buyer_spend_confirm">确定买家已付款</string>
+    <string name="str_buyer_unpaid_confirm">买家未付正确款项</string>
+    <string name="str_withdraw_deposit">提现</string>
+    <string name="str_restart_timer_succeed">重启计时器成功</string>
+    <string name="str_restart_timer_fail">重启计时器失败</string>
+    <string name="str_input_operate_reason">输入操作理由</string>
+    <string name="str_upload_documents">上传凭证</string>
+    <string name="str_please_upload_pictures">请上传图片</string>
+    <string name="str_remark_operation_reason">请输入操作理由</string>
+    <string name="str_operate_success">操作成功</string>
+
 
     <string name="str_aleft">👈</string>
     <string name="str_right">👉</string>

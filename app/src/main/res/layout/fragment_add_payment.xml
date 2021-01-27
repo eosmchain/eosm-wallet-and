@@ -15,12 +15,14 @@
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/album_dp_50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topbar">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/userNameTv"
@@ -30,23 +32,18 @@
                 android:layout_marginTop="@dimen/album_dp_20"
                 android:text="@string/str_username"
                 android:textColor="@color/app_color_common_deputy"
-                android:textSize="@dimen/small"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textSize="@dimen/small" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/userNameValEt"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/album_dp_20"
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="@dimen/album_dp_20"
                 android:hint="@string/str_import_collection_name"
                 android:textColor="@color/app_color_common_black"
-                android:textSize="@dimen/medium"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/userNameTv" />
+                android:textSize="@dimen/medium" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/accountNumberTv"
@@ -56,23 +53,84 @@
                 android:layout_marginTop="@dimen/album_dp_30"
                 android:text="@string/str_account_number"
                 android:textColor="@color/app_color_common_deputy"
-                android:textSize="@dimen/small"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/userNameValEt" />
+                android:textSize="@dimen/small" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/accountNumberValEt"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/album_dp_20"
                 android:layout_marginTop="@dimen/album_dp_20"
                 android:layout_marginRight="@dimen/album_dp_20"
                 android:hint="@string/str_import_collection_account"
                 android:textColor="@color/app_color_common_black"
-                android:textSize="@dimen/medium"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="@dimen/medium" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mailTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_20"
+                android:layout_marginTop="@dimen/album_dp_30"
+                android:text="@string/str_email"
+                android:textColor="@color/app_color_common_deputy"
+                android:textSize="@dimen/small" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/mailValEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_20"
+                android:layout_marginTop="@dimen/album_dp_20"
+                android:layout_marginRight="@dimen/album_dp_20"
+                android:hint="@string/str_email"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/medium" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/verificationTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_20"
+                android:layout_marginTop="@dimen/album_dp_30"
+                android:text="@string/str_verification_code"
+                android:textColor="@color/app_color_common_deputy"
+                android:textSize="@dimen/small"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/accountNumberTv" />
+                app:layout_constraintTop_toBottomOf="@id/mailValEt" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/verificationValEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/album_dp_20"
+                    android:layout_marginTop="@dimen/album_dp_20"
+                    android:layout_marginRight="@dimen/album_dp_20"
+                    android:layout_weight="1"
+                    android:hint="@string/str_import_verification_code"
+                    android:textColor="@color/app_color_common_black"
+                    android:textSize="@dimen/medium" />
+
+                <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                    android:id="@+id/sendCodeBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/album_dp_15"
+                    android:layout_marginRight="@dimen/album_dp_15"
+                    android:paddingLeft="@dimen/album_dp_15"
+                    android:paddingTop="@dimen/album_dp_10"
+                    android:paddingRight="@dimen/album_dp_15"
+                    android:paddingBottom="@dimen/album_dp_10"
+                    android:text="@string/str_phonenumber_verification_code"
+                    android:textColor="@color/durban_White"
+                    app:qmui_backgroundColor="@color/app_color_dark_blue2"
+                    app:qmui_radius="5dp" />
+            </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/collectionQRTv"
@@ -82,9 +140,7 @@
                 android:layout_marginTop="@dimen/album_dp_30"
                 android:text="@string/str_add_collection_qr"
                 android:textColor="@color/app_color_common_deputy"
-                android:textSize="@dimen/small"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/accountNumberValEt" />
+                android:textSize="@dimen/small"/>
 
             <FrameLayout
                 android:id="@+id/addCollectionQRLayout"
@@ -93,9 +149,7 @@
                 android:layout_marginLeft="@dimen/album_dp_20"
                 android:layout_marginTop="@dimen/album_dp_20"
                 android:layout_marginRight="@dimen/album_dp_20"
-                android:maxHeight="@dimen/album_dp_80"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/collectionQRTv">
+                android:maxHeight="@dimen/album_dp_80">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/collectionQRValIv"
@@ -121,23 +175,18 @@
                 android:layout_marginTop="@dimen/album_dp_30"
                 android:text="@string/str_bank_name"
                 android:textColor="@color/app_color_common_deputy"
-                android:textSize="@dimen/small"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/accountNumberValEt" />
+                android:textSize="@dimen/small" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/bankNameValEt"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/album_dp_20"
                 android:layout_marginTop="@dimen/album_dp_20"
                 android:layout_marginRight="@dimen/album_dp_20"
                 android:hint="@string/str_import_bank_name"
                 android:textColor="@color/app_color_common_black"
-                android:textSize="@dimen/medium"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/bankNameTv" />
+                android:textSize="@dimen/medium" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/bankSubbranchTv"
@@ -147,57 +196,60 @@
                 android:layout_marginTop="@dimen/album_dp_30"
                 android:text="@string/str_open_subbranch"
                 android:textColor="@color/app_color_common_deputy"
-                android:textSize="@dimen/small"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/bankNameValEt" />
+                android:textSize="@dimen/small"/>
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/bankSubbranchValEt"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/album_dp_20"
                 android:layout_marginTop="@dimen/album_dp_20"
                 android:layout_marginRight="@dimen/album_dp_20"
                 android:hint="@string/str_import_bank_name"
                 android:textColor="@color/app_color_common_black"
-                android:textSize="@dimen/medium"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/bankSubbranchTv" />
+                android:textSize="@dimen/medium" />
 
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/phonePayGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="visible"
-                app:constraint_referenced_ids="addCollectionQRLayout,collectionQRTv" />
+<!--            <androidx.constraintlayout.widget.Group-->
+<!--                android:id="@+id/phonePayGroup"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:visibility="gone"-->
+<!--                app:constraint_referenced_ids="addCollectionQRLayout,collectionQRTv" />-->
 
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/bankPayGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:constraint_referenced_ids="bankNameTv,bankNameValEt,bankSubbranchTv,bankSubbranchValEt" />
+<!--            <androidx.constraintlayout.widget.Group-->
+<!--                android:id="@+id/bankPayGroup"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:visibility="gone"-->
+<!--                app:constraint_referenced_ids="bankNameTv,bankNameValEt,bankSubbranchTv,bankSubbranchValEt" />-->
 
-            <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
-                android:id="@+id/saveBtn"
-                android:layout_width="@dimen/album_dp_0"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/album_dp_50"
-                android:layout_marginTop="@dimen/album_dp_50"
-                android:layout_marginRight="@dimen/album_dp_50"
-                android:paddingTop="@dimen/album_dp_10"
-                android:paddingBottom="@dimen/album_dp_10"
-                android:text="@string/str_save"
-                android:textColor="@color/durban_White"
-                android:textSize="@dimen/big_small"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/addCollectionQRLayout"
-                app:qmui_backgroundColor="@color/app_color_dark_blue2"
-                app:qmui_radius="5dp" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+<!--            <androidx.constraintlayout.widget.Group-->
+<!--                android:id="@+id/mailGroup"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:visibility="gone"-->
+<!--                app:constraint_referenced_ids="mailTv,mailValEt,verificationValEt,verificationTv,sendCodeBtn" />-->
+
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/saveBtn"
+        android:layout_width="@dimen/album_dp_0"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/album_dp_50"
+        android:layout_marginTop="@dimen/album_dp_50"
+        android:layout_marginRight="@dimen/album_dp_50"
+        android:layout_marginBottom="@dimen/album_dp_50"
+        android:paddingTop="@dimen/album_dp_10"
+        android:paddingBottom="@dimen/album_dp_10"
+        android:text="@string/str_save"
+        android:textColor="@color/durban_White"
+        android:textSize="@dimen/big_small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:qmui_backgroundColor="@color/app_color_dark_blue2"
+        app:qmui_radius="5dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -643,18 +643,18 @@ public class StakeVoteMainFragment extends BaseFragment {
                 table = "candidates";
             } else if (type == 1) {
                 table = "votes";
-                mapTableRows.put("lower_bound", walletAddress);
-                mapTableRows.put("upper_bound", walletAddress);
+                mapTableRows.put("lower_bound", " " + walletAddress);
+                mapTableRows.put("upper_bound", " " + walletAddress);
                 mapTableRows.put("index_position", "2");
                 mapTableRows.put("key_type", "i64");
             } else if (type == 2) {
                 table = "candidates";
-                mapTableRows.put("lower_bound", walletAddress);
-                mapTableRows.put("upper_bound", walletAddress);
+                mapTableRows.put("lower_bound", " " + walletAddress);
+                mapTableRows.put("upper_bound", " " + walletAddress);
             } else if (type == 3) {
                 table = "voters";
-                mapTableRows.put("lower_bound", walletAddress);
-                mapTableRows.put("upper_bound", walletAddress);
+                mapTableRows.put("lower_bound", " " + walletAddress);
+                mapTableRows.put("upper_bound", " " + walletAddress);
             }
             mapTableRows.put("table", table);
             emWalletRepository.fetchTableRowsStr(mapTableRows, walletType)
@@ -694,8 +694,8 @@ public class StakeVoteMainFragment extends BaseFragment {
                 Map mapTableRows = MapUtils.newHashMap();
                 mapTableRows.put("scope", mVoteContract);
                 mapTableRows.put("code", mVoteContract);
-                mapTableRows.put("lower_bound", walletAddress);
-                mapTableRows.put("upper_bound", walletAddress);
+                mapTableRows.put("lower_bound", " " + walletAddress);
+                mapTableRows.put("upper_bound", " " + walletAddress);
                 mapTableRows.put("json", true);
                 mapTableRows.put("table", "voters");
                 emWalletRepository.fetchTableRowsStr(mapTableRows, walletType)

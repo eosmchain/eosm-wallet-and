@@ -27,6 +27,7 @@ import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
+import com.token.mangowallet.bean.ContactInfoBean;
 import com.token.mangowallet.bean.PayInfoBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
@@ -57,6 +58,7 @@ public class SetupPaymentFragment extends BaseFragment {
     private MangoWallet mangoWallet;
     private List<PayInfoBean.DataBean> payInfoList = new ArrayList<>();
     private PayInfoAdapter payInfoAdapter;
+    private ContactInfoBean.DataBean dataBean;
 
     @Override
     protected View onCreateView() {
@@ -71,6 +73,7 @@ public class SetupPaymentFragment extends BaseFragment {
     protected void initData() {
         Bundle bundle = getArguments();
         mangoWallet = bundle.getParcelable(EXTRA_WALLET);
+        dataBean = bundle.getParcelable("ContactInfoBean");
         getPayInfoList();
     }
 
@@ -185,6 +188,7 @@ public class SetupPaymentFragment extends BaseFragment {
         Bundle bundle = new Bundle();
         bundle.putParcelable(EXTRA_WALLET, mangoWallet);
         bundle.putParcelable("PayInfoBean", payInfoBean);
+        bundle.putParcelable("ContactInfoBean", dataBean);
         //1、银行卡；2、微信支付；3、支付宝
         bundle.putInt("payId", payId);
         bundle.putBoolean("isEdit", isEdit);

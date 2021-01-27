@@ -43,6 +43,7 @@ import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.bean.DealsOrderBean;
 import com.token.mangowallet.bean.IsBindBean;
+import com.token.mangowallet.bean.OTCGlobalBean;
 import com.token.mangowallet.bean.PayInfoUserInfoBean;
 import com.token.mangowallet.bean.SelordersBean;
 import com.token.mangowallet.bean.TransactionBean;
@@ -70,6 +71,7 @@ import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
+import static com.token.mangowallet.utils.Constants.BUYER_DEAL;
 import static com.token.mangowallet.utils.Constants.DEAL_CONTRACT;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
@@ -106,6 +108,7 @@ public class OTCDealFragment extends BaseFragment {
     private Bundle orderBundle;
     private String order_sn = "";
     private int adapterPosition = 0;
+    private OTCGlobalBean.RowsBean mOTCGlobalBean;
 
     @Override
     protected View onCreateView() {
@@ -126,6 +129,7 @@ public class OTCDealFragment extends BaseFragment {
         mangoWallet = bundle.getParcelable(EXTRA_WALLET);
         walletType = Constants.WalletType.getPagerFromPositon(mangoWallet.getWalletType());
         emWalletRepository = new EMWalletRepository();
+        getTableRowsGlobal();
         getOrdersTableRows();
         isBind();
     }
@@ -183,6 +187,7 @@ public class OTCDealFragment extends BaseFragment {
             public void onClick() {
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(EXTRA_WALLET, mangoWallet);
+                bundle.putParcelable("OTCGlobalBean", mOTCGlobalBean);
                 startFragment("OTCSellFragment", bundle);
             }
         });
@@ -246,6 +251,7 @@ public class OTCDealFragment extends BaseFragment {
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(EXTRA_WALLET, mangoWallet);
+                bundle.putParcelable("OTCGlobalBean", mOTCGlobalBean);
                 startFragment("OTCSetupFragment", bundle);
             }
         });
@@ -308,7 +314,7 @@ public class OTCDealFragment extends BaseFragment {
             param.put("deal_quantity", deal_quantity + " " + MGP_SYMBOL);
             param.put("order_sn", order_sn);
             String json = GsonUtils.toJson(param);
-            emWalletRepository.sendTransaction("opendeal", mangoWallet.getPrivateKey(), mangoWallet.getWalletAddress(), DEAL_CONTRACT, json, walletType)
+            emWalletRepository.sendTransaction(BUYER_DEAL, mangoWallet.getPrivateKey(), mangoWallet.getWalletAddress(), DEAL_CONTRACT, json, walletType)
                     .subscribe(this::onTransactionSuccess, this::onError);
         } catch (Exception e) {
             e.printStackTrace();
@@ -344,8 +350,9 @@ public class OTCDealFragment extends BaseFragment {
             mapTableRows.put("json", true);
             mapTableRows.put("scope", DEAL_CONTRACT);
             mapTableRows.put("code", DEAL_CONTRACT);
-            mapTableRows.put("index_position", "6");
             mapTableRows.put("table", "deals");
+
+            mapTableRows.put("index_position", "6");
             mapTableRows.put("key_type", "i64");
             mapTableRows.put("lower_bound", order_sn);
             mapTableRows.put("upper_bound", order_sn);
@@ -353,6 +360,45 @@ public class OTCDealFragment extends BaseFragment {
                     .subscribe(this::onTradeOrderSuccess, this::onError);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * 投票配置表 比如：过多长时间才能撤回自己参加的投票（refund_delay_sec）；发布节点最小支付数额（min_bp_list_quantity）
+     */
+    private void getTableRowsGlobal() {
+        try {
+            showTipDialog(getString(R.string.str_loading));
+            Map mapTableRows = MapUtils.newHashMap();
+            mapTableRows.put("scope", DEAL_CONTRACT);
+            mapTableRows.put("code", DEAL_CONTRACT);
+            mapTableRows.put("json", true);
+            mapTableRows.put("table_key", "");
+            mapTableRows.put("table", "global");
+            emWalletRepository.fetchTableRowsStr(mapTableRows, walletType)
+                    .subscribe(this::onGlobalSuccess, this::onError);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void onGlobalSuccess(Object o) {
+        dismissTipDialog();
+        if (ObjectUtils.isNotEmpty(o)) {
+            OTCGlobalBean otcGlobalBean = GsonUtils.fromJson(o.toString(), OTCGlobalBean.class);
+            if (otcGlobalBean != null) {
+                if (CollectionUtils.isNotEmpty(otcGlobalBean.getRows())) {
+                    mOTCGlobalBean = otcGlobalBean.getRows().get(0);
+//                    if (CollectionUtils.isNotEmpty(mOTCGlobalBean.getOtc_arbiters())) {
+//                        for (int i = 0; i < mOTCGlobalBean.getOtc_arbiters().size(); i++) {
+//                            String otc_arbiters = mOTCGlobalBean.getOtc_arbiters().get(i);
+//                            if (ObjectUtils.equals(walletAddress, otc_arbiters)) {
+//                                otcArbitrationItem.setVisibility(View.VISIBLE);
+//                            }
+//                        }
+//                    }
+                }
+            }
         }
     }
 

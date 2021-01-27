@@ -166,30 +166,32 @@ public class MainActivity extends BaseFragmentActivity {
                 // 打開👉MangoWallet
                 // 【抖音 电脑包】
                 String[] shareData = mProText.split(getString(R.string.str_aleft));
-                if (ObjectUtils.isNotEmpty(shareData))
-                    if (ObjectUtils.isNotEmpty(shareData[2])) {
-                        String[] appNameArr = shareData[2].split(getString(R.string.str_right));
-                        if (ObjectUtils.equals(AppUtils.getAppName(), appNameArr[1])) {
-                            String userNameBase64EncodeData = shareData[1];
+                if (ObjectUtils.isNotEmpty(shareData)) {
+                    if (shareData.length >= 2) {
+                        if (ObjectUtils.isNotEmpty(shareData[2])) {
+                            String[] appNameArr = shareData[2].split(getString(R.string.str_right));
+                            if (ObjectUtils.equals(AppUtils.getAppName(), appNameArr[1])) {
+                                String userNameBase64EncodeData = shareData[1];
 
-                            if (ObjectUtils.isNotEmpty(userNameBase64EncodeData)) {
-                                String[] userNameBase64EncodeArr = userNameBase64EncodeData.split(getString(R.string.str_right));
-                                String userNameBase64Encode = ObjectUtils.isEmpty(userNameBase64EncodeArr) ? "" : userNameBase64EncodeArr[1];
-                                if (ObjectUtils.isNotEmpty(userNameBase64Encode)) {
-                                    byte[] bytes = EncodeUtils.base64Decode(userNameBase64Encode);
-                                    userName = ConvertUtils.bytes2String(bytes);
-                                    MangoWallet wallet = WalletDaoUtils.getCurrentWallet();
-                                    if (!ObjectUtils.equals(wallet.getWalletAddress(), userName)) {
-                                        String proID = ObjectUtils.isEmpty(shareData) ? "" : shareData[0];
-                                        if (ObjectUtils.isNotEmpty(proID)) {
-
-                                            proFind(proID);
+                                if (ObjectUtils.isNotEmpty(userNameBase64EncodeData)) {
+                                    String[] userNameBase64EncodeArr = userNameBase64EncodeData.split(getString(R.string.str_right));
+                                    String userNameBase64Encode = ObjectUtils.isEmpty(userNameBase64EncodeArr) ? "" : userNameBase64EncodeArr[1];
+                                    if (ObjectUtils.isNotEmpty(userNameBase64Encode)) {
+                                        byte[] bytes = EncodeUtils.base64Decode(userNameBase64Encode);
+                                        userName = ConvertUtils.bytes2String(bytes);
+                                        MangoWallet wallet = WalletDaoUtils.getCurrentWallet();
+                                        if (!ObjectUtils.equals(wallet.getWalletAddress(), userName)) {
+                                            String proID = ObjectUtils.isEmpty(shareData) ? "" : shareData[0];
+                                            if (ObjectUtils.isNotEmpty(proID)) {
+                                                proFind(proID);
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
                     }
+                }
             }
         }
     }

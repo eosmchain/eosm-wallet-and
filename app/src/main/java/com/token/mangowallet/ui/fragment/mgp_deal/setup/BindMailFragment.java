@@ -28,6 +28,7 @@ import com.token.mangowallet.bean.IsBindBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.utils.NRSAUtils;
+import com.token.mangowallet.view.ViewUtils;
 
 import java.util.Map;
 
@@ -57,6 +58,8 @@ public class BindMailFragment extends BaseFragment {
     private Unbinder unbinder;
     private MangoWallet mangoWallet;
     private CountDownTimer timer;
+    private String mEMail = "";
+    private boolean isAddMail = false;//是否是添加邮箱
 
     @Override
     protected View onCreateView() {
@@ -71,17 +74,27 @@ public class BindMailFragment extends BaseFragment {
     protected void initData() {
         Bundle bundle = getArguments();
         mangoWallet = bundle.getParcelable(EXTRA_WALLET);
+        mEMail = bundle.getString("EMail");
+        isAddMail = ObjectUtils.isEmpty(mEMail);
     }
 
     @Override
     protected void initView() {
-        topbar.setTitle(R.string.str_mailbox_verification);
+        if (isAddMail) {
+            topbar.setTitle(R.string.str_add_mailbox);
+//            ViewUtils.setEditableEditText(emailEt, true);
+        } else {
+            topbar.setTitle(R.string.str_mailbox_verification);
+            emailEt.setText(mEMail);
+//            ViewUtils.setEditableEditText(emailEt, false);
+        }
         topbar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 popBackStack();
             }
         });
+
 
     }
 

@@ -102,7 +102,7 @@ public class TokensViewModel extends BaseViewModel {
     public void fetchAppHomeData(String type) {
         progress.postValue(true);
         Map map = MapUtils.newHashMap();
-        map.put("address", defaultWallet.getValue().getWalletAddress());
+        map.put("address", defaultWallet == null ? "" : defaultWallet.getValue().getWalletAddress());
         map.put("type", type);
         String jsonData2 = GsonUtils.toJson(map);
         try {

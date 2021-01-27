@@ -11,4 +11,6 @@
     <item name="currencyID" type="id" />
 
     <item name="layout_for_shadow" type="id"/>
+    <item name="orderStatus" type="id"/>
+    <item name="transactionAmountVal" type="id"/>
 </resources>

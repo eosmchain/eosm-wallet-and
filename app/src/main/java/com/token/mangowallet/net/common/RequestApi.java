@@ -1566,4 +1566,21 @@ public interface RequestApi {
     @Headers("urlname:" + Constants.OTCURL)
     @POST("/otcapi/api/moPayInfo/del")
     Observable<JsonObject> delPayWay(@Header("content") String content);
+
+    /**
+     * 上传凭证
+     * <p>
+     * arbitrator 仲裁者
+     * buyer 买家
+     * createTime	不用传
+     * id 不用传
+     * img 图片组成json
+     * remark 备注
+     * seller 卖家
+     *
+     * @Header("content:") String content
+     */
+    @Headers("urlname:" + Constants.OTCURL)
+    @POST("/api/arbitration/save")
+    Observable<JsonObject> arbitrationSave(@Header("content") String content);
 }
