@@ -13,6 +13,7 @@ import static com.token.mangowallet.utils.Constants.AYING_TEST_URL;
 import static com.token.mangowallet.utils.Constants.AYING_URL;
 import static com.token.mangowallet.utils.Constants.CHEN_TEST_MGP_URL;
 import static com.token.mangowallet.utils.Constants.CORPORATION_URL;
+import static com.token.mangowallet.utils.Constants.DEAL_CONTRACT;
 import static com.token.mangowallet.utils.Constants.FAJIAN_URL;
 import static com.token.mangowallet.utils.Constants.GUOYU_TEST_URL;
 import static com.token.mangowallet.utils.Constants.GUOYU_URL;
@@ -22,6 +23,7 @@ import static com.token.mangowallet.utils.Constants.OTC_API_URL;
 import static com.token.mangowallet.utils.Constants.OTC_TEST_API_URL;
 import static com.token.mangowallet.utils.Constants.PRODUCT_URL;
 import static com.token.mangowallet.utils.Constants.TESTURL;
+import static com.token.mangowallet.utils.Constants.TEST_DEAL_CONTRACT;
 import static com.token.mangowallet.utils.Constants.TEST_URL;
 import static com.token.mangowallet.utils.Constants.TEST_VOTE_CONTRACT;
 import static com.token.mangowallet.utils.Constants.VOTE_API_URL;
@@ -81,6 +83,16 @@ public class BaseUrlUtils {
             return OTC_TEST_API_URL;
         } else {
             return OTC_API_URL;
+        }
+    }
+
+    public String getOTCContract() {
+        String serverName = SPUtils.getInstance(Constants.SP_MangoWallet_info).getString(Constants.KEY_SERVER, Constants.isTest ? TESTURL : CORPORATION_URL);
+        ServerInfo serverInfo = serverInfoMap.get(serverName);
+        if (serverInfo.isTest()) {
+            return TEST_DEAL_CONTRACT;
+        } else {
+            return DEAL_CONTRACT;
         }
     }
 

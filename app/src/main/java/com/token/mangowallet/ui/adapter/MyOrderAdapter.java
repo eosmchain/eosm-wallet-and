@@ -50,6 +50,7 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object, BaseViewHolder> {
         String timeVal = "";
         String mgpnumVal = "";
         String transactionAmountVal = "";
+        String unit = "CNY";
         int maker_passed = 0;//商家等于1表示通过，反正没通过
         int taker_passed = 0;//买家等于1表示通过，反正没通过
         int arbiter_passed = 0;//客服等于1表示通过，反正没通过
@@ -124,12 +125,27 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object, BaseViewHolder> {
             taker_passed = ObjectUtils.equals("1970-01-01T00:00:00", dealRowsBean.getTaker_passed_at()) ? 0 : 1;
             arbiter_passed = ObjectUtils.equals("1970-01-01T00:00:00", dealRowsBean.getArbiter_passed_at()) ? 0 : 1;
             String order_price = (ObjectUtils.isEmpty(dealRowsBean.getOrder_price()) ? "0.00 CNY" : dealRowsBean.getOrder_price()).split(" ")[0];
+            BigDecimal orderPriceDecimal = new BigDecimal(order_price.split(" ")[0]);
             String deal_quantity = (ObjectUtils.isEmpty(dealRowsBean.getDeal_quantity()) ? "0.0000 MGP" : dealRowsBean.getDeal_quantity()).split(" ")[0];
-            transactionAmountVal = new BigDecimal(order_price).multiply(new BigDecimal(deal_quantity)).setScale(2, RoundingMode.FLOOR).toPlainString();
+            BigDecimal dealQuantityDecimal = new BigDecimal(deal_quantity.split(" ")[0]);
+            BigDecimal totalPricesDecimal = dealQuantityDecimal.multiply(orderPriceDecimal);
+            transactionAmountVal = totalPricesDecimal.setScale(2, RoundingMode.FLOOR).toPlainString();
+            String order_price_usd = ObjectUtils.isEmpty(dealRowsBean.getOrder_price_usd()) ? "0.0000 USD" : dealRowsBean.getOrder_price_usd();
+            BigDecimal orderPriceUsdDecimal = new BigDecimal(order_price_usd.split(" ")[0]);
 
+            String orderCNYQuantity = totalPricesDecimal.setScale(2, RoundingMode.FLOOR).toPlainString();
+            String orderUsdQuantity = dealQuantityDecimal.multiply(orderPriceUsdDecimal).setScale(4, RoundingMode.FLOOR).toPlainString();
+
+            if (dealRowsBean.getPay_type() == 4 || dealRowsBean.getPay_type() == 5) {
+                transactionAmountVal = orderUsdQuantity;
+                unit = "USDT";
+            } else {
+                transactionAmountVal = orderCNYQuantity;
+                unit = "CNY";
+            }
             //orderStatus 订单状态：0:代付款;1:超时取消;2:待放行;3:放行超时;4:交易完成;5:交易取消;
             if (dealRowsBean.getTaker_passed() == 0 && taker_passed == 0 && dealRowsBean.getClosed() == 0) {
-                //代付款 taker_passed = 0， taker_passed_at= 1970-01-01T00:00:00", close = 0
+                //代付款 taker_passed = 0， taker_passed_at = "1970-01-01T00:00:00", close = 0
                 long mistiming = TimeUtils.getSurplusMillisTime(dealRowsBean.getExpired_at());//expiration_at
                 if (mistiming > 0) {
                     orderStatus = 0;
@@ -176,7 +192,7 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object, BaseViewHolder> {
         timeValTv.setText(TimeUtils.getStringTime2(timeVal));
         mgpnumTv.setText(mgpnumTitle);
         mgpnumValTv.setText(mgpnumVal);
-        transactionAmountTv.setText(getContext().getString(R.string.str_amount_trade) + "(CYN)");
+        transactionAmountTv.setText(getContext().getString(R.string.str_amount_trade) + "(" + unit + ")");
         transactionAmountValTv.setText(transactionAmountVal);
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("transactionAmountVal", transactionAmountVal);

@@ -28,6 +28,7 @@ import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
+import com.token.mangowallet.MainActivity;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.bean.DealsOrderBean;
@@ -50,11 +51,9 @@ import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.token.mangowallet.utils.Constants.DEAL_CONTRACT;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
 import static com.token.mangowallet.utils.Constants.OTC_ARBITER_ORDERS;
-import static com.token.mangowallet.utils.Constants.OTC_BUYER_ORDERS;
 
 public class OTCArbitrationFragment extends BaseFragment {
 
@@ -207,8 +206,8 @@ public class OTCArbitrationFragment extends BaseFragment {
             showTipDialog(getString(R.string.str_loading));
             Map mapTableRows = MapUtils.newHashMap();
             mapTableRows.put("json", true);
-            mapTableRows.put("scope", DEAL_CONTRACT);
-            mapTableRows.put("code", DEAL_CONTRACT);
+            mapTableRows.put("scope", MainActivity.deal_contract);
+            mapTableRows.put("code", MainActivity.deal_contract);
             mapTableRows.put("table", "deals");
             mapTableRows.put("limit", "500");
 

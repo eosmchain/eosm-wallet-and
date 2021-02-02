@@ -18,6 +18,7 @@ import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
+import com.token.mangowallet.MainActivity;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.bean.SelordersBean;
@@ -34,15 +35,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-
-import static com.token.mangowallet.utils.Constants.DEAL_CONTRACT;
-import static com.token.mangowallet.utils.Constants.EOSIO_TOKEN_CONTRACT_CODE;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
-import static com.token.mangowallet.utils.Constants.MGP_SYMBOL;
 import static com.token.mangowallet.utils.Constants.OLOSE_ORDER;
-import static com.token.mangowallet.utils.Constants.OPEN_ORDER;
-import static com.token.mangowallet.utils.Constants.TRANSFER_ACTION;
+
+
 
 public class EntrustFragment extends BaseFragment {
 
@@ -201,7 +198,7 @@ public class EntrustFragment extends BaseFragment {
         String jsonData = GsonUtils.toJson(params);
         String privatekey = mangoWallet.getPrivateKey();
         //openorder
-        emWalletRepository.sendTransaction(OLOSE_ORDER, privatekey, mangoWallet.getWalletAddress(), DEAL_CONTRACT, jsonData, walletType)
+        emWalletRepository.sendTransaction(OLOSE_ORDER, privatekey, mangoWallet.getWalletAddress(), MainActivity.deal_contract, jsonData, walletType)
                 .subscribe(this::onTransaction, this::onError);
     }
 

@@ -32,6 +32,7 @@ import com.qmuiteam.qmui.widget.tab.QMUITab;
 import com.qmuiteam.qmui.widget.tab.QMUITabBuilder;
 import com.qmuiteam.qmui.widget.tab.QMUITabIndicator;
 import com.qmuiteam.qmui.widget.tab.QMUITabSegment;
+import com.token.mangowallet.MainActivity;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.bean.DealsOrderBean;
@@ -41,6 +42,7 @@ import com.token.mangowallet.bean.PayInfoBean;
 import com.token.mangowallet.bean.PayInfoUserInfoBean;
 import com.token.mangowallet.bean.TransactionBean;
 import com.token.mangowallet.db.MangoWallet;
+import com.token.mangowallet.net.common.BaseUrlUtils;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.utils.ClipboardUtils;
@@ -63,7 +65,6 @@ import io.reactivex.schedulers.Schedulers;
 
 import static com.token.mangowallet.utils.Constants.BACKDEAL_ORDER;
 import static com.token.mangowallet.utils.Constants.BUYER_REVOKE;
-import static com.token.mangowallet.utils.Constants.DEAL_CONTRACT;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
 import static com.token.mangowallet.utils.Constants.OTC_ARBITER_ORDERS;
@@ -151,6 +152,8 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
     private Dialog payWayTipDialog;
     private PayInfoUserInfoBean.DataBean.PayInfosBean curPayInfoBean;
     private String orderStatusTimeStr = "";//str_expire_nonpayment
+    private String orderCNYQuantity = "";
+    private String orderUsdQuantity = "";
 
     @Override
     protected View onCreateView() {
@@ -177,6 +180,17 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
         }
 //        getPayInfoList();
         getTableRowsGlobal();
+        if (mRowsBean != null) {
+            String deal_quantity = ObjectUtils.isEmpty(mRowsBean.getDeal_quantity()) ? "0.0000 MGP" : mRowsBean.getDeal_quantity();
+            BigDecimal dealQuantityDecimal = new BigDecimal(deal_quantity.split(" ")[0]);
+            String order_price_usd = ObjectUtils.isEmpty(mRowsBean.getOrder_price_usd()) ? "0.0000 USD" : mRowsBean.getOrder_price_usd();
+            BigDecimal orderPriceUsdDecimal = new BigDecimal(order_price_usd.split(" ")[0]);
+            String order_price = ObjectUtils.isEmpty(mRowsBean.getOrder_price()) ? "0.00 CNY" : mRowsBean.getOrder_price();
+            BigDecimal orderPriceDecimal = new BigDecimal(order_price.split(" ")[0]);
+            BigDecimal totalPricesDecimal = dealQuantityDecimal.multiply(orderPriceDecimal);
+            orderCNYQuantity = "¥" + totalPricesDecimal.setScale(2, RoundingMode.FLOOR).toPlainString();
+            orderUsdQuantity = dealQuantityDecimal.multiply(orderPriceUsdDecimal).setScale(4, RoundingMode.FLOOR).toPlainString() + " USD";
+        }
     }
 
     @Override
@@ -261,6 +275,10 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
                 tabText = getString(R.string.str_wechat_pay);
             } else if (dataBean.getPayId() == 3) {
                 tabText = getString(R.string.str_alipay);
+            } else if (dataBean.getPayId() == 4) {
+                tabText = getString(R.string.str_usdt_erc20);
+            } else if (dataBean.getPayId() == 5) {
+                tabText = getString(R.string.str_usdt_trc20);
             }
             if (ObjectUtils.isNotEmpty(tabText)) {
                 QMUITab tab = tabBuilder.setText(tabText).build(getContext());
@@ -278,8 +296,20 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
                 if (CollectionUtils.isNotEmpty(payInfoList)) {
                     curPayInfoBean = payInfoList.get(index);
                     mPaymentInfoFragment.setPayInfo(curPayInfoBean);
+                    if (OTC_TYPE == OTC_BUYER_ORDERS) {
+                        if (curPayInfoBean.getPayId() == 4 || curPayInfoBean.getPayId() == 5) {
+                            buyerStatusValTv.setText(orderUsdQuantity);
+                            if (mTransactionDetailFragment != null) {
+                                mTransactionDetailFragment.setTotalPrices(orderUsdQuantity);
+                            }
+                        } else {
+                            buyerStatusValTv.setText(orderCNYQuantity);
+                            if (mTransactionDetailFragment != null) {
+                                mTransactionDetailFragment.setTotalPrices(orderCNYQuantity);
+                            }
+                        }
+                    }
                 }
-
                 mCurIndex = index;
             }
 
@@ -723,7 +753,7 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
                 param.put("taker", mRowsBean.getOrder_taker());
                 param.put("deal_id", String.valueOf(mRowsBean.getId()));
                 String json = GsonUtils.toJson(param);
-                emWalletRepository.sendTransaction(BUYER_REVOKE, mangoWallet.getPrivateKey(), mangoWallet.getWalletAddress(), DEAL_CONTRACT, json, walletType)
+                emWalletRepository.sendTransaction(BUYER_REVOKE, mangoWallet.getPrivateKey(), mangoWallet.getWalletAddress(), MainActivity.deal_contract, json, walletType)
                         .subscribe(this::onClosedealOrderSuccess, this::onError);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -747,7 +777,7 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
                 param.put("pass", true);
                 param.put("pay_type", OTC_TYPE == OTC_BUYER_ORDERS ? String.valueOf(curPayInfoBean.getPayId()) : String.valueOf(mRowsBean.getPay_type()));
                 String json = GsonUtils.toJson(param);
-                emWalletRepository.sendTransaction(PASS_DEAL, mangoWallet.getPrivateKey(), mangoWallet.getWalletAddress(), DEAL_CONTRACT, json, walletType)
+                emWalletRepository.sendTransaction(PASS_DEAL, mangoWallet.getPrivateKey(), mangoWallet.getWalletAddress(), MainActivity.deal_contract, json, walletType)
                         .subscribe(this::onPassdealSuccess, this::onError);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -776,7 +806,7 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
                 param.put("deal_id", String.valueOf(mRowsBean.getId()));//交易订单id
                 param.put("user_type", user_type);
                 String json = GsonUtils.toJson(param);
-                emWalletRepository.sendTransaction(RESTART_ORDER, mangoWallet.getPrivateKey(), mangoWallet.getWalletAddress(), DEAL_CONTRACT, json, walletType)
+                emWalletRepository.sendTransaction(RESTART_ORDER, mangoWallet.getPrivateKey(), mangoWallet.getWalletAddress(), MainActivity.deal_contract, json, walletType)
                         .subscribe(this::onRestartOrderSuccess, this::onError);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -798,7 +828,7 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
                 param.put("owner", mangoWallet.getWalletAddress());
                 param.put("deal_id", String.valueOf(mRowsBean.getId()));//交易订单id
                 String json = GsonUtils.toJson(param);
-                emWalletRepository.sendTransaction(BACKDEAL_ORDER, mangoWallet.getPrivateKey(), mangoWallet.getWalletAddress(), DEAL_CONTRACT, json, walletType)
+                emWalletRepository.sendTransaction(BACKDEAL_ORDER, mangoWallet.getPrivateKey(), mangoWallet.getWalletAddress(), MainActivity.deal_contract, json, walletType)
                         .subscribe(this::onPassdealSuccess, this::onError);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -868,8 +898,8 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
         try {
             showTipDialog(getString(R.string.str_loading));
             Map mapTableRows = MapUtils.newHashMap();
-            mapTableRows.put("scope", DEAL_CONTRACT);
-            mapTableRows.put("code", DEAL_CONTRACT);
+            mapTableRows.put("scope", MainActivity.deal_contract);
+            mapTableRows.put("code", MainActivity.deal_contract);
             mapTableRows.put("json", true);
             mapTableRows.put("table_key", "");
             mapTableRows.put("table", "global");
@@ -956,7 +986,6 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
                     OTCGlobalBean.RowsBean mOTCGlobalBean = otcGlobalBean.getRows().get(0);
                     serviceWechatNumberValTv.setText(ObjectUtils.isEmpty(mOTCGlobalBean.getCs_contact()) ? "" : mOTCGlobalBean.getCs_contact());
                 }
-
             }
         }
     }

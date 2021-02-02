@@ -22,6 +22,7 @@ import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
+import com.token.mangowallet.MainActivity;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.bean.DealsOrderBean;
@@ -50,7 +51,6 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 import static com.token.mangowallet.utils.Constants.BACKDEAL_ORDER;
-import static com.token.mangowallet.utils.Constants.DEAL_CONTRACT;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
 
@@ -211,7 +211,7 @@ public class SpendConfirmFragment extends BaseFragment {
                 param.put("owner", mangoWallet.getWalletAddress());
                 param.put("deal_id", String.valueOf(mRowsBean.getId()));//交易订单id
                 String json = GsonUtils.toJson(param);
-                emWalletRepository.sendTransaction(BACKDEAL_ORDER, mangoWallet.getPrivateKey(), mangoWallet.getWalletAddress(), DEAL_CONTRACT, json, walletType)
+                emWalletRepository.sendTransaction(BACKDEAL_ORDER, mangoWallet.getPrivateKey(), mangoWallet.getWalletAddress(), MainActivity.deal_contract, json, walletType)
                         .subscribe(this::onBackdealOrderSuccess, this::onError);
             } catch (Exception e) {
                 e.printStackTrace();

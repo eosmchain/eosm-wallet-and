@@ -30,6 +30,7 @@ import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
+import com.token.mangowallet.MainActivity;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.bean.CurrencyData;
@@ -66,8 +67,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import one.block.eosiojava.models.rpcProvider.Action;
 import one.block.eosiojava.models.rpcProvider.Authorization;
-
-import static com.token.mangowallet.utils.Constants.DEAL_CONTRACT;
 import static com.token.mangowallet.utils.Constants.EOSIO_TOKEN_CONTRACT_CODE;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
 import static com.token.mangowallet.utils.Constants.KEY_COIN_SYMBOL;
@@ -489,7 +488,7 @@ public class OTCSellFragment extends BaseFragment {
         String memo = "sell";
         params.put("memo", memo);
         params.put("from", walletAddress);
-        params.put("to", DEAL_CONTRACT);
+        params.put("to", MainActivity.deal_contract);
         params.put("quantity", quantityDecimal.setScale(4, RoundingMode.FLOOR) + " " + walletType);
         jsonData = GsonUtils.toJson(params);
         mAction1 = new Action(EOSIO_TOKEN_CONTRACT_CODE, TRANSFER_ACTION, Collections.singletonList(new Authorization(walletAddress, "active")), jsonData);
@@ -505,7 +504,7 @@ public class OTCSellFragment extends BaseFragment {
         params.put("price", priceDecimal.setScale(2, RoundingMode.FLOOR).toPlainString() + " CNY");
         params.put("min_accept_quantity", minCNYDecimal.setScale(2, RoundingMode.FLOOR).toPlainString() + " CNY");
         jsonData = GsonUtils.toJson(params);
-        mAction2 = new Action(DEAL_CONTRACT, OPEN_ORDER, Collections.singletonList(new Authorization(walletAddress, "active")), jsonData);
+        mAction2 = new Action(MainActivity.deal_contract, OPEN_ORDER, Collections.singletonList(new Authorization(walletAddress, "active")), jsonData);
 
         actionList.add(mAction1);
         actionList.add(mAction2);

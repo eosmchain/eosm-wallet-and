@@ -22,6 +22,7 @@ import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
+import com.token.mangowallet.MainActivity;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.bean.ContactInfoBean;
@@ -44,13 +45,9 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-
-import static com.token.mangowallet.utils.Constants.DEAL_CONTRACT;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
 import static com.token.mangowallet.utils.Constants.MERCHANT_WITHDRAW;
-import static com.token.mangowallet.utils.Constants.OTC_BUYER_ORDERS;
-import static com.token.mangowallet.utils.Constants.PASS_DEAL;
 
 public class OTCSetupFragment extends BaseFragment {
     @BindView(R.id.topbar)
@@ -192,8 +189,8 @@ public class OTCSetupFragment extends BaseFragment {
         try {
             showTipDialog(getString(R.string.str_loading));
             Map mapTableRows = MapUtils.newHashMap();
-            mapTableRows.put("scope", DEAL_CONTRACT);
-            mapTableRows.put("code", DEAL_CONTRACT);
+            mapTableRows.put("scope", MainActivity.deal_contract);
+            mapTableRows.put("code", MainActivity.deal_contract);
             mapTableRows.put("json", true);
             mapTableRows.put("table_key", "");
             mapTableRows.put("table", "global");
@@ -217,7 +214,7 @@ public class OTCSetupFragment extends BaseFragment {
                 param.put("owner", walletAddress);
                 param.put("quantity", availableQuantityDecimal.setScale(4) + " MGP");
                 String json = GsonUtils.toJson(param);
-                emWalletRepository.sendTransaction(MERCHANT_WITHDRAW, mangoWallet.getPrivateKey(), mangoWallet.getWalletAddress(), DEAL_CONTRACT, json, walletType)
+                emWalletRepository.sendTransaction(MERCHANT_WITHDRAW, mangoWallet.getPrivateKey(), mangoWallet.getWalletAddress(), MainActivity.deal_contract, json, walletType)
                         .subscribe(this::onWithdrawOrder, this::onError);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -277,8 +274,8 @@ public class OTCSetupFragment extends BaseFragment {
             showTipDialog(getString(R.string.str_loading));
             Map mapTableRows = MapUtils.newHashMap();
             mapTableRows.put("table", "sellers");
-            mapTableRows.put("scope", DEAL_CONTRACT);
-            mapTableRows.put("code", DEAL_CONTRACT);
+            mapTableRows.put("scope", MainActivity.deal_contract);
+            mapTableRows.put("code", MainActivity.deal_contract);
             mapTableRows.put("lower_bound", " " + walletAddress);
             mapTableRows.put("upper_bound", " " + walletAddress);
             mapTableRows.put("json", true);

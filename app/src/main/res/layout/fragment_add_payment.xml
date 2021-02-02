@@ -15,7 +15,6 @@
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/album_dp_50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topbar">
 
@@ -32,7 +31,8 @@
                 android:layout_marginTop="@dimen/album_dp_20"
                 android:text="@string/str_username"
                 android:textColor="@color/app_color_common_deputy"
-                android:textSize="@dimen/small" />
+                android:textSize="@dimen/small"
+                android:visibility="gone" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/userNameValEt"
@@ -43,7 +43,31 @@
                 android:layout_marginRight="@dimen/album_dp_20"
                 android:hint="@string/str_import_collection_name"
                 android:textColor="@color/app_color_common_black"
-                android:textSize="@dimen/medium" />
+                android:textSize="@dimen/medium"
+                android:visibility="gone" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/chainTypeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_20"
+                android:layout_marginTop="@dimen/album_dp_30"
+                android:text="@string/str_chain_type"
+                android:textColor="@color/app_color_common_deputy"
+                android:textSize="@dimen/small"
+                android:visibility="gone" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/chainTypeValEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_20"
+                android:layout_marginTop="@dimen/album_dp_20"
+                android:layout_marginRight="@dimen/album_dp_20"
+                android:hint="@string/str_please_import"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/medium"
+                android:visibility="gone" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/accountNumberTv"
@@ -53,7 +77,8 @@
                 android:layout_marginTop="@dimen/album_dp_30"
                 android:text="@string/str_account_number"
                 android:textColor="@color/app_color_common_deputy"
-                android:textSize="@dimen/small" />
+                android:textSize="@dimen/small"
+                android:visibility="gone" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/accountNumberValEt"
@@ -63,6 +88,93 @@
                 android:layout_marginTop="@dimen/album_dp_20"
                 android:layout_marginRight="@dimen/album_dp_20"
                 android:hint="@string/str_import_collection_account"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/medium"
+                android:visibility="gone" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/collectionAddressTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_20"
+                android:layout_marginTop="@dimen/album_dp_30"
+                android:text="@string/str_collection_address"
+                android:textColor="@color/app_color_common_deputy"
+                android:textSize="@dimen/small"
+                android:visibility="gone" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/collectionAddressValEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_20"
+                android:layout_marginTop="@dimen/album_dp_20"
+                android:layout_marginRight="@dimen/album_dp_20"
+                android:hint="@string/str_collection_address"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/medium"
+                android:visibility="gone" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/bankIdTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_20"
+                android:layout_marginTop="@dimen/album_dp_30"
+                android:text="@string/str_bank_id"
+                android:textColor="@color/app_color_common_deputy"
+                android:textSize="@dimen/small" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/bankIdValEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_20"
+                android:layout_marginTop="@dimen/album_dp_20"
+                android:layout_marginRight="@dimen/album_dp_20"
+                android:hint="@string/str_import_bank_card_account_number"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/medium" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/bankNameTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_20"
+                android:layout_marginTop="@dimen/album_dp_30"
+                android:text="@string/str_bank_name"
+                android:textColor="@color/app_color_common_deputy"
+                android:textSize="@dimen/small" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/bankNameValEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_20"
+                android:layout_marginTop="@dimen/album_dp_20"
+                android:layout_marginRight="@dimen/album_dp_20"
+                android:hint="@string/str_import_bank_name"
+                android:textColor="@color/app_color_common_black"
+                android:textSize="@dimen/medium" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/bankSubbranchTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_20"
+                android:layout_marginTop="@dimen/album_dp_30"
+                android:text="@string/str_open_subbranch"
+                android:textColor="@color/app_color_common_deputy"
+                android:textSize="@dimen/small" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/bankSubbranchValEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/album_dp_20"
+                android:layout_marginTop="@dimen/album_dp_20"
+                android:layout_marginRight="@dimen/album_dp_20"
+                android:hint="@string/str_import_bank_name"
                 android:textColor="@color/app_color_common_black"
                 android:textSize="@dimen/medium" />
 
@@ -100,6 +212,7 @@
                 app:layout_constraintTop_toBottomOf="@id/mailValEt" />
 
             <LinearLayout
+                android:id="@+id/verificationValLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -140,7 +253,8 @@
                 android:layout_marginTop="@dimen/album_dp_30"
                 android:text="@string/str_add_collection_qr"
                 android:textColor="@color/app_color_common_deputy"
-                android:textSize="@dimen/small"/>
+                android:textSize="@dimen/small"
+                android:visibility="gone" />
 
             <FrameLayout
                 android:id="@+id/addCollectionQRLayout"
@@ -149,7 +263,8 @@
                 android:layout_marginLeft="@dimen/album_dp_20"
                 android:layout_marginTop="@dimen/album_dp_20"
                 android:layout_marginRight="@dimen/album_dp_20"
-                android:maxHeight="@dimen/album_dp_80">
+                android:maxHeight="@dimen/album_dp_80"
+                android:visibility="gone">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/collectionQRValIv"
@@ -167,68 +282,30 @@
                     android:visibility="gone" />
             </FrameLayout>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/bankNameTv"
+            <View
+                android:id="@+id/line"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/album_dp_20"
-                android:layout_marginTop="@dimen/album_dp_30"
-                android:text="@string/str_bank_name"
-                android:textColor="@color/app_color_common_deputy"
-                android:textSize="@dimen/small" />
+                android:layout_height="@dimen/album_dp_100" />
+            <!--     str_collection_address       <androidx.constraintlayout.widget.Group-->
+            <!--                android:id="@+id/phonePayGroup"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:visibility="gone"-->
+            <!--                app:constraint_referenced_ids="addCollectionQRLayout,collectionQRTv" />-->
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/bankNameValEt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/album_dp_20"
-                android:layout_marginTop="@dimen/album_dp_20"
-                android:layout_marginRight="@dimen/album_dp_20"
-                android:hint="@string/str_import_bank_name"
-                android:textColor="@color/app_color_common_black"
-                android:textSize="@dimen/medium" />
+            <!--            <androidx.constraintlayout.widget.Group-->
+            <!--                android:id="@+id/bankPayGroup"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:visibility="gone"-->
+            <!--                app:constraint_referenced_ids="bankNameTv,bankNameValEt,bankSubbranchTv,bankSubbranchValEt" />-->
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/bankSubbranchTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/album_dp_20"
-                android:layout_marginTop="@dimen/album_dp_30"
-                android:text="@string/str_open_subbranch"
-                android:textColor="@color/app_color_common_deputy"
-                android:textSize="@dimen/small"/>
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/bankSubbranchValEt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/album_dp_20"
-                android:layout_marginTop="@dimen/album_dp_20"
-                android:layout_marginRight="@dimen/album_dp_20"
-                android:hint="@string/str_import_bank_name"
-                android:textColor="@color/app_color_common_black"
-                android:textSize="@dimen/medium" />
-
-<!--            <androidx.constraintlayout.widget.Group-->
-<!--                android:id="@+id/phonePayGroup"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:visibility="gone"-->
-<!--                app:constraint_referenced_ids="addCollectionQRLayout,collectionQRTv" />-->
-
-<!--            <androidx.constraintlayout.widget.Group-->
-<!--                android:id="@+id/bankPayGroup"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:visibility="gone"-->
-<!--                app:constraint_referenced_ids="bankNameTv,bankNameValEt,bankSubbranchTv,bankSubbranchValEt" />-->
-
-<!--            <androidx.constraintlayout.widget.Group-->
-<!--                android:id="@+id/mailGroup"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:visibility="gone"-->
-<!--                app:constraint_referenced_ids="mailTv,mailValEt,verificationValEt,verificationTv,sendCodeBtn" />-->
+            <!--            <androidx.constraintlayout.widget.Group-->
+            <!--                android:id="@+id/mailGroup"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:visibility="gone"-->
+            <!--                app:constraint_referenced_ids="mailTv,mailValEt,verificationValEt,verificationTv,sendCodeBtn" />-->
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

@@ -36,6 +36,7 @@ import com.token.mangowallet.bean.AppVersionBean;
 import com.token.mangowallet.bean.FindProBean;
 import com.token.mangowallet.bean.ProBean;
 import com.token.mangowallet.db.MangoWallet;
+import com.token.mangowallet.net.common.BaseUrlUtils;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.net.common.RxSubscriber;
 import com.token.mangowallet.ui.fragment.GoodsDetailsFragment;
@@ -84,6 +85,7 @@ public class MainActivity extends BaseFragmentActivity {
     private AppCompatTextView commodityPriceTv;
     private AppCompatButton viewDetailsBtn;
     private FrameLayout.LayoutParams lp;
+    public static String deal_contract = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +103,7 @@ public class MainActivity extends BaseFragmentActivity {
 ////        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 //        NavigationUI.setupWithNavController(navView, navController);//CORPORATION_URL、TESTURL、GUOYU_URL、AYING_URL
         getVersion();
+        deal_contract = BaseUrlUtils.getInstance().getOTCContract();
     }
 
     @Override

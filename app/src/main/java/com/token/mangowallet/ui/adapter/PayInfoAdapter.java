@@ -41,6 +41,12 @@ public class PayInfoAdapter extends BaseQuickAdapter<PayInfoBean.DataBean, BaseV
         } else if (dataBean.getPayId() == 3) {
             mipRes = R.mipmap.ic_alipay;
             isBank = false;
+        } else if (dataBean.getPayId() == 4) {
+            mipRes = R.mipmap.ic_usdt_20;
+            isBank = true;
+        } else if (dataBean.getPayId() == 5) {
+            mipRes = R.mipmap.ic_usdt_20;
+            isBank = true;
         }
         baseViewHolder.setGone(R.id.qrcodeIv, isBank);
         if (mipRes != 0) {

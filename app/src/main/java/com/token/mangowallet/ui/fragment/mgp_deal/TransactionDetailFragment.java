@@ -92,7 +92,6 @@ public class TransactionDetailFragment extends BaseFragment {
 
     }
 
-
     @OnClick({R.id.totalPricesValTv, R.id.priceValTv, R.id.quantityValTv, R.id.orderNumberValTv, R.id.paymentMethodValTv, R.id.putCoinHashValTv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -125,22 +124,40 @@ public class TransactionDetailFragment extends BaseFragment {
         if (mRowsBean != null) {
             String deal_quantity = ObjectUtils.isEmpty(mRowsBean.getDeal_quantity()) ? "0.0000 MGP" : mRowsBean.getDeal_quantity();
             String order_price = ObjectUtils.isEmpty(mRowsBean.getOrder_price()) ? "0.00 CNY" : mRowsBean.getOrder_price();
+            String order_price_usd = ObjectUtils.isEmpty(mRowsBean.getOrder_price_usd()) ? "0.0000 USD" : mRowsBean.getOrder_price_usd();
+            BigDecimal orderPriceUsdDecimal = new BigDecimal(order_price_usd.split(" ")[0]);
 
             dealQuantityDecimal = new BigDecimal(deal_quantity.split(" ")[0]);
             orderPriceDecimal = new BigDecimal(order_price.split(" ")[0]);
             totalPricesDecimal = dealQuantityDecimal.multiply(orderPriceDecimal);
-            totalPricesValTv.setText("¥" + totalPricesDecimal.setScale(2, RoundingMode.HALF_UP).toPlainString());
             priceValTv.setText("¥" + orderPriceDecimal.toPlainString());
             quantityValTv.setText(deal_quantity);//pay_type
             orderNumberValTv.setText(ObjectUtils.isEmpty(mRowsBean.getOrder_sn()) ? "" : mRowsBean.getOrder_sn());
+            String orderCNYQuantity = "¥" + totalPricesDecimal.setScale(2, RoundingMode.HALF_UP).toPlainString();
+            String orderUsdQuantity = dealQuantityDecimal.multiply(orderPriceUsdDecimal).setScale(4, RoundingMode.FLOOR).toPlainString() + " USD";
 
+            boolean isUSD = false;
             String tabText = null;
             if (mRowsBean.getPay_type() == 1) {
                 tabText = getString(R.string.str_bank_card);
+                isUSD = false;
             } else if (mRowsBean.getPay_type() == 2) {
                 tabText = getString(R.string.str_wechat_pay);
+                isUSD = false;
             } else if (mRowsBean.getPay_type() == 3) {
                 tabText = getString(R.string.str_alipay);
+                isUSD = false;
+            } else if (mRowsBean.getPay_type() == 4) {
+                tabText = getString(R.string.str_usdt_erc20);
+                isUSD = true;
+            } else if (mRowsBean.getPay_type() == 5) {
+                tabText = getString(R.string.str_usdt_trc20);
+                isUSD = true;
+            }
+            if (isUSD) {
+                totalPricesValTv.setText(orderUsdQuantity);
+            } else {
+                totalPricesValTv.setText(orderCNYQuantity);
             }
             if (ObjectUtils.isNotEmpty(tabText)) {
                 paymentMethodValTv.setText(tabText);
@@ -151,5 +168,9 @@ public class TransactionDetailFragment extends BaseFragment {
                 paymentMethodValTv.setVisibility(View.GONE);
             }
         }
+    }
+
+    public void setTotalPrices(String totalPrices) {
+        totalPricesValTv.setText(totalPrices);
     }
 }

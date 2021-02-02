@@ -32,13 +32,14 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/buyerStatusValTv"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/album_dp_50"
             android:layout_marginLeft="@dimen/album_dp_10"
             android:gravity="center_vertical"
             android:text="￥1,000.00"
             android:textColor="@color/app_color_orange"
             android:textSize="@dimen/big_medium"
+            android:singleLine="true"
             app:layout_constraintBaseline_toBaselineOf="@id/buyerStatusTv"
             app:layout_constraintStart_toEndOf="@id/buyerStatusTv"
             app:layout_constraintTop_toTopOf="parent" />

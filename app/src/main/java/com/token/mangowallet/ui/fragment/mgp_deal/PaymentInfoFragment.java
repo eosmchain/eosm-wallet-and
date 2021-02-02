@@ -137,6 +137,20 @@ public class PaymentInfoFragment extends BaseFragment {
                 payWaypayment = getString(R.string.str_alipay_id);
                 bankCardGroup.setVisibility(View.GONE);
                 alipayGroup.setVisibility(View.VISIBLE);
+            } else if (dataBean.getPayId() == 4) {
+                mipRes = R.mipmap.ic_usdt_20;
+                payWayRes = getString(R.string.str_usdt_erc20);
+                payWaypayment = getString(R.string.str_collection_address);
+                userNameTv.setText(getString(R.string.str_chain_type));
+                bankCardGroup.setVisibility(View.GONE);
+                alipayGroup.setVisibility(View.VISIBLE);
+            } else if (dataBean.getPayId() == 5) {
+                mipRes = R.mipmap.ic_usdt_20;
+                payWayRes = getString(R.string.str_usdt_trc20);
+                payWaypayment = getString(R.string.str_collection_address);
+                userNameTv.setText(getString(R.string.str_chain_type));
+                bankCardGroup.setVisibility(View.GONE);
+                alipayGroup.setVisibility(View.VISIBLE);
             }
             Drawable drawable = ContextCompat.getDrawable(getContext(), mipRes);
             drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());

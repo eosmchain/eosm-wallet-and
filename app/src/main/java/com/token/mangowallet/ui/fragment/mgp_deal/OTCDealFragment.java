@@ -39,6 +39,7 @@ import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener;
+import com.token.mangowallet.MainActivity;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.bean.DealsOrderBean;
@@ -72,7 +73,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 import static com.token.mangowallet.utils.Constants.BUYER_DEAL;
-import static com.token.mangowallet.utils.Constants.DEAL_CONTRACT;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
 import static com.token.mangowallet.utils.Constants.MGP_SYMBOL;
@@ -314,7 +314,7 @@ public class OTCDealFragment extends BaseFragment {
             param.put("deal_quantity", deal_quantity + " " + MGP_SYMBOL);
             param.put("order_sn", order_sn);
             String json = GsonUtils.toJson(param);
-            emWalletRepository.sendTransaction(BUYER_DEAL, mangoWallet.getPrivateKey(), mangoWallet.getWalletAddress(), DEAL_CONTRACT, json, walletType)
+            emWalletRepository.sendTransaction(BUYER_DEAL, mangoWallet.getPrivateKey(), mangoWallet.getWalletAddress(), MainActivity.deal_contract, json, walletType)
                     .subscribe(this::onTransactionSuccess, this::onError);
         } catch (Exception e) {
             e.printStackTrace();
@@ -329,8 +329,8 @@ public class OTCDealFragment extends BaseFragment {
             showTipDialog(getString(R.string.str_loading));
             Map mapTableRows = MapUtils.newHashMap();
             mapTableRows.put("table", "selorders");
-            mapTableRows.put("scope", DEAL_CONTRACT);
-            mapTableRows.put("code", DEAL_CONTRACT);
+            mapTableRows.put("scope", MainActivity.deal_contract);
+            mapTableRows.put("code", MainActivity.deal_contract);
             mapTableRows.put("json", true);
             mapTableRows.put("limit", "500");
             emWalletRepository.fetchTableRowsStr(mapTableRows, walletType)
@@ -348,8 +348,8 @@ public class OTCDealFragment extends BaseFragment {
 //            showTipDialog(getString(R.string.str_loading));
             Map mapTableRows = MapUtils.newHashMap();
             mapTableRows.put("json", true);
-            mapTableRows.put("scope", DEAL_CONTRACT);
-            mapTableRows.put("code", DEAL_CONTRACT);
+            mapTableRows.put("scope", MainActivity.deal_contract);
+            mapTableRows.put("code", MainActivity.deal_contract);
             mapTableRows.put("table", "deals");
 
             mapTableRows.put("index_position", "6");
@@ -370,8 +370,8 @@ public class OTCDealFragment extends BaseFragment {
         try {
             showTipDialog(getString(R.string.str_loading));
             Map mapTableRows = MapUtils.newHashMap();
-            mapTableRows.put("scope", DEAL_CONTRACT);
-            mapTableRows.put("code", DEAL_CONTRACT);
+            mapTableRows.put("scope", MainActivity.deal_contract);
+            mapTableRows.put("code", MainActivity.deal_contract);
             mapTableRows.put("json", true);
             mapTableRows.put("table_key", "");
             mapTableRows.put("table", "global");

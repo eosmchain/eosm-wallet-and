@@ -114,7 +114,7 @@ public class ArbitrationOrderAdapter extends BaseQuickAdapter<DealsOrderBean.Row
         timeValTv.setText(TimeUtils.getStringTime2(timeVal));
         mgpnumTv.setText(mgpnumTitle);
         mgpnumValTv.setText(mgpnumVal);
-        transactionAmountTv.setText(getContext().getString(R.string.str_amount_trade) + "(CYN)");
+        transactionAmountTv.setText(getContext().getString(R.string.str_amount_trade) + "(CNY)");
         transactionAmountValTv.setText(transactionAmountVal);
 //        Map<String, Object> dataMap = new HashMap<>();
 //        dataMap.put("transactionAmountVal", transactionAmountVal);

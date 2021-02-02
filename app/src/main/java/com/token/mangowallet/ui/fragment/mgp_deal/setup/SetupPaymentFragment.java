@@ -181,6 +181,8 @@ public class SetupPaymentFragment extends BaseFragment {
         builder.addItem(ContextCompat.getDrawable(getContext(), R.mipmap.ic_bank_card), getString(R.string.str_bank_card));
         builder.addItem(ContextCompat.getDrawable(getContext(), R.mipmap.ic_wechat), getString(R.string.str_wechat_pay));
         builder.addItem(ContextCompat.getDrawable(getContext(), R.mipmap.ic_alipay), getString(R.string.str_alipay));
+        builder.addItem(ContextCompat.getDrawable(getContext(), R.mipmap.ic_usdt_20), getString(R.string.str_usdt_erc20));
+        builder.addItem(ContextCompat.getDrawable(getContext(), R.mipmap.ic_usdt_20), getString(R.string.str_usdt_trc20));
         builder.build().show();
     }
 

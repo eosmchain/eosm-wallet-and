@@ -900,6 +900,11 @@
     <string name="str_please_upload_pictures">请上传图片</string>
     <string name="str_remark_operation_reason">请输入操作理由</string>
     <string name="str_operate_success">操作成功</string>
+    <string name="str_usdt_erc20">USDT-ERC20</string>
+    <string name="str_usdt_trc20">USDT-TRC20</string>
+    <string name="str_chain_type">链类型</string>
+    <string name="str_chain_success">上链成功</string>
+    <string name="str_chain_fail">上链失败</string>
 
 
     <string name="str_aleft">👈</string>
