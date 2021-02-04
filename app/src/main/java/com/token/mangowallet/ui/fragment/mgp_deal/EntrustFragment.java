@@ -35,10 +35,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
 import static com.token.mangowallet.utils.Constants.OLOSE_ORDER;
-
 
 
 public class EntrustFragment extends BaseFragment {
@@ -150,7 +150,7 @@ public class EntrustFragment extends BaseFragment {
             repealEntrustBtn.setVisibility(View.GONE);
         }
         statusValTv.setText(orderStatusStr);
-        entrustSellTv.setText(getString(R.string.str_entrust_sell) + (ObjectUtils.isEmpty(mSelordersBean.getQuantity()) ? "0.0000 MGP" : mSelordersBean.getQuantity()));
+        entrustSellTv.setText(getString(R.string.str_entrust_sell) + " " + (ObjectUtils.isEmpty(mSelordersBean.getQuantity()) ? "0.0000 MGP" : mSelordersBean.getQuantity()));
         priceValTv.setText(ObjectUtils.isEmpty(mSelordersBean.getPrice()) ? "￥0.00" : mSelordersBean.getPrice());
         quantityValTv.setText(ObjectUtils.isEmpty(mSelordersBean.getQuantity()) ? "0.0000 MGP" : mSelordersBean.getQuantity());
         haveSellValTv.setText(ObjectUtils.isEmpty(mSelordersBean.getFufilled_quantity()) ? "0.0000 MGP" : mSelordersBean.getFufilled_quantity());

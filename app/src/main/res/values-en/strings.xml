@@ -853,7 +853,7 @@ After deleting the program or wallet, you need to restore the wallet by importin
     <string name="str_be_released">Pending release</string>
     <string name="str_pay_overtime">Payment overtime</string>
     <string name="str_time">ms</string>
-    <string name="str_amount_trade">Total transaction</string>
+    <string name="str_amount_trade">GMV</string>
     <string name="str_sell">sell</string>
     <string name="str_residue">surplus</string>
     <string name="str_transaction_timeout">Transaction timeout</string>
