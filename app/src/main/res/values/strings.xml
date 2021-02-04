@@ -905,7 +905,8 @@
     <string name="str_chain_type">链类型</string>
     <string name="str_chain_success">上链成功</string>
     <string name="str_chain_fail">上链失败</string>
-
+    <string name="str_mnemonic_word_fail">请输入正确的助记词</string>
+    <string name="str_privatekey_fail">请输入正确的私钥</string>
 
     <string name="str_aleft">👈</string>
     <string name="str_right">👉</string>

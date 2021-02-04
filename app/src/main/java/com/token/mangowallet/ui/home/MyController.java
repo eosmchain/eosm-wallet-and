@@ -36,6 +36,7 @@ import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
+import com.token.mangowallet.MainActivity;
 import com.token.mangowallet.MyApplication;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
@@ -47,6 +48,7 @@ import com.token.mangowallet.bean.MsgCodeBean;
 import com.token.mangowallet.net.common.BaseUrlUtils;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.net.common.ServerInfo;
+import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.ui.activity.LanguageActivity;
 import com.token.mangowallet.ui.activity.WebActivity;
 import com.token.mangowallet.ui.activity.pinyin.CountryCodeActivity;
@@ -94,6 +96,7 @@ public class MyController extends QMUIWindowInsetLayout {
     private QMUICommonListItemView bindEthAddressItem;
     private int bindCode = -1;
     private FindBean.DataBean dataBean;
+    private EMWalletRepository emWalletRepository;
 
     public MyController(BaseFragment baseFragment) {
         super(baseFragment.getActivity());
@@ -112,15 +115,50 @@ public class MyController extends QMUIWindowInsetLayout {
         topbar.setTitle(R.string.str_my);
         appVersionTv.setVisibility(VISIBLE);
         appVersionTv.setText("V" + AppUtils.getAppVersionName());
-
+        emWalletRepository = new EMWalletRepository();
         appVersionTv.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
             @Override
             public void onDebouncingClick(View v) {
 //                Bundle bundle = new Bundle();
 //                bundle.putParcelable(EXTRA_WALLET, baseFragment.mangoWallet);
 //                baseFragment.startFragment("OTCDealFragment", bundle);
+//                getTradeOrder("");
             }
         });
+    }
+
+    /**
+     * 获取交易订单
+     */
+    private void getTradeOrder(String order_sn) {
+        try {
+//            showTipDialog(getString(R.string.str_loading));
+            Map mapTableRows = MapUtils.newHashMap();
+            mapTableRows.put("json", true);
+            mapTableRows.put("scope", "dex.oo2");
+            mapTableRows.put("code", "dex.oo2");
+            mapTableRows.put("table", "order");
+            mapTableRows.put("index_position", "5");
+            mapTableRows.put("key_type", "i256");
+            mapTableRows.put("lower_bound", baseFragment.mangoWallet.getWalletAddress());
+            mapTableRows.put("upper_bound", baseFragment.mangoWallet.getWalletAddress());
+            mapTableRows.put("reverse", false);
+            mapTableRows.put("show_payer", false);
+            emWalletRepository.fetchTableRowsStr(mapTableRows, Constants.WalletType.getPagerFromPositon(baseFragment.mangoWallet.getWalletType()))
+                    .subscribe(this::onTradeOrderSuccess, this::onError);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void onTradeOrderSuccess(Object o) {
+        baseFragment.dismissTipDialog();
+        LogUtils.eTag(LOG_TAG, "o = " + GsonUtils.toJson(o));
+    }
+
+    private void onError(Object e) {
+        baseFragment.dismissTipDialog();
+        LogUtils.eTag(LOG_TAG, "e = " + e.toString());
     }
 
     private void initData() {

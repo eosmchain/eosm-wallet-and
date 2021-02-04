@@ -269,10 +269,19 @@ public class ImportWalletFragment extends BaseFragment {
 
     public void walletAccountSuccess(List<String> list) {
         if (ObjectUtils.isEmpty(list)) {
-            toMainActivity(mangoWallet);
+            if (currIndex == 0) {
+                ToastUtils.showLong(R.string.str_mnemonic_word_fail);
+            } else if (currIndex == 0) {
+                ToastUtils.showLong(R.string.str_privatekey_fail);
+            }
         } else {
             if (list.size() <= 0) {
-                toMainActivity(mangoWallet);
+                if (currIndex == 0) {
+                    ToastUtils.showLong(R.string.str_mnemonic_word_fail);
+                } else if (currIndex == 0) {
+                    ToastUtils.showLong(R.string.str_privatekey_fail);
+                }
+//                toMainActivity(mangoWallet);
             } else {
                 showSimpleBottomSheetList(list, mWalletType);
             }
