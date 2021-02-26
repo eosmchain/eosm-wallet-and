@@ -38,6 +38,7 @@ import com.token.mangowallet.bean.VoteBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.repository.EMWalletRepository;
+import com.token.mangowallet.utils.AssociationVoteTable;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.DialogHelper;
@@ -249,7 +250,7 @@ public class VoteDetailsFragment extends BaseFragment {
             mapTableRows.put("json", true);
             mapTableRows.put("code", ASSOCIATION_VOTE_CONTRACT);
             mapTableRows.put("scope", ASSOCIATION_VOTE_CONTRACT);
-            mapTableRows.put("table", "voteabc");
+            mapTableRows.put("table", AssociationVoteTable.getVotedetails());
             mapTableRows.put("index_position", "2");
             mapTableRows.put("key_type", "i64");
             mapTableRows.put("lower_bound", walletAddress);

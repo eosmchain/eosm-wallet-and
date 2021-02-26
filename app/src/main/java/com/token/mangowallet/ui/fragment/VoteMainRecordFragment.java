@@ -37,6 +37,7 @@ import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.ui.adapter.VoteMainAdapter;
 import com.token.mangowallet.ui.adapter.VoteMainRecordAdapter;
+import com.token.mangowallet.utils.AssociationVoteTable;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.DragFloatActionButton2;
@@ -153,7 +154,7 @@ public class VoteMainRecordFragment extends BaseFragment {
             mapTableRows.put("json", true);
             mapTableRows.put("code", ASSOCIATION_VOTE_CONTRACT);
             mapTableRows.put("scope", ASSOCIATION_VOTE_CONTRACT);
-            mapTableRows.put("table", "awardabc");
+            mapTableRows.put("table", AssociationVoteTable.getAwards());
             emWalletRepository.fetchTableRowsStr(mapTableRows, walletType)
                     .subscribe(this::votesLogSuccess, this::onError);
         } catch (Exception e) {

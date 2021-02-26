@@ -43,6 +43,7 @@ import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.ui.adapter.VoteMainAdapter;
+import com.token.mangowallet.utils.AssociationVoteTable;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.DragFloatActionButton2;
@@ -206,7 +207,7 @@ public class VoteMainFragment extends BaseFragment {
             mapTableRows.put("json", true);
             mapTableRows.put("code", ASSOCIATION_VOTE_CONTRACT);
             mapTableRows.put("scope", ASSOCIATION_VOTE_CONTRACT);
-            mapTableRows.put("table", "config");
+            mapTableRows.put("table", AssociationVoteTable.getConfigs());
             emWalletRepository.fetchTableRowsStr(mapTableRows, walletType)
                     .subscribe(this::isSchemeSuccess, this::onError);
         } catch (Exception e) {
@@ -231,7 +232,6 @@ public class VoteMainFragment extends BaseFragment {
 
     /**
      * 是否开启投递方案
-     * //config/scheme/vote/record/award
      */
     private void themes() {
         showTipDialog(getString(R.string.str_loading));
@@ -240,7 +240,7 @@ public class VoteMainFragment extends BaseFragment {
         mapTableRows.put("json", true);
         mapTableRows.put("code", ASSOCIATION_VOTE_CONTRACT);
         mapTableRows.put("scope", ASSOCIATION_VOTE_CONTRACT);
-        mapTableRows.put("table", "schemeabc");
+        mapTableRows.put("table", AssociationVoteTable.getSchemes());
         mapTableRows.put("index_position", "4");
         mapTableRows.put("key_type", "i64");
         mapTableRows.put("lower_bound", "1");
