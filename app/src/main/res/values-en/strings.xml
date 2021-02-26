@@ -632,7 +632,7 @@
     <string name="str_vote_theme">Theme</string>
     <string name="str_enter_vote_theme">Please enter the project name</string>
     <string name="str_vote_describe">Program description</string>
-    <string name="str_enter_vote_describe">Please enter a description of the project (no limit in words)</string>
+    <string name="str_enter_vote_describe">Please enter a description of the project</string>
     <string name="str_vote_scheme">Program</string>
     <string name="str_vote_ticket">votes</string>
     <string name="str_vote_t">Vote</string>

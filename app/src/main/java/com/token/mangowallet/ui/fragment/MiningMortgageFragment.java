@@ -1,5 +1,6 @@
 package com.token.mangowallet.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -9,18 +10,26 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.MapUtils;
 import com.blankj.utilcode.util.ObjectUtils;
+import com.blankj.utilcode.util.PermissionUtils;
+import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.blankj.utilcode.util.UtilsTransActivity;
 import com.google.gson.JsonObject;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.layout.QMUIRelativeLayout;
@@ -39,6 +48,7 @@ import com.token.mangowallet.bean.TransactionBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.listener.DialogConfirmListener;
 import com.token.mangowallet.net.common.NetWorkManager;
+import com.token.mangowallet.ui.activity.QRCodeScanActivity;
 import com.token.mangowallet.ui.viewmodel.MortgageModelFactory;
 import com.token.mangowallet.ui.viewmodel.MortgageViewModel;
 import com.token.mangowallet.utils.BalanceUtils;
@@ -50,6 +60,7 @@ import com.token.mangowallet.view.ViewUtils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -63,6 +74,7 @@ import static com.token.mangowallet.ui.fragment.OperatingStepsFragment.FIRST_MIX
 import static com.token.mangowallet.utils.Constants.EOSIO_TOKEN_CONTRACT_CODE;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
 import static com.token.mangowallet.utils.Constants.HMIO_SYMBOL;
+import static com.token.mangowallet.utils.Constants.INTENT_EXTRA_KEY_QR_SCAN;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
 import static com.token.mangowallet.utils.Constants.TRANSFER_ACTION;
 
@@ -98,6 +110,16 @@ public class MiningMortgageFragment extends BaseFragment {
     AppCompatEditText quantityEt;
     @BindView(R.id.balanceTv)
     AppCompatTextView balanceTv;
+    @BindView(R.id.mortgageInitiatedTv)
+    AppCompatTextView mortgageInitiatedTv;
+    @BindView(R.id.qrcodeIv)
+    AppCompatImageView qrcodeIv;
+    @BindView(R.id.mortgageInitiatedEt)
+    AppCompatEditText mortgageInitiatedEt;
+    @BindView(R.id.text1)
+    AppCompatTextView text1;
+    @BindView(R.id.mortgageInitiatedLayout)
+    RelativeLayout mortgageInitiatedLayout;
 
     private Unbinder unbinder;
     private MortgageModelFactory mortgageModelFactory;
@@ -126,6 +148,7 @@ public class MiningMortgageFragment extends BaseFragment {
     private BigDecimal bdQuantity;
     private BigDecimal bdNumHMIO = BigDecimal.ZERO;
     private BigDecimal bdMgpValue = BigDecimal.ZERO;
+    private String mAccountAddress = "";
 
     @Override
     protected View onCreateView() {
@@ -150,6 +173,8 @@ public class MiningMortgageFragment extends BaseFragment {
         }
         mgpNum = new BigDecimal(mMgpNum);
         walletAddress = mangoWallet.getWalletAddress();
+        mAccountAddress = walletAddress;
+        mortgageInitiatedEt.setText(mAccountAddress);
         walletType = Constants.WalletType.getPagerFromPositon(mangoWallet.getWalletType());
         mRadius = QMUIDisplayHelper.dp2px(getContext(), 8);
         mortgageViewModel.prepare(mangoWallet);
@@ -181,6 +206,8 @@ public class MiningMortgageFragment extends BaseFragment {
             line.setVisibility(View.VISIBLE);
             layout2.setVisibility(View.VISIBLE);
             balanceTv.setVisibility(View.VISIBLE);
+            mortgageInitiatedLayout.setVisibility(View.VISIBLE);
+            mortgageInitiatedEt.setVisibility(View.VISIBLE);
             isRemaining = false;
             remaining = "";
         } else {
@@ -191,6 +218,8 @@ public class MiningMortgageFragment extends BaseFragment {
             line.setVisibility(View.GONE);
             layout2.setVisibility(View.GONE);
             balanceTv.setVisibility(View.GONE);
+            mortgageInitiatedLayout.setVisibility(View.GONE);
+            mortgageInitiatedEt.setVisibility(View.GONE);
             isRemaining = true;
         }
         if (ObjectUtils.isEmpty(remaining)) {
@@ -276,31 +305,47 @@ public class MiningMortgageFragment extends BaseFragment {
         orderValueTv.setText(BalanceUtils.currencyToBase(ObjectUtils.isEmpty(MGPValue) ? "0.00" : MGPValue, 2, RoundingMode.FLOOR));
     }
 
-    @OnClick(R.id.nextstepBtn)
-    public void onViewClicked() {
-        if (ObjectUtils.isEmpty(quantityEt.getText())) {
-            ToastUtils.showLong(R.string.str_cannot_empty);
-            return;
-        }
-        String quantity = quantityEt.getText().toString();
-        // 如果指定的数与参数相等返回0。
-        // 如果指定的数小于参数返回 -1。
-        // 如果指定的数大于参数返回  1。
-        bdQuantity = new BigDecimal(quantity.trim());
+    @OnClick({R.id.nextstepBtn, R.id.qrcodeIv})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.nextstepBtn:
+                if (ObjectUtils.isEmpty(quantityEt.getText())) {
+                    ToastUtils.showLong(R.string.str_cannot_empty);
+                    return;
+                }
+                if (ObjectUtils.isEmpty(mortgageInitiatedEt.getText())) {
+                    ToastUtils.showLong(R.string.str_cannot_empty);
+                    return;
+                }
+                mAccountAddress = mortgageInitiatedEt.getText().toString();
+                boolean isPass = RegexUtils.isMatch(Constants.REGEX_ACCOUNT_NAME, mAccountAddress);
+                if (!isPass) {
+                    ToastUtils.showLong(R.string.str_account_name_rule);
+                    return;
+                }
+                String quantity = quantityEt.getText().toString();
+                // 如果指定的数与参数相等返回0。
+                // 如果指定的数小于参数返回 -1。
+                // 如果指定的数大于参数返回  1。
+                bdQuantity = new BigDecimal(quantity.trim());
 //        if (isMortgage && bdMGPValue.compareTo(new BigDecimal(100)) < 0) {
 //            ToastUtils.showLong(R.string.str_cant_less_than_100);
 //            return;
 //        }
-        if (isMortgage) {
-            showSimpleBottomSheetList();
-        } else {
-            if (qmuiDialog == null) {
-                qmuiDialog = DialogHelper.showEditTextDialog(getActivity(), getString(R.string.str_password_authentification),
-                        getString(R.string.str_enter_password), getString(android.R.string.ok), getString(android.R.string.cancel), listener, true);
-            }
-            qmuiDialog.show();
+                if (isMortgage) {
+                    showSimpleBottomSheetList();
+                } else {
+                    if (qmuiDialog == null) {
+                        qmuiDialog = DialogHelper.showEditTextDialog(getActivity(), getString(R.string.str_password_authentification),
+                                getString(R.string.str_enter_password), getString(android.R.string.ok), getString(android.R.string.cancel), listener, true);
+                    }
+                    qmuiDialog.show();
+                }
+                break;
+            case R.id.qrcodeIv:
+                startQrCode();
+                break;
         }
-
 //        showSimpleBottomSheetList();
     }
 
@@ -319,6 +364,43 @@ public class MiningMortgageFragment extends BaseFragment {
         }
     };
 
+    /**
+     * 开始扫码
+     */
+    public void startQrCode() {
+        PermissionUtils.permission(PermissionConstants.CAMERA, PermissionConstants.STORAGE)
+                .rationale(new PermissionUtils.OnRationaleListener() {
+                    @Override
+                    public void rationale(UtilsTransActivity activity, ShouldRequest shouldRequest) {
+                        DialogHelper.showRationaleDialog(getActivity(), shouldRequest);
+                    }
+                }).callback(new PermissionUtils.FullCallback() {
+            @Override
+            public void onGranted(List<String> permissionsGranted) {
+                Intent intent = new Intent(getActivity(), QRCodeScanActivity.class);
+                registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        Bundle bundle;
+                        if (!ObjectUtils.isEmpty(result)) {
+                            int resultCode = result.getResultCode();
+                            Intent intent = result.getData();
+                            String scanResult = intent.getStringExtra(INTENT_EXTRA_KEY_QR_SCAN);
+                            if (!ObjectUtils.isEmpty(scanResult)) {
+                                mAccountAddress = scanResult;
+                                mortgageInitiatedEt.setText(mAccountAddress);
+                            }
+                        }
+                    }
+                }).launch(intent);
+            }
+
+            @Override
+            public void onDenied(List<String> permissionsDeniedForever, List<String> permissionsDenied) {
+            }
+        }).request();
+    }
+
     private void transferTransaction() {
         Map params = MapUtils.newHashMap();
         if (isRemaining) {
@@ -330,7 +412,7 @@ public class MiningMortgageFragment extends BaseFragment {
 //        String memo = type;
             code = EOSIO_TOKEN_CONTRACT_CODE;
             action = TRANSFER_ACTION;
-            params.put("memo", "staking");
+            params.put("memo", mAccountAddress);
             params.put("from", walletAddress);
             params.put("to", Constants.contractAddress);
             params.put("quantity", quantity + " " + walletType);

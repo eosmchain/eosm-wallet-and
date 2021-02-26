@@ -630,7 +630,7 @@
     <string name="str_vote_theme">テーマ</string>
     <string name="str_enter_vote_theme">プロジェクト名を入力してください</string>
     <string name="str_vote_describe">プログラムの説明</string>
-    <string name="str_enter_vote_describe">プロジェクトの説明を入力してください（言葉で制限なし）</string>
+    <string name="str_enter_vote_describe">プロジェクトの説明を入力してください</string>
     <string name="str_vote_scheme">プログラム</string>
     <string name="str_vote_ticket">チケット</string>
     <string name="str_vote_t">投票</string>

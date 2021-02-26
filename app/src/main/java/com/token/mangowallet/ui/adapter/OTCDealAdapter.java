@@ -54,50 +54,51 @@ public class OTCDealAdapter extends BaseQuickAdapter<SelordersBean.RowsBean, Bas
         AppCompatImageView bankCardIv = baseViewHolder.getView(R.id.bankCardIv);
         AppCompatImageView alipayIv = baseViewHolder.getView(R.id.alipayIv);
         AppCompatImageView wechatIv = baseViewHolder.getView(R.id.wechatIv);
-        try {
-            Map params = MapUtils.newHashMap();
-            params.put("mgpName", rowsBean.getOwner());
-            String json = GsonUtils.toJson(params);
-            String content = NRSAUtils.encrypt(json);
-            NetWorkManager.getRequest().payInfo(content)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new RxSubscriber<JsonObject>(otcDealFragment.getActivity(), false) {
-                        @Override
-                        public void onFail(String failMsg) {
-                            LogUtils.eTag(LOG_TAG, "failMsg = " + failMsg);
-                        }
-
-                        @Override
-                        public void onSuccess(JsonObject jsonObject) {
-                            if (ObjectUtils.isNotEmpty(jsonObject)) {
-                                PayInfoUserInfoBean payInfoUserInfoBean = GsonUtils.fromJson(GsonUtils.toJson(jsonObject), PayInfoUserInfoBean.class);
-                                if (payInfoUserInfoBean != null) {
-                                    if (payInfoUserInfoBean.getCode() == 0) {
-                                        PayInfoUserInfoBean.DataBean dataBean = payInfoUserInfoBean.getData();
-                                        mUserInfoHashMap.put(baseViewHolder.getAdapterPosition(), dataBean);
-                                        List<PayInfoUserInfoBean.DataBean.PayInfosBean> payInfosBeanList = dataBean.getPayInfos();
-//                                        PayInfoUserInfoBean.DataBean.UserInfoBean userInfo = dataBean.getUserInfo();
-                                        if (CollectionUtils.isNotEmpty(payInfosBeanList)) {
-                                            for (int i = 0; i < payInfosBeanList.size(); i++) {
-                                                PayInfoUserInfoBean.DataBean.PayInfosBean payInfosBean = payInfosBeanList.get(i);
-                                                if (payInfosBean.getPayId() == 1) {
-                                                    bankCardIv.setVisibility(View.VISIBLE);
-                                                } else if (payInfosBean.getPayId() == 2) {
-                                                    wechatIv.setVisibility(View.VISIBLE);
-                                                } else if (payInfosBean.getPayId() == 3) {
-                                                    alipayIv.setVisibility(View.VISIBLE);
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        AppCompatImageView usdtIv = baseViewHolder.getView(R.id.usdtIv);
+//        try {
+//            Map params = MapUtils.newHashMap();
+//            params.put("mgpName", rowsBean.getOwner());
+//            String json = GsonUtils.toJson(params);
+//            String content = NRSAUtils.encrypt(json);
+//            NetWorkManager.getRequest().payInfo(content)
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(new RxSubscriber<JsonObject>(otcDealFragment.getActivity(), false) {
+//                        @Override
+//                        public void onFail(String failMsg) {
+//                            LogUtils.eTag(LOG_TAG, "failMsg = " + failMsg);
+//                        }
+//
+//                        @Override
+//                        public void onSuccess(JsonObject jsonObject) {
+//                            if (ObjectUtils.isNotEmpty(jsonObject)) {
+//                                PayInfoUserInfoBean payInfoUserInfoBean = GsonUtils.fromJson(GsonUtils.toJson(jsonObject), PayInfoUserInfoBean.class);
+//                                if (payInfoUserInfoBean != null) {
+//                                    if (payInfoUserInfoBean.getCode() == 0) {
+//                                        PayInfoUserInfoBean.DataBean dataBean = payInfoUserInfoBean.getData();
+//                                        mUserInfoHashMap.put(baseViewHolder.getAdapterPosition(), dataBean);
+//                                        List<PayInfoUserInfoBean.DataBean.PayInfosBean> payInfosBeanList = dataBean.getPayInfos();
+////                                        PayInfoUserInfoBean.DataBean.UserInfoBean userInfo = dataBean.getUserInfo();
+//                                        if (CollectionUtils.isNotEmpty(payInfosBeanList)) {
+//                                            for (int i = 0; i < payInfosBeanList.size(); i++) {
+//                                                PayInfoUserInfoBean.DataBean.PayInfosBean payInfosBean = payInfosBeanList.get(i);
+//                                                if (payInfosBean.getPayId() == 1) {
+//                                                    bankCardIv.setVisibility(View.VISIBLE);
+//                                                } else if (payInfosBean.getPayId() == 2) {
+//                                                    wechatIv.setVisibility(View.VISIBLE);
+//                                                } else if (payInfosBean.getPayId() == 3) {
+//                                                    alipayIv.setVisibility(View.VISIBLE);
+//                                                }
+//                                            }
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    });
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         /**
          *   "id": 0, // 订单ID
          *       "owner": "mgptest11111", // 挂售人
@@ -130,8 +131,8 @@ public class OTCDealAdapter extends BaseQuickAdapter<SelordersBean.RowsBean, Bas
             frozen_quantityStr = frozen_quantityStr.split(" ")[0];
             frozen_quantity = new BigDecimal(ObjectUtils.isEmpty(frozen_quantityStr) ? "0" : frozen_quantityStr);
         }
-        if (ObjectUtils.isNotEmpty(rowsBean.getFufilled_quantity())) {//交易完成数量
-            String fufilled_quantityStr = rowsBean.getFufilled_quantity();
+        if (ObjectUtils.isNotEmpty(rowsBean.getFulfilled_quantity())) {//交易完成数量
+            String fufilled_quantityStr = rowsBean.getFulfilled_quantity();
             fufilled_quantityStr = fufilled_quantityStr.split(" ")[0];
             fufilled_quantity = new BigDecimal(ObjectUtils.isEmpty(fufilled_quantityStr) ? "0" : fufilled_quantityStr);
         }
@@ -152,5 +153,24 @@ public class OTCDealAdapter extends BaseQuickAdapter<SelordersBean.RowsBean, Bas
 //                + "-" + BalanceUtils.currencyToBase(max_accept_quantity.toPlainString(), 2, RoundingMode.FLOOR));
         baseViewHolder.setText(R.id.quotaValueTv, "￥" + min_accept_quantity.setScale(2, RoundingMode.FLOOR).toPlainString()
                 + "-" + "￥" + max_accept_quantity.setScale(2, RoundingMode.FLOOR).toPlainString());
+
+        List<Integer> accepted_payments = rowsBean.getAccepted_payments();
+        if (CollectionUtils.isNotEmpty(accepted_payments)) {
+            for (int i = 0; i < accepted_payments.size(); i++) {
+                int payId = accepted_payments.get(i);
+                //@[@"yl_",@"wx_",@"zfb_",@"usdticon erc20",@"usdticon trc20"]
+                if (payId == 1) {
+                    bankCardIv.setVisibility(View.VISIBLE);
+                } else if (payId == 2) {
+                    wechatIv.setVisibility(View.VISIBLE);
+                }else if (payId == 3) {
+                    alipayIv.setVisibility(View.VISIBLE);
+                }else if (payId == 4) {
+                    usdtIv.setVisibility(View.VISIBLE);
+                }else if (payId == 5) {
+                    usdtIv.setVisibility(View.VISIBLE);
+                }
+            }
+        }
     }
 }

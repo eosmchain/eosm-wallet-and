@@ -98,8 +98,8 @@ public class MyOrderAdapter extends BaseQuickAdapter<Object, BaseViewHolder> {
                 frozen_quantityStr = frozen_quantityStr.split(" ")[0];
                 frozen_quantity = new BigDecimal(ObjectUtils.isEmpty(frozen_quantityStr) ? "0" : frozen_quantityStr);
             }
-            if (ObjectUtils.isNotEmpty(entrustRowsBean.getFufilled_quantity())) {//交易完成数量
-                String fufilled_quantityStr = entrustRowsBean.getFufilled_quantity();
+            if (ObjectUtils.isNotEmpty(entrustRowsBean.getFulfilled_quantity())) {//交易完成数量
+                String fufilled_quantityStr = entrustRowsBean.getFulfilled_quantity();
                 fufilled_quantityStr = fufilled_quantityStr.split(" ")[0];
                 fufilled_quantity = new BigDecimal(ObjectUtils.isEmpty(fufilled_quantityStr) ? "0" : fufilled_quantityStr);
             }

@@ -59,6 +59,12 @@ public class NodeBean implements Parcelable {
     private BigDecimal reward_round;
     private BigDecimal share_ratio;
 
+    private String staked_votes_num;
+    private String received_votes_num;
+    private String tallied_votes_num;
+    private String total_votes_num;
+
+
     protected NodeBean(Parcel in) {
         owner = in.readString();
         self_reward_share = new BigDecimal(in.readString());
@@ -82,6 +88,10 @@ public class NodeBean implements Parcelable {
         election_round = new BigDecimal(in.readString());
         reward_round = new BigDecimal(in.readString());
         share_ratio = new BigDecimal(in.readString());
+        staked_votes_num = in.readString();
+        received_votes_num = in.readString();
+        tallied_votes_num = in.readString();
+        total_votes_num = in.readString();
     }
 
     @Override
@@ -108,6 +118,10 @@ public class NodeBean implements Parcelable {
         dest.writeString(election_round == null ? "0" : election_round.toPlainString());
         dest.writeString(reward_round == null ? "0" : reward_round.toPlainString());
         dest.writeString(share_ratio == null ? "0" : share_ratio.toPlainString());
+        dest.writeString(staked_votes_num);
+        dest.writeString(received_votes_num);
+        dest.writeString(tallied_votes_num);
+        dest.writeString(total_votes_num);
     }
 
     @Override
@@ -301,6 +315,38 @@ public class NodeBean implements Parcelable {
 
     public void setShare_ratio(BigDecimal share_ratio) {
         this.share_ratio = share_ratio;
+    }
+
+    public String getStaked_votes_num() {
+        return staked_votes_num;
+    }
+
+    public void setStaked_votes_num(String staked_votes_num) {
+        this.staked_votes_num = staked_votes_num;
+    }
+
+    public String getReceived_votes_num() {
+        return received_votes_num;
+    }
+
+    public void setReceived_votes_num(String received_votes_num) {
+        this.received_votes_num = received_votes_num;
+    }
+
+    public String getTallied_votes_num() {
+        return tallied_votes_num;
+    }
+
+    public void setTallied_votes_num(String tallied_votes_num) {
+        this.tallied_votes_num = tallied_votes_num;
+    }
+
+    public String getTotal_votes_num() {
+        return total_votes_num;
+    }
+
+    public void setTotal_votes_num(String total_votes_num) {
+        this.total_votes_num = total_votes_num;
     }
 
     public static Creator<NodeBean> getCREATOR() {

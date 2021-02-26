@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.token.mangowallet.view.RequiredTextView
+        android:id="@+id/voteThemeTv"
+        android:layout_width="@dimen/album_dp_0"
+        android:layout_height="wrap_content"
+        android:background="@color/durban_White"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/album_dp_15"
+        android:paddingTop="@dimen/album_dp_10"
+        android:paddingBottom="@dimen/album_dp_10"
+        android:text="@string/str_vote_scheme"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topBar"
+        app:layout_constraintWidth_percent="0.3"
+        app:prefix="*"
+        app:prefix_color="@color/app_color_red_1" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/voteThemeEt"
+        android:layout_width="@dimen/album_dp_0"
+        android:layout_height="wrap_content"
+        android:background="@color/durban_White"
+        android:gravity="right|center_vertical"
+        android:hint="@string/str_enter_vote_theme"
+        android:paddingTop="@dimen/album_dp_10"
+        android:paddingRight="@dimen/album_dp_10"
+        android:paddingBottom="@dimen/album_dp_10"
+        android:singleLine="true"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/small"
+        app:layout_constraintStart_toEndOf="@id/voteThemeTv"
+        app:layout_constraintTop_toBottomOf="@id/topBar"
+        app:layout_constraintWidth_percent="0.7" />
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/qmui_list_divider_height"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:background="@drawable/qmui_divider"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/voteThemeEt" />
+
+    <com.token.mangowallet.view.RequiredTextView
+        android:id="@+id/voteDescribeTv"
+        android:layout_width="@dimen/album_dp_0"
+        android:layout_height="wrap_content"
+        android:background="@color/durban_White"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/album_dp_15"
+        android:paddingTop="@dimen/album_dp_10"
+        android:paddingBottom="@dimen/album_dp_10"
+        android:text="@string/str_vote_describe"
+        android:textColor="@color/app_color_common_black"
+        android:textSize="@dimen/small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line1"
+        app:layout_constraintWidth_percent="1"
+        app:prefix="*"
+        app:prefix_color="@color/app_color_red_1" />
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/qmui_list_divider_height"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:background="@drawable/qmui_divider"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/voteDescribeTv" />
+
+    <FrameLayout
+        android:id="@+id/voteDescribeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:layout_constraintTop_toBottomOf="@id/line2">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/voteDescribeEt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:gravity="top"
+            android:hint="@string/str_enter_vote_describe"
+            android:inputType=""
+            android:paddingLeft="@dimen/album_dp_15"
+            android:paddingTop="@dimen/album_dp_10"
+            android:textColor="@color/app_color_common_black"
+            android:textSize="@dimen/small" />
+    </FrameLayout>
+
+    <View
+        android:id="@+id/line3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/qmui_list_divider_height"
+        android:layout_marginLeft="@dimen/album_dp_15"
+        android:layout_marginRight="@dimen/album_dp_15"
+        android:background="@drawable/qmui_divider"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/voteDescribeLayout" />
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/submitBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/album_dp_40"
+        android:layout_marginLeft="@dimen/album_dp_20"
+        android:layout_marginTop="@dimen/album_dp_45"
+        android:layout_marginRight="@dimen/album_dp_20"
+        android:text="@string/str_submit"
+        android:textColor="@color/durban_White"
+        android:textSize="@dimen/small"
+        app:layout_constraintTop_toBottomOf="@id/voteDescribeLayout"
+        app:qmui_backgroundColor="@color/app_color_theme_7"
+        app:qmui_borderWidth="@dimen/album_dp_0"
+        app:qmui_radius="8dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

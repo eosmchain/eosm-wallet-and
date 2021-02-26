@@ -54,6 +54,7 @@
                     android:paddingLeft="@dimen/album_dp_15"
                     android:paddingTop="@dimen/album_dp_10"
                     android:paddingBottom="@dimen/album_dp_10"
+                    android:visibility="gone"
                     android:text="" />
 
                 <androidx.recyclerview.widget.RecyclerView

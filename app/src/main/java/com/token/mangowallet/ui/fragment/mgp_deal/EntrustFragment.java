@@ -125,8 +125,8 @@ public class EntrustFragment extends BaseFragment {
             frozen_quantityStr = frozen_quantityStr.split(" ")[0];
             frozen_quantity = new BigDecimal(ObjectUtils.isEmpty(frozen_quantityStr) ? "0" : frozen_quantityStr);
         }
-        if (ObjectUtils.isNotEmpty(mSelordersBean.getFufilled_quantity())) {//交易完成数量
-            String fufilled_quantityStr = mSelordersBean.getFufilled_quantity();
+        if (ObjectUtils.isNotEmpty(mSelordersBean.getFulfilled_quantity())) {//交易完成数量
+            String fufilled_quantityStr = mSelordersBean.getFulfilled_quantity();
             fufilled_quantityStr = fufilled_quantityStr.split(" ")[0];
             fufilled_quantity = new BigDecimal(ObjectUtils.isEmpty(fufilled_quantityStr) ? "0" : fufilled_quantityStr);
         }
@@ -153,7 +153,7 @@ public class EntrustFragment extends BaseFragment {
         entrustSellTv.setText(getString(R.string.str_entrust_sell) + " " + (ObjectUtils.isEmpty(mSelordersBean.getQuantity()) ? "0.0000 MGP" : mSelordersBean.getQuantity()));
         priceValTv.setText(ObjectUtils.isEmpty(mSelordersBean.getPrice()) ? "￥0.00" : mSelordersBean.getPrice());
         quantityValTv.setText(ObjectUtils.isEmpty(mSelordersBean.getQuantity()) ? "0.0000 MGP" : mSelordersBean.getQuantity());
-        haveSellValTv.setText(ObjectUtils.isEmpty(mSelordersBean.getFufilled_quantity()) ? "0.0000 MGP" : mSelordersBean.getFufilled_quantity());
+        haveSellValTv.setText(ObjectUtils.isEmpty(mSelordersBean.getFulfilled_quantity()) ? "0.0000 MGP" : mSelordersBean.getFulfilled_quantity());
         haveFreezeValTv.setText(ObjectUtils.isEmpty(mSelordersBean.getFrozen_quantity()) ? "0.0000 MGP" : mSelordersBean.getFrozen_quantity());
     }
 

@@ -133,28 +133,29 @@ public class StakeVotesMainAdapter extends BaseSectionQuickAdapter<NodeSection, 
                 voteBtn.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.qmui_config_color_red));
                 mNodeName = ObjectUtils.isEmpty(nodeBean.getNode_name()) ? "" : nodeBean.getNode_name();
                 mVoteNum = ObjectUtils.isEmpty(nodeBean.getQuantity()) ? "0.00 MGP" : nodeBean.getQuantity();
-                if (ObjectUtils.isNotEmpty(nodeBean.getVoted_at())) {
-                    if (refund_delay_sec == null) {
-                        voteBtn.setVisibility(View.INVISIBLE);
-                    } else {//1605 774 592 039 1605 773 906 000
-                        long mCurMillis = TimeUtils.getNowMills();
-                        String timeVote = timeUtils.getStringTime(nodeBean.getVoted_at());
-                        long mMillis = TimeUtils.string2Millis(timeVote);
-                        BigDecimal mBDCurMillis = new BigDecimal(mCurMillis);
-                        BigDecimal mBDMillis = new BigDecimal(mMillis);
-                        BigDecimal mTotalMillis = mBDMillis.add(refund_delay_sec.multiply(new BigDecimal("1000")));
-
-                        if (mTotalMillis.subtract(mBDCurMillis).compareTo(BigDecimal.ZERO) > 0) {
-                            //-1表示小于，0是等于，1是大于。
-                            voteBtn.setVisibility(View.INVISIBLE);
-                        } else {
-                            voteBtn.setVisibility(View.VISIBLE);
-                        }
-                    }
-                } else {
-                    voteBtn.setVisibility(View.INVISIBLE);
-                }
-
+                voteBtn.setVisibility(View.VISIBLE);
+//                if (ObjectUtils.isNotEmpty(nodeBean.getVoted_at())) {
+//                    if (refund_delay_sec == null) {
+//                        voteBtn.setVisibility(View.INVISIBLE);
+//                    } else {//1605 774 592 039 1605 773 906 000
+//                        long mCurMillis = TimeUtils.getNowMills();
+//                        String timeVote = timeUtils.getStringTime(nodeBean.getVoted_at());
+//                        long mMillis = TimeUtils.string2Millis(timeVote);
+//                        BigDecimal mBDCurMillis = new BigDecimal(mCurMillis);
+//                        BigDecimal mBDMillis = new BigDecimal(mMillis);
+//                        BigDecimal mTotalMillis = mBDMillis.add(refund_delay_sec.multiply(new BigDecimal("1000")));
+//
+//                        voteBtn.setVisibility(View.VISIBLE);
+//                        if (mTotalMillis.subtract(mBDCurMillis).compareTo(BigDecimal.ZERO) > 0) {
+//                            //-1表示小于，0是等于，1是大于。
+//                            voteBtn.setVisibility(View.INVISIBLE);
+//                        } else {
+//                            voteBtn.setVisibility(View.VISIBLE);
+//                        }
+//                    }
+//                } else {
+//                    voteBtn.setVisibility(View.INVISIBLE);
+//                }
                 mNodeUrl = ObjectUtils.isEmpty(nodeBean.getNode_url()) ? "" : nodeBean.getNode_url();
                 mProfitRatio = ObjectUtils.isEmpty(nodeBean.getShare_ratio()) ? "" : Constants.percent.subtract(nodeBean.getShare_ratio().divide(Constants.percent)) + "%";
             } else if (baseFragment.type == 2) {//2：获取我的节点；

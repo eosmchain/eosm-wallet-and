@@ -631,7 +631,7 @@
     <string name="str_vote_theme">테마</string>
     <string name="str_enter_vote_theme">프로젝트 이름을 입력하세요</string>
     <string name="str_vote_describe">프로그램 설명</string>
-    <string name="str_enter_vote_describe">프로젝트에 대한 설명을 입력하십시오 (단어 제한 없음).</string>
+    <string name="str_enter_vote_describe">프로젝트에 대한 설명을 입력하십시오.</string>
     <string name="str_vote_scheme">프로그램</string>
     <string name="str_vote_ticket">티켓</string>
     <string name="str_vote_t">투표</string>

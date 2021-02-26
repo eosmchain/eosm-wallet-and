@@ -250,6 +250,16 @@ public class SendVoteMainFragment extends BaseFragment {
         params.put("voteTitleKo", voteThemeKOEt.getText().toString());
         params.put("voteContentKo", voteDescribeKOEt.getText().toString());
 //        params.put("schemeContent", schemeContent);
+//        @{
+//            @"code":mgp_cmvoting,
+//            @"action":@"addscheme",
+//            @"parameter":@{
+//                    @"account":[MGPHttpRequest shareManager].curretWallet.address,
+//                    @"scheme_title":cell0.Jh_info,
+//                    @"scheme_content":cell1.Jh_info,
+//                    @"cash_money":[NSString stringWithFormat:@"%.4f MGP", amount.doubleValue]
+//                }
+//        }
         String json = GsonUtils.toJson(params);
         try {
             String content = NRSAUtils.encrypt(json);

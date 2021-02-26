@@ -1,65 +1,59 @@
 package com.token.mangowallet.bean;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public class VoteLogBean {
 
     /**
-     * code : 0
-     * msg : success
-     * data : [{"id":1,"awardId":2,"address":"aaaaaab12345","money":1,"voteCount":2,"voteId":5,"type":0,"typeName":"方案奖励"},{"id":3,"awardId":3,"address":"aaaaaab12345","money":1,"voteCount":2,"voteId":10,"type":0,"typeName":"方案奖励"},{"id":4,"awardId":3,"address":"aaaaaab12345","money":5,"voteCount":2,"voteId":10,"type":1,"typeName":"投票成功奖励"}]
+     * rows : [{"id":0,"account":"mgptest11111","created_at":"2021-02-25T03:44:14","money":"1.0000 MGP","award_type":0,"is_del":0},{"id":1,"account":"mgpchain2222","created_at":"2021-02-25T03:44:14","money":"1.0000 MGP","award_type":0,"is_del":0},{"id":2,"account":"mgpchain2222","created_at":"2021-02-25T03:44:14","money":"2.0000 MGP","award_type":1,"is_del":0},{"id":3,"account":"mgpchain2222","created_at":"2021-02-25T03:44:14","money":"1.0000 MGP","award_type":1,"is_del":0},{"id":4,"account":"mwalletadmin","created_at":"2021-02-25T03:44:14","money":"8.0000 MGP","award_type":1,"is_del":0},{"id":5,"account":"mgpchain2222","created_at":"2021-02-25T03:44:14","money":"100.0000 MGP","award_type":1,"is_del":0}]
+     * more : false
+     * next_key :
      */
 
-    private int code;
-    private String msg;
-    private List<DataBean> data;
+    private boolean more;
+    private String next_key;
+    private List<RowsBean> rows;
 
-    public int getCode() {
-        return code;
+    public boolean isMore() {
+        return more;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setMore(boolean more) {
+        this.more = more;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getNext_key() {
+        return next_key;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setNext_key(String next_key) {
+        this.next_key = next_key;
     }
 
-    public List<DataBean> getData() {
-        return data;
+    public List<RowsBean> getRows() {
+        return rows;
     }
 
-    public void setData(List<DataBean> data) {
-        this.data = data;
+    public void setRows(List<RowsBean> rows) {
+        this.rows = rows;
     }
 
-    public static class DataBean {
+    public static class RowsBean {
         /**
-         * id : 1
-         * awardId : 2
-         * address : aaaaaab12345
-         * money : 1
-         * voteCount : 2
-         * voteId : 5
-         * type : 0
-         * typeName : 方案奖励
+         * id : 0
+         * account : mgptest11111
+         * created_at : 2021-02-25T03:44:14
+         * money : 1.0000 MGP
+         * award_type : 0
+         * is_del : 0
          */
 
         private int id;
-        private int awardId;
-        private String address;
-        private BigDecimal money;
-        private int voteCount;
-        private int voteId;
-        private int type;
-        private String typeName;
-        private String createTime;
+        private String account;
+        private String created_at;
+        private String money;
+        private int award_type;
+        private int is_del;
 
         public int getId() {
             return id;
@@ -69,68 +63,44 @@ public class VoteLogBean {
             this.id = id;
         }
 
-        public int getAwardId() {
-            return awardId;
+        public String getAccount() {
+            return account;
         }
 
-        public void setAwardId(int awardId) {
-            this.awardId = awardId;
+        public void setAccount(String account) {
+            this.account = account;
         }
 
-        public String getAddress() {
-            return address;
+        public String getCreated_at() {
+            return created_at;
         }
 
-        public void setAddress(String address) {
-            this.address = address;
+        public void setCreated_at(String created_at) {
+            this.created_at = created_at;
         }
 
-        public BigDecimal getMoney() {
+        public String getMoney() {
             return money;
         }
 
-        public void setMoney(BigDecimal money) {
+        public void setMoney(String money) {
             this.money = money;
         }
 
-        public int getVoteCount() {
-            return voteCount;
+        public int getAward_type() {
+            return award_type;
         }
 
-        public void setVoteCount(int voteCount) {
-            this.voteCount = voteCount;
+        public void setAward_type(int award_type) {
+            this.award_type = award_type;
         }
 
-        public int getVoteId() {
-            return voteId;
+        public int getIs_del() {
+            return is_del;
         }
 
-        public void setVoteId(int voteId) {
-            this.voteId = voteId;
-        }
-
-        public int getType() {
-            return type;
-        }
-
-        public void setType(int type) {
-            this.type = type;
-        }
-
-        public String getTypeName() {
-            return typeName;
-        }
-
-        public void setTypeName(String typeName) {
-            this.typeName = typeName;
-        }
-
-        public String getCreateTime() {
-            return createTime;
-        }
-
-        public void setCreateTime(String createTime) {
-            this.createTime = createTime;
+        public void setIs_del(int is_del) {
+            this.is_del = is_del;
         }
     }
 }

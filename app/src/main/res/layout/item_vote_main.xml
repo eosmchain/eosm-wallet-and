@@ -38,6 +38,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/album_dp_10"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="@string/str_mix_mortgage_progress" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -72,17 +74,18 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/album_dp_10"
-        android:layout_marginTop="@dimen/album_dp_10"
         android:layout_marginRight="@dimen/album_dp_10"
         android:layout_marginBottom="@dimen/album_dp_10"
-        app:qmui_slider_bar_constraint_thumb_in_moving="false"
-        app:qmui_slider_bar_thumb_size="@dimen/album_dp_0"
         android:progressDrawable="@drawable/layer_list_progress_drawable"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/rateTv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rankingTv"
-        app:qmui_slider_bar_height="8dp" />
+        app:layout_constraintTop_toBottomOf="@id/layout"
+        app:qmui_slider_bar_constraint_thumb_in_moving="false"
+        app:qmui_slider_bar_height="8dp"
+        app:qmui_slider_bar_normal_color="@color/qmui_config_color_gray_8"
+        app:qmui_slider_bar_progress_color="@color/app_color_saffron_yellow"
+        app:qmui_slider_bar_thumb_size="@dimen/album_dp_0" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/rateTv"
@@ -92,8 +95,7 @@
         android:text="0%"
         android:textColor="@color/app_color_saffron_yellow"
         android:textSize="@dimen/small"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/rectProgressBar"
-        app:layout_constraintTop_toBottomOf="@id/rankingTv" />
+        app:layout_constraintTop_toBottomOf="@id/layout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

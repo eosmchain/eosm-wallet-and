@@ -132,7 +132,7 @@ public interface Constants {
     String ETH_TOKEN = "0xDA79e4a8839CB8EAF9BeCe5DB71feAA4565347B2";
     String MGP_PLEDGE_ACCOUNT = "mgpchainhalf";//Merchant account pledge
     String USDT_TOKEN = "0xdAC17F958D2ee523a2206206994597C13D831ec7";
-    String VOTE_CONTRACT = "mgp.bpvoting";
+    String VOTE_CONTRACT = "mgp.bpvoting";//节点投票合约
     String TEST_VOTE_CONTRACT = "bpvotingo3o5";
     String WITHDRAW_VOTE = "unvote";//撤回投票
     String CANCEL_NODE = "delist";//取消节点  cancel
@@ -147,6 +147,10 @@ public interface Constants {
     String RESTART_ORDER = "restart";//订单重启 （仲裁者账号）
     String BACKDEAL_ORDER = "backdeal";//款项异常（订单变成代付款）
     String SETSELLER = "setseller";//交易确认
+    String ASSOCIATION_VOTE_CONTRACT = "mgp.cmvoting";//社群投票合约 association
+    String ADDSCHEME = "addscheme";//添加社群投票方案
+    String ADDVOTE = "addvote";//社群投票
+    String UPSCHEME = "upscheme";//社群投票方案修改
     ///////////////////////////////////////////
     String BaseFilePath = Environment.getExternalStorageDirectory() + File.separator + "MangoWallet";
     String CrashFilePath = BaseFilePath + File.separator + "Crash";

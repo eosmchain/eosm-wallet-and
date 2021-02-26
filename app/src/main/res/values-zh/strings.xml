@@ -631,7 +631,7 @@
     <string name="str_vote_theme">主题</string>
     <string name="str_enter_vote_theme">请输入方案名称</string>
     <string name="str_vote_describe">方案描述</string>
-    <string name="str_enter_vote_describe">请输入方案描述（字数不限）</string>
+    <string name="str_enter_vote_describe">请输入方案描述</string>
     <string name="str_vote_scheme">方案</string>
     <string name="str_vote_ticket">票</string>
     <string name="str_vote_t">投票</string>

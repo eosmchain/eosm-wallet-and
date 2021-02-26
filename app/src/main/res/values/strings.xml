@@ -632,7 +632,7 @@
     <string name="str_vote_theme">主题</string>
     <string name="str_enter_vote_theme">请输入方案名称</string>
     <string name="str_vote_describe">方案描述</string>
-    <string name="str_enter_vote_describe">请输入方案描述（字数不限）</string>
+    <string name="str_enter_vote_describe">请输入方案描述</string>
     <string name="str_vote_scheme">方案</string>
     <string name="str_vote_ticket">票</string>
     <string name="str_vote_t">投票</string>
@@ -907,6 +907,15 @@
     <string name="str_chain_fail">上链失败</string>
     <string name="str_mnemonic_word_fail">请输入正确的助记词</string>
     <string name="str_privatekey_fail">请输入正确的私钥</string>
+    <string name="str_account_address">账户地址</string>
+    <string name="str_been_voted">已投%s票</string>
+    <string name="str_total_votes">总票</string>
+    <string name="str_notopened_vote">暂未开启投票</string>
+    <string name="str_deposit_return">方案押金退回</string>
+    <string name="str_vote_return">投票退回</string>
+    <string name="str_scheme_award">方案奖励</string>
+    <string name="str_vote_award">投票奖励</string>
+    <string name="str_edit_failure">编辑失败</string>
 
     <string name="str_aleft">👈</string>
     <string name="str_right">👉</string>

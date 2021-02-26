@@ -139,6 +139,16 @@
         android:src="@mipmap/ic_wechat"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/purchaseBtn"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toStartOf="@id/usdtIv" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/usdtIv"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginRight="@dimen/album_dp_20"
+        android:layout_marginBottom="8dp"
+        android:src="@mipmap/ic_usdt_20"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/purchaseBtn"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

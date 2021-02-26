@@ -1,11 +1,14 @@
 package com.token.mangowallet.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
-public class A {
+public class SchemesThemesBean {
 
     /**
-     * rows : [{"account":"mgpchain2222","id":1,"scheme_title":"铁路网","scheme_content":"来咯巫山烤鱼兔子窝借款","created_at":"2021-02-24T09:01:48","updated_at":"2021-02-24T09:01:48","vote_count":"2.0000 MGP","is_del":0,"cash_money":"1.0000 MGP","is_remit":0},{"account":"mgpchain2222","id":2,"scheme_title":"安慕希","scheme_content":"2222222222","created_at":"2021-02-24T09:01:56","updated_at":"2021-02-24T09:01:56","vote_count":"0.0000 MGP","is_del":0,"cash_money":"1.0000 MGP","is_remit":0}]
+     * rows : [{"account":"mgptest11111","id":0,"scheme_title":"嗄咯","scheme_content":"咯女","created_at":"2021-02-23T09:56:23","updated_at":"2021-02-23T09:56:23","vote_count":"2.0000 MGP","is_del":0,"cash_money":"1.0000 MGP","is_remit":0}]
      * more : false
      * next_key :
      */
@@ -38,30 +41,80 @@ public class A {
         this.rows = rows;
     }
 
-    public static class RowsBean {
+    public static class RowsBean implements Parcelable {
         /**
-         * account : mgpchain2222
-         * id : 1
-         * scheme_title : 铁路网
-         * scheme_content : 来咯巫山烤鱼兔子窝借款
-         * created_at : 2021-02-24T09:01:48
-         * updated_at : 2021-02-24T09:01:48
+         * account : mgptest11111
+         * id : 0
+         * scheme_title : 嗄咯
+         * scheme_content : 咯女
+         * created_at : 2021-02-23T09:56:23
+         * updated_at : 2021-02-23T09:56:23
          * vote_count : 2.0000 MGP
          * is_del : 0
          * cash_money : 1.0000 MGP
          * is_remit : 0
          */
 
-        private String account;
         private int id;
+        private String account;
+        private String vote_count;
+        private String created_at;
         private String scheme_title;
         private String scheme_content;
-        private String created_at;
+        private int scheme_id;
+        ////////////////////////////////
         private String updated_at;
-        private String vote_count;
         private int is_del;
         private String cash_money;
         private int is_remit;
+        private int audit_status;
+        protected RowsBean(Parcel in) {
+            id = in.readInt();
+            account = in.readString();
+            vote_count = in.readString();
+            created_at = in.readString();
+            scheme_title = in.readString();
+            scheme_content = in.readString();
+            scheme_id = in.readInt();
+            updated_at = in.readString();
+            is_del = in.readInt();
+            cash_money = in.readString();
+            is_remit = in.readInt();
+            audit_status = in.readInt();
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(id);
+            dest.writeString(account);
+            dest.writeString(vote_count);
+            dest.writeString(created_at);
+            dest.writeString(scheme_title);
+            dest.writeString(scheme_content);
+            dest.writeInt(scheme_id);
+            dest.writeString(updated_at);
+            dest.writeInt(is_del);
+            dest.writeString(cash_money);
+            dest.writeInt(is_remit);
+            dest.writeInt(audit_status);
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        public static final Creator<RowsBean> CREATOR = new Creator<RowsBean>() {
+            @Override
+            public RowsBean createFromParcel(Parcel in) {
+                return new RowsBean(in);
+            }
+
+            @Override
+            public RowsBean[] newArray(int size) {
+                return new RowsBean[size];
+            }
+        };
 
         public String getAccount() {
             return account;
@@ -141,6 +194,22 @@ public class A {
 
         public void setIs_remit(int is_remit) {
             this.is_remit = is_remit;
+        }
+
+        public int getScheme_id() {
+            return scheme_id;
+        }
+
+        public void setScheme_id(int scheme_id) {
+            this.scheme_id = scheme_id;
+        }
+
+        public int getAudit_status() {
+            return audit_status;
+        }
+
+        public void setAudit_status(int audit_status) {
+            this.audit_status = audit_status;
         }
     }
 }

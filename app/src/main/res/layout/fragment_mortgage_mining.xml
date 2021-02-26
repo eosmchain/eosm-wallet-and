@@ -76,6 +76,45 @@
                     android:theme="@style/MyEditText" />
 
                 <RelativeLayout
+                    android:id="@+id/mortgageInitiatedLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/walletNameTv"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/album_dp_15"
+                    android:layout_marginTop="@dimen/album_dp_20"
+                    android:layout_toRightOf="@id/walletIconTv">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/mortgageInitiatedTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/str_mortgage_initiated"
+                        android:textColor="@color/app_color_common_black"
+                        android:textSize="@dimen/small" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/qrcodeIv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/album_dp_15"
+                        android:src="@mipmap/icon_scan2" />
+                </RelativeLayout>
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/mortgageInitiatedEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/album_dp_45"
+                    android:layout_marginLeft="@dimen/album_dp_15"
+                    android:layout_marginRight="@dimen/album_dp_15"
+                    android:hint="@string/str_account_address"
+                    android:maxLength="12"
+                    android:textColor="@color/app_color_common_dark_black"
+                    android:textSize="@dimen/sp_15"
+                    android:theme="@style/MyEditText" />
+
+                <RelativeLayout
                     android:id="@+id/layout1"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/album_dp_45"

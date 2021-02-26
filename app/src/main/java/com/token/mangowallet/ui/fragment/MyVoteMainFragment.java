@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.BarUtils;
+import com.blankj.utilcode.util.CollectionUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.MapUtils;
@@ -39,6 +40,7 @@ import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.bean.MsgCodeBean;
 import com.token.mangowallet.bean.PageInfo;
+import com.token.mangowallet.bean.SchemesThemesBean;
 import com.token.mangowallet.bean.ThemesBean;
 import com.token.mangowallet.bean.TransactionBean;
 import com.token.mangowallet.db.MangoWallet;
@@ -63,6 +65,7 @@ import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
+import static com.token.mangowallet.utils.Constants.ASSOCIATION_VOTE_CONTRACT;
 import static com.token.mangowallet.utils.Constants.EOSIO_TOKEN_CONTRACT_CODE;
 import static com.token.mangowallet.utils.Constants.EXTRA_VOTE_DATA;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
@@ -90,13 +93,13 @@ public class MyVoteMainFragment extends BaseFragment {
     private Constants.WalletType walletType;
     private PageInfo pageInfo;
     private final static int limit = 20;
-    private List<ThemesBean.DataBean> themesList = new ArrayList<>();
-    private ThemesBean.DataBean dataBean;
+    private List<SchemesThemesBean.RowsBean> themesList = new ArrayList<>();
+    private SchemesThemesBean.RowsBean dataBean;
     private EMWalletRepository emWalletRepository;
     private int voteId;
     private QMUIDialog passwordQmuiDialog;
     private QMUIDialog mMsgQMUIDialog;
-    private int mIndex = 0;
+    public static int mIndex = 0;
     private BigDecimal balance;
 
     @Override
@@ -145,38 +148,15 @@ public class MyVoteMainFragment extends BaseFragment {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 dataBean = themesList.get(position);
-                if (dataBean.getType() == 0) {
-                    if (VoteMainFragment.bdNumer.compareTo(balance) > 0) {
-                        ToastUtils.showLong(R.string.str_vote_balance_deficiency);
-                    } else {
-                        voteId = dataBean.getVoteId();
-                        if (mMsgQMUIDialog == null) {
-                            mMsgQMUIDialog = DialogHelper.showMessageDialog(getActivity(), getString(R.string.str_warm_prompt),
-                                    getString(R.string.str_vote_send_msg),
-                                    getString(R.string.str_cancel),
-                                    getString(R.string.str_ok), new QMUIDialogAction.ActionListener() {
-                                        @Override
-                                        public void onClick(QMUIDialog dialog, int index) {
-                                            dialog.dismiss();
-                                        }
-                                    }, new QMUIDialogAction.ActionListener() {
-                                        @Override
-                                        public void onClick(QMUIDialog dialog, int index) {
-                                            dialog.dismiss();
-                                            if (passwordQmuiDialog == null) {
-                                                passwordQmuiDialog = DialogHelper.showEditTextDialog(getActivity(), getString(R.string.str_password_authentification),
-                                                        getString(R.string.str_enter_password), getString(android.R.string.ok), getString(android.R.string.cancel), listener, true);
-                                            }
-                                            passwordQmuiDialog.show();
-                                        }
-                                    });
-                        }
-                        mMsgQMUIDialog.show();
-                    }
-                } else if (dataBean.getType() == 2) {
-                    toFragment(0);
-                } else {
+                if (mIndex == 0) {
                     toFragment(1);
+                } else {
+                    if (dataBean.getAudit_status() == 0) {
+                    } else if (dataBean.getAudit_status() == 1) {
+                        toFragment(1);
+                    } else if (dataBean.getAudit_status() == 2) {
+                        toFragment(0);
+                    }
                 }
             }
         });
@@ -184,29 +164,13 @@ public class MyVoteMainFragment extends BaseFragment {
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-//                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
                 pageInfo.reset();
-                if (mIndex == 0) {
-                    participateThemes();
-                } else {
-                    myTheme();
-                }
+                getMyScheme();
             }
         });
 
-        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore(RefreshLayout refreshlayout) {
-//                refreshlayout.finishLoadMore(2000/*,false*/);//传入false表示加载失败
-                pageInfo.nextPage();
-                if (mIndex == 0) {
-                    participateThemes();
-                } else {
-                    myTheme();
-                }
-            }
-        });
         refreshLayout.autoRefresh();
+        refreshLayout.setEnableLoadMore(false);
         sendFloating.setVisibility(View.GONE);
     }
 
@@ -255,11 +219,7 @@ public class MyVoteMainFragment extends BaseFragment {
             public void onTabSelected(int index) {
                 pageInfo.reset();
                 mIndex = index;
-                if (index == 0) {
-                    participateThemes();
-                } else {
-                    myTheme();
-                }
+                getMyScheme();
             }
 
             @Override
@@ -288,6 +248,41 @@ public class MyVoteMainFragment extends BaseFragment {
         }
     }
 
+    private void getMyScheme() {
+        try {//config/scheme/record/award
+            showTipDialog(getString(R.string.str_loading));
+            Map mapTableRows = MapUtils.newHashMap();
+            mapTableRows.put("json", true);
+            mapTableRows.put("code", ASSOCIATION_VOTE_CONTRACT);
+            mapTableRows.put("scope", ASSOCIATION_VOTE_CONTRACT);
+            mapTableRows.put("table", mIndex == 0 ? "recordabc" : "schemeabc");
+            mapTableRows.put("index_position", "2");
+            mapTableRows.put("key_type", "i64");
+            mapTableRows.put("lower_bound", walletAddress);
+            mapTableRows.put("upper_bound", walletAddress);
+            emWalletRepository.fetchTableRowsStr(mapTableRows, walletType)
+                    .subscribe(this::onMySchemeSuccess, this::onError);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void onMySchemeSuccess(Object o) {
+        dismissTipDialog();
+        themesList.clear();
+        refreshLayout.finishRefresh();
+        if (o != null) {
+            SchemesThemesBean schemesThemesBean = GsonUtils.fromJson((String) o, SchemesThemesBean.class);
+            if (schemesThemesBean != null) {
+                List<SchemesThemesBean.RowsBean> rowsBeanList = schemesThemesBean.getRows();
+                if (CollectionUtils.isNotEmpty(rowsBeanList)) {
+                    themesList.addAll(rowsBeanList);
+                }
+            }
+        }
+        voteMainAdapter.notifyDataSetChanged();
+    }
+
     private void transferTransaction() {
         String memo = String.valueOf(voteId) + ",0";
         Map params = MapUtils.newHashMap();
@@ -298,53 +293,53 @@ public class MyVoteMainFragment extends BaseFragment {
         params.put("quantity", VoteMainFragment.mNumer + walletType);
         String jsonData = GsonUtils.toJson(params);
         String privatekey = mangoWallet.getPrivateKey();
-        LogUtils.dTag(LOG_TAG,  "accountName = " + walletAddress
+        LogUtils.dTag(LOG_TAG, "accountName = " + walletAddress
                 + "params = " + jsonData);
         emWalletRepository.sendTransaction(TRANSFER_ACTION, privatekey, walletAddress, EOSIO_TOKEN_CONTRACT_CODE, jsonData, walletType)
                 .subscribe(this::onTransaction, this::onError);
     }
 
-    /**
-     * 我发布的方案
-     */
-    private void myTheme() {
-        showTipDialog(getString(R.string.str_loading));
-        Map params = MapUtils.newHashMap();
-        params.put("address", walletAddress);
-        params.put("page", String.valueOf(pageInfo.page));
-        params.put("limit", String.valueOf(limit));
-        String json = GsonUtils.toJson(params);
-        try {
-            String content = NRSAUtils.encrypt(json);
-            NetWorkManager.getRequest().myTheme(content)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::themesSuccess, this::onError);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    /**
+//     * 我发布的方案
+//     */
+//    private void myTheme() {
+//        showTipDialog(getString(R.string.str_loading));
+//        Map params = MapUtils.newHashMap();
+//        params.put("address", walletAddress);
+//        params.put("page", String.valueOf(pageInfo.page));
+//        params.put("limit", String.valueOf(limit));
+//        String json = GsonUtils.toJson(params);
+//        try {
+//            String content = NRSAUtils.encrypt(json);
+//            NetWorkManager.getRequest().myTheme(content)
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(this::themesSuccess, this::onError);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
-    /**
-     * 我参与的方案
-     */
-    private void participateThemes() {
-        showTipDialog(getString(R.string.str_loading));
-        Map params = MapUtils.newHashMap();
-        params.put("address", walletAddress);
-        params.put("page", String.valueOf(pageInfo.page));
-        params.put("limit", String.valueOf(limit));
-        String json = GsonUtils.toJson(params);
-        try {
-            String content = NRSAUtils.encrypt(json);
-            NetWorkManager.getRequest().participateUpdate(content)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::themesSuccess, this::onError);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    /**
+//     * 我参与的方案
+//     */
+//    private void participateThemes() {
+//        showTipDialog(getString(R.string.str_loading));
+//        Map params = MapUtils.newHashMap();
+//        params.put("address", walletAddress);
+//        params.put("page", String.valueOf(pageInfo.page));
+//        params.put("limit", String.valueOf(limit));
+//        String json = GsonUtils.toJson(params);
+//        try {
+//            String content = NRSAUtils.encrypt(json);
+//            NetWorkManager.getRequest().participateUpdate(content)
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(this::themesSuccess, this::onError);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     /**
      * 提交hash及抵押金额
@@ -380,28 +375,28 @@ public class MyVoteMainFragment extends BaseFragment {
         }
     }
 
-    private void themesSuccess(JsonObject jsonObject) {
-        dismissTipDialog();
-        if (pageInfo.isFirstPage()) {
-            refreshLayout.finishRefresh();
-        } else {
-            refreshLayout.finishLoadMore();
-        }
-        if (jsonObject != null) {
-            ThemesBean themesBean = GsonUtils.fromJson(GsonUtils.toJson(jsonObject), ThemesBean.class);
-            if (themesBean.getCode() == 0) {
-                if (pageInfo.isFirstPage()) {
-                    themesList.clear();
-                    themesList.addAll(themesBean.getData());
-                } else {
-                    themesList.addAll(themesList.size(), themesBean.getData());
-                }
-                voteMainAdapter.notifyDataSetChanged();
-            } else {
-                ToastUtils.showLong(themesBean.getMsg());
-            }
-        }
-    }
+//    private void themesSuccess(JsonObject jsonObject) {
+//        dismissTipDialog();
+//        if (pageInfo.isFirstPage()) {
+//            refreshLayout.finishRefresh();
+//        } else {
+//            refreshLayout.finishLoadMore();
+//        }
+////        if (jsonObject != null) {
+////            ThemesBean themesBean = GsonUtils.fromJson(GsonUtils.toJson(jsonObject), ThemesBean.class);
+////            if (themesBean.getCode() == 0) {
+////                if (pageInfo.isFirstPage()) {
+////                    themesList.clear();
+////                    themesList.addAll(themesBean.getData());
+////                } else {
+////                    themesList.addAll(themesList.size(), themesBean.getData());
+////                }
+////                voteMainAdapter.notifyDataSetChanged();
+////            } else {
+////                ToastUtils.showLong(themesBean.getMsg());
+////            }
+////        }
+//    }
 
     private void balanceSuccess(BigDecimal balance) {
         this.balance = balance;
@@ -431,13 +426,19 @@ public class MyVoteMainFragment extends BaseFragment {
 //        ToastUtils.showLong(R.string.str_network_error);
     }
 
+    private void onError(Object e) {
+        dismissTipDialog();
+        refreshLayout.finishRefresh();
+        LogUtils.eTag(LOG_TAG, "e = " + e.toString());
+    }
+
     private void toFragment(int type) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(EXTRA_WALLET, mangoWallet);
         if (type == 0) {//发布方案
             bundle.putBoolean("isEdit", true);
             bundle.putParcelable(EXTRA_VOTE_DATA, dataBean);
-            startFragment("SendVoteMainFragment", bundle);
+            startFragment("AddVoteMainFragment", bundle);
         } else if (type == 1) {//方案详情
             bundle.putParcelable(EXTRA_VOTE_DATA, dataBean);
             startFragment("VoteDetailsFragment", bundle);
@@ -449,6 +450,6 @@ public class MyVoteMainFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        participateThemes();
+        getMyScheme();
     }
 }

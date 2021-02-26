@@ -91,10 +91,6 @@ public class OTCDealFragment extends BaseFragment {
     SmartRefreshLayout refreshLayout;
     @BindView(R.id.mysellDragBtn)
     DragFloatActionButton mysellDragBtn;
-    @BindView(R.id.header)
-    ClassicsHeader header;
-    @BindView(R.id.footer)
-    ClassicsFooter footer;
 
     private Unbinder unbinder;
     private OTCDealAdapter otcDealAdapter;
@@ -327,12 +323,25 @@ public class OTCDealFragment extends BaseFragment {
     private void getOrdersTableRows() {
         try {
             showTipDialog(getString(R.string.str_loading));
+//            @{
+//        @"json": @1,
+//        @"code": mgp_otcstore,
+//        @"scope":mgp_otcstore,
+//        @"index_position":@"2",
+//        @"table":@"selorders",
+//        @"key_type":@"i64",
+//        @"limit":@"500",
+//        @"upper_bound":@"-100",
+//    }
             Map mapTableRows = MapUtils.newHashMap();
-            mapTableRows.put("table", "selorders");
-            mapTableRows.put("scope", MainActivity.deal_contract);
-            mapTableRows.put("code", MainActivity.deal_contract);
             mapTableRows.put("json", true);
+            mapTableRows.put("code", MainActivity.deal_contract);
+            mapTableRows.put("scope", MainActivity.deal_contract);
+            mapTableRows.put("index_position", "2");
+            mapTableRows.put("table", "selorders");
+            mapTableRows.put("key_type", "i64");
             mapTableRows.put("limit", "500");
+            mapTableRows.put("upper_bound", "-100");
             emWalletRepository.fetchTableRowsStr(mapTableRows, walletType)
                     .subscribe(this::onOrdersSuccess, this::onError);
         } catch (Exception e) {
@@ -438,67 +447,67 @@ public class OTCDealFragment extends BaseFragment {
             if (selordersBean != null) {
                 if (CollectionUtils.isNotEmpty(selordersBean.getRows())) {
                     rowsBeanList.addAll(selordersBean.getRows());
-                    CollectionUtils.filter(rowsBeanList, new CollectionUtils.Predicate<SelordersBean.RowsBean>() {
-                        @Override
-                        public boolean evaluate(SelordersBean.RowsBean item) {//过滤closed=1、MGP数量小于最小购买值的不要
-                            BigDecimal min_accept_quantity = BigDecimal.ZERO;
-                            BigDecimal min_mgp_num = BigDecimal.ZERO;
-                            BigDecimal price = BigDecimal.ZERO;
-                            BigDecimal quantity = BigDecimal.ZERO;
-                            BigDecimal frozen_quantity = BigDecimal.ZERO;
-                            BigDecimal fufilled_quantity = BigDecimal.ZERO;
-                            BigDecimal remaining_quantity = BigDecimal.ZERO;
-                            if (ObjectUtils.isNotEmpty(item.getPrice())) { // 价格
-                                String priceStr = item.getPrice();
-                                priceStr = priceStr.split(" ")[0];
-                                price = new BigDecimal(ObjectUtils.isEmpty(priceStr) ? "0" : priceStr);
-                            }
-                            if (ObjectUtils.isNotEmpty(item.getMin_accept_quantity())) {
-                                String min_accept_quantityStr = item.getMin_accept_quantity();
-                                min_accept_quantityStr = min_accept_quantityStr.split(" ")[0];
-                                min_accept_quantity = new BigDecimal(ObjectUtils.isEmpty(min_accept_quantityStr) ? "0" : min_accept_quantityStr);
-                            }
-                            if (ObjectUtils.isNotEmpty(item.getQuantity())) {// 总数
-                                String quantityStr = item.getQuantity();
-                                quantityStr = quantityStr.split(" ")[0];
-                                quantity = new BigDecimal(ObjectUtils.isEmpty(quantityStr) ? "0" : quantityStr);
-                            }
-                            if (ObjectUtils.isNotEmpty(item.getFrozen_quantity())) {// 冻结币
-                                String frozen_quantityStr = item.getFrozen_quantity();
-                                frozen_quantityStr = frozen_quantityStr.split(" ")[0];
-                                frozen_quantity = new BigDecimal(ObjectUtils.isEmpty(frozen_quantityStr) ? "0" : frozen_quantityStr);
-                            }
-                            if (ObjectUtils.isNotEmpty(item.getFufilled_quantity())) {//交易完成数量
-                                String fufilled_quantityStr = item.getFufilled_quantity();
-                                fufilled_quantityStr = fufilled_quantityStr.split(" ")[0];
-                                fufilled_quantity = new BigDecimal(ObjectUtils.isEmpty(fufilled_quantityStr) ? "0" : fufilled_quantityStr);
-                            }
-                            remaining_quantity = quantity.subtract(frozen_quantity).subtract(fufilled_quantity);
-                            min_mgp_num = min_accept_quantity.divide(price, 4, BigDecimal.ROUND_HALF_UP);
-                            LogUtils.dTag("evaluate==", quantity.toPlainString() + " - " + min_mgp_num.toPlainString() + " = ");
-                            return ObjectUtils.equals(0, item.getClosed()) && remaining_quantity.compareTo(min_mgp_num) >= 0;//-1表示小于，0是等于，1是大于。
-                        }
-                    });
-                    Collections.sort(rowsBeanList, new Comparator<SelordersBean.RowsBean>() {
-                        @Override
-                        public int compare(SelordersBean.RowsBean o1, SelordersBean.RowsBean o2) {
-                            int compare;
-                            String price1 = ObjectUtils.isEmpty(o1.getPrice()) ? "0.00 CNY" : o1.getPrice();
-                            String price2 = ObjectUtils.isEmpty(o2.getPrice()) ? "0.00 CNY" : o2.getPrice();
-                            price1 = price1.split(" ")[0];
-                            price2 = price2.split(" ")[0];
-                            BigDecimal priceDecimal1 = new BigDecimal(ObjectUtils.isEmpty(price1) ? "0" : price1);
-                            BigDecimal priceDecimal2 = new BigDecimal(ObjectUtils.isEmpty(price2) ? "0" : price2);
-                            if (priceDecimal1.compareTo(priceDecimal2) > 0) {//-1表示小于，0是等于，1是大于。
-                                compare = 1;
-                            } else if (priceDecimal1.compareTo(priceDecimal2) < 0) {
-                                compare = -1;
-                            } else {
-                                compare = 0;
-                            }
-                            return compare;
-                        }
-                    });
+//                    CollectionUtils.filter(rowsBeanList, new CollectionUtils.Predicate<SelordersBean.RowsBean>() {
+//                        @Override
+//                        public boolean evaluate(SelordersBean.RowsBean item) {//过滤closed=1、MGP数量小于最小购买值的不要
+//                            BigDecimal min_accept_quantity = BigDecimal.ZERO;
+//                            BigDecimal min_mgp_num = BigDecimal.ZERO;
+//                            BigDecimal price = BigDecimal.ZERO;
+//                            BigDecimal quantity = BigDecimal.ZERO;
+//                            BigDecimal frozen_quantity = BigDecimal.ZERO;
+//                            BigDecimal fufilled_quantity = BigDecimal.ZERO;
+//                            BigDecimal remaining_quantity = BigDecimal.ZERO;
+//                            if (ObjectUtils.isNotEmpty(item.getPrice())) { // 价格
+//                                String priceStr = item.getPrice();
+//                                priceStr = priceStr.split(" ")[0];
+//                                price = new BigDecimal(ObjectUtils.isEmpty(priceStr) ? "0" : priceStr);
+//                            }
+//                            if (ObjectUtils.isNotEmpty(item.getMin_accept_quantity())) {
+//                                String min_accept_quantityStr = item.getMin_accept_quantity();
+//                                min_accept_quantityStr = min_accept_quantityStr.split(" ")[0];
+//                                min_accept_quantity = new BigDecimal(ObjectUtils.isEmpty(min_accept_quantityStr) ? "0" : min_accept_quantityStr);
+//                            }
+//                            if (ObjectUtils.isNotEmpty(item.getQuantity())) {// 总数
+//                                String quantityStr = item.getQuantity();
+//                                quantityStr = quantityStr.split(" ")[0];
+//                                quantity = new BigDecimal(ObjectUtils.isEmpty(quantityStr) ? "0" : quantityStr);
+//                            }
+//                            if (ObjectUtils.isNotEmpty(item.getFrozen_quantity())) {// 冻结币
+//                                String frozen_quantityStr = item.getFrozen_quantity();
+//                                frozen_quantityStr = frozen_quantityStr.split(" ")[0];
+//                                frozen_quantity = new BigDecimal(ObjectUtils.isEmpty(frozen_quantityStr) ? "0" : frozen_quantityStr);
+//                            }
+//                            if (ObjectUtils.isNotEmpty(item.getFulfilled_quantity())) {//交易完成数量
+//                                String fufilled_quantityStr = item.getFulfilled_quantity();
+//                                fufilled_quantityStr = fufilled_quantityStr.split(" ")[0];
+//                                fufilled_quantity = new BigDecimal(ObjectUtils.isEmpty(fufilled_quantityStr) ? "0" : fufilled_quantityStr);
+//                            }
+//                            remaining_quantity = quantity.subtract(frozen_quantity).subtract(fufilled_quantity);
+//                            min_mgp_num = min_accept_quantity.divide(price, 4, BigDecimal.ROUND_HALF_UP);
+//                            LogUtils.dTag("evaluate==", quantity.toPlainString() + " - " + min_mgp_num.toPlainString() + " = ");
+//                            return ObjectUtils.equals(0, item.getClosed()) && remaining_quantity.compareTo(min_mgp_num) >= 0;//-1表示小于，0是等于，1是大于。
+//                        }
+//                    });
+//                    Collections.sort(rowsBeanList, new Comparator<SelordersBean.RowsBean>() {
+//                        @Override
+//                        public int compare(SelordersBean.RowsBean o1, SelordersBean.RowsBean o2) {
+//                            int compare;
+//                            String price1 = ObjectUtils.isEmpty(o1.getPrice()) ? "0.00 CNY" : o1.getPrice();
+//                            String price2 = ObjectUtils.isEmpty(o2.getPrice()) ? "0.00 CNY" : o2.getPrice();
+//                            price1 = price1.split(" ")[0];
+//                            price2 = price2.split(" ")[0];
+//                            BigDecimal priceDecimal1 = new BigDecimal(ObjectUtils.isEmpty(price1) ? "0" : price1);
+//                            BigDecimal priceDecimal2 = new BigDecimal(ObjectUtils.isEmpty(price2) ? "0" : price2);
+//                            if (priceDecimal1.compareTo(priceDecimal2) > 0) {//-1表示小于，0是等于，1是大于。
+//                                compare = 1;
+//                            } else if (priceDecimal1.compareTo(priceDecimal2) < 0) {
+//                                compare = -1;
+//                            } else {
+//                                compare = 0;
+//                            }
+//                            return compare;
+//                        }
+//                    });
                     otcDealAdapter.notifyDataSetChanged();
                 }
             }

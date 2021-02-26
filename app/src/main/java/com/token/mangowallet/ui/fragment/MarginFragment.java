@@ -38,6 +38,7 @@ import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.bean.LowerBean;
 import com.token.mangowallet.bean.MsgCodeBean;
+import com.token.mangowallet.bean.SchemesThemesBean;
 import com.token.mangowallet.bean.ThemesBean;
 import com.token.mangowallet.bean.TransactionBean;
 import com.token.mangowallet.db.MangoWallet;
@@ -52,6 +53,8 @@ import com.token.mangowallet.view.DialogHelper;
 import com.token.mangowallet.view.ViewUtils;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -61,7 +64,12 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import one.block.eosiojava.models.rpcProvider.Action;
+import one.block.eosiojava.models.rpcProvider.Authorization;
 
+import static com.token.mangowallet.utils.Constants.ADDSCHEME;
+import static com.token.mangowallet.utils.Constants.ADDVOTE;
+import static com.token.mangowallet.utils.Constants.ASSOCIATION_VOTE_CONTRACT;
 import static com.token.mangowallet.utils.Constants.EOSIO_TOKEN_CONTRACT_CODE;
 import static com.token.mangowallet.utils.Constants.EXTRA_VOTE_DATA;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
@@ -108,7 +116,7 @@ public class MarginFragment extends BaseFragment {
     private QMUIDialog passwordQmuiDialog;
     private BigDecimal mMixNum = BigDecimal.ZERO;
     private int type;
-    private ThemesBean.DataBean dataBean;
+    private SchemesThemesBean.RowsBean dataBean;
 
     @Override
     protected View onCreateView() {
@@ -273,24 +281,66 @@ public class MarginFragment extends BaseFragment {
         showTipDialog(getString(R.string.str_loading));
         BigDecimal bdQuantity = new BigDecimal(transferAmountEt.getText().toString());
         String memo = "";
+        Map params = MapUtils.newHashMap();
+        String privatekey = mangoWallet.getPrivateKey();
         if (type == 0) {
             memo = "Margin";
+            params.put("memo", memo);
+            params.put("from", walletAddress);
+            params.put("to", MARGIN_ACCOUNT);
+            params.put("quantity", bdQuantity.setScale(4) + " " + walletType);
+            String jsonData = GsonUtils.toJson(params);
+            LogUtils.dTag(LOG_TAG, "accountName = " + walletAddress
+                    + "params = " + jsonData);
+
+            emWalletRepository.sendTransaction(TRANSFER_ACTION, privatekey, walletAddress, EOSIO_TOKEN_CONTRACT_CODE, jsonData, walletType)
+                    .subscribe(this::onTransaction, this::onError);
         } else if (type == 1) {
-            //{"voteId":voteId,
-            //"voteType":"0"} voteType:投票1，发布0
-            memo = String.valueOf(dataBean.getVoteId()) + ",1";
+
+            List<Action> actionList = new ArrayList<>();
+            Action mAction1;
+            Action mAction2;
+            memo = "";
+            params.put("memo", memo);
+            params.put("from", walletAddress);
+            params.put("to", ASSOCIATION_VOTE_CONTRACT);
+            params.put("quantity", bdQuantity.setScale(4) + " " + walletType);
+            String jsonData = GsonUtils.toJson(params);
+            LogUtils.dTag(LOG_TAG, "accountName1 = " + walletAddress
+                    + "params = " + jsonData);
+
+            mAction1 = new Action(EOSIO_TOKEN_CONTRACT_CODE, TRANSFER_ACTION, Collections.singletonList(new Authorization(walletAddress, "active")), jsonData);
+//{
+//    action = addvote;
+//    code = "mgp.cmvoting";
+//    parameter =     {
+//        account = mgpchain2222;
+//        "is_super_node" = 1;
+//        "scheme_content" = "scheme_content";
+//        "scheme_id" = id;
+//        "scheme_title" = "scheme_title";
+//        "vote_count" = "3.0000 MGP";
+//    };
+//}
+            params.clear();
+            params.put("account", walletAddress);
+            params.put("vote_count", bdQuantity.setScale(4) + " " + walletType);
+            params.put("scheme_id", String.valueOf(dataBean.getId()));
+            params.put("scheme_title", dataBean.getScheme_title());
+            params.put("scheme_content", dataBean.getScheme_content());
+            params.put("is_super_node", false);
+            jsonData = GsonUtils.toJson(params);
+            LogUtils.dTag(LOG_TAG, "accountName2 = " + walletAddress
+                    + "params = " + jsonData);
+
+            mAction2 = new Action(ASSOCIATION_VOTE_CONTRACT, ADDVOTE, Collections.singletonList(new Authorization(walletAddress, "active")), jsonData);
+
+            actionList.add(mAction1);
+            actionList.add(mAction2);
+            emWalletRepository.sendTransaction(actionList, privatekey, walletType)
+                    .subscribe(this::onTransaction, this::onError);
+
         }
-        Map params = MapUtils.newHashMap();
-        params.put("memo", memo);
-        params.put("from", walletAddress);
-        params.put("to", type == 0 ? MARGIN_ACCOUNT : VOTE_ACCOUNT);
-        params.put("quantity", bdQuantity.setScale(4) + " " + walletType);
-        String jsonData = GsonUtils.toJson(params);
-        String privatekey = mangoWallet.getPrivateKey();
-        LogUtils.dTag(LOG_TAG, "accountName = " + walletAddress
-                + "params = " + jsonData);
-        emWalletRepository.sendTransaction(TRANSFER_ACTION, privatekey, walletAddress, EOSIO_TOKEN_CONTRACT_CODE, jsonData, walletType)
-                .subscribe(this::onTransaction, this::onError);
     }
 
     /**
