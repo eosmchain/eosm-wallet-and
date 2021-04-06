@@ -1,7 +1,6 @@
 package com.token.mangowallet.net.common;
 
 import com.google.gson.JsonObject;
-import com.token.mangowallet.bean.AccountNames;
 import com.token.mangowallet.bean.AppHomeBean;
 import com.token.mangowallet.bean.CurrencyPrice;
 import com.token.mangowallet.bean.EthplorerResponse;
@@ -9,8 +8,6 @@ import com.token.mangowallet.bean.FindBean;
 import com.token.mangowallet.bean.OrderIndexBean;
 import com.token.mangowallet.bean.StoreHomeBean;
 import com.token.mangowallet.utils.Constants;
-
-import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
@@ -26,12 +23,9 @@ import one.block.eosiojava.models.rpcProvider.response.GetRawAbiResponse;
 import one.block.eosiojava.models.rpcProvider.response.GetRequiredKeysResponse;
 import one.block.eosiojava.models.rpcProvider.response.PushTransactionResponse;
 import one.block.eosiojavarpcprovider.implementations.EosioJavaRpcProviderImpl;
-import one.block.eosiojavarpcprovider.implementations.IEosioJavaRpcProviderApi;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -1583,4 +1577,16 @@ public interface RequestApi {
     @Headers("urlname:" + Constants.OTCURL)
     @POST("/api/arbitration/save")
     Observable<JsonObject> arbitrationSave(@Header("content") String content);
+
+    /**
+     * 获取收款方式
+     * mgpName
+     * bucket otcstore.mgps.me
+     * appName MGP
+     *
+     * @Header("content:") String content
+     */
+    @Headers("urlname:" + Constants.CORPORATION_URL)
+    @POST("/api/userOrder/blend/blendChannel")
+    Observable<JsonObject> blendChannel();
 }

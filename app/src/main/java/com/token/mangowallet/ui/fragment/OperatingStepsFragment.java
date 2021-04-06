@@ -23,6 +23,7 @@ import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.bean.MsgCodeBean;
+import com.token.mangowallet.bean.OrderSysBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.utils.ClipboardUtils;
@@ -84,6 +85,8 @@ public class OperatingStepsFragment extends BaseFragment {
     private String CollectionAddress;
     private String orderID;
     private int type;
+    private OrderSysBean.DataBean orderSysDataBean;
+    private String receiveAddress;
 
     @Override
     protected View onCreateView() {
@@ -102,7 +105,11 @@ public class OperatingStepsFragment extends BaseFragment {
         walletAddress = mangoWallet.getWalletAddress();
         num = bundle.getString("num", "");
         SYMBOL = bundle.getString("SYMBOL", "");
-        if (type == TWICE_MIX_MORTGAGE_TYPE) {
+        if (type == FIRST_MIX_MORTGAGE_TYPE) {
+            orderSysDataBean = bundle.getParcelable("orderSysDataBean");
+            receiveAddress = bundle.getString("receiveAddress", "");
+            moneyType = bundle.getString("moneyType", "");
+        } else if (type == TWICE_MIX_MORTGAGE_TYPE) {
             id = bundle.getString("id", "");
         } else if (type == GOODS_PAYMENT_TYPE) {
             orderID = bundle.getString("OrderID", "");
@@ -119,7 +126,10 @@ public class OperatingStepsFragment extends BaseFragment {
                 popBackStack();
             }
         });
-        if (type == GOODS_PAYMENT_TYPE) {
+        if (type == FIRST_MIX_MORTGAGE_TYPE) {
+            tokenAddressTv.setText(orderSysDataBean.getContract());
+            collectionAddressTv.setText(orderSysDataBean.getReceive());
+        } else if (type == GOODS_PAYMENT_TYPE) {
             tokenAddressTv.setText(USDT_TOKEN);
             collectionAddressTv.setText(CollectionAddress);
         } else {
@@ -171,6 +181,7 @@ public class OperatingStepsFragment extends BaseFragment {
         params.put("hash", hashEt.getText().toString().trim());
         if (type == FIRST_MIX_MORTGAGE_TYPE) {
             params.put("num", num);
+            params.put("receiveAddress", receiveAddress);
         } else if (type == TWICE_MIX_MORTGAGE_TYPE) {
             params.put("id", id);
         } else if (type == GOODS_PAYMENT_TYPE) {

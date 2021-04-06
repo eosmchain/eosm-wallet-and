@@ -48,11 +48,6 @@ import java.util.Map;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * @author cginechen
- * @date 2016-12-08
- */
-
 @ActivityScheme(name = "launcher")
 public class LauncherActivity extends Activity {
 

@@ -29,11 +29,12 @@
     <color name="app_color_blue_3_disabled">#7FEBF9FF</color>
     <color name="app_color_blue_3_pressed">#7FEBF9FF</color>
     <color name="app_color_baby_blue">#3db1ea</color>
-    <color name="app_color_viridis">#1FB15B</color>
     <color name="app_color_red_1">#F76968</color>
+    <color name="app_color_viridis">#1FB15B</color>
     <color name="app_color_green">#83d62f</color>
     <color name="app_color_saffron_yellow">#f08f26</color>
     <color name="app_color_red">#fe4e4e</color>
+    <color name="app_color_background">#eeeeee</color>
 
     <color name="app_color_theme_1">#EF5362</color> <!-- Grapefruit -->
     <color name="app_color_theme_2">#FE6D4B</color> <!-- Bittersweet -->
@@ -48,7 +49,6 @@
     <color name="app_color_theme_11">#F0A23B</color> <!-- BTC -->
     <color name="app_color_theme_12">#383554</color> <!-- EOS -->
     <color name="app_color_theme_13">#5590F0</color> <!-- ETH -->
-    <color name="app_color_background">#eeeeee</color>
 
     <color name="bar_divider">#D4D6D8</color>
     <color name="tab_panel_bg">#ffffff</color>

@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.MapUtils;
+import com.google.gson.JsonObject;
 import com.token.mangowallet.bean.CurrencyPrice;
 import com.token.mangowallet.bean.OrderIndexBean;
 import com.token.mangowallet.bean.TableRowsBean;
@@ -33,6 +34,7 @@ public class MortgageViewModel extends BaseViewModel {
     public final MutableLiveData<OrderIndexBean> orderIndexBean = new MutableLiveData<>();
     public final MutableLiveData<CurrencyPrice> prices = new MutableLiveData<>();
     public final MutableLiveData<TransactionBean> transactionBean = new MutableLiveData<>();
+    public final MutableLiveData<String> blendChannelModel = new MutableLiveData<>();
 
     public final FetchWalletInteract fetchWalletInteract;
     public final EMWalletRepository emWalletRepository;
@@ -100,6 +102,18 @@ public class MortgageViewModel extends BaseViewModel {
         }
     }
 
+    public void getBlendChannel() {
+        try {
+            progress.postValue(true);
+            NetWorkManager.getRequest().blendChannel()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::onBlendChannel, this::onError);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void onDefaultWallet(MangoWallet wallet) {
         defaultWallet.setValue(wallet);
         fetchBalance();
@@ -124,6 +138,11 @@ public class MortgageViewModel extends BaseViewModel {
         progress.postValue(false);
         LogUtils.d("Tokens", "price: " + currencyPrice.getData().getPair() + "  " + currencyPrice.getData().getPrice());
         this.prices.postValue(currencyPrice);
+    }
+
+    public void onBlendChannel(JsonObject jsonObject) {
+        progress.postValue(false);
+        this.blendChannelModel.postValue(GsonUtils.toJson(jsonObject));
     }
 
     public void sendTransaction(String action, String code, String jsonData) {
@@ -157,6 +176,10 @@ public class MortgageViewModel extends BaseViewModel {
 
     public LiveData<CurrencyPrice> prices() {
         return prices;
+    }
+
+    public LiveData<String> blendChannelModel() {
+        return blendChannelModel;
     }
 
     public LiveData<TransactionBean> transaction() {

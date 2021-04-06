@@ -116,7 +116,7 @@ public class TransferFragment extends BaseFragment {
         privatekey = mangoWallet.getPrivateKey();
         walletType = Constants.WalletType.getPagerFromPositon(mangoWallet.getWalletType());
         transactionModelFactory = new TransactionModelFactory();
-        transactionViewModel = ViewModelProviders.of(this.getActivity(), transactionModelFactory)
+        transactionViewModel = ViewModelProviders.of(this, transactionModelFactory)
                 .get(TransactionViewModel.class);
         transactionViewModel.prepare(mangoWallet);
         transactionViewModel.balance().observe(this, this::onBalance);

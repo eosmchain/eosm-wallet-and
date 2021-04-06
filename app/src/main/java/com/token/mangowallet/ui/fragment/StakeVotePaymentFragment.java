@@ -221,6 +221,10 @@ public class StakeVotePaymentFragment extends BaseFragment {
     private void transferTransaction() {
         showTipDialog(getString(R.string.str_loading));
         BigDecimal bdQuantity = new BigDecimal(transferAmountEt.getText().toString());
+        if (ObjectUtils.isEmpty(mNodeAddress)) {
+            ToastUtils.showShort(R.string.str_node_address_exception);
+            return;
+        }
         String memo = "vote:" + mNodeAddress;
 
         Map params = MapUtils.newHashMap();

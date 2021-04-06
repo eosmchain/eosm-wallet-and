@@ -127,11 +127,11 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
     private TransactionDetailFragment mTransactionDetailFragment;
     private CountDownTimer timer;
     private List<PayInfoUserInfoBean.DataBean.PayInfosBean> payInfoList = new ArrayList<>();
-    private PayInfoUserInfoBean.DataBean mPayInfoUserInfoBean;
     private DealsOrderBean.RowsBean mRowsBean;
     private int OTC_TYPE = 0;//0 ： 卖家， 1 : 买家 ， 2 ：客服
     private String mStartTime = "0";
     private long dieoutTime = 0;
+    private String mOwner;
     /**
      * // 代付款
      * taker_passed = 0， taker_passed_at= 1970-01-01T00:00:00", close = 0
@@ -170,14 +170,11 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
         mangoWallet = bundle.getParcelable(EXTRA_WALLET);
         OTC_TYPE = bundle.getInt("OTC_TYPE", 0);
         amountPaid = bundle.getString("amountPaid", amountPaid);
-        mPayInfoUserInfoBean = bundle.getParcelable("PayInfoUserInfoBean");
+        mOwner = bundle.getString("owner");
         mRowsBean = bundle.getParcelable("RowsBean");
         walletType = Constants.WalletType.getPagerFromPositon(mangoWallet.getWalletType());
         emWalletRepository = new EMWalletRepository();
         dieoutTime = 15 * 60 * 1000;
-        if (mPayInfoUserInfoBean != null) {
-            payInfoList.addAll(mPayInfoUserInfoBean.getPayInfos());
-        }
 //        getPayInfoList();
         getTableRowsGlobal();
         if (mRowsBean != null) {
@@ -191,6 +188,7 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
             orderCNYQuantity = "¥" + totalPricesDecimal.setScale(2, RoundingMode.FLOOR).toPlainString();
             orderUsdQuantity = dealQuantityDecimal.multiply(orderPriceUsdDecimal).setScale(4, RoundingMode.FLOOR).toPlainString() + " USD";
         }
+        getPayInfo();
     }
 
     @Override
@@ -203,7 +201,7 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
             }
         });
         buyerStatusValTv.setText(amountPaid.contains("￥") ? amountPaid : "￥" + amountPaid);
-        updateView();
+
         countDown();
     }
 
@@ -488,7 +486,9 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
                     initTabSegment();
                     mTabSegment.setVisibility(View.VISIBLE);
                     mPaymentInfoFragment = new PaymentInfoFragment();
-                    curPayInfoBean = payInfoList.get(mCurIndex);
+                    if (CollectionUtils.isNotEmpty(payInfoList)) {
+                        curPayInfoBean = payInfoList.get(mCurIndex);
+                    }
                     bundle.putParcelable("PayInfosBean", curPayInfoBean);
                     mPaymentInfoFragment.setArguments(bundle);
                     getChildFragmentManager()
@@ -908,6 +908,73 @@ public class BuyerTransactionInfoFragment extends BaseFragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void getPayInfo() {
+        try {
+            showTipDialog(getString(R.string.str_loading));
+            Map params = MapUtils.newHashMap();
+            params.put("mgpName", ObjectUtils.isEmpty(mOwner) ? mRowsBean.getOrder_maker() : mOwner);
+            String json = GsonUtils.toJson(params);
+            String content = NRSAUtils.encrypt(json);
+            NetWorkManager.getRequest().payInfo(content)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::onPayInfoSuccess, this::onError);
+//            new RxSubscriber<JsonObject>(otcDealFragment.getActivity(), false) {
+//                        @Override
+//                        public void onFail(String failMsg) {
+//                            LogUtils.eTag(LOG_TAG, "failMsg = " + failMsg);
+//                        }
+//
+//                        @Override
+//                        public void onSuccess(JsonObject jsonObject) {
+//                            if (ObjectUtils.isNotEmpty(jsonObject)) {
+//                                PayInfoUserInfoBean payInfoUserInfoBean = GsonUtils.fromJson(GsonUtils.toJson(jsonObject), PayInfoUserInfoBean.class);
+//                                if (payInfoUserInfoBean != null) {
+//                                    if (payInfoUserInfoBean.getCode() == 0) {
+//                                        PayInfoUserInfoBean.DataBean dataBean = payInfoUserInfoBean.getData();
+//                                        mUserInfoHashMap.put(baseViewHolder.getAdapterPosition(), dataBean);
+//                                        List<PayInfoUserInfoBean.DataBean.PayInfosBean> payInfosBeanList = dataBean.getPayInfos();
+////                                        PayInfoUserInfoBean.DataBean.UserInfoBean userInfo = dataBean.getUserInfo();
+//                                        if (CollectionUtils.isNotEmpty(payInfosBeanList)) {
+//                                            for (int i = 0; i < payInfosBeanList.size(); i++) {
+//                                                PayInfoUserInfoBean.DataBean.PayInfosBean payInfosBean = payInfosBeanList.get(i);
+//                                                if (payInfosBean.getPayId() == 1) {
+//                                                    bankCardIv.setVisibility(View.VISIBLE);
+//                                                } else if (payInfosBean.getPayId() == 2) {
+//                                                    wechatIv.setVisibility(View.VISIBLE);
+//                                                } else if (payInfosBean.getPayId() == 3) {
+//                                                    alipayIv.setVisibility(View.VISIBLE);
+//                                                }
+//                                            }
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void onPayInfoSuccess(JsonObject jsonObject) {
+        dismissTipDialog();
+        if (jsonObject != null) {
+            PayInfoUserInfoBean payInfoUserInfoBean = GsonUtils.fromJson(GsonUtils.toJson(jsonObject), PayInfoUserInfoBean.class);
+            if (payInfoUserInfoBean != null) {
+                if (payInfoUserInfoBean.getCode() == 0) {
+                    PayInfoUserInfoBean.DataBean dataBean = payInfoUserInfoBean.getData();
+                    if (dataBean != null) {
+                        payInfoList.addAll(dataBean.getPayInfos());
+                    }
+                } else {
+                    ToastUtils.showShort(payInfoUserInfoBean.getMsg());
+                }
+            }
+        }
+        updateView();
     }
 
     private void onRestartOrderSuccess(TransactionBean transactionBean) {

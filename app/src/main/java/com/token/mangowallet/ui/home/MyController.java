@@ -114,7 +114,7 @@ public class MyController extends QMUIWindowInsetLayout {
     private void initView() {
         topbar.setTitle(R.string.str_my);
         appVersionTv.setVisibility(VISIBLE);
-        appVersionTv.setText("V" + AppUtils.getAppVersionName());
+        appVersionTv.setText("v" + AppUtils.getAppVersionName());
         emWalletRepository = new EMWalletRepository();
         appVersionTv.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
             @Override

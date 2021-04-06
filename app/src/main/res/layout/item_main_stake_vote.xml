@@ -44,7 +44,6 @@
             android:textStyle="bold" />
     </FrameLayout>
 
-
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/nodeNameTv"
         android:layout_width="wrap_content"
@@ -92,34 +91,41 @@
         android:layout_marginTop="@dimen/album_dp_10"
         android:layout_marginRight="@dimen/album_dp_15"
         android:layout_marginBottom="5dp"
-        android:text=""
+        android:text="sss"
         android:textColor="@color/app_color_common_hint"
         android:textSize="@dimen/small"
-        app:layout_constraintBottom_toTopOf="@id/voteBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toRightOf="@id/headerLayout"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
-        android:id="@+id/voteBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="@dimen/album_dp_15"
-        android:layout_marginBottom="@dimen/album_dp_10"
-        android:paddingLeft="@dimen/album_dp_15"
-        android:paddingTop="5dp"
-        android:paddingRight="@dimen/album_dp_15"
-        android:paddingBottom="5dp"
-        android:text="@string/str_to_vote"
-        android:textColor="@color/white"
-        android:textSize="@dimen/small"
+    <FrameLayout
+        android:id="@+id/voteLayout"
+        android:layout_width="@dimen/album_dp_0"
+        android:layout_height="@dimen/album_dp_0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/headerLayout"
-        app:layout_constraintTop_toBottomOf="@id/voteNumTv"
-        app:qmui_backgroundColor="@color/app_color_theme_11"
-        app:qmui_borderColor="@color/app_color_theme_11"
-        app:qmui_borderWidth="@dimen/album_dp_0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.3">
+
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/voteBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="@dimen/album_dp_15"
+            android:layout_marginBottom="@dimen/album_dp_10"
+            android:paddingLeft="@dimen/album_dp_15"
+            android:paddingTop="5dp"
+            android:paddingRight="@dimen/album_dp_15"
+            android:paddingBottom="5dp"
+            android:text="@string/str_to_vote"
+            android:textColor="@color/white"
+            android:textSize="@dimen/small"
+            app:qmui_backgroundColor="@color/app_color_theme_11"
+            app:qmui_borderColor="@color/app_color_theme_11"
+            app:qmui_borderWidth="@dimen/album_dp_0" />
+    </FrameLayout>
+
 
 </com.qmuiteam.qmui.layout.QMUIConstraintLayout>

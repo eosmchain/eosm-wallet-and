@@ -80,3 +80,4 @@ public static void dropTable(org.greenrobot.greendao.database.Database, boolean)
 -dontwarn net.sqlcipher.database.**
 # If you do NOT use RxJava:
 -dontwarn rx.**
+############################

@@ -51,7 +51,7 @@
                     android:text="0.00"
                     android:textStyle="bold"
                     android:textColor="@color/app_color_orange"
-                    android:textSize="@dimen/big_large" />
+                    android:textSize="@dimen/big_medium" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/unpaidUnitTv"
@@ -60,7 +60,7 @@
                     android:text="MGP"
                     android:textStyle="bold"
                     android:textColor="@color/app_color_orange"
-                    android:textSize="@dimen/medium" />
+                    android:textSize="@dimen/small" />
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatTextView

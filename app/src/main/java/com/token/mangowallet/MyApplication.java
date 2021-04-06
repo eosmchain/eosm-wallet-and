@@ -139,8 +139,7 @@ public class MyApplication extends Application {
         CrashReport.initCrashReport(context, "ae70a2f85f", Constants.ISTEST, strategy);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(application);
         NetWorkManager.getInstance().init();
-        //初始化工具类
-        Utils.init(application);
+
         QMUISwipeBackActivityManager.init(application);
         //拍照和图片裁剪框架初始化
         Album.initialize(AlbumConfig.newBuilder(application)

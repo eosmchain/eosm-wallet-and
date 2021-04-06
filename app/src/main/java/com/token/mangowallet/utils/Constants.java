@@ -11,7 +11,7 @@ public interface Constants {
      * 正式域名
      */
     String PRODUCT_URL = "https://api.mgpchain.com/";//https://api.mgpchain.com/api/appVersion/getVersion
-    String TEST_URL = "https://api.coom.pub/";//http://47.56.124.233:18888/";
+    String TEST_URL = "http://47.56.124.233:18887";//http://47.56.124.233:18888/";
     String GUOYU_TEST_URL = "http://192.168.0.101:8888/";
     String AYING_TEST_URL = "https://api.coom.pub/";//"http://192.168.31.50:28888"; //"http://47.56.127.227:8888";
     //MGP
@@ -147,7 +147,7 @@ public interface Constants {
     String RESTART_ORDER = "restart";//订单重启 （仲裁者账号）
     String BACKDEAL_ORDER = "backdeal";//款项异常（订单变成代付款）
     String SETSELLER = "setseller";//交易确认
-    String ASSOCIATION_VOTE_CONTRACT = "mgp.cmvoting";//社群投票合约 association
+    String ASSOCIATION_VOTE_CONTRACT = "mgpchainvote";//"mgp.cmvoting";//社群投票合约 association
     String ADDSCHEME = "addscheme";//添加社群投票方案
     String ADDVOTE = "addvote";//社群投票
     String UPSCHEME = "upscheme";//社群投票方案修改

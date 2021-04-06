@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.BarUtils;
+import com.blankj.utilcode.util.CollectionUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.MapUtils;
@@ -42,6 +43,7 @@ import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
+import com.token.mangowallet.bean.BlendChannelBean;
 import com.token.mangowallet.bean.CurrencyPrice;
 import com.token.mangowallet.bean.OrderSysBean;
 import com.token.mangowallet.bean.TransactionBean;
@@ -60,6 +62,7 @@ import com.token.mangowallet.view.ViewUtils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -129,7 +132,7 @@ public class MiningMortgageFragment extends BaseFragment {
     private MangoWallet mangoWallet;
     private String remaining = "";
     private boolean isRemaining;
-    private BigDecimal balance;
+    private BigDecimal balance = BigDecimal.ZERO;
     private BigDecimal price = BigDecimal.ZERO;
     private BigDecimal quantityMGP;
     private String orderStar;
@@ -149,6 +152,9 @@ public class MiningMortgageFragment extends BaseFragment {
     private BigDecimal bdNumHMIO = BigDecimal.ZERO;
     private BigDecimal bdMgpValue = BigDecimal.ZERO;
     private String mAccountAddress = "";
+    private List<BlendChannelBean.DataBean.ChannelListBean> channelListBeanList = new ArrayList<>();
+    private BlendChannelBean.DataBean.ChannelListBean channelListBean;
+    private OrderSysBean.DataBean orderSysDataBean;
 
     @Override
     protected View onCreateView() {
@@ -175,6 +181,7 @@ public class MiningMortgageFragment extends BaseFragment {
         walletAddress = mangoWallet.getWalletAddress();
         mAccountAddress = walletAddress;
         mortgageInitiatedEt.setText(mAccountAddress);
+        balanceTv.setText(String.format(getString(R.string.str_balance_value), balance.toPlainString()));
         walletType = Constants.WalletType.getPagerFromPositon(mangoWallet.getWalletType());
         mRadius = QMUIDisplayHelper.dp2px(getContext(), 8);
         mortgageViewModel.prepare(mangoWallet);
@@ -182,6 +189,8 @@ public class MiningMortgageFragment extends BaseFragment {
         mortgageViewModel.prices().observe(this, this::onPrice);
         mortgageViewModel.transaction().observe(this, this::onTransaction);
         mortgageViewModel.getTicker();
+        mortgageViewModel.getBlendChannel();
+        mortgageViewModel.blendChannelModel().observe(this, this::onBlendChannelModel);
 //        presenter.requestCurrencyBalance(Params.getBalancePamars(accountName, EOSIO_TOKEN_CONTRACT_CODE, MGP_SYMBOL));
 //        presenter.requestPortData(Constants.PRICE_MGP, PRICE);
     }
@@ -294,6 +303,21 @@ public class MiningMortgageFragment extends BaseFragment {
             }
         }
         ToastUtils.showLong(transactionBean.msg);
+    }
+
+    private void onBlendChannelModel(String s) {
+        channelListBeanList.clear();
+        if (ObjectUtils.isNotEmpty(s)) {
+            BlendChannelBean blendChannelBean = GsonUtils.fromJson(s, BlendChannelBean.class);
+            if (blendChannelBean != null) {
+                if (blendChannelBean.getCode() == 0) {
+                    BlendChannelBean.DataBean dataBean = blendChannelBean.getData();
+                    if (CollectionUtils.isNotEmpty(dataBean.getChannelList())) {
+                        channelListBeanList.addAll(dataBean.getChannelList());
+                    }
+                }
+            }
+        }
     }
 
     private void mgpValueView() {
@@ -454,7 +478,8 @@ public class MiningMortgageFragment extends BaseFragment {
                         @Override
                         public void onClick(QMUIBottomSheet dialog, View itemView, int position, String tag) {
                             dialog.dismiss();
-                            if (position == 0) {
+                            channelListBean = channelListBeanList.get(position);
+                            if (channelListBean.getChainType() == 1) {
                                 bdMgpValue = bdQuantity;
                                 if (isMortgage && bdMgpValue.compareTo(balance) > 0) {
                                     ToastUtils.showLong(R.string.str_cannot_greater_balance);
@@ -465,14 +490,16 @@ public class MiningMortgageFragment extends BaseFragment {
                                             getString(R.string.str_enter_password), getString(android.R.string.ok), getString(android.R.string.cancel), listener, true);
                                 }
                                 qmuiDialog.show();
-                            } else if (position == 1) {
+                            } else {
                                 orderSys();
 //                                toOperatingStepsFragment();
                             }
                         }
                     });
-            builder.addItem("MGP");
-            builder.addItem("HMIO+MGP");
+            for (int i = 0; i < channelListBeanList.size(); i++) {
+                BlendChannelBean.DataBean.ChannelListBean channelListBean = channelListBeanList.get(i);
+                builder.addItem(ObjectUtils.isEmpty(channelListBean.getName()) ? "" : channelListBean.getName());
+            }
             bottomSheet = builder.build();
         }
         if (!bottomSheet.isShowing()) {
@@ -482,13 +509,16 @@ public class MiningMortgageFragment extends BaseFragment {
 
     private void toOperatingStepsFragment() {
         bdNumHMIO = bdQuantity.multiply(mHmioDuty);
-        numHMIO = bdNumHMIO.toPlainString();
+        numHMIO = bdNumHMIO.setScale(4).toPlainString();
         bdMgpValue = bdQuantity.subtract(bdNumHMIO);
         Bundle bundle = new Bundle();
         bundle.putParcelable(EXTRA_WALLET, mangoWallet);
         bundle.putInt("type", FIRST_MIX_MORTGAGE_TYPE);
         bundle.putString("num", numHMIO);
-        bundle.putString("SYMBOL", HMIO_SYMBOL);
+        bundle.putString("moneyType", String.valueOf(channelListBean.getMoneyType()));
+        bundle.putString("receiveAddress", mAccountAddress);
+        bundle.putString("SYMBOL", orderSysDataBean.getCoin_type());
+        bundle.putParcelable("orderSysDataBean", orderSysDataBean);
         startFragment("OperatingStepsFragment", bundle);
     }
 
@@ -497,6 +527,7 @@ public class MiningMortgageFragment extends BaseFragment {
         try {
             Map params = MapUtils.newHashMap();
             params.put("num", quantityEt.getText().toString());
+            params.put("id", String.valueOf(channelListBean.getId()));
             String json = GsonUtils.toJson(params);
             String content = NRSAUtils.encrypt(json);
             NetWorkManager.getRequest().orderSys(content)
@@ -514,7 +545,8 @@ public class MiningMortgageFragment extends BaseFragment {
             OrderSysBean orderSysBean = GsonUtils.fromJson(GsonUtils.toJson(jsonData), OrderSysBean.class);
             if (orderSysBean.getCode() == 0) {
                 if (ObjectUtils.isNotEmpty(orderSysBean.getData())) {
-                    mHmioDuty = orderSysBean.getData().getHmio_pro();
+                    orderSysDataBean = orderSysBean.getData();
+                    mHmioDuty = orderSysDataBean.getHmio_pro();
                     toOperatingStepsFragment();
                 }
             } else {

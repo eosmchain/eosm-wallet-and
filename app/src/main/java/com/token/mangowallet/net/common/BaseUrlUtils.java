@@ -142,7 +142,7 @@ public class BaseUrlUtils {
 
         ServerInfo info3 = new ServerInfo();
         info3.setTest(true);
-        info3.setKserverName("郭煜本地");
+        info3.setKserverName("gy本地");
         info3.setKserverApi(GUOYU_TEST_URL);
         info3.setNodeBTC("http://test.bitstoreapp.com");
         info3.setNodeETH("https://ropsten.infura.io/v3/dc6e037d7e2141e38e2b8042d29438aa");
@@ -152,7 +152,7 @@ public class BaseUrlUtils {
 
         ServerInfo info4 = new ServerInfo();
         info4.setTest(true);
-        info4.setKserverName("啊应本地");
+        info4.setKserverName("ay本地");
         info4.setKserverApi(AYING_TEST_URL);
         info4.setNodeBTC("http://test.bitstoreapp.com");
         info4.setNodeETH("https://ropsten.infura.io/v3/dc6e037d7e2141e38e2b8042d29438aa");
@@ -162,7 +162,7 @@ public class BaseUrlUtils {
 
         ServerInfo info5 = new ServerInfo();
         info5.setTest(true);
-        info5.setKserverName("法建本地");
+        info5.setKserverName("fj本地");
         info5.setKserverApi("http://v.babih.com");
         info5.setNodeBTC("http://test.bitstoreapp.com");
         info5.setNodeETH("https://ropsten.infura.io/v3/dc6e037d7e2141e38e2b8042d29438aa");
@@ -170,15 +170,15 @@ public class BaseUrlUtils {
         info5.setNodeMGP(AYING_TEST_MGP_URL);
         info5.setKserverKey(FAJIAN_URL);
 
-        ServerInfo info6 = new ServerInfo();
-        info6.setTest(true);
-        info6.setKserverName("法建本地");
-        info6.setKserverApi("http://v.babih.com");
-        info6.setNodeBTC("http://test.bitstoreapp.com");
-        info6.setNodeETH("https://ropsten.infura.io/v3/dc6e037d7e2141e38e2b8042d29438aa");
-        info6.setNodeEOS("https://jungle2.cryptolions.io");
-        info6.setNodeMGP(AYING_TEST_MGP_URL);
-        info6.setKserverKey(FAJIAN_URL);
+//        ServerInfo info6 = new ServerInfo();
+//        info6.setTest(true);
+//        info6.setKserverName("法建本地");
+//        info6.setKserverApi("http://v.babih.com");
+//        info6.setNodeBTC("http://test.bitstoreapp.com");
+//        info6.setNodeETH("https://ropsten.infura.io/v3/dc6e037d7e2141e38e2b8042d29438aa");
+//        info6.setNodeEOS("https://jungle2.cryptolions.io");
+//        info6.setNodeMGP(AYING_TEST_MGP_URL);
+//        info6.setKserverKey(FAJIAN_URL);
 
         serverInfoMap.put(CORPORATION_URL, info1);
         serverInfoMap.put(TESTURL, info2);

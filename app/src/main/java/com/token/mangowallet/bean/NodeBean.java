@@ -37,6 +37,7 @@ public class NodeBean implements Parcelable {
     private String last_vote_tallied_at;
     private String last_unvote_tallied_at;
     private String last_rewarded_at;
+    private int status;
 
     ////////////////////////////投票主界面数据
     /**
@@ -92,6 +93,7 @@ public class NodeBean implements Parcelable {
         received_votes_num = in.readString();
         tallied_votes_num = in.readString();
         total_votes_num = in.readString();
+        status = in.readInt();
     }
 
     @Override
@@ -122,6 +124,7 @@ public class NodeBean implements Parcelable {
         dest.writeString(received_votes_num);
         dest.writeString(tallied_votes_num);
         dest.writeString(total_votes_num);
+        dest.writeInt(status);
     }
 
     @Override
@@ -347,6 +350,14 @@ public class NodeBean implements Parcelable {
 
     public void setTotal_votes_num(String total_votes_num) {
         this.total_votes_num = total_votes_num;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public static Creator<NodeBean> getCREATOR() {

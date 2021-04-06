@@ -222,11 +222,11 @@ public class OTCDealFragment extends BaseFragment {
                 @Override
                 public void onOrders(int ordersId, int index, String num, String amountPaid, String buyNum) {
                     getOrders(String.valueOf(ordersId), buyNum);
-                    PayInfoUserInfoBean.DataBean dataBean = otcDealAdapter.mUserInfoHashMap.get(adapterPosition);
+                    SelordersBean.RowsBean mRowsBean = rowsBeanList.get(adapterPosition);
                     orderBundle = new Bundle();
                     orderBundle.putInt("OTC_TYPE", OTC_BUYER_ORDERS);
                     orderBundle.putString("amountPaid", amountPaid);
-                    orderBundle.putParcelable("PayInfoUserInfoBean", dataBean);
+                    orderBundle.putString("owner", mRowsBean.getOwner());
                     orderBundle.putParcelable(EXTRA_WALLET, mangoWallet);
                 }
             });

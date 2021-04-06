@@ -22,6 +22,7 @@ import com.token.mangowallet.bean.VotesBean;
 import com.token.mangowallet.bean.entity.NodeSection;
 import com.token.mangowallet.ui.fragment.StakeVoteMainFragment;
 import com.token.mangowallet.utils.Constants;
+import com.token.mangowallet.view.ViewUtils;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -31,7 +32,6 @@ import java.util.List;
 
 public class StakeVotesMainAdapter extends BaseSectionQuickAdapter<NodeSection, BaseViewHolder> {
 
-    private OnClickListener listener;
     private boolean isManage = false;
     private BigDecimal refund_delay_sec;
     private com.token.mangowallet.utils.TimeUtils timeUtils;
@@ -42,6 +42,7 @@ public class StakeVotesMainAdapter extends BaseSectionQuickAdapter<NodeSection, 
         setNormalLayout(R.layout.item_main_stake_vote);
         this.baseFragment = fragment;
         timeUtils = new com.token.mangowallet.utils.TimeUtils();
+        addChildClickViewIds(R.id.voteLayout);
     }
 
 //    public StakeVotesMainAdapter(StakeVoteMainFragment baseFragment, @Nullable List<VotesBean.RowsBean> data) {
@@ -106,14 +107,6 @@ public class StakeVotesMainAdapter extends BaseSectionQuickAdapter<NodeSection, 
             } else {
                 rankingTv.setVisibility(View.GONE);
             }
-            voteBtn.setOnClickListener(new ClickUtils.OnDebouncingClickListener() {
-                @Override
-                public void onDebouncingClick(View v) {
-                    if (listener != null) {
-                        listener.onClick(v, baseViewHolder.getBindingAdapterPosition() - getHeaderLayoutCount());
-                    }
-                }
-            });
 
 //        int mRadii = QMUIDisplayHelper.dp2px(getContext(), 10);
             //0：获取全部投票数据；1：获取我的投票数据；2：获取我的节点；3：获取投票奖励;4：获取撤回时间
@@ -129,7 +122,16 @@ public class StakeVotesMainAdapter extends BaseSectionQuickAdapter<NodeSection, 
                 mNodeUrl = ObjectUtils.isEmpty(nodeBean.getNode_url()) ? "" : nodeBean.getNode_url();
                 voteBtn.setVisibility(View.VISIBLE);
             } else if (baseFragment.type == 1) {//1：获取我的投票数据；
-                mVote = getContext().getString(R.string.str_withdraw);
+                //NSString *status = [dic[@"status"]intValue] == 0 ? NSLocalizedString(@"撤票中", nil) : NSLocalizedString(@"撤回", nil);
+                if (nodeBean.getStatus() == 0) {
+                    mVote = getContext().getString(R.string.str_cancel_ticket);
+                    voteBtn.setEnabled(false);
+                    voteBtn.setClickable(false);
+                } else {
+                    mVote = getContext().getString(R.string.str_withdraw);
+                    voteBtn.setEnabled(true);
+                    voteBtn.setClickable(true);
+                }
                 voteBtn.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.qmui_config_color_red));
                 mNodeName = ObjectUtils.isEmpty(nodeBean.getNode_name()) ? "" : nodeBean.getNode_name();
                 mVoteNum = ObjectUtils.isEmpty(nodeBean.getQuantity()) ? "0.00 MGP" : nodeBean.getQuantity();
@@ -189,10 +191,6 @@ public class StakeVotesMainAdapter extends BaseSectionQuickAdapter<NodeSection, 
 
     public void setRefundDelaySec(BigDecimal refund_delay_sec) {
         this.refund_delay_sec = refund_delay_sec;
-    }
-
-    public void setOnClickListener(OnClickListener listener) {
-        this.listener = listener;
     }
 
     public interface OnClickListener {

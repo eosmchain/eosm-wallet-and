@@ -26,6 +26,7 @@ import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.google.gson.JsonObject;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
@@ -152,7 +153,7 @@ public class StakeVoteMainFragment extends BaseFragment {
     protected void initData() {
         Bundle bundle = getArguments();
         mangoWallet = bundle.getParcelable(EXTRA_WALLET);
-        walletAddress = mangoWallet.getWalletAddress();//"huobioooo.kr";//
+        walletAddress = mangoWallet.getWalletAddress();//"abcabc123123";//
         walletType = Constants.WalletType.getPagerFromPositon(mangoWallet.getWalletType());
         pageInfo = new PageInfo();
         mVoteContract = BaseUrlUtils.getInstance().getVoteContract();
@@ -276,9 +277,11 @@ public class StakeVoteMainFragment extends BaseFragment {
 //        refreshLayout.autoRefresh();
         refreshLayout.setEnableLoadMore(false);
 
-        votesMainAdapter.setOnClickListener(new StakeVotesMainAdapter.OnClickListener() {
+
+        votesMainAdapter.addChildClickViewIds(R.id.voteLayout);
+        votesMainAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
             @Override
-            public void onClick(View v, int position) {
+            public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
                 NodeSection nodeSection = nodeSectionList.get(position);
                 if (!nodeSection.isHeader) {
                     mCurNodeBean = (NodeBean) nodeSection.getObject();
@@ -300,12 +303,27 @@ public class StakeVoteMainFragment extends BaseFragment {
                                 return;
                             }
                         }
+                        if (type == 1 && mCurNodeBean.getStatus() == 0) {
+                            return;
+                        }
                         if (passwordQmuiDialog == null) {
                             passwordQmuiDialog = DialogHelper.showEditTextDialog(getActivity(), getString(R.string.str_password_authentification),
                                     getString(R.string.str_enter_password), getString(android.R.string.ok), getString(android.R.string.cancel), listener, true);
                         }
                         passwordQmuiDialog.show();
                     }
+                }
+            }
+        });
+        becomeNodeTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mGlobalRowsBean != null) {
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable(EXTRA_WALLET, mangoWallet);
+                    bundle.putParcelable("mGlobalRowsBean", mGlobalRowsBean);
+                    bundle.putBoolean("isAdd", true);
+                    startFragment("StakeAddVoteFragment", bundle);
                 }
             }
         });
@@ -331,20 +349,6 @@ public class StakeVoteMainFragment extends BaseFragment {
                 }
             }
         });
-
-        becomeNodeTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mGlobalRowsBean != null) {
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelable(EXTRA_WALLET, mangoWallet);
-                    bundle.putParcelable("mGlobalRowsBean", mGlobalRowsBean);
-                    bundle.putBoolean("isAdd", true);
-                    startFragment("StakeAddVoteFragment", bundle);
-                }
-            }
-        });
-
         unpaidIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -759,6 +763,9 @@ public class StakeVoteMainFragment extends BaseFragment {
         dismissTipDialog();
         if (transactionBean != null) {
             if (transactionBean.isSuccess) {
+                if (type == 1) {
+                    ToastUtils.showLong(R.string.str_withdraw_success);
+                }
                 getTableRows();
             } else {
                 ToastUtils.showLong(transactionBean.msg);

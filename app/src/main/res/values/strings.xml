@@ -916,6 +916,9 @@
     <string name="str_scheme_award">方案奖励</string>
     <string name="str_vote_award">投票奖励</string>
     <string name="str_edit_failure">编辑失败</string>
+    <string name="str_withdraw_success">撤回成功,72小时内到帐</string>
+    <string name="str_cancel_ticket">撤票中</string>
+    <string name="str_node_address_exception">节点地址异常</string>
 
     <string name="str_aleft">👈</string>
     <string name="str_right">👉</string>
