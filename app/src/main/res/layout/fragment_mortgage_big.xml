@@ -326,6 +326,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/text5layout"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/album_dp_35">
 
@@ -397,6 +398,7 @@
                     android:layout_height="@dimen/album_dp_35">
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/moneyTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -423,6 +425,7 @@
                     android:layout_height="@dimen/album_dp_35">
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/valuetextTv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -436,7 +439,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/album_dp_15"
                         android:layout_marginRight="@dimen/album_dp_15"
                         android:text="$0.00"
@@ -450,6 +452,7 @@
                     android:layout_height="@dimen/album_dp_35">
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/mortgage_status_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -477,6 +480,7 @@
                     android:layout_height="@dimen/album_dp_35">
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/opening_time_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -525,8 +529,8 @@
                         android:textSize="@dimen/big_small" />
                 </RelativeLayout>
 
-
                 <RelativeLayout
+                    android:id="@+id/currency_day_value_layout"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/album_dp_35">
 
@@ -548,6 +552,62 @@
                         android:layout_marginLeft="@dimen/album_dp_15"
                         android:layout_marginRight="@dimen/album_dp_15"
                         android:text="0%"
+                        android:textColor="@color/app_color_common_black"
+                        android:textSize="@dimen/big_small" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/capping_value_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/album_dp_35"
+                    android:visibility="gone">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/album_dp_15"
+                        android:text="@string/str_capping"
+                        android:textColor="@color/app_color_common_black"
+                        android:textSize="@dimen/big_small" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/cappingValueTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/album_dp_15"
+                        android:layout_marginRight="@dimen/album_dp_15"
+                        android:text="0$"
+                        android:textColor="@color/app_color_common_black"
+                        android:textSize="@dimen/big_small" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/earnings_value_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/album_dp_35"
+                    android:visibility="gone">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/album_dp_15"
+                        android:text="@string/str_earnings"
+                        android:textColor="@color/app_color_common_black"
+                        android:textSize="@dimen/big_small" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/earningsValueTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/album_dp_15"
+                        android:layout_marginRight="@dimen/album_dp_15"
+                        android:text="0$"
                         android:textColor="@color/app_color_common_black"
                         android:textSize="@dimen/big_small" />
                 </RelativeLayout>

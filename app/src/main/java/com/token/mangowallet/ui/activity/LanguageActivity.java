@@ -21,7 +21,6 @@ import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
-import com.token.mangowallet.MainActivity;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseActivity;
 import com.token.mangowallet.utils.Constants;

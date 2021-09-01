@@ -1,23 +1,17 @@
 package com.token.mangowallet.ui.adapter;
 
-import android.os.Build;
 import android.view.View;
-import android.widget.ProgressBar;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
-import androidx.core.widget.ContentLoadingProgressBar;
 
 import com.blankj.utilcode.util.ObjectUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
-import com.qmuiteam.qmui.widget.QMUIProgressBar;
 import com.qmuiteam.qmui.widget.QMUISlider;
 import com.token.mangowallet.R;
 import com.token.mangowallet.bean.SchemesThemesBean;
-import com.token.mangowallet.bean.ThemesBean;
 import com.token.mangowallet.ui.fragment.MyVoteMainFragment;
 import com.token.mangowallet.ui.fragment.VoteMainFragment;
 

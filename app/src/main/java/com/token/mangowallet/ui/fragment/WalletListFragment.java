@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.BusUtils;
-import com.blankj.utilcode.util.ClickUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -38,7 +37,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-import static com.token.mangowallet.ui.home.HomeFragment.homeFragment;
 import static com.token.mangowallet.utils.Constants.BUS_CUT_WALLET;
 import static com.token.mangowallet.utils.Constants.BUS_TO_WALLET;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;

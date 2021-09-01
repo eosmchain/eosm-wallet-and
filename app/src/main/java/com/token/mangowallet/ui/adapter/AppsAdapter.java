@@ -5,19 +5,14 @@ import android.view.View;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 
-import com.blankj.utilcode.util.ObjectUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.token.mangowallet.R;
 import com.token.mangowallet.bean.AppHomeBean;
-import com.token.mangowallet.bean.AppItemModel;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 public class AppsAdapter extends BaseQuickAdapter<AppHomeBean.DataBean.AppBean, BaseViewHolder> {
 

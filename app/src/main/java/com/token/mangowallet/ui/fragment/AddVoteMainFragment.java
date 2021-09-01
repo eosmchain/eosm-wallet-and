@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.core.content.ContextCompat;
@@ -20,11 +19,9 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
-import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.bean.SchemesThemesBean;
-import com.token.mangowallet.bean.ThemesBean;
 import com.token.mangowallet.bean.TransactionBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.listener.DialogConfirmListener;
@@ -32,7 +29,6 @@ import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.Md5Utils;
 import com.token.mangowallet.view.DialogHelper;
-import com.token.mangowallet.view.RequiredTextView;
 
 import java.util.ArrayList;
 import java.util.Collections;

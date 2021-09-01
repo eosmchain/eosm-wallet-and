@@ -34,7 +34,6 @@ import com.token.mangowallet.listener.DialogConfirmListener;
 import com.token.mangowallet.ui.activity.AddWalletActivity;
 import com.token.mangowallet.utils.ClipboardUtils;
 import com.token.mangowallet.utils.Constants;
-import com.token.mangowallet.utils.MangoWalletUtils;
 import com.token.mangowallet.utils.Md5Utils;
 import com.token.mangowallet.utils.WalletDaoUtils;
 import com.token.mangowallet.view.DialogHelper;
@@ -45,7 +44,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-import cn.bingoogolapple.qrcode.zxing.QRCodeEncoder;
 
 import static com.token.mangowallet.utils.Constants.BUS_CUT_WALLET;
 import static com.token.mangowallet.utils.Constants.BUS_TO_WALLET;

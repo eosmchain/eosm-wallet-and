@@ -1,26 +1,19 @@
 package com.token.mangowallet.view;
 
 import android.content.Context;
-import android.graphics.Rect;
 import android.os.Build;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
-import com.qmuiteam.qmui.widget.popup.QMUINormalPopup;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.ui.adapter.SpinnerAdapter;

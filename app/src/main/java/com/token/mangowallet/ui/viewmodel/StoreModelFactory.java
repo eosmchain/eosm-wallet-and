@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.token.mangowallet.interact.FetchWalletInteract;
-import com.token.mangowallet.repository.EMWalletRepository;
 
 public class StoreModelFactory implements ViewModelProvider.Factory {
 

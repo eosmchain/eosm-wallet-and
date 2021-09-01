@@ -3,12 +3,12 @@ ext {
     android = [
             compileSdkVersion: 29,
             buildToolsVersion: "29.0.3",
-            applicationId    : "com.token.mangowallet",
-            testapplicationId    : "com.token.mangowallettest",
+            applicationId    : "com.token.mangowallet",//com.token.mangowallet//com.yunwang.mango
+            testapplicationId: "com.token.mangowallettest",
             minSdkVersion    : 21,
             targetSdkVersion : 29,
-            versionCode      : 76,
-            versionName      : "2.0.6.4",
+            versionCode      : 87,
+            versionName      : "2.0.6.15",
     ]
     //version配置
     versions = [
@@ -33,6 +33,7 @@ ext {
             'support-v4'              : "com.android.support:support-v4:${versions["support-version"]}",
     ]
     //依赖第三方配置
+
     dependencies = [
             "multidex"                             : 'androidx.multidex:multidex:2.0.1',
             //rxjava

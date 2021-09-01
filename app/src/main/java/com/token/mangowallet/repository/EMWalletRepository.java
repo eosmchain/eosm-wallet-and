@@ -2,7 +2,6 @@ package com.token.mangowallet.repository;
 
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.MapUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.token.mangowallet.MyApplication;
 import com.token.mangowallet.bean.AccountInfo;
@@ -45,14 +44,11 @@ import one.block.eosiojava.models.rpcProvider.response.RPCResponseError;
 import one.block.eosiojava.session.TransactionProcessor;
 import one.block.eosiojava.session.TransactionSession;
 import one.block.eosiojavaabieosserializationprovider.AbiEosSerializationProviderImpl;
-import one.block.eosiojavarpcprovider.implementations.EosioJavaRpcProviderImpl;
 import one.block.eosiosoftkeysignatureprovider.SoftKeySignatureProviderImpl;
 import one.block.eosiosoftkeysignatureprovider.error.ImportKeyError;
 import party.loveit.eosforandroidlibrary.Ecc;
 
 import static com.token.mangowallet.utils.Constants.EOSIO_TOKEN_CONTRACT_CODE;
-import static com.token.mangowallet.utils.Constants.WalletType.EOS;
-import static com.token.mangowallet.utils.Constants.WalletType.MGP;
 
 public class EMWalletRepository {
     public CustomEosioJavaRpcProviderImpl customEosioJavaRpcProvider = null;

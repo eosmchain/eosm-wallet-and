@@ -1,7 +1,6 @@
 package com.token.mangowallet.ui.fragment;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +13,6 @@ import androidx.core.content.ContextCompat;
 
 import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.ClickUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.MapUtils;
@@ -29,16 +27,13 @@ import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
-import com.token.mangowallet.bean.GoodsImgeModel;
 import com.token.mangowallet.bean.MsgCodeBean;
-import com.token.mangowallet.bean.entity.ImgSection;
 import com.token.mangowallet.bean.entity.UploadImgBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.utils.AppFilePath;
 import com.token.mangowallet.utils.PhotoUtils;
 import com.token.mangowallet.utils.NRSAUtils;
-import com.token.mangowallet.utils.UriToPathUtils;
 import com.token.mangowallet.view.DialogHelper;
 import com.token.mangowallet.view.PictureChoicePop;
 import com.token.mangowallet.view.RequiredTextView;
@@ -59,7 +54,6 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-import static com.token.mangowallet.bean.entity.ImgSection.GOODS_SLIDESHOW;
 import static com.token.mangowallet.utils.Constants.EXTRA_STORE;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;

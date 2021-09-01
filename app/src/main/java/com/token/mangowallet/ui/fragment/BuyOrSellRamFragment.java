@@ -12,7 +12,6 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.ClickUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.MapUtils;
@@ -53,13 +52,11 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 import static com.token.mangowallet.utils.Constants.BUYRAM_ACTION;
-import static com.token.mangowallet.utils.Constants.DELEGATEBW_ACTION;
 import static com.token.mangowallet.utils.Constants.EOSIO_SYSTEM_CONTRACT_CODE;
 import static com.token.mangowallet.utils.Constants.EXTRA_ACCOUNT_INFO;
 import static com.token.mangowallet.utils.Constants.EXTRA_TRANSACTION;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
 import static com.token.mangowallet.utils.Constants.SELLRAM_ACTION;
-import static com.token.mangowallet.utils.Constants.UNDELEGATEBW_ACTION;
 import static com.token.mangowallet.utils.Constants.percent;
 
 public class BuyOrSellRamFragment extends BaseFragment {

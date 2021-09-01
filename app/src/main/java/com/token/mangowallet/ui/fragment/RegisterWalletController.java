@@ -1,6 +1,5 @@
 package com.token.mangowallet.ui.fragment;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,20 +19,16 @@ import com.qmuiteam.qmui.widget.QMUIWindowInsetLayout;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 import com.token.mangowallet.R;
 import com.token.mangowallet.bean.AccountInfo;
-import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.listener.ControlListener;
 import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.utils.Constants;
 
-import java.math.BigDecimal;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import cn.bingoogolapple.qrcode.zxing.QRCodeEncoder;
-import one.block.eosiojava.error.rpcProvider.RpcProviderError;
 
 import static com.token.mangowallet.utils.Constants.TO_CREATE_WALLET;
 

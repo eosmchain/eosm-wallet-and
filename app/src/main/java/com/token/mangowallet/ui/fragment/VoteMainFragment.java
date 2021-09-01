@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.ClickUtils;
 import com.blankj.utilcode.util.CollectionUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
@@ -26,19 +25,12 @@ import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
-import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
-import com.token.mangowallet.MainActivity;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
-import com.token.mangowallet.bean.AppStoreLifeBean;
-import com.token.mangowallet.bean.DealsOrderBean;
 import com.token.mangowallet.bean.LowerBean;
-import com.token.mangowallet.bean.MsgCodeBean;
-import com.token.mangowallet.bean.PageInfo;
 import com.token.mangowallet.bean.SchemeConfigBean;
 import com.token.mangowallet.bean.SchemesThemesBean;
-import com.token.mangowallet.bean.ThemesBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.repository.EMWalletRepository;
@@ -50,7 +42,6 @@ import com.token.mangowallet.view.DragFloatActionButton2;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 

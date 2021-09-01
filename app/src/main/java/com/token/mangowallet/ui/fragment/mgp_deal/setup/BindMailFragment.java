@@ -28,7 +28,6 @@ import com.token.mangowallet.bean.IsBindBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.utils.NRSAUtils;
-import com.token.mangowallet.view.ViewUtils;
 
 import java.util.Map;
 

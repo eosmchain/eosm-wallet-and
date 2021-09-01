@@ -1,6 +1,5 @@
 package com.token.mangowallet.ui.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.ClickUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
@@ -139,7 +136,7 @@ public class AppsInteriorFragment extends BaseFragment {
             @Override
             public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
                 AppHomeBean.DataBean.AppBean appBean = appBeanList.get(position);
-                //    0内部1外部    当传入参数type = 0时: 返回type: 1持币生息 2MID身份标识 3团队分享   4KOL激励
+                //    0内部1外部    当传入参数type = 0时: 返回type: 1持币生息 2MID身份标识 3团队分享   4KOL激励 7MGP燃料挖矿
                 //                 当传入参数type = 1时: 返回type: 1POS抵押  2Mango 链商 3Mango 金融 4Mango 媒体~~~~
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(EXTRA_WALLET, mangoWallet);
@@ -234,7 +231,7 @@ public class AppsInteriorFragment extends BaseFragment {
 
     private void onError(ErrorEnvelope e) {
         dismissTipDialog();
-        LogUtils.eTag(LOG_TAG, "e = " + e.message+":"+e.code);
+        LogUtils.eTag(LOG_TAG, "e = " + e.message + ":" + e.code);
 //        ToastUtils.showLong(R.string.str_network_error);
     }
 

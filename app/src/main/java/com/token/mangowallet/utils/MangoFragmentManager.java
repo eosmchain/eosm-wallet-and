@@ -7,6 +7,7 @@ import com.token.mangowallet.ui.fragment.ActivateMidFragment;
 import com.token.mangowallet.ui.fragment.AddGoodsFragment;
 import com.token.mangowallet.ui.fragment.AddVoteMainFragment;
 import com.token.mangowallet.ui.fragment.ExportPrivateKeyOrMnemonicsFragment;
+import com.token.mangowallet.ui.fragment.MiningBigFragment;
 import com.token.mangowallet.ui.fragment.NewRealTimeDateFragment;
 import com.token.mangowallet.ui.fragment.RuleFragment;
 import com.token.mangowallet.ui.fragment.StakeAddVoteFragment;
@@ -182,6 +183,7 @@ public class MangoFragmentManager {
         mapFragments.put("OTCArbitrationFragment", OTCArbitrationFragment.class);
         mapFragments.put("SpendConfirmFragment", SpendConfirmFragment.class);
         mapFragments.put("AddVoteMainFragment", AddVoteMainFragment.class);
+        mapFragments.put("MiningBigFragment", MiningBigFragment.class);
     }
 
     public Class<? extends BaseFragment> getFragment(String fragmentName) {

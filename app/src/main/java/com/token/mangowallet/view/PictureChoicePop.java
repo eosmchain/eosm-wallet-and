@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.blankj.utilcode.util.ClickUtils;
-import com.blankj.utilcode.util.ScreenUtils;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;

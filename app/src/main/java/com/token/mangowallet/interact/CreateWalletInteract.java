@@ -2,33 +2,17 @@ package com.token.mangowallet.interact;
 
 import android.content.Context;
 
-import com.blankj.utilcode.util.GsonUtils;
-import com.blankj.utilcode.util.ObjectUtils;
-import com.blankj.utilcode.util.SPUtils;
-import com.token.mangowallet.MyApplication;
 import com.token.mangowallet.bean.AccountInfo;
-import com.token.mangowallet.bean.AccountNames;
 import com.token.mangowallet.db.MangoWallet;
-import com.token.mangowallet.net.eosmgp.EOSNetWorkManager;
-import com.token.mangowallet.net.eosmgp.EOSParams;
 import com.token.mangowallet.repository.EMWalletRepository;
-import com.token.mangowallet.repository.RepositoryFactory;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.MangoWalletUtils;
-import com.token.mangowallet.utils.WalletDaoUtils;
 
 import java.util.List;
-import java.util.Map;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import one.block.eosiojavarpcprovider.implementations.EosioJavaRpcProviderImpl;
-import party.loveit.eosforandroidlibrary.Ecc;
-
-import static com.token.mangowallet.utils.Constants.WalletType.ALL;
-import static com.token.mangowallet.utils.Constants.WalletType.EOS;
-import static com.token.mangowallet.utils.Constants.WalletType.MGP;
 
 public class CreateWalletInteract {
 

@@ -1,13 +1,8 @@
 package com.token.mangowallet.view;
 
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.viewpager.widget.ViewPager;
-
-import com.blankj.utilcode.util.ScreenUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.token.mangowallet.R;

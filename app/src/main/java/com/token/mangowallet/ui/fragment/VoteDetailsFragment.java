@@ -11,7 +11,6 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 
 import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.ClickUtils;
 import com.blankj.utilcode.util.CollectionUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
@@ -28,11 +27,7 @@ import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.bean.CandidatesBean;
 import com.token.mangowallet.bean.CheckSuperNodeBean;
 import com.token.mangowallet.bean.MsgCodeBean;
-import com.token.mangowallet.bean.NodeBean;
-import com.token.mangowallet.bean.NodeListBean;
-import com.token.mangowallet.bean.SchemeConfigBean;
 import com.token.mangowallet.bean.SchemesThemesBean;
-import com.token.mangowallet.bean.ThemesBean;
 import com.token.mangowallet.bean.TransactionBean;
 import com.token.mangowallet.bean.VoteBean;
 import com.token.mangowallet.db.MangoWallet;
@@ -56,12 +51,9 @@ import io.reactivex.schedulers.Schedulers;
 
 import static com.token.mangowallet.utils.Constants.ADDVOTE;
 import static com.token.mangowallet.utils.Constants.ASSOCIATION_VOTE_CONTRACT;
-import static com.token.mangowallet.utils.Constants.EOSIO_TOKEN_CONTRACT_CODE;
 import static com.token.mangowallet.utils.Constants.EXTRA_VOTE_DATA;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
-import static com.token.mangowallet.utils.Constants.MARGIN_ACCOUNT;
-import static com.token.mangowallet.utils.Constants.TRANSFER_ACTION;
 import static com.token.mangowallet.utils.Constants.VOTE_CONTRACT;
 
 public class VoteDetailsFragment extends BaseFragment {

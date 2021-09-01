@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import androidx.annotation.DrawableRes;
 
 import com.blankj.utilcode.util.CollectionUtils;
-import com.blankj.utilcode.util.ObjectUtils;
 import com.token.mangowallet.utils.StringConverter;
 
 import org.greenrobot.greendao.annotation.Convert;
@@ -14,7 +13,6 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
-import org.greenrobot.greendao.annotation.Unique;
 
 import java.util.List;
 

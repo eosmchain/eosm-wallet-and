@@ -15,10 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.BusUtils;
-import com.blankj.utilcode.util.ClickUtils;
 import com.blankj.utilcode.util.CollectionUtils;
-import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.SPUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.qmuiteam.qmui.layout.QMUIFrameLayout;
@@ -33,7 +30,6 @@ import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.WalletDaoUtils;
 import com.token.mangowallet.view.basepopup.BasePopup;
 
-import java.util.Iterator;
 import java.util.List;
 
 import butterknife.BindView;

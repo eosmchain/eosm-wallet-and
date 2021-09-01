@@ -905,6 +905,24 @@
     <string name="str_chain_fail">チェーンで失敗しました</string>
     <string name="str_mnemonic_word_fail">正しいニーモニックフレーズを入力してください</string>
     <string name="str_privatekey_fail">正しい秘密鍵を入力してください</string>
+    <string name="str_account_address">アカウントアドレス</string>
+    <string name="str_been_voted">%s票が投じられた</string>
+    <string name="str_total_votes">総投票数</string>
+    <string name="str_notopened_vote">投票はまだ開かれていません</string>
+    <string name="str_deposit_return">プログラム保証金の返金</string>
+    <string name="str_vote_return">反対票を投じる</string>
+    <string name="str_scheme_award">プログラムの報酬</string>
+    <string name="str_vote_award">投票報酬</string>
+    <string name="str_edit_failure">編集に失敗しました</string>
+    <string name="str_withdraw_success">引き出しは成功し、72 時間以内に到着します</string>
+    <string name="str_cancel_ticket">撤退</string>
+    <string name="str_node_address_exception">ノードアドレスが異常です</string>
+    <string name="str_exponent">索引</string>
+    <string name="str_lp_quantity_money">LP通貨量</string>
+    <string name="str_mortgage_time">住宅ローンの時間</string>
+    <string name="str_ecological_mortgage">生態系抵当</string>
+    <string name="str_cumulative_distribution">累積分布</string>
+
 
     <string name="str_aleft">👈</string>
     <string name="str_right">👉</string>

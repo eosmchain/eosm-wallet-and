@@ -11,7 +11,6 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.ClickUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.StringUtils;
@@ -32,9 +31,7 @@ import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.MangoWalletUtils;
 import com.token.mangowallet.view.DialogHelper;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,8 +43,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
-import static com.token.mangowallet.utils.Constants.TO_IMPORT_WALLET_MNEMONIC;
-import static com.token.mangowallet.utils.Constants.TO_IMPORT_WALLET_PRIVATEKEY;
 
 
 public class ExportPrivateKeyOrMnemonicsFragment extends BaseFragment {

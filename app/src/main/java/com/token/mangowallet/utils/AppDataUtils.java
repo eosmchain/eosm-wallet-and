@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Environment;
 
 import com.blankj.utilcode.util.AppUtils;
-import com.blankj.utilcode.util.SPUtils;
 import com.token.mangowallet.R;
 
 import java.io.File;

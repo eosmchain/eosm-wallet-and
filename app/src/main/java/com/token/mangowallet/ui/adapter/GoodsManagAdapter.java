@@ -17,7 +17,6 @@ import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 import com.token.mangowallet.R;
 import com.token.mangowallet.bean.GoodsManaBean;
-import com.token.mangowallet.bean.OrderGoodsBean;
 import com.token.mangowallet.utils.BalanceUtils;
 
 import org.jetbrains.annotations.NotNull;

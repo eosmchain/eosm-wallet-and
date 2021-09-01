@@ -46,8 +46,17 @@ public class OrderIndexBean {
 
         private String sysMgpNum;
         private CalPowerBean calPower;
+        private String destroyNum;
         private YesterdayOrderBean yesterdayOrder;
         private OrderBean order;
+
+        public String getDestroyNum() {
+            return destroyNum;
+        }
+
+        public void setDestroyNum(String destroyNum) {
+            this.destroyNum = destroyNum;
+        }
 
         public String getSysMgpNum() {
             return sysMgpNum;

@@ -1,14 +1,10 @@
 package com.token.mangowallet.ui.adapter;
 
-import android.view.View;
 import android.widget.CheckedTextView;
-
-import androidx.appcompat.widget.AppCompatTextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.token.mangowallet.R;
-import com.token.mangowallet.bean.AppHomeBean;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

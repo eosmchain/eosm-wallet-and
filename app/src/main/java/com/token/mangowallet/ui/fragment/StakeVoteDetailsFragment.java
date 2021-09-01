@@ -8,12 +8,10 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 
 import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.ClickUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.MapUtils;
 import com.blankj.utilcode.util.ObjectUtils;
-import com.blankj.utilcode.util.TimeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.google.gson.JsonObject;
@@ -25,15 +23,11 @@ import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.bean.NodeBean;
 import com.token.mangowallet.bean.NodeDetailBean;
-import com.token.mangowallet.bean.VotesBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.utils.Constants;
-import com.token.mangowallet.utils.PhotoUtils;
 import com.token.mangowallet.utils.NRSAUtils;
-import com.token.mangowallet.view.PictureChoicePop;
 
-import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Map;
 

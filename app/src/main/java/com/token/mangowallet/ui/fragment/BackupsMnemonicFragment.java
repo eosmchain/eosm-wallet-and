@@ -6,27 +6,21 @@ import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
-import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.BusUtils;
 import com.blankj.utilcode.util.ClickUtils;
-import com.blankj.utilcode.util.EncodeUtils;
 import com.blankj.utilcode.util.FileIOUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.MapUtils;
-import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.TimeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.JsonObject;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUITopBar;
-import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
-import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.token.mangowallet.MainActivity;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
@@ -34,17 +28,13 @@ import com.token.mangowallet.bean.BaseBean;
 import com.token.mangowallet.bean.MsgCodeBean;
 import com.token.mangowallet.bus.ToWallet;
 import com.token.mangowallet.db.MangoWallet;
-import com.token.mangowallet.interact.CreateWalletInteract;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.utils.WalletDaoUtils;
-import com.token.mangowallet.view.DialogHelper;
 
 import java.io.File;
 import java.io.IOException;
-import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -54,17 +44,13 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import party.loveit.bip44forandroidlibrary.utils.Bip44Utils;
-import party.loveit.eosforandroidlibrary.Ecc;
 
 import static com.token.mangowallet.utils.Constants.BUS_CUT_WALLET;
 import static com.token.mangowallet.utils.Constants.BUS_TO_WALLET;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
 import static com.token.mangowallet.utils.Constants.WalletType.ALL;
-import static com.token.mangowallet.utils.Constants.WalletType.MGP;
 import static com.token.mangowallet.utils.Constants.isTest;
-import static com.token.mangowallet.utils.MangoWalletUtils.EOS_PATH;
 
 public class BackupsMnemonicFragment extends BaseFragment {
 

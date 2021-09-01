@@ -67,7 +67,6 @@ import io.reactivex.schedulers.Schedulers;
 
 import static com.token.mangowallet.utils.Constants.BUS_TO_WALLET;
 import static com.token.mangowallet.utils.Constants.KEY_COIN_SYMBOL;
-import static com.token.mangowallet.utils.Constants.KEY_CURRENCY_SYMBOL;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
 import static com.token.mangowallet.utils.Constants.SP_MangoWallet_info;
 

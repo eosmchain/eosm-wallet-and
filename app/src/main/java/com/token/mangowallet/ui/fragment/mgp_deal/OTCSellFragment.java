@@ -44,7 +44,6 @@ import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.listener.DialogConfirmListener;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.repository.EMWalletRepository;
-import com.token.mangowallet.utils.APPUtils;
 import com.token.mangowallet.utils.BalanceUtils;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.Md5Utils;
@@ -73,10 +72,8 @@ import static com.token.mangowallet.utils.Constants.KEY_COIN_SYMBOL;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
 import static com.token.mangowallet.utils.Constants.MGP_SYMBOL;
 import static com.token.mangowallet.utils.Constants.OPEN_ORDER;
-import static com.token.mangowallet.utils.Constants.SHOP_ACCOUNT;
 import static com.token.mangowallet.utils.Constants.SP_MangoWallet_info;
 import static com.token.mangowallet.utils.Constants.TRANSFER_ACTION;
-import static com.token.mangowallet.utils.Constants.percent;
 
 public class OTCSellFragment extends BaseFragment {
     @BindView(R.id.topbar)

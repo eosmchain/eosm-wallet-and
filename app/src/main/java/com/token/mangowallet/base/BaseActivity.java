@@ -1,18 +1,13 @@
 package com.token.mangowallet.base;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.google.firebase.analytics.FirebaseAnalytics;

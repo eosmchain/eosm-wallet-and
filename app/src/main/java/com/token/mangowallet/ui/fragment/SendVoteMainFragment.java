@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.core.content.ContextCompat;
@@ -26,20 +25,17 @@ import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.bean.AddThemeBean;
-import com.token.mangowallet.bean.LowerBean;
 import com.token.mangowallet.bean.MsgCodeBean;
 import com.token.mangowallet.bean.ThemesBean;
 import com.token.mangowallet.bean.TransactionBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.listener.DialogConfirmListener;
-import com.token.mangowallet.net.common.BaseUrlUtils;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.Md5Utils;
 import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.DialogHelper;
-import com.token.mangowallet.view.RequiredTextView;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -55,7 +51,6 @@ import static com.token.mangowallet.utils.Constants.EOSIO_TOKEN_CONTRACT_CODE;
 import static com.token.mangowallet.utils.Constants.EXTRA_VOTE_DATA;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
-import static com.token.mangowallet.utils.Constants.MARGIN_ACCOUNT;
 import static com.token.mangowallet.utils.Constants.TRANSFER_ACTION;
 import static com.token.mangowallet.utils.Constants.VOTE_ACCOUNT;
 

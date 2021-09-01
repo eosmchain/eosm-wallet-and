@@ -15,6 +15,7 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.MapUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.google.gson.JsonObject;
 import com.qmuiteam.qmui.layout.QMUIConstraintLayout;
 import com.qmuiteam.qmui.layout.QMUILayoutHelper;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
@@ -24,9 +25,10 @@ import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
-import com.token.mangowallet.bean.OrderIndexBean;
+import com.token.mangowallet.bean.LPOrderBean;
 import com.token.mangowallet.bean.TableRowsBean;
 import com.token.mangowallet.db.MangoWallet;
+import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.ui.viewmodel.MortgageModelFactory;
 import com.token.mangowallet.ui.viewmodel.MortgageViewModel;
 import com.token.mangowallet.utils.BalanceUtils;
@@ -42,12 +44,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
-import static com.token.mangowallet.utils.Constants.EOSIO_TOKEN_CONTRACT_CODE;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
 
-public class MortgageBigFragment extends BaseFragment {
+public class MiningBigFragment extends BaseFragment {
 
     @BindView(R.id.topBar)
     QMUITopBar topBar;
@@ -109,7 +112,50 @@ public class MortgageBigFragment extends BaseFragment {
     AppCompatTextView hashrateNodeValTv;
     @BindView(R.id.hashrateIndexValTv)
     AppCompatTextView hashrateIndexValTv;
-
+    @BindView(R.id.hashrateText1)
+    AppCompatTextView hashrateText1;
+    @BindView(R.id.text1)
+    AppCompatTextView text1;
+    @BindView(R.id.text2)
+    AppCompatTextView text2;
+    @BindView(R.id.layout)
+    QMUILinearLayout layout;
+    @BindView(R.id.hashrateUserTv)
+    AppCompatTextView hashrateUserTv;
+    @BindView(R.id.hashrateShareTv)
+    AppCompatTextView hashrateShareTv;
+    @BindView(R.id.hashrateTeamTv)
+    AppCompatTextView hashrateTeamTv;
+    @BindView(R.id.hashrateLightnodeTv)
+    AppCompatTextView hashrateLightnodeTv;
+    @BindView(R.id.hashrateNodeTv)
+    AppCompatTextView hashrateNodeTv;
+    @BindView(R.id.hashrateIndexTv)
+    AppCompatTextView hashrateIndexTv;
+    @BindView(R.id.text3)
+    AppCompatTextView text3;
+    @BindView(R.id.layout3titleLayout)
+    RelativeLayout layout3titleLayout;
+    @BindView(R.id.text4)
+    AppCompatTextView text4;
+    @BindView(R.id.text5layout)
+    RelativeLayout text5layout;
+    @BindView(R.id.valuetextTv)
+    AppCompatTextView valuetextTv;
+    @BindView(R.id.mortgage_status_tv)
+    AppCompatTextView mortgage_status_tv;
+    @BindView(R.id.opening_time_tv)
+    AppCompatTextView opening_time_tv;
+    @BindView(R.id.currency_day_value_layout)
+    RelativeLayout currency_day_value_layout;
+    @BindView(R.id.earnings_value_layout)
+    RelativeLayout earnings_value_layout;
+    @BindView(R.id.earningsValueTv)
+    AppCompatTextView earningsValueTv;
+    @BindView(R.id.capping_value_layout)
+    RelativeLayout capping_value_layout;
+    @BindView(R.id.cappingValueTv)
+    AppCompatTextView cappingValueTv;
 
     private Unbinder unbinder;
     private MortgageModelFactory mortgageModelFactory;
@@ -123,9 +169,9 @@ public class MortgageBigFragment extends BaseFragment {
     private int mRadius;
     private String remaining;
     private String mMgpNum = "0.0000";
-    private OrderIndexBean orderIndexBean;
+    private LPOrderBean mLPOrderBean;
     private Constants.WalletType walletType;
-    private int toType = 1;
+    private int toType = 2;
 
     @Override
     protected View onCreateView() {
@@ -150,29 +196,31 @@ public class MortgageBigFragment extends BaseFragment {
         mortgageViewModel.prepare(mangoWallet);
 //        mortgageViewModel.balance().observe(this, this::onBalance);
         mortgageViewModel.tableRows().observe(this, this::onTableRows);
-        mortgageViewModel.orderIndex().observe(this, this::onOrderIndex);
-        mortgageViewModel.emWalletRepository.fetchBalance(EOSIO_TOKEN_CONTRACT_CODE, walletType)
-                .subscribe(this::onBalance, this::onError);
-//        fetchBalance(EOSIO_TOKEN_CONTRACT_CODE);
+//        mortgageViewModel.orderIndex().observe(this, this::onOrderIndex);
+//        mortgageViewModel.emWalletRepository.fetchBalance(EOSIO_TOKEN_CONTRACT_CODE, walletType)
+//                .subscribe(this::onBalance, this::onError);
+        earnings_value_layout.setVisibility(View.VISIBLE);
+        capping_value_layout.setVisibility(View.VISIBLE);
+
     }
 
     @Override
     protected void initView() {
-        topBar.setTitle(getString(R.string.str_hashrate_theme));
+        topBar.setTitle(getString(R.string.str_ecological_mortgage));
         topBar.addLeftImageButton(R.drawable.icon_black_arrows_back, R.id.topbar_left_change_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 popBackStack();
             }
         });
-        topBar.addRightTextButton(R.string.str_mix_mortgage, R.id.topbar_right_change_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putParcelable(EXTRA_WALLET, mangoWallet);
-                startFragment("MixMortgageFragment", bundle);
-            }
-        });
+//        topBar.addRightTextButton(R.string.str_mix_mortgage, R.id.topbar_right_change_button).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Bundle bundle = new Bundle();
+//                bundle.putParcelable(EXTRA_WALLET, mangoWallet);
+//                startFragment("MixMortgageFragment", bundle);
+//            }
+//        });
         layout1.setRadius(mRadius);
         layout2.setRadius(mRadius);
         layout3.setRadius(mRadius, QMUILayoutHelper.HIDE_RADIUS_SIDE_BOTTOM);
@@ -185,10 +233,30 @@ public class MortgageBigFragment extends BaseFragment {
 
     }
 
-    private void onBalance(BigDecimal balance) {
-        String balanceStr = balance.setScale(4, RoundingMode.CEILING).toPlainString();
-        accumulativeDestructionTv.setText(balanceStr);
+    /**
+     *
+     */
+    private void LPOrder() {
+        try {
+            showTipDialog(getString(R.string.str_loading));
+            Map params = MapUtils.newHashMap();
+            params.put("address", walletAddress);
+
+            String json = GsonUtils.toJson(params);
+            String content = NRSAUtils.encrypt(json);
+            NetWorkManager.getRequest().LPOrder(content)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::onOrderIndex, this::onError);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
+//    private void onBalance(BigDecimal balance) {
+//        String balanceStr = balance.setScale(4, RoundingMode.CEILING).toPlainString();
+//        accumulativeDestructionTv.setText(balanceStr);
+//    }
 
     private void onError(Throwable e) {
         dismissTipDialog();
@@ -207,8 +275,10 @@ public class MortgageBigFragment extends BaseFragment {
                 } else {
                     TableRowsBean.RowsBean rowsBean = rowsBeanList.get(0);
                     remaining = rowsBean.getRemaining().split(" ")[0];
+                    mMgpNum = rowsBean.getRemaining().split(" ")[0];
                 }
                 BigDecimal bdRemaining = new BigDecimal(remaining);
+
                 // 如果指定的数与参数相等返回0。
                 // 如果指定的数小于参数返回 -1。
                 // 如果指定的数大于参数返回  1。
@@ -225,90 +295,81 @@ public class MortgageBigFragment extends BaseFragment {
         }
     }
 
-    private void onOrderIndex(OrderIndexBean orderIndexBean) {
-        LogUtils.dTag(LOG_TAG, "data = " + GsonUtils.toJson(orderIndexBean));
-        this.orderIndexBean = orderIndexBean;
-        if (orderIndexBean.getCode() == 0) {
-            updataView();
-        } else {
-            ToastUtils.showShort(orderIndexBean.getMsg());
+    private void onOrderIndex(JsonObject object) {
+        dismissTipDialog();
+        if (object != null) {
+            mLPOrderBean = GsonUtils.fromJson(GsonUtils.toJson(object), LPOrderBean.class);
+            if (mLPOrderBean != null) {
+//        this.orderIndexBean = orderIndexBean;
+                if (mLPOrderBean.getCode() == 0) {
+                } else {
+                    ToastUtils.showShort(mLPOrderBean.getMsg());
+                }
+            }
         }
+        updataView();
     }
 
     public void lazyLoad() {
         try {
-            showTipDialog(getString(R.string.str_loading));
             Map mapTableRows = MapUtils.newHashMap();
-            mapTableRows.put("scope", Constants.contractAddress);
-            mapTableRows.put("code", Constants.contractAddress);
+            mapTableRows.put("scope", Constants.EMCONTRACT);
+            mapTableRows.put("code", Constants.EMCONTRACT);
             mapTableRows.put("table", "balances");
             mapTableRows.put("json", true);
             mapTableRows.put("table_key", "");
             mapTableRows.put("lower_bound", " " + walletAddress);
             mapTableRows.put("upper_bound", " " + walletAddress);
             mortgageViewModel.fetchTableRows(mapTableRows);
-
-            Map mapOrderIndex = MapUtils.newHashMap();
-            mapOrderIndex.put("address", walletAddress);
-            String jsonData2 = GsonUtils.toJson(mapOrderIndex);
-            String content = NRSAUtils.encrypt(jsonData2);
-            mortgageViewModel.fetchOrderIndex(content);
+            LPOrder();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private void updataView() {
-        if (orderIndexBean != null) {
-            OrderIndexBean.DataBean dataBean = orderIndexBean.getData();
+        text2.setText(getString(R.string.str_cumulative_distribution));
+        hashrateText1.setText("LP");
+        hashrateUserTv.setText(R.string.str_order);
+        hashrateShareTv.setText(R.string.str_share);
+        hashrateTeamTv.setText(R.string.str_exponent);
+        hashrateLightnodeTv.setVisibility(View.GONE);
+        hashrateLightnodeValTv.setVisibility(View.GONE);
+        hashrateNodeTv.setVisibility(View.GONE);
+        hashrateNodeValTv.setVisibility(View.GONE);
+        hashrateIndexTv.setVisibility(View.GONE);
+        hashrateIndexValTv.setVisibility(View.GONE);
+        text5layout.setVisibility(View.GONE);
+        valuetextTv.setText(R.string.str_lp_quantity_money);
+        mortgage_status_tv.setText(R.string.str_order_value);
+        mortgage_status_tv.setText(R.string.str_order_value);
+        opening_time_tv.setText(R.string.str_mortgage_time);
+        expectedUnlockLayout.setVisibility(View.GONE);
+        currency_day_value_layout.setVisibility(View.GONE);
+        mortgageValueTv.setText("");
+        if (mLPOrderBean != null) {
+            LPOrderBean.DataBean dataBean = mLPOrderBean.getData();
             if (dataBean != null) {
-                accumulativeDestructionTv.setText(dataBean.getDestroyNum());
-                totalMortgageVolumeTv.setText(dataBean.getSysMgpNum());
-                OrderIndexBean.DataBean.YesterdayOrderBean yesterdayOrderBean = dataBean.getYesterdayOrder();
-                if (yesterdayOrderBean != null) {
-                    yesterdayOrderValueTv.setText(BalanceUtils.currencyToBase(ObjectUtils.isEmpty(yesterdayOrderBean.getOrderValue()) ? "0" : yesterdayOrderBean.getOrderValue(), 2, RoundingMode.FLOOR));
-                    yesterdayIncentiveTv.setText((ObjectUtils.isEmpty(yesterdayOrderBean.getMoney()) ? "0" : yesterdayOrderBean.getMoney()) + walletType);
-                    motivateIndexTv.setText((ObjectUtils.isEmpty(yesterdayOrderBean.getPro()) ? "0" : yesterdayOrderBean.getPro()) + "%");
+                totalMortgageVolumeTv.setText(dataBean.getTotalNum() == null ? "0" : dataBean.getTotalNum().setScale(4).toPlainString());
+                accumulativeDestructionTv.setText(String.valueOf(dataBean.getTotalOut()));
+                yesterdayIncentiveTv.setText((ObjectUtils.isEmpty(dataBean.getYesterdayRewardNum()) ? "0" : String.valueOf(dataBean.getYesterdayRewardNum())) + walletType);
+                yesterdayOrderValueTv.setText(BalanceUtils.currencyToBase(ObjectUtils.isEmpty(dataBean.getYesterdayDollarValue()) ? "0" : String.valueOf(dataBean.getYesterdayDollarValue()), 2, RoundingMode.FLOOR));
+                LPOrderBean.DataBean.PowerBean powerBean = dataBean.getPower();
+                if (powerBean != null) {
+                    hashrateUserValTv.setText(ObjectUtils.isEmpty(powerBean.getUserPower()) ? "0" : String.valueOf(powerBean.getUserPower()));
+                    hashrateShareValTv.setText(ObjectUtils.isEmpty(powerBean.getSharePower()) ? "0" : String.valueOf(powerBean.getSharePower()));
+                    hashrateTeamValTv.setText(ObjectUtils.isEmpty(powerBean.getPowerIndex()) ? "0" : String.valueOf(powerBean.getPowerIndex()));
                 }
-                OrderIndexBean.DataBean.OrderBean orderBean = dataBean.getOrder();
+                LPOrderBean.DataBean.OrderBean orderBean = dataBean.getOrder();
                 if (orderBean != null) {
-                    if (ObjectUtils.isEmpty(orderBean.getLockStatus())) {
-                        mortgageStatusLayout.setVisibility(View.GONE);
-                    } else {
-                        mortgageStatusTv.setText(orderBean.getLockStatus());
-                    }
-                    mortgageValueTv.setText(ObjectUtils.isEmpty(orderBean.getOrderLevel()) ? "M0" : orderBean.getOrderLevel());
-                    if (ObjectUtils.isEmpty(orderBean.getCreateTime())) {
-                        openingTimeLayout.setVisibility(View.GONE);
-                    } else {
-                        openingTimeTv.setText(orderBean.getCreateTime());
-                    }
-                    if (ObjectUtils.isEmpty(orderBean.getUnlockTime())) {
-                        expectedUnlockLayout.setVisibility(View.GONE);
-                    } else {
-                        expectedUnlockTv.setText(orderBean.getUnlockTime());
-                    }
-                    String dailyPro = orderBean.getDailyPro();
-                    String mDailyPro = null;
-                    if (!ObjectUtils.isEmpty(dailyPro)) {
-                        BigDecimal dailyProDecimal = new BigDecimal(dailyPro);
-                        mDailyPro = dailyProDecimal.multiply(new BigDecimal("100")).stripTrailingZeros().toPlainString();
-                    }
-                    currencyDayValueTv.setText(ObjectUtils.isEmpty(mDailyPro) ? "0" : (mDailyPro + "%"));
-                    valueTv.setText(BalanceUtils.currencyToBase(ObjectUtils.isEmpty(orderBean.getOrderValue()) ? "0" : orderBean.getOrderValue(), 2, RoundingMode.FLOOR));
-                    mMgpNum = orderBean.getMgpNum();
-                    amountMoneyTv.setText((ObjectUtils.isEmpty(mMgpNum) ? "0" : orderBean.getMgpNum()) + "MGP");
+                    amountMoneyTv.setText((ObjectUtils.isEmpty(orderBean.getNum()) ? "0" : orderBean.getNum()) + "");//
+                    valueTv.setText(ObjectUtils.isEmpty(orderBean.getLpNum()) ? "0" : String.valueOf(orderBean.getLpNum()));
+                    mortgageStatusTv.setText("$" + (ObjectUtils.isEmpty(orderBean.getDollarValue()) ? "0" : String.valueOf(orderBean.getDollarValue())));
+                    openingTimeTv.setText(ObjectUtils.isEmpty(orderBean.getCreateDate()) ? "" : orderBean.getCreateDate());
+                    mortgageValueTv.setText(ObjectUtils.isEmpty(orderBean.getLevelName()) ? "" : orderBean.getLevelName());
+                    cappingValueTv.setText((ObjectUtils.isEmpty(orderBean.getCappingMoney()) ? "0" : orderBean.getCappingMoney()) + "$");
+                    earningsValueTv.setText((ObjectUtils.isEmpty(orderBean.getGainMoney()) ? "0" : orderBean.getGainMoney()) + "$");
                 }
-                OrderIndexBean.DataBean.CalPowerBean calPowerBean = dataBean.getCalPower();
-                if (calPowerBean != null) {
-                    hashrateUserValTv.setText(ObjectUtils.isEmpty(calPowerBean.getUserPower()) ? "0" : calPowerBean.getUserPower());
-                    hashrateShareValTv.setText(ObjectUtils.isEmpty(calPowerBean.getPushPower()) ? "0" : calPowerBean.getPushPower());
-                    hashrateTeamValTv.setText(ObjectUtils.isEmpty(calPowerBean.getTeamPower()) ? "0" : calPowerBean.getTeamPower());
-                    hashrateLightnodeValTv.setText(ObjectUtils.isEmpty(calPowerBean.getLightNodePower()) ? "0" : calPowerBean.getLightNodePower());
-                    hashrateNodeValTv.setText(ObjectUtils.isEmpty(calPowerBean.getLightPower()) ? "0" : calPowerBean.getLightPower());
-                    hashrateIndexValTv.setText(ObjectUtils.isEmpty(calPowerBean.getPowerIndex()) ? "0" : calPowerBean.getPowerIndex());
-                }
-
             }
         }
     }

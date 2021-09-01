@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 import static com.token.mangowallet.utils.Constants.AYING_TEST_MGP_URL;
-import static com.token.mangowallet.utils.Constants.AYING_TEST_URL;
 import static com.token.mangowallet.utils.Constants.AYING_URL;
 import static com.token.mangowallet.utils.Constants.CHEN_TEST_MGP_URL;
 import static com.token.mangowallet.utils.Constants.CORPORATION_URL;
@@ -153,7 +152,7 @@ public class BaseUrlUtils {
         ServerInfo info4 = new ServerInfo();
         info4.setTest(true);
         info4.setKserverName("ay本地");
-        info4.setKserverApi(AYING_TEST_URL);
+        info4.setKserverApi(TEST_URL);
         info4.setNodeBTC("http://test.bitstoreapp.com");
         info4.setNodeETH("https://ropsten.infura.io/v3/dc6e037d7e2141e38e2b8042d29438aa");
         info4.setNodeEOS("https://jungle2.cryptolions.io");

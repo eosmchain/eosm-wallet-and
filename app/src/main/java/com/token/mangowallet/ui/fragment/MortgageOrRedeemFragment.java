@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -16,12 +15,9 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.ClickUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.MapUtils;
 import com.blankj.utilcode.util.ObjectUtils;
-import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.TextInputEditText;
@@ -37,7 +33,6 @@ import com.token.mangowallet.bean.AccountInfo;
 import com.token.mangowallet.bean.TransactionBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.listener.DialogConfirmListener;
-import com.token.mangowallet.net.common.DelegatebwParams;
 import com.token.mangowallet.net.eosmgp.EOSParams;
 import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.ui.viewmodel.ResManModelFactory;
@@ -46,13 +41,10 @@ import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.ConversionUnits;
 import com.token.mangowallet.utils.Md5Utils;
 import com.token.mangowallet.view.BatteryView;
-import com.token.mangowallet.view.CashierInputFilter;
 import com.token.mangowallet.view.DialogHelper;
 import com.token.mangowallet.view.ViewUtils;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -62,14 +54,11 @@ import butterknife.Unbinder;
 
 import static com.token.mangowallet.utils.Constants.DELEGATEBW_ACTION;
 import static com.token.mangowallet.utils.Constants.EOSIO_SYSTEM_CONTRACT_CODE;
-import static com.token.mangowallet.utils.Constants.EOSIO_TOKEN_CONTRACT_CODE;
 import static com.token.mangowallet.utils.Constants.EXTRA_ACCOUNT_INFO;
 import static com.token.mangowallet.utils.Constants.EXTRA_TRANSACTION;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
-import static com.token.mangowallet.utils.Constants.TRANSFER_ACTION;
 import static com.token.mangowallet.utils.Constants.UNDELEGATEBW_ACTION;
-import static com.token.mangowallet.utils.Constants.isTest;
 import static com.token.mangowallet.utils.Constants.percent;
 import static com.token.mangowallet.utils.Constants.thousand;
 

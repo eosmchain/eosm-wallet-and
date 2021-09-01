@@ -4,7 +4,6 @@ import android.view.View;
 
 import androidx.appcompat.widget.AppCompatTextView;
 
-import com.blankj.utilcode.util.ClickUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;

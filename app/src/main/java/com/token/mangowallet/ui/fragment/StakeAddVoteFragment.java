@@ -16,7 +16,6 @@ import androidx.core.content.ContextCompat;
 
 import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.ClickUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.MapUtils;
@@ -34,10 +33,8 @@ import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.bean.GlobalBean;
-import com.token.mangowallet.bean.GoodsImgeModel;
 import com.token.mangowallet.bean.MsgCodeBean;
 import com.token.mangowallet.bean.TransactionBean;
-import com.token.mangowallet.bean.entity.ImgSection;
 import com.token.mangowallet.bean.entity.UploadImgBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.listener.DialogConfirmListener;
@@ -45,7 +42,6 @@ import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.utils.AppFilePath;
 import com.token.mangowallet.utils.Constants;
-import com.token.mangowallet.utils.InputFilterMinMax;
 import com.token.mangowallet.utils.Md5Utils;
 import com.token.mangowallet.utils.PhotoUtils;
 import com.token.mangowallet.utils.NRSAUtils;
@@ -68,7 +64,6 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-import static com.token.mangowallet.bean.entity.ImgSection.GOODS_SLIDESHOW;
 import static com.token.mangowallet.ui.fragment.StakeVoteMainFragment.mVoteContract;
 import static com.token.mangowallet.utils.Constants.EOSIO_TOKEN_CONTRACT_CODE;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
@@ -215,6 +210,8 @@ public class StakeAddVoteFragment extends BaseFragment {
                 filePath = (String) result;
                 delBtn.setVisibility(View.VISIBLE);
                 Glide.with(getActivity()).load(filePath).into(imageIv);
+//                uploadImge(filePath);
+
 //                File file = new File(filePath);
 //                pictureUri = AppFilePath.getUri(getActivity(), file);
 

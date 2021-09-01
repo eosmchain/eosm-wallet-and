@@ -1,7 +1,6 @@
 package com.token.mangowallet.ui.adapter;
 
 import android.view.View;
-import android.widget.CompoundButton;
 
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;

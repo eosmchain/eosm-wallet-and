@@ -1,7 +1,5 @@
 package com.token.mangowallet.ui.adapter;
 
-import android.view.View;
-
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -10,8 +8,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.token.mangowallet.R;
 import com.token.mangowallet.bean.DealsOrderBean;
-import com.token.mangowallet.bean.SelordersBean;
-import com.token.mangowallet.ui.fragment.mgp_deal.MyOrderFragment;
 import com.token.mangowallet.utils.TimeUtils;
 
 import org.jetbrains.annotations.NotNull;
@@ -19,10 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ArbitrationOrderAdapter extends BaseQuickAdapter<DealsOrderBean.RowsBean, BaseViewHolder> {
 

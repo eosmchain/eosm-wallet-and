@@ -5,8 +5,6 @@ import com.token.mangowallet.net.common.BaseUrlUtils;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.WalletDaoUtils;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Map;
 
 import io.reactivex.Observable;

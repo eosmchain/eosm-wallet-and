@@ -1,29 +1,22 @@
 package com.token.mangowallet.net.common;
 
 import com.blankj.utilcode.util.GsonUtils;
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.Utils;
 import com.token.mangowallet.net.interceptor.BaseUrlInterceptor;
 import com.token.mangowallet.net.interceptor.CommonParamInterceptor;
 import com.token.mangowallet.net.interceptor.HttpCacheInterceptor;
 import com.token.mangowallet.net.interceptor.LogInterceptor;
-import com.token.mangowallet.net.interceptor.LogInterceptor2;
 import com.token.mangowallet.utils.Constants;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import static com.token.mangowallet.utils.Constants.LOG_TAG;
 
 public class RetrofitUtils {
     private static final String TAG = "RetrofitUtils";

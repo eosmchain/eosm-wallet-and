@@ -1,14 +1,11 @@
 package com.token.mangowallet.ui.adapter;
 
-import android.content.res.ColorStateList;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 
-import com.blankj.utilcode.util.ClickUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;

@@ -6,13 +6,10 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.blankj.utilcode.util.ObjectUtils;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView;
 import com.token.mangowallet.R;
-import com.token.mangowallet.bean.MixMortgageBean;
 import com.token.mangowallet.bean.OrderListBean;
 
 import org.jetbrains.annotations.NotNull;

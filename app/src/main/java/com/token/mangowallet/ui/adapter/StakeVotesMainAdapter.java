@@ -5,12 +5,9 @@ import android.view.View;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 
-import com.blankj.utilcode.util.ClickUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
-import com.blankj.utilcode.util.TimeUtils;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseSectionQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.qmuiteam.qmui.layout.QMUIConstraintLayout;
@@ -18,11 +15,9 @@ import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 import com.token.mangowallet.R;
 import com.token.mangowallet.bean.NodeBean;
-import com.token.mangowallet.bean.VotesBean;
 import com.token.mangowallet.bean.entity.NodeSection;
 import com.token.mangowallet.ui.fragment.StakeVoteMainFragment;
 import com.token.mangowallet.utils.Constants;
-import com.token.mangowallet.view.ViewUtils;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -43,6 +38,7 @@ public class StakeVotesMainAdapter extends BaseSectionQuickAdapter<NodeSection, 
         this.baseFragment = fragment;
         timeUtils = new com.token.mangowallet.utils.TimeUtils();
         addChildClickViewIds(R.id.voteLayout);
+        addChildClickViewIds(R.id.voteBtn);
     }
 
 //    public StakeVotesMainAdapter(StakeVoteMainFragment baseFragment, @Nullable List<VotesBean.RowsBean> data) {
@@ -172,14 +168,24 @@ public class StakeVotesMainAdapter extends BaseSectionQuickAdapter<NodeSection, 
                 mNodeUrl = getContext().getString(R.string.str_hypothecation) + (ObjectUtils.isEmpty(nodeBean.getStaked_votes()) ? "0.00 MGP" : nodeBean.getStaked_votes());
             }
 
-            if (ObjectUtils.isNotEmpty(mNodeUrl)) {
-                nodeURLTv.setText(mNodeUrl);
-                nodeURLTv.setVisibility(View.VISIBLE);
+            if (ObjectUtils.isEmpty(mNodeName)) {
+                nodeNameTv.setVisibility(View.INVISIBLE);
             } else {
-                nodeURLTv.setVisibility(View.GONE);
+                nodeNameTv.setVisibility(View.VISIBLE);
+                nodeNameTv.setText(ObjectUtils.isEmpty(mNodeName) ? "" : mNodeName);
             }
-            nodeNameTv.setText(mNodeName);
-            profitRatioTv.setText(ObjectUtils.isEmpty(mProfitRatio) ? "" : String.format(getContext().getString(R.string.str_income_ratio), mProfitRatio));
+            if (ObjectUtils.isEmpty(mProfitRatio)) { 
+                profitRatioTv.setVisibility(View.INVISIBLE);
+            } else {
+                profitRatioTv.setVisibility(View.VISIBLE);
+                profitRatioTv.setText(ObjectUtils.isEmpty(mProfitRatio) ? "" : String.format(getContext().getString(R.string.str_income_ratio), mProfitRatio));
+            }
+            if (ObjectUtils.isEmpty(mNodeUrl)) {
+                nodeURLTv.setVisibility(View.INVISIBLE);
+            } else {
+                nodeURLTv.setVisibility(View.VISIBLE);
+                nodeURLTv.setText(ObjectUtils.isEmpty(mNodeUrl) ? "" : mNodeUrl);
+            }
             voteBtn.setText(mVote);
             voteNumTv.setText(mVoteStr + mVoteNum);
         }

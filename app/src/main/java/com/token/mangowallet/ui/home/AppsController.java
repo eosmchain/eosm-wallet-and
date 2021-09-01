@@ -109,6 +109,13 @@ public class AppsController extends QMUIWindowInsetLayout {
                     baseFragment.startFragment("VoteMainFragment", bundle);
                 } else if (appBean.getType() == 6) {//4 Mango 投票
                     baseFragment.startFragment("OTCDealFragment", bundle);
+                } else if (appBean.getType() == 7) {//7 生态抵押
+//                    if (ObjectUtils.isEmpty(MyApplication.getInstance().mMid)) {
+////                        ToastUtils.showLong(R.string.str_please_active_mid);
+////                    } else {
+////                        baseFragment.startFragment("MiningBigFragment", bundle);
+////                    }
+                    baseFragment.startFragment("MiningBigFragment", bundle);
                 }
 
             }

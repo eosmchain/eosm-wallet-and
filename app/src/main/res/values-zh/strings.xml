@@ -906,7 +906,23 @@
     <string name="str_chain_fail">上链失败</string>
     <string name="str_mnemonic_word_fail">请输入正确的助记词</string>
     <string name="str_privatekey_fail">请输入正确的私钥</string>
-
+    <string name="str_account_address">账户地址</string>
+    <string name="str_been_voted">已投%s票</string>
+    <string name="str_total_votes">总票</string>
+    <string name="str_notopened_vote">暂未开启投票</string>
+    <string name="str_deposit_return">方案押金退回</string>
+    <string name="str_vote_return">投票退回</string>
+    <string name="str_scheme_award">方案奖励</string>
+    <string name="str_vote_award">投票奖励</string>
+    <string name="str_edit_failure">编辑失败</string>
+    <string name="str_withdraw_success">撤回成功,72小时内到帐</string>
+    <string name="str_cancel_ticket">撤票中</string>
+    <string name="str_node_address_exception">节点地址异常</string>
+    <string name="str_exponent">指数</string>
+    <string name="str_lp_quantity_money">LP币量</string>
+    <string name="str_mortgage_time">抵押时间</string>
+    <string name="str_ecological_mortgage">生态抵押</string>
+    <string name="str_cumulative_distribution">累计分发</string>
 
 
     <string name="str_aleft">👈</string>

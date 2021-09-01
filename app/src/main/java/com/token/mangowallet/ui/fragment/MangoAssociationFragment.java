@@ -29,7 +29,6 @@ import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.bean.MortgageAssociationBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
-import com.token.mangowallet.net.exception.CompanyException;
 import com.token.mangowallet.ui.adapter.AssociationAdapter;
 import com.token.mangowallet.utils.BalanceUtils;
 import com.token.mangowallet.utils.Constants;
@@ -46,7 +45,6 @@ import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.token.mangowallet.utils.Constants.EXTRA_CREATE_ACCOUNT_DATA;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
 

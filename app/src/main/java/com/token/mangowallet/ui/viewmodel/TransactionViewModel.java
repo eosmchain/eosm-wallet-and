@@ -3,7 +3,6 @@ package com.token.mangowallet.ui.viewmodel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.token.mangowallet.bean.AccountInfo;
 import com.token.mangowallet.bean.TableRowsBean;
 import com.token.mangowallet.bean.TransactionBean;
 import com.token.mangowallet.bean.TransactionDetailsBean;

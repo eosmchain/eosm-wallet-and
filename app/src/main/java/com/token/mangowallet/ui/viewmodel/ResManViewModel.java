@@ -3,35 +3,17 @@ package com.token.mangowallet.ui.viewmodel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.blankj.utilcode.util.GsonUtils;
-import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.ObjectUtils;
-import com.google.gson.reflect.TypeToken;
 import com.token.mangowallet.bean.AccountInfo;
 import com.token.mangowallet.bean.TableRowsBean;
 import com.token.mangowallet.bean.TransactionBean;
 import com.token.mangowallet.db.MangoWallet;
-import com.token.mangowallet.entity.Token;
 import com.token.mangowallet.interact.FetchWalletInteract;
-import com.token.mangowallet.net.eosmgp.EOSParams;
 import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.utils.Constants;
 
-import java.math.BigDecimal;
-import java.util.List;
 import java.util.Map;
 
-import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-import okhttp3.RequestBody;
-import one.block.eosiojava.error.rpcProvider.RpcProviderError;
-import one.block.eosiojavarpcprovider.implementations.EosioJavaRpcProviderImpl;
-
-import static com.token.mangowallet.utils.Constants.EOSIO_TOKEN_CONTRACT_CODE;
-import static com.token.mangowallet.utils.Constants.WalletType.EOS;
-import static com.token.mangowallet.utils.Constants.WalletType.MGP;
 
 public class ResManViewModel extends BaseViewModel {
 

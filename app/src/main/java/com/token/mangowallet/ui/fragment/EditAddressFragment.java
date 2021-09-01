@@ -2,12 +2,10 @@ package com.token.mangowallet.ui.fragment;
 
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Switch;
@@ -22,7 +20,6 @@ import com.blankj.utilcode.util.ClickUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.MapUtils;
 import com.blankj.utilcode.util.ObjectUtils;
-import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.JsonObject;
 import com.lljjcoder.Interface.OnCityItemClickListener;
@@ -37,15 +34,12 @@ import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.bean.CountryBean;
-import com.token.mangowallet.bean.GoodsTypeBean;
 import com.token.mangowallet.bean.MsgCodeBean;
 import com.token.mangowallet.bean.ShippingAddressBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
-import com.token.mangowallet.net.exception.CompanyException;
 import com.token.mangowallet.utils.NRSAUtils;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -59,7 +53,6 @@ import io.reactivex.schedulers.Schedulers;
 import static com.token.mangowallet.utils.Constants.EXTRA_ISADD_ADDRESS;
 import static com.token.mangowallet.utils.Constants.EXTRA_RECEIVER_ADDRESS;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
-import static com.token.mangowallet.utils.Constants.percent;
 
 /**
  * 新增/编辑 地址界面.

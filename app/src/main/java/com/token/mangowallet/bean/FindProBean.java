@@ -1,7 +1,5 @@
 package com.token.mangowallet.bean;
 
-import java.util.List;
-
 public class FindProBean {
 
     /**

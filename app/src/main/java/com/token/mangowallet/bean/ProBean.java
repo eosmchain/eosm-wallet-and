@@ -3,7 +3,6 @@ package com.token.mangowallet.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public class ProBean implements Parcelable {

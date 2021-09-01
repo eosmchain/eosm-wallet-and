@@ -906,6 +906,23 @@
     <string name="str_chain_fail">체인에서 실패</string>
     <string name="str_mnemonic_word_fail">올바른 니모닉 문구를 입력하세요.</string>
     <string name="str_privatekey_fail">올바른 개인 키를 입력하십시오</string>
+    <string name="str_account_address">계정 주소</string>
+    <string name="str_been_voted">%s 개의 투표 던지기</string>
+    <string name="str_total_votes">총 투표</string>
+    <string name="str_notopened_vote">아직 투표가 시작되지 않았습니다.</string>
+    <string name="str_deposit_return">프로그램 입금 환불</string>
+    <string name="str_vote_return">다시 투표</string>
+    <string name="str_scheme_award">프로그램 보상</string>
+    <string name="str_vote_award">투표 보상</string>
+    <string name="str_edit_failure">수정 실패</string>
+    <string name="str_withdraw_success">인출이 성공적이며 72 시간 이내에 도착합니다.</string>
+    <string name="str_cancel_ticket">철수</string>
+    <string name="str_node_address_exception">노드 주소가 비정상입니다.</string>
+    <string name="str_exponent">인덱스</string>
+    <string name="str_lp_quantity_money">LP 통화량</string>
+    <string name="str_mortgage_time">모기지 시간</string>
+    <string name="str_ecological_mortgage">생태 모기지</string>
+    <string name="str_cumulative_distribution">누적 분포</string>
 
     <string name="str_aleft">👈</string>
     <string name="str_right">👉</string>

@@ -11,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.ContentLoadingProgressBar;
@@ -153,7 +154,7 @@ public class StakeVoteMainFragment extends BaseFragment {
     protected void initData() {
         Bundle bundle = getArguments();
         mangoWallet = bundle.getParcelable(EXTRA_WALLET);
-        walletAddress = mangoWallet.getWalletAddress();//"abcabc123123";//
+        walletAddress = "jzm333333333";//mangoWallet.getWalletAddress();//"jzm333333333";//
         walletType = Constants.WalletType.getPagerFromPositon(mangoWallet.getWalletType());
         pageInfo = new PageInfo();
         mVoteContract = BaseUrlUtils.getInstance().getVoteContract();
@@ -278,7 +279,7 @@ public class StakeVoteMainFragment extends BaseFragment {
         refreshLayout.setEnableLoadMore(false);
 
 
-        votesMainAdapter.addChildClickViewIds(R.id.voteLayout);
+        votesMainAdapter.addChildClickViewIds(R.id.voteLayout, R.id.voteBtn);
         votesMainAdapter.setOnItemChildClickListener(new OnItemChildClickListener() {
             @Override
             public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
@@ -293,16 +294,16 @@ public class StakeVoteMainFragment extends BaseFragment {
                         bundle.putInt("type", type);
                         startFragment("StakeVoteDetailsFragment", bundle);
                     } else {
-                        if (type == 2) {
-                            String mVoteNum = ObjectUtils.isEmpty(mCurNodeBean.getReceived_votes()) ? "0.00 MGP" : mCurNodeBean.getReceived_votes();
-                            String[] strings = mVoteNum.split(" ");
-                            BigDecimal mVoteNumDecimal = new BigDecimal(strings[0]);
-                            if (mVoteNumDecimal.compareTo(BigDecimal.ZERO) > 0) {
-                                //-1表示小于，0是等于，1是大于。
-                                ToastUtils.showLong(String.format(getString(R.string.str_irrevocable_voted), mVoteNum));
-                                return;
-                            }
-                        }
+//                        if (type == 2) {
+//                            String mVoteNum = ObjectUtils.isEmpty(mCurNodeBean.getReceived_votes()) ? "0.00 MGP" : mCurNodeBean.getReceived_votes();
+//                            String[] strings = mVoteNum.split(" ");
+//                            BigDecimal mVoteNumDecimal = new BigDecimal(strings[0]);
+//                            if (mVoteNumDecimal.compareTo(BigDecimal.ZERO) > 0) {
+//                                //-1表示小于，0是等于，1是大于。
+//                                ToastUtils.showLong(String.format(getString(R.string.str_irrevocable_voted), mVoteNum));
+//                                return;
+//                            }
+//                        }
                         if (type == 1 && mCurNodeBean.getStatus() == 0) {
                             return;
                         }

@@ -2,14 +2,12 @@ package com.token.mangowallet.ui.adapter;
 
 import androidx.appcompat.widget.AppCompatTextView;
 
-import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.module.LoadMoreModule;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.token.mangowallet.R;
-import com.token.mangowallet.bean.CurrencyData;
 import com.token.mangowallet.bean.IndexMarkIndexBean;
 import com.token.mangowallet.utils.BalanceUtils;
 

@@ -8,9 +8,7 @@ import android.os.Build;
 import android.os.Environment;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.FileProvider;
 
-import com.blankj.utilcode.util.AppUtils;
 import com.yanzhenjie.album.provider.CameraFileProvider;
 
 import java.io.ByteArrayOutputStream;

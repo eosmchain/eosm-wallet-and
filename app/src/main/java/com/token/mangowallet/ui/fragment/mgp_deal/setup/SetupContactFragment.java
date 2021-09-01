@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.appcompat.widget.AppCompatEditText;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 
@@ -24,11 +23,9 @@ import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.bean.ContactInfoBean;
-import com.token.mangowallet.bean.TransactionBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.utils.NRSAUtils;
-import com.token.mangowallet.view.ViewUtils;
 
 import java.util.Map;
 

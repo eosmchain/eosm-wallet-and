@@ -25,7 +25,7 @@ public interface Constants {
     //获取代币Token
     String ETHPLORER_API_URL = "https://api.ethplorer.io";
     String VOTE_TEST_API_URL = "http://m.test.mgps.me/";//"http://vote.mgpchain.io";// "http://192.168.31.49:9000";
-    String VOTE_API_URL = "http://vote.mgpchain.io";
+    String VOTE_API_URL = "https://vote.mgpchain.io";
     String OTC_API_URL = "https://m.mgps.me/";
     String OTC_TEST_API_URL = "http://m.test.mgps.me/";
     String MMGPS_API_URL = "http://m.mgps.me";
@@ -151,6 +151,7 @@ public interface Constants {
     String ADDSCHEME = "addscheme";//添加社群投票方案
     String ADDVOTE = "addvote";//社群投票
     String UPSCHEME = "upscheme";//社群投票方案修改
+    String EMCONTRACT = "mgptaking222";//生态抵押合约
     ///////////////////////////////////////////
     String BaseFilePath = Environment.getExternalStorageDirectory() + File.separator + "MangoWallet";
     String CrashFilePath = BaseFilePath + File.separator + "Crash";

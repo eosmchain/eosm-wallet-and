@@ -13,7 +13,6 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.blankj.utilcode.util.AppUtils;
-import com.blankj.utilcode.util.ClickUtils;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.EncodeUtils;
 import com.blankj.utilcode.util.GsonUtils;

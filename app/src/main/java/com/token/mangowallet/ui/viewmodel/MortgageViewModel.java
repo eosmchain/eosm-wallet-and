@@ -14,7 +14,6 @@ import com.token.mangowallet.bean.TransactionBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.interact.FetchWalletInteract;
 import com.token.mangowallet.net.common.NetWorkManager;
-import com.token.mangowallet.net.exception.CompanyException;
 import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.NRSAUtils;

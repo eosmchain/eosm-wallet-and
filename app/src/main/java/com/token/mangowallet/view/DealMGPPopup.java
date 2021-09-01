@@ -26,11 +26,9 @@ import com.qmuiteam.qmui.widget.tab.QMUITabSegment;
 import com.token.mangowallet.R;
 import com.token.mangowallet.bean.SelordersBean;
 import com.token.mangowallet.utils.APPUtils;
-import com.token.mangowallet.utils.BalanceUtils;
 import com.token.mangowallet.view.basepopup.BasePopup;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,7 +37,6 @@ import butterknife.Unbinder;
 
 import static com.blankj.utilcode.util.StringUtils.getString;
 import static com.token.mangowallet.utils.Constants.MGP_SYMBOL;
-import static java.math.RoundingMode.CEILING;
 import static java.math.RoundingMode.FLOOR;
 
 public class DealMGPPopup extends BasePopup {

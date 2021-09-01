@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.constraintlayout.widget.Barrier;
@@ -13,39 +12,26 @@ import androidx.constraintlayout.widget.Group;
 import androidx.core.content.ContextCompat;
 
 import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.CollectionUtils;
-import com.blankj.utilcode.util.GsonUtils;
-import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.MapUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.google.gson.JsonObject;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
-import com.token.mangowallet.bean.ContactInfoBean;
-import com.token.mangowallet.bean.PayInfoBean;
 import com.token.mangowallet.bean.PayInfoUserInfoBean;
 import com.token.mangowallet.db.MangoWallet;
-import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.utils.ClipboardUtils;
-import com.token.mangowallet.utils.NRSAUtils;
 import com.token.mangowallet.view.BigImgDialog;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
-import static com.token.mangowallet.utils.Constants.LOG_TAG;
 
 public class PaymentInfoFragment extends BaseFragment {
 

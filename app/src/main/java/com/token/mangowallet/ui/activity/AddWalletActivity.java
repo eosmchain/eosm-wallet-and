@@ -1,9 +1,7 @@
 package com.token.mangowallet.ui.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 
-import com.qmuiteam.qmui.arch.annotation.DefaultFirstFragment;
 import com.qmuiteam.qmui.arch.annotation.FirstFragments;
 import com.qmuiteam.qmui.arch.annotation.LatestVisitRecord;
 import com.token.mangowallet.base.BaseFragment;

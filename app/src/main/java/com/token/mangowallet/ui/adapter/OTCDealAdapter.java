@@ -5,38 +5,23 @@ import android.view.View;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.blankj.utilcode.util.CollectionUtils;
-import com.blankj.utilcode.util.GsonUtils;
-import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.MapUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-import com.google.gson.JsonObject;
 import com.token.mangowallet.R;
-import com.token.mangowallet.bean.OrderGoodsBean;
 import com.token.mangowallet.bean.PayInfoUserInfoBean;
 import com.token.mangowallet.bean.SelordersBean;
-import com.token.mangowallet.net.common.NetWorkManager;
-import com.token.mangowallet.net.common.RxSubscriber;
 import com.token.mangowallet.ui.fragment.mgp_deal.OTCDealFragment;
 import com.token.mangowallet.utils.APPUtils;
-import com.token.mangowallet.utils.BalanceUtils;
-import com.token.mangowallet.utils.NRSAUtils;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-
-import static com.token.mangowallet.utils.Constants.LOG_TAG;
 import static com.token.mangowallet.utils.Constants.MGP_SYMBOL;
 
 public class OTCDealAdapter extends BaseQuickAdapter<SelordersBean.RowsBean, BaseViewHolder> {

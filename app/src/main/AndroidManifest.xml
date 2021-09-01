@@ -26,7 +26,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <application
-        android:name=".MyApplication"
+        android:name="com.token.mangowallet.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_mgp_rounded"
         android:label="@string/app_name"
@@ -40,7 +40,7 @@
         tools:targetApi="n">
 
         <activity
-            android:name=".ui.activity.LauncherActivity"
+            android:name="com.token.mangowallet.ui.activity.LauncherActivity"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,25 +50,25 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.token.mangowallet.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout|uiMode"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize|stateHidden" />
 
         <activity
-            android:name=".ui.activity.login.BaseLoginActivity"
+            android:name="com.token.mangowallet.ui.activity.login.BaseLoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout|uiMode"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize|adjustPan" />
 
         <activity
-            android:name=".ui.activity.pinyin.CountryCodeActivity"
+            android:name="com.token.mangowallet.ui.activity.pinyin.CountryCodeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout|uiMode"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name=".ui.activity.QRCodeScanActivity"
+            android:name="com.token.mangowallet.ui.activity.QRCodeScanActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout|uiMode"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
@@ -80,18 +80,18 @@
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
 
         <activity
-            android:name=".ui.activity.AddWalletActivity"
+            android:name="com.token.mangowallet.ui.activity.AddWalletActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout|uiMode"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
 
         <activity
-            android:name=".ui.activity.WebActivity"
+            android:name="com.token.mangowallet.ui.activity.WebActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout|uiMode"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name=".ui.activity.LanguageActivity"
+            android:name="com.token.mangowallet.ui.activity.LanguageActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|screenLayout|uiMode"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />

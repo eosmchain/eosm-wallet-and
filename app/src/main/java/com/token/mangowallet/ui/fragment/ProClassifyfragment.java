@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.ClickUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.MapUtils;
@@ -36,7 +35,6 @@ import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.bean.ClassifyProBean;
 import com.token.mangowallet.bean.PageInfo;
 import com.token.mangowallet.bean.ProBean;
-import com.token.mangowallet.bean.ProListBean;
 import com.token.mangowallet.bean.StoreHomeBean;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;

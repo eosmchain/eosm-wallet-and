@@ -1,7 +1,6 @@
 package com.token.mangowallet.repository;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
 import com.blankj.utilcode.util.SPUtils;
 import com.token.mangowallet.db.MangoWallet;

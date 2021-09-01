@@ -5,7 +5,6 @@ import android.view.View;
 
 import androidx.core.content.ContextCompat;
 
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView;

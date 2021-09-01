@@ -10,7 +10,6 @@ import androidx.core.content.ContextCompat;
 
 import com.blankj.utilcode.util.ObjectUtils;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.module.LoadMoreModule;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;

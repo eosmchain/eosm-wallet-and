@@ -907,6 +907,23 @@ After deleting the program or wallet, you need to restore the wallet by importin
     <string name="str_chain_fail">Failed on the chain</string>
     <string name="str_mnemonic_word_fail">Please enter the correct mnemonic phrase</string>
     <string name="str_privatekey_fail">Please enter the correct private key</string>
+    <string name="str_account_address">Account address</string>
+    <string name="str_been_voted">%s votes cast</string>
+    <string name="str_total_votes">Total votes</string>
+    <string name="str_notopened_vote">Voting has not been opened yet</string>
+    <string name="str_deposit_return">Program deposit refund</string>
+    <string name="str_vote_return">Vote back</string>
+    <string name="str_scheme_award">Program rewards</string>
+    <string name="str_vote_award">Voting reward</string>
+    <string name="str_edit_failure">Edit failed</string>
+    <string name="str_withdraw_success">The withdrawal is successful and will arrive within 72 hours</string>
+    <string name="str_cancel_ticket">Withdrawal</string>
+    <string name="str_node_address_exception">Node address is abnormal</string>
+    <string name="str_exponent">index</string>
+    <string name="str_lp_quantity_money">LP currency volume</string>
+    <string name="str_mortgage_time">Mortgage time</string>
+    <string name="str_ecological_mortgage">Ecological mortgage</string>
+    <string name="str_cumulative_distribution">Cumulative distribution</string>
 
     <string name="str_aleft">👈</string>
     <string name="str_right">👉</string>

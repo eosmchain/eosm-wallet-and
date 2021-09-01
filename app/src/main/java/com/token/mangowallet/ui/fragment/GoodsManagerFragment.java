@@ -37,7 +37,6 @@ import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.bean.GoodsManaBean;
 import com.token.mangowallet.bean.MsgCodeBean;
 import com.token.mangowallet.bus.AddGoodsSucEffect;
-import com.token.mangowallet.bus.ShippingAddressEffect;
 import com.token.mangowallet.db.MangoWallet;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.ui.adapter.GoodsManagAdapter;

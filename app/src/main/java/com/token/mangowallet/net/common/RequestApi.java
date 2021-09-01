@@ -1589,4 +1589,17 @@ public interface RequestApi {
     @Headers("urlname:" + Constants.CORPORATION_URL)
     @POST("/api/userOrder/blend/blendChannel")
     Observable<JsonObject> blendChannel();
+
+    /**
+     * 获取收款方式
+     * mgpName
+     * bucket otcstore.mgps.me
+     * appName MGP
+     *
+     * @Header("content:") String content
+     */
+    @Headers("urlname:" + Constants.CORPORATION_URL)
+    @POST("/api/lp/order")
+    Observable<JsonObject> LPOrder(@Header("content") String content);
+
 }

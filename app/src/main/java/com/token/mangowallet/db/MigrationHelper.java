@@ -5,7 +5,6 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.blankj.utilcode.util.EncodeUtils;
 import com.blankj.utilcode.util.FileIOUtils;
 import com.blankj.utilcode.util.TimeUtils;
 import com.token.mangowallet.db.greendao.DaoMaster;
@@ -17,12 +16,9 @@ import org.greenrobot.greendao.internal.DaoConfig;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import okhttp3.HttpUrl;
 
 
 /**

@@ -9,12 +9,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.token.mangowallet.R;
 import com.token.mangowallet.bean.MarginRecordBean;
-import com.token.mangowallet.bean.MiningOrderIncomeItem;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 import static com.token.mangowallet.utils.Constants.MGP_SYMBOL;
 

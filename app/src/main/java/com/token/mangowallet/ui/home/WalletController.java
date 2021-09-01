@@ -17,8 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.constant.PermissionConstants;
-import com.blankj.utilcode.util.ClickUtils;
-import com.blankj.utilcode.util.FileIOUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.MapUtils;
@@ -78,7 +76,6 @@ import static com.token.mangowallet.utils.Constants.TO_CREATE_WALLET;
 import static com.token.mangowallet.utils.Constants.WalletType.ALL;
 import static com.token.mangowallet.utils.Constants.WalletType.EOS;
 import static com.token.mangowallet.utils.Constants.WalletType.MGP;
-import static com.token.mangowallet.utils.Constants.isTest;
 
 public class WalletController extends QMUIWindowInsetLayout implements PopCreationWallet.OnCreationWalletClickListener, QMUIPullRefreshLayout.OnPullListener {
 

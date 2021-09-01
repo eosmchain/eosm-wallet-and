@@ -9,7 +9,6 @@ import com.blankj.utilcode.util.ObjectUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.token.mangowallet.R;
-import com.token.mangowallet.bean.ThemesBean;
 import com.token.mangowallet.bean.VoteLogBean;
 
 import org.jetbrains.annotations.NotNull;

@@ -4,8 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -18,7 +16,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.token.mangowallet.R;
 import com.token.mangowallet.bean.ProBean;
-import com.token.mangowallet.bean.ProListBean;
 import com.token.mangowallet.utils.BalanceUtils;
 
 

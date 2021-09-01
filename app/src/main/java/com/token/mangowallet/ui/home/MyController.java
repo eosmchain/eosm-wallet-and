@@ -1,70 +1,47 @@
 package com.token.mangowallet.ui.home;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.appcompat.widget.AppCompatEditText;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 
-import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.ClickUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.MapUtils;
 import com.blankj.utilcode.util.ObjectUtils;
-import com.blankj.utilcode.util.SPUtils;
-import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.JsonObject;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 import com.qmuiteam.qmui.widget.QMUIWindowInsetLayout;
 import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
-import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
-import com.token.mangowallet.MainActivity;
 import com.token.mangowallet.MyApplication;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
-import com.token.mangowallet.bean.AppHomeBean;
-import com.token.mangowallet.bean.CountryBean;
 import com.token.mangowallet.bean.FindBean;
 import com.token.mangowallet.bean.MerchantBean;
-import com.token.mangowallet.bean.MsgCodeBean;
-import com.token.mangowallet.net.common.BaseUrlUtils;
 import com.token.mangowallet.net.common.NetWorkManager;
-import com.token.mangowallet.net.common.ServerInfo;
 import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.ui.activity.LanguageActivity;
 import com.token.mangowallet.ui.activity.WebActivity;
-import com.token.mangowallet.ui.activity.pinyin.CountryCodeActivity;
-import com.token.mangowallet.utils.ClipboardUtils;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.NRSAUtils;
-import com.token.mangowallet.view.DialogHelper;
-import com.token.mangowallet.view.ViewUtils;
 
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -73,7 +50,6 @@ import static com.blankj.utilcode.util.StringUtils.getString;
 import static com.token.mangowallet.ui.home.HomeFragment.homeFragment;
 import static com.token.mangowallet.utils.Constants.EXTRA_TO_URL;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
-import static com.token.mangowallet.utils.Constants.GUOYU_URL;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
 
 public class MyController extends QMUIWindowInsetLayout {

@@ -76,7 +76,6 @@ import io.reactivex.schedulers.Schedulers;
 import static com.token.mangowallet.ui.fragment.OperatingStepsFragment.FIRST_MIX_MORTGAGE_TYPE;
 import static com.token.mangowallet.utils.Constants.EOSIO_TOKEN_CONTRACT_CODE;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
-import static com.token.mangowallet.utils.Constants.HMIO_SYMBOL;
 import static com.token.mangowallet.utils.Constants.INTENT_EXTRA_KEY_QR_SCAN;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
 import static com.token.mangowallet.utils.Constants.TRANSFER_ACTION;
@@ -155,6 +154,7 @@ public class MiningMortgageFragment extends BaseFragment {
     private List<BlendChannelBean.DataBean.ChannelListBean> channelListBeanList = new ArrayList<>();
     private BlendChannelBean.DataBean.ChannelListBean channelListBean;
     private OrderSysBean.DataBean orderSysDataBean;
+    private int toType = 0;
 
     @Override
     protected View onCreateView() {
@@ -172,6 +172,7 @@ public class MiningMortgageFragment extends BaseFragment {
         bundle = getArguments();
         mangoWallet = bundle.getParcelable(EXTRA_WALLET);
         type = bundle.getString("type", "");
+        toType = bundle.getInt("toType", 0);
         isMortgage = bundle.getBoolean("isMortgage");
         String mMgpNum = bundle.getString("mgpNum", "0");
         if (ObjectUtils.isEmpty(mMgpNum)) {
@@ -272,7 +273,8 @@ public class MiningMortgageFragment extends BaseFragment {
         });
         InputFilter[] filters = {ViewUtils.filter};
         quantityEt.setFilters(filters);
-
+        mortgageInitiatedEt.setVisibility(toType == 2 ? View.GONE : View.VISIBLE);
+        mortgageInitiatedLayout.setVisibility(toType == 2 ? View.GONE : View.VISIBLE);
     }
 
     private void onBalance(BigDecimal balance) {
@@ -356,7 +358,8 @@ public class MiningMortgageFragment extends BaseFragment {
 //            ToastUtils.showLong(R.string.str_cant_less_than_100);
 //            return;
 //        }
-                if (isMortgage) {
+
+                if (isMortgage && toType == 1) {
                     showSimpleBottomSheetList();
                 } else {
                     if (qmuiDialog == null) {
@@ -429,16 +432,16 @@ public class MiningMortgageFragment extends BaseFragment {
         Map params = MapUtils.newHashMap();
         if (isRemaining) {
             action = "redeem";
-            code = Constants.contractAddress;
+            code = toType == 2 ? Constants.EMCONTRACT : Constants.contractAddress;
             params.put("account", walletAddress);
         } else {
-            String quantity = bdMgpValue.setScale(4, BigDecimal.ROUND_HALF_DOWN).toPlainString();
+            String quantity = (toType == 2 ? bdQuantity : bdMgpValue).setScale(4, BigDecimal.ROUND_HALF_DOWN).toPlainString();
 //        String memo = type;
             code = EOSIO_TOKEN_CONTRACT_CODE;
             action = TRANSFER_ACTION;
             params.put("memo", mAccountAddress);
             params.put("from", walletAddress);
-            params.put("to", Constants.contractAddress);
+            params.put("to", toType == 2 ? Constants.EMCONTRACT : Constants.contractAddress);
             params.put("quantity", quantity + " " + walletType);
         }
         String jsonData = "";

@@ -3,7 +3,6 @@ package com.token.mangowallet.ui.fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -12,12 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.ClickUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.MapUtils;
 import com.blankj.utilcode.util.ObjectUtils;
-import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
@@ -32,23 +29,13 @@ import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
-import com.token.mangowallet.bean.MixMortgageBean;
-import com.token.mangowallet.bean.MsgCodeBean;
 import com.token.mangowallet.bean.OrderListBean;
 import com.token.mangowallet.bean.PageInfo;
-import com.token.mangowallet.bean.TransactionBean;
 import com.token.mangowallet.db.MangoWallet;
-import com.token.mangowallet.listener.DialogConfirmListener;
 import com.token.mangowallet.net.common.NetWorkManager;
-import com.token.mangowallet.repository.EMWalletRepository;
 import com.token.mangowallet.ui.adapter.LifeRecordAdapter;
-import com.token.mangowallet.ui.adapter.MixMortgageAdapter;
-import com.token.mangowallet.utils.Constants;
-import com.token.mangowallet.utils.Md5Utils;
 import com.token.mangowallet.utils.NRSAUtils;
-import com.token.mangowallet.view.DialogHelper;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -59,12 +46,8 @@ import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.token.mangowallet.ui.fragment.OperatingStepsFragment.TWICE_MIX_MORTGAGE_TYPE;
-import static com.token.mangowallet.utils.Constants.EOSIO_TOKEN_CONTRACT_CODE;
 import static com.token.mangowallet.utils.Constants.EXTRA_WALLET;
 import static com.token.mangowallet.utils.Constants.LOG_TAG;
-import static com.token.mangowallet.utils.Constants.MGP_PLEDGE_ACCOUNT;
-import static com.token.mangowallet.utils.Constants.TRANSFER_ACTION;
 
 public class LifePaymentRecordFragment extends BaseFragment {
 

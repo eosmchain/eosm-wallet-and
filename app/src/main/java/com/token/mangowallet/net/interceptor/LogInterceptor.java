@@ -2,11 +2,9 @@ package com.token.mangowallet.net.interceptor;
 
 import android.os.Environment;
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.blankj.utilcode.util.CrashUtils;
 import com.blankj.utilcode.util.EncodeUtils;
 import com.blankj.utilcode.util.FileIOUtils;
 import com.blankj.utilcode.util.LogUtils;

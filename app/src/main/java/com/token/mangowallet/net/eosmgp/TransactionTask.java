@@ -26,7 +26,6 @@ import one.block.eosiojava.models.rpcProvider.response.RPCResponseError;
 import one.block.eosiojava.session.TransactionProcessor;
 import one.block.eosiojava.session.TransactionSession;
 import one.block.eosiojavaabieosserializationprovider.AbiEosSerializationProviderImpl;
-import one.block.eosiojavarpcprovider.error.EosioJavaRpcProviderInitializerError;
 import one.block.eosiojavarpcprovider.implementations.EosioJavaRpcProviderImpl;
 import one.block.eosiosoftkeysignatureprovider.SoftKeySignatureProviderImpl;
 import one.block.eosiosoftkeysignatureprovider.error.ImportKeyError;

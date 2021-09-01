@@ -9,7 +9,6 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 
 import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.ClickUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -20,7 +19,6 @@ import com.token.mangowallet.R;
 import com.token.mangowallet.base.BaseFragment;
 import com.token.mangowallet.bean.MsgCodeBean;
 import com.token.mangowallet.net.common.NetWorkManager;
-import com.token.mangowallet.utils.CustomTagHandler;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.MapUtils;
-import com.token.mangowallet.bean.AccountInfo;
 import com.token.mangowallet.bean.AppHomeBean;
 import com.token.mangowallet.bean.FindBean;
 import com.token.mangowallet.bean.TableRowsBean;

@@ -6,26 +6,18 @@ import androidx.appcompat.widget.AppCompatTextView;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseSectionQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.qmuiteam.qmui.layout.QMUILinearLayout;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.token.mangowallet.R;
 import com.token.mangowallet.bean.ProBean;
-import com.token.mangowallet.bean.ProListBean;
-import com.token.mangowallet.bean.StoreHomeBean;
-import com.token.mangowallet.bean.entity.ImgSection;
 import com.token.mangowallet.bean.entity.ProductSection;
 import com.token.mangowallet.utils.BalanceUtils;
-import com.token.mangowallet.view.RequiredTextView;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.math.RoundingMode;
-import java.util.List;
-
-import static com.token.mangowallet.utils.Constants.WalletType.MGP;
 
 public class CommodityAdapter extends BaseSectionQuickAdapter<ProductSection, BaseViewHolder> {
 

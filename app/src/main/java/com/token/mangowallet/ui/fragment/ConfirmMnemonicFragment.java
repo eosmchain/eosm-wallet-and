@@ -37,7 +37,6 @@ import com.token.mangowallet.bean.BaseBean;
 import com.token.mangowallet.bean.MsgCodeBean;
 import com.token.mangowallet.bus.ToWallet;
 import com.token.mangowallet.db.MangoWallet;
-import com.token.mangowallet.interact.CreateWalletInteract;
 import com.token.mangowallet.net.common.NetWorkManager;
 import com.token.mangowallet.utils.Constants;
 import com.token.mangowallet.utils.NRSAUtils;

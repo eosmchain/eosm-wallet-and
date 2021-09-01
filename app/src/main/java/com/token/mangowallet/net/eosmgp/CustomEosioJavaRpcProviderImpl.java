@@ -7,10 +7,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
 
-import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
-import okhttp3.logging.HttpLoggingInterceptor;
 import one.block.eosiojava.error.rpcProvider.GetBlockRpcError;
 import one.block.eosiojava.error.rpcProvider.GetInfoRpcError;
 import one.block.eosiojava.error.rpcProvider.GetRawAbiRpcError;
@@ -31,11 +29,9 @@ import one.block.eosiojava.models.rpcProvider.response.RPCResponseError;
 import one.block.eosiojavarpcprovider.error.EosioJavaRpcErrorConstants;
 import one.block.eosiojavarpcprovider.error.EosioJavaRpcProviderCallError;
 import one.block.eosiojavarpcprovider.error.EosioJavaRpcProviderInitializerError;
-import one.block.eosiojavarpcprovider.implementations.IEosioJavaRpcProviderApi;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CustomEosioJavaRpcProviderImpl implements IRPCProvider {
 

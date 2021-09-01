@@ -1,27 +1,15 @@
 package com.token.mangowallet.ui.adapter;
 
-import android.view.View;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.blankj.utilcode.util.ObjectUtils;
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
-import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.token.mangowallet.R;
 import com.token.mangowallet.bean.ProListBean;
-import com.token.mangowallet.bean.StoreHomeBean;
 import com.token.mangowallet.listener.CommodityListener;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 public class StoreCommodityAdapter extends BaseQuickAdapter<ProListBean, BaseViewHolder> {
 

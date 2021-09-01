@@ -1,6 +1,5 @@
 package com.token.mangowallet.ui.adapter;
 
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import com.bumptech.glide.Glide;
@@ -9,7 +8,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView;
 import com.token.mangowallet.R;
-import com.token.mangowallet.bean.AppStoreLifeBean;
 import com.token.mangowallet.bean.MixMortgageBean;
 
 import org.jetbrains.annotations.NotNull;
